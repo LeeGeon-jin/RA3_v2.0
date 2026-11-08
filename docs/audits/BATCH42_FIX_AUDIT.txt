@@ -1,0 +1,7 @@
+BATCH42_FIX AUDIT (box only, field-level, not full XSD, not compiled) - SOURCE PASS (replaces batch41 as candidate)
+tar 244411B sha256 728cbb230da5c07a955387b8ae78c5470327dd0ee1e52f5b3e1d140ed3b45084 (handoff == attachment), safe paths; saved batch42_FIX.tar.gz.
+vs 42: only JapanEmperorSonFlagpoleStatue.xml; only diff = one added line 13 'KindOf="-NOT_AUTOACQUIRABLE"' on GameObject JapanEmperorSonFlagpoleStatueBuildable (after EditorName, attribute position irrelevant). Other 87 files byte-identical; 88 XML parse; Mod 87 all + 3 ref.
+Inherited NOT_AUTOACQUIRABLE now removed (relative syntax, native). All other Batch42 PASS findings unchanged. UI: TYPE/DESC/NAME:EmperorSonStatue + Portrait/Button_EmperorSonFlagPoleStatue are SDK references kept verbatim; asset existence/display not verified.
+Japan CY set now 16 commands.
+NEXT Guard03: see BATCH42_AUDIT.txt section; JapanConstructionYardCommandSet append Command_ConstructJapanStatueGuard03 as 17th (after Command_ConstructJapanEmperorSonFlagpoleStatue), keep all 16 in order.
+Not compiled/tested. Phase 1 not complete.

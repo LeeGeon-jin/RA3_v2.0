@@ -1,0 +1,283 @@
+<?xml version="1.0" encoding="utf-8"?>
+<AssetDeclaration xmlns="uri:ea.com:eala:asset">
+	<LogicCommand
+		id="Command_AlliedCommandoSprintSpecialPower"
+		Type="SPECIAL_POWER">
+		<SpecialPower>SpecialPower_AlliedCommandoSprint</SpecialPower>
+		<AISpecialPowerInfo
+			Heuristic="SPEED_BOOST"
+			Manager="MICRO_MANAGER"/>
+	</LogicCommand>
+
+	<LogicCommand
+		id="Command_JapanYariSprintSpecialPower"
+		Type="SPECIAL_POWER">
+		<SpecialPower>SpecialPower_JapanYariSprint</SpecialPower>
+		<AISpecialPowerInfo
+			Heuristic="SPEED_BOOST"
+			Manager="MICRO_MANAGER"
+			UseInMicroManagerState="RETREAT COMBAT CLEANUP"
+			UseNearTacticalTarget="true"/>
+	</LogicCommand>
+
+	<LogicCommand
+		id="Command_RammingSpeed"
+		Type="SPECIAL_POWER">
+		<SpecialPower>SpecialPower_JapanShogunSprint</SpecialPower>
+		<AISpecialPowerInfo
+			Heuristic="SPEED_BOOST"
+			Manager="MICRO_MANAGER"
+			UseInMicroManagerState="RETREAT COMBAT CLEANUP"
+			UseNearTacticalTarget="true"/>
+	</LogicCommand>
+
+	<LogicCommand
+		id="Command_ConstructJapanEmperorMecha"
+		Type="UNIT_BUILD">
+		<Object>JapanEmperorMecha</Object>
+	</LogicCommand>
+
+	<LogicCommand
+		id="Command_ConstructAlliedCoastalGun"
+		Type="CONSTRUCTION_YARD_CONSTRUCT">
+		<Object>AlliedCoastalGun</Object>
+	</LogicCommand>
+
+	<LogicCommand
+		id="Command_ConstructJapanMechaKingCore"
+		Type="UNIT_BUILD">
+		<Object>JapanMechaKingCore</Object>
+	</LogicCommand>
+
+	<LogicCommand
+		id="Command_ConstructJapanWaveForceTripleCannonEgg"
+		Type="UNIT_BUILD">
+		<Object>JapanWaveForceTripleCannonEgg</Object>
+	</LogicCommand>
+
+	<LogicCommand
+		id="Command_ConstructSovietMoaiTeslaHead"
+		Type="CONSTRUCTION_YARD_CONSTRUCT">
+		<Object>SovietMoaiTeslaHead</Object>
+	</LogicCommand>
+
+	<LogicCommand
+		id="Command_ConstructSovietArtilleryDome"
+		Type="CONSTRUCTION_YARD_CONSTRUCT">
+		<Object>SovietArtilleryDome</Object>
+	</LogicCommand>
+
+	<LogicCommand
+		id="Command_ConstructSovietRushmoreLaserHead"
+		Type="CONSTRUCTION_YARD_CONSTRUCT">
+		<Object>SovietRushmoreLaserHead</Object>
+	</LogicCommand>
+
+	<LogicCommand
+		id="Command_ConstructAlliedRushmoreLaserHead"
+		Type="CONSTRUCTION_YARD_CONSTRUCT">
+		<Object>AlliedRushmoreLaserHead</Object>
+	</LogicCommand>
+	<LogicCommand
+		id="Command_ConstructJapanImperialAdminBuilding"
+		Type="CONSTRUCTION_YARD_CONSTRUCT">
+		<Object>JapanImperialAdminBuildingBuildable</Object>
+	</LogicCommand>
+	<LogicCommand
+		id="Command_ConstructJapanEmperorFlagpoleStatue"
+		Type="CONSTRUCTION_YARD_CONSTRUCT">
+		<Object>JapanEmperorFlagpoleStatueBuildable</Object>
+	</LogicCommand>
+	<LogicCommand
+		id="Command_ConstructJapanEmperorSonFlagpoleStatue"
+		Type="CONSTRUCTION_YARD_CONSTRUCT">
+		<Object>JapanEmperorSonFlagpoleStatueBuildable</Object>
+	</LogicCommand>
+	<LogicCommand
+		id="Command_ConstructJapanStatueGuard03"
+		Type="CONSTRUCTION_YARD_CONSTRUCT">
+		<Object>JapanStatueGuard03Buildable</Object>
+	</LogicCommand>
+	<LogicCommand
+		id="Command_ConstructJapanMtFujiViewingTower"
+		Type="CONSTRUCTION_YARD_CONSTRUCT">
+		<Object>JapanMtFujiViewingTowerBuildable</Object>
+	</LogicCommand>
+	<LogicCommand
+		id="Command_ConstructSovietHeroesStatue"
+		Type="CONSTRUCTION_YARD_CONSTRUCT">
+		<Object>SovietHeroesStatueBuildable</Object>
+	</LogicCommand>
+	<LogicCommand
+		id="Command_ConstructSovietGreatKremlinPalace"
+		Type="CONSTRUCTION_YARD_CONSTRUCT">
+		<Object>SovietGreatKremlinPalaceBuildable</Object>
+	</LogicCommand>
+	<LogicCommand
+		id="Command_ConstructJapanStatueGuard01"
+		Type="CONSTRUCTION_YARD_CONSTRUCT">
+		<Object>JapanStatueGuard01Buildable</Object>
+	</LogicCommand>
+	<LogicCommand
+		id="Command_ConstructJapanStatueGuard02"
+		Type="CONSTRUCTION_YARD_CONSTRUCT">
+		<Object>JapanStatueGuard02Buildable</Object>
+	</LogicCommand>
+	<LogicCommand
+		id="Command_ConstructAlliedStatueOfLiberty"
+		Type="CONSTRUCTION_YARD_CONSTRUCT">
+		<Object>AlliedStatueOfLibertyBuildable</Object>
+	</LogicCommand>
+	<LogicCommand
+		id="Command_ConstructAlliedHospitalTechStructure"
+		Type="CONSTRUCTION_YARD_CONSTRUCT">
+		<Object>AlliedHospitalTechStructureBuildable</Object>
+	</LogicCommand>
+	<LogicCommand
+		id="Command_ConstructSovietHospitalTechStructure"
+		Type="CONSTRUCTION_YARD_CONSTRUCT">
+		<Object>SovietHospitalTechStructureBuildable</Object>
+	</LogicCommand>
+	<LogicCommand
+		id="Command_ConstructJapanHospitalTechStructure"
+		Type="CONSTRUCTION_YARD_CONSTRUCT">
+		<Object>JapanHospitalTechStructureBuildable</Object>
+	</LogicCommand>
+	<LogicCommand
+		id="Command_ConstructAlliedGarageTechStructure"
+		Type="CONSTRUCTION_YARD_CONSTRUCT">
+		<Object>AlliedGarageTechStructureBuildable</Object>
+	</LogicCommand>
+	<LogicCommand
+		id="Command_ConstructSovietGarageTechStructure"
+		Type="CONSTRUCTION_YARD_CONSTRUCT">
+		<Object>SovietGarageTechStructureBuildable</Object>
+	</LogicCommand>
+	<LogicCommand
+		id="Command_ConstructJapanGarageTechStructure"
+		Type="CONSTRUCTION_YARD_CONSTRUCT">
+		<Object>JapanGarageTechStructureBuildable</Object>
+	</LogicCommand>
+	<LogicCommand
+		id="Command_ConstructAlliedShipYardTechStructure"
+		Type="CONSTRUCTION_YARD_CONSTRUCT">
+		<Object>AlliedShipYardTechStructureBuildable</Object>
+	</LogicCommand>
+	<LogicCommand
+		id="Command_ConstructSovietShipYardTechStructure"
+		Type="CONSTRUCTION_YARD_CONSTRUCT">
+		<Object>SovietShipYardTechStructureBuildable</Object>
+	</LogicCommand>
+	<LogicCommand
+		id="Command_ConstructJapanShipYardTechStructure"
+		Type="CONSTRUCTION_YARD_CONSTRUCT">
+		<Object>JapanShipYardTechStructureBuildable</Object>
+	</LogicCommand>
+	<LogicCommand
+		id="Command_ConstructAlliedAirportTechStructure"
+		Type="CONSTRUCTION_YARD_CONSTRUCT">
+		<Object>AlliedAirportTechStructureBuildable</Object>
+	</LogicCommand>
+	<LogicCommand
+		id="Command_ConstructSovietAirportTechStructure"
+		Type="CONSTRUCTION_YARD_CONSTRUCT">
+		<Object>SovietAirportTechStructureBuildable</Object>
+	</LogicCommand>
+	<LogicCommand
+		id="Command_ConstructJapanAirportTechStructure"
+		Type="CONSTRUCTION_YARD_CONSTRUCT">
+		<Object>JapanAirportTechStructureBuildable</Object>
+	</LogicCommand>
+	<LogicCommand
+		id="Command_ConstructAlliedVeterancyTechStructure"
+		Type="CONSTRUCTION_YARD_CONSTRUCT">
+		<Object>AlliedVeterancyTechStructureBuildable</Object>
+	</LogicCommand>
+	<LogicCommand
+		id="Command_ConstructSovietVeterancyTechStructure"
+		Type="CONSTRUCTION_YARD_CONSTRUCT">
+		<Object>SovietVeterancyTechStructureBuildable</Object>
+	</LogicCommand>
+	<LogicCommand
+		id="Command_ConstructJapanVeterancyTechStructure"
+		Type="CONSTRUCTION_YARD_CONSTRUCT">
+		<Object>JapanVeterancyTechStructureBuildable</Object>
+	</LogicCommand>
+
+	<LogicCommand
+		id="Command_ConstructAlliedQuickProductionCenter"
+		Type="CONSTRUCTION_YARD_CONSTRUCT">
+		<Object>AlliedQuickProductionCenter</Object>
+	</LogicCommand>
+
+	<LogicCommand
+		id="Command_ConstructSovietQuickProductionCenter"
+		Type="CONSTRUCTION_YARD_CONSTRUCT">
+		<Object>SovietQuickProductionCenter</Object>
+	</LogicCommand>
+
+	<LogicCommand
+		id="Command_ConstructJapanQuickProductionCenter"
+		Type="CONSTRUCTION_YARD_CONSTRUCT">
+		<Object>JapanQuickProductionCenter</Object>
+	</LogicCommand>
+
+	<LogicCommand
+		id="Command_ConstructSovietCloningCenter"
+		Type="CONSTRUCTION_YARD_CONSTRUCT">
+		<Object>SovietCloningCenter</Object>
+	</LogicCommand>
+
+	<LogicCommand
+		Type="UNIT_BUILD"
+		id="Command_ConstructSovietInfiltrationInfantry">
+		<Object>SovietInfiltrationInfantry</Object>
+	</LogicCommand>
+
+	<LogicCommand
+		Type="UNIT_BUILD"
+		id="Command_ConstructAlliedAdvancedMirageTank">
+		<Object>AlliedAdvancedMirageTank</Object>
+	</LogicCommand>
+
+	<LogicCommand
+		Type="UNIT_BUILD"
+		id="Command_ConstructSovietSupportBomber_Buildable">
+		<Object>SovietSupportBomber_Buildable</Object>
+	</LogicCommand>
+
+	<LogicCommand
+		Type="CONSTRUCTION_YARD_CONSTRUCT"
+		id="Command_ConstructJapanRushmoreLaserHead">
+		<Object>JapanRushmoreLaserHead</Object>
+	</LogicCommand>
+
+	<LogicCommand
+		Type="SPECIAL_POWER"
+		id="Command_TechAirportParadrop_Allied"
+		Options="NEED_TARGET_POS">
+		<SpecialPower>SpecialPower_TechAirportParadrop_Allied</SpecialPower>
+	</LogicCommand>
+
+	<LogicCommand
+		Type="SPECIAL_POWER"
+		id="Command_TechAirportParadrop_Soviet"
+		Options="NEED_TARGET_POS">
+		<SpecialPower>SpecialPower_TechAirportParadrop_Soviet</SpecialPower>
+	</LogicCommand>
+
+	<LogicCommand
+		Type="SPECIAL_POWER"
+		id="Command_TechAirportParadrop_Japan"
+		Options="NEED_TARGET_POS">
+		<SpecialPower>SpecialPower_TechAirportParadrop_Japan</SpecialPower>
+	</LogicCommand>
+
+	<!-- Buildable Precision Bomber construction (Batch 102) -->
+	<LogicCommand
+		Type="UNIT_BUILD"
+		id="Command_ConstructAlliedSupersonicBomber_Buildable">
+		<Object>AlliedSupersonicBomber_Buildable</Object>
+	</LogicCommand>
+
+</AssetDeclaration>

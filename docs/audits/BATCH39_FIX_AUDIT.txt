@@ -1,0 +1,23 @@
+BATCH39_FIX AUDIT (box only, field-level, not full XSD, not compiled) - SOURCE PASS (replaces batch38_FIX3 as candidate)
+tar 237894B sha256 5ca55f13682fa7a768c70b75cc74c7f6cc4f67b1f89a12c824e6066934d72e37 (handoff == attachment), safe paths; saved batch39_FIX.tar.gz.
+vs 39: only LogicCommand.xml changed; Command_ConstructAlliedRushmoreLaserHead now exactly id + Type="CONSTRUCTION_YARD_CONSTRUCT" + <Object>AlliedRushmoreLaserHead</Object> (Radius/Options/sound removed), same form as Command_ConstructAlliedCoastalGun.
+vs 38_FIX3: only Ready/LogicCommand/LogicCommandSet differ; other 82 identical; 85 XML parse; Mod 84 all + 3 ref unchanged.
+Chain: CYBase(15)/Crane(14) -> command -> AlliedRushmoreLaserHead (Allies, BuildTime 30, 2000, AlliedTechStructure, -75, 1250/1250, 360 WSU Replace -> SovietRushmoreLaserHeadWeapon, ActiveBody 2000, inherited Unpack 1.5s and AIUpdate). All Batch39 PASS findings stand.
+Not compiled / not tested in game. Phase 1 not complete.
+
+NEXT MINIMAL ITEM: Japan decorative building VL_ImperialMilitaryAdminBuilding_01 (S03 final target)
+Doc: L6 revision 2026-11-07 + L1086 requirement ("让帝国也直接造装饰建筑…雕像1000 其他的2000。雕像10秒 其他的20秒（本人补充：不耗电；无前置条件）") + L1089 implementation:
+ - object confirmed: S03 final target = VL_ImperialMilitaryAdminBuilding_01 (map instance Japan01, "Objective 4 Destroy the Palace"). 2000 / 20 s, EnergyProduction 0, no GameDependency.
+ - "帝国直接放置（同已定科技建筑 / 快速生产中心写法：CONSTRUCTION_YARD_CONSTRUCT，BuildTime 直接计时，不走纳米核心 + 展开），无建造动画、无烟尘". Native precedent: Command_ConstructJapanWall is CONSTRUCTION_YARD_CONSTRUCT in JapanConstructionYardCommandSet.
+ - "新 ID 复制…原战役对象不改；新副本去掉…CreateObjectDie / DestroyDie、雕像光环、驻军模块一律去掉". 
+ - inherited landmark rules: attackable (remove NOT_AUTOACQUIRABLE if present, keep ActiveBody), one per player (MaxSimultaneousOfType 1), health original (=$CIV_HEALTH_MEDIUM = 3000), armor 待定 (= inherit original, don't change), button position 待定 (append), AI does not build.
+ - risk: Vladivostok.xml only via WorldBuilder.xml -> mod must include the file (+ART W3X, YU_HotelDebris, VL_..._Collapse).
+SDK object (Civilian/Vladivostok_VL/Buildings/VL_ImperialMilitaryAdminBuilding_01.xml): inherits BaseCivilianStructureNoGarrisonDestructible, KindOf "-CIVILIAN_BUILDING +AUTO_ACQUIRABLE_BY_AI", Name/DESC/TYPE ImperialAdminBuilding, portrait/button Portrait_/Button_JapanImperialPalace (real keys -> no invented strings needed), ActiveBody ModuleTag_Body =$CIV_HEALTH_MEDIUM, CreateObjectDie (Die_OCL -> _Collapse) + DestroyDie, BuildingDestructionBehavior, FXList.
+Proposed Batch40 (1 new + 2 changed + Mod +1):
+ 1. add the SDK file verbatim minus the 1 ART all include (keep DATA instance includes; add GlobalDefines if needed for macros); original object untouched.
+ 2. append new GameObject JapanDecoImperialAdminBuilding (name only a proposal; doc "如 JapanDeco_*，名称待定") inheritFrom="VL_ImperialMilitaryAdminBuilding_01" Side="Japan" BuildTime="20" EnergyProduction="0" with ObjectResourceInfo BuildCost =$ACCOUNT_ORE 2000, MaxSimultaneousOfType="1", no GameDependency; Behaviors: CreateObjectDie and DestroyDie removed per doc (needs explicit verification how to remove inherited modules - inheritFrom cannot delete a module; therefore make an independent full copy, not inheritFrom, dropping those two modules). NOTE risk to flag: without DestroyDie/CreateObjectDie the dead object may linger as rubble/not be removed; BuildingDestructionBehavior remains. If cloud prefers keeping DestroyDie for clean death, that departs from doc text -> must be asked, not chosen silently.
+ 3. LogicCommand: Command_ConstructJapanDecoImperialAdminBuilding Type="CONSTRUCTION_YARD_CONSTRUCT" <Object>new id</Object>.
+ 4. JapanConstructionYardCommandSet: append after current 13 (keep order). Japan has no crane equivalent.
+ Open items to check in that batch: BuildPlacementTypeFlag/ProductionQueueType needed for Japan CY direct build (compare JapanWallPiece), KindOf needs STRUCTURE/selectable for player ownership (inherited from base - verify), Japan CY ProjectedBuildability OTHER_STRUCTURE.
+Alternative simple candidate: TH_StatueGuard03 (already STRUCTURE, ActiveBody =$CIV_HEALTH_SMALL, 1000/10) but doc says guard-statue health "沿用原版或待定" -> less settled; Admin building has all values fixed.
+Japan Rushmore core/unpack split remains pending; does not block this.

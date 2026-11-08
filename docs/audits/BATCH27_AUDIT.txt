@@ -1,0 +1,22 @@
+BATCH27 AUDIT (box only) - FAIL / BLOCKED
+tar 223135B sha 9d3472e8...96c5 (handoff == attachment), safe paths, 76 XML parse OK (DOM only, not XSD). Saved batch27.tar.gz.
+Changed vs 26: AttributeModifier, LogicCommand, LogicCommandSet, UnitAbilityButtonTemplates, JapanNavyScoutShip (modified); UI/ButtonStateDataCommon.xml (NEW, 1 asset); Mod +1 include (79). Other files byte-identical.
+BLOCKERS
+B1 SpecialPower_JapanYariSprint is NOT in SDK and NOT defined in package -> unresolved reference (unit + LogicCommand). Claim "already exists in SDK" is false.
+B2 UnitAbilityButtonTemplates.xml: ButtonTanyaSprint was OVERWRITTEN by ButtonJapanYariSprint -> Tanya sprint button lost (Batch11_VALIDATED regression). LogicCommand/CommandSet for Tanya intact.
+B3 JapanNavyScoutShip.xml line 335: `Duration="5s" />>` stray '>' text inside Behaviors (DOM tolerates; schema/builder risk).
+B4 Strings NAME:/DESC:AbilityJapanYariSprint do not exist anywhere -> missing-string UI; at best placeholder.
+NON-BLOCKING
+- AttributeModifier_JapanYariSprint SPEED 150% 5s OK; unique ID.
+- LogicCommand SPECIAL_POWER/SPEED_BOOST MICRO_MANAGER OK, but lacks UseInMicroManagerState="RETREAT COMBAT CLEANUP" UseNearTacticalTarget="true" (engineer precedent, doc L1077/1083).
+- CommandSet override JapanNavyScoutShipCommandSet = SDK order with kamikaze cmd replaced. OK.
+- MovementSpecialPower attrs valid per MovementSpecialPower.xsd; BusyDurationOnExit default 0s fine (engineer uses 5s, not authorized for Yari).
+- Removed KamikazeAttack, KamikazeAttackUpdate, BezierProjectile, FireWeaponWhenDead(DETONATED only, warhead JapanNavalScoutShipKamikazeAttackWarhead). DETONATED only arises from kamikaze projectile path -> suicide-specific; normal death (CreateObjectDie/DestroyDie ALL) retained. Authorized by doc L1084 step 1 (warhead die module implied). Rest of unit (BuildTime 5/cost 800/speed 125/torpedo/model) unchanged vs batch26.
+- Japan engineer sprint 30s+sound unchanged; Tanya 25s chain unchanged.
+MINIMAL FIX
+1 Add to SpecialPowerTemplates.xml: <SpecialPowerTemplate id="SpecialPower_JapanYariSprint" ReloadTime="15s" TargetType="NONE" WaypointModeTerminal="false"/>
+2 Restore ButtonTanyaSprint template exactly as batch26, append ButtonJapanYariSprint as second template (keep original xmlns line).
+3 Line 335 `/>>` -> `/>`.
+4 Either reuse Title/Description NAME:/DESC:AbilityJapanEngineerSprint (marked temporary) or add strings; UI not complete.
+5 (Optional per doc) add UseInMicroManagerState="RETREAT COMBAT CLEANUP" UseNearTacticalTarget="true".
+Shogun ramming->speed not in this batch. Native compile & in-game untested.

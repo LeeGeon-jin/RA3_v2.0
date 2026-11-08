@@ -1,0 +1,20 @@
+Batch25 box-only audit 2026-11-08 ~03:55 UTC+10. PC not contacted; no compile; source unedited.
+Archive: handoff ra3v2_phase1_batch25.tar.gz present, 221161 B, SHA256 4f542b6389e815fd64bd121af7d114d3baf848c94b8fb280e0abb1ee34e8ecc8 (match; no asset copy needed). Saved /workspace/ra3xfer/batch25.tar.gz, unpacked /workspace/b40.
+diff -r vs Batch24: 69 old files byte-identical; changed Weapon.xml, Mod.xml (+3 includes); new 3 ship files.
+Structure: safe paths; 74 XML parse; Mod 3 reference + 73 all exact; no ns0; top-level joinAction 0; ART type=all ci 0.
+Weapon.xml (all weapon assets compared): only
+ JapanAntiStructureShipWeapon ClipReloadTime Min 7.0s->3.5s, Max 8.0s->4.0s (ClipSize 3, FiringDuration 0.25 unchanged).
+ Leech_ShipWeapon (inheritFrom JapanAntiStructureShipWeapon, ForbiddenFiringObjectStatus="") gained child <ClipReloadTime MinSeconds="7.0s" MaxSeconds="8.0s"/> - MinSeconds/MaxSeconds ARE the native attribute names (identical to the SDK ClipReloadTime element used in parent and all weapons), not invented. Restores original 7/8 for the leech copy (child element overrides inherited). Engine inheritance semantics untested.
+ No other weapon changed.
+Ships vs full SDK (only BuildTime/prereq; only ART type=all includes removed):
+ JapanAntiVehicleShip (Naginata) 18->15; cost 1800; NeededUpgrade Upgrade_JapanNavalYardTech2 kept; TorpedoSpread intact; 7 removed; kept GlobalDefines, ART:EX_Headlights.w3x instance, BaseVehicle.
+ JapanNavyScoutShip (Yari) 10->5; cost 800; Kamikaze intact; 5 removed; same kept set.
+ JapanAntiStructureShip (Shogun) 22->20; NeededUpgrade Upgrade_JapanNavalYardTech3 -> RequiredObject JapanTechStructure; cost 2200; RammingSpeed intact; 5 removed.
+ Auth doc L987/L1071/L1077/L1083. Old values/prereqs unchanged.
+VERDICT: SOURCE PASS - replaces Batch24 as native-compile candidate. Not compiled/tested. ART instance EX_Headlights (Bibber-only) risk applies to Naginata/Yari too.
+Next (read-only): GlobalData/upgrade.xml NOT in pack. SDK upgrade.xml (92 UpgradeTemplates, no includes, us-ascii):
+ Upgrade_JapanWarFactoryTech2 (line 479) BuildTime "30.0s" -> "10s" (BuildCost 750 kept; RequiredObject JapanRefinery kept) - doc L951/L952.
+ Upgrade_JapanNavalYardTech2 (line 446) BuildTime "30.0s" -> "10s" (BuildCost 750 kept) - doc L987.
+ Keep Tech3 upgrades (buyable, prereqs Tech2 + JapanTechStructure) unchanged; AI/buttons unchanged. Not referenced in campaign overrides (0 hits).
+ Risk: full upgrade.xml copy overrides all 92 upgrades (incl. Allied/Soviet) -> must be byte-identical except those 2 attributes; Barracks Tech2 not in this doc row (check separately).
+Native plan: new Mods\RA3_V2.0_Batch25, same BAB cmd, 0 Error/Critical/Warning/Unknown, manifests unchanged, exact missing-ART list, one path-only retry.

@@ -1,0 +1,16 @@
+Batch3 package e9c98f48...f028 (114686 B) box-only review 2026-11-07 23:25 UTC+10. Saved: /workspace/ra3xfer/batch3.tar.gz, unpacked /workspace/b4. NOT transferred (PC offline by instruction).
+Structural: 33 files data/, safe; 33/33 parse; Mod.xml 3 reference DATA:static/global/audio + 32 all, full coverage; 0 ART all; 0 top-level joinAction. Includes/InfiltratorContainEconomic.xml removed.
+Unchanged vs batch2 fix (b3): all 16 phase-1 structures except AlliedRefinery/JapanRefinery; all 9 units, TechStructure, CoopBasePersonality.
+New: AlliedEngineer, SovietRefinery, GlobalData/{AttributeModifier,SpecialPowerTemplates,Weapon}.xml (full-file copies of SDK originals with small value diffs).
+Diffs vs SDK originals (ignoring whitespace, ART lines):
+ AlliedEngineer: ALLIED_HEALTH_TENT_RADIUS 100.0 -> 150   [doc L508 "医疗帐篷范围1.5倍" -> consistent]
+ AttributeModifier_RiotShield SPEED 50% -> 70%            [doc L496 "盾牌模式速度提高到35"; doc L668 base speed 50 -> 35/50=70% consistent, derived]
+ SpecialPower_TimeBelt ReloadTime 30s -> 5s               [WRONG TARGET: doc L517-518 says SpecialPower_Bribe 10s->5s; Bribe left at 10s; TimeBelt not in requirement]
+ Weapon JapanCommandoTech1AirborneKiller ClipReload Max 4.0s->0.5s (Min stays 4.0s)  [WRONG TARGET, Japanese commando; Min>Max]
+ Weapon AAAVT1_AlliedAntiVehicleInfantryMissileLauncher ClipReload 4.0/4.0 -> 0.5/0.5 [doc L502/L506 consistent; 0.5 value is implementer choice for "大幅缩短/取消"]
+ Weapon JapanAntiStructureVehicleBeamWeapon ClipReload Max 4.0s->0.5s  [WRONG TARGET]
+ AlliedBaseDefense turret javelin weapon: NOT changed (doc L506 "名称待核")
+ Spy DominateRadius still 65 (doc L518 wants 130) - not done. Steal half - not done (fixed 2000).
+InfiltratorContain Replace in Allied/Japan/Soviet refinery: after xi:include of SDK Includes/InfiltratorContainEconomic.xml, a 2nd <InfiltratorContain id="ModuleTag_InfiltratorContain" BlockedDuration="0s" xai:joinAction="Replace"/> in the SAME object body.
+ Schema Modules/InfiltratorContain.xsd: Effect has no default, Amount default 0.0. A literal Replace would yield module without Effect/Amount (STEAL_MONEY 2000 lost); without inheritance context it is likely a duplicate module id in one object. Not a complete module. High risk; only compile/game test can show.
+Plan when PC online & approved: new Mods\RA3_V2.0_Batch3, logs E:\RA3ModBuild\logs_batch3, same BAB cmd /od /iod SDK\builtmods; pass = 0 Error/Critical/Warning/Unknown + manifests unchanged. Compile-clean would still not validate the issues above. Batch2_FIX superseded.

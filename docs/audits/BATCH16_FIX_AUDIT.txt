@@ -1,0 +1,12 @@
+Batch16_FIX box-only audit 2026-11-08 ~02:10 UTC+10. PC not contacted; no compile; source unedited.
+Found in handoff: ra3v2_phase1_batch16_fix.tar.gz 154767 B SHA256 27bfea90e1dffb15f058f8c2726cb064b8330ffc23da25ec89a713ab165b3eff (match). (Old ra3v2_phase1_batch16.tar.gz 154736 B also present, not audited.) Saved /workspace/ra3xfer/batch16_fix.tar.gz, unpacked /workspace/b29.
+Structure: safe paths; 57 files all XML parse; no ns0; Mod.xml 3 reference + 56 all, exact one-to-one, no dups, properly closed; diff vs Batch15 Mod = only +2 includes (SovietAntiGroundAircraft, SovietBomberAircraft) - no old entries lost. ART type=all (case-insensitive) 0; top-level joinAction 0.
+vs Batch15: 54 old content files byte-identical (9 deps, miners, ore, Tanya sprint, naval weapons/V4Rocket, all previous values unchanged).
+Asset compare vs full SDK (every node/attr/text):
+ Twinblade SovietAntiGroundAircraft: only BuildTime 15->12; TransportContain KillPassengersOnDeath="true" (original; air passengers undecided). No ART instance includes.
+ Kirov SovietBomberAircraft: only BuildTime 25->20 and BuildCost Amount 2500->2000; prerequisite SovietTechStructure unchanged. No ART instance includes.
+ Authorization: doc L896 (Twinblade 15->12, cost 1200/airfield unchanged; Kirov 2500->2000, 25->20, prerequisites unchanged); L897 campaign overrides contain no cost/time/prereq for these.
+VERDICT: SOURCE PASS - replaces Batch15 as native-compile candidate. Not compiled/tested.
+ART instance risk: none new; existing (EX_Headlights, EXTnkTrack, Miner/IFV/Bullfrog/Athena/Mirage etc).
+Native plan (PC online): tar -> E:\RA3ModBuild\_in; new Mods\RA3_V2.0_Batch16Fix; logs\batch16fix; same BAB cmd (absolute data\Mod.xml, /od /iod SDK builtmods); pass = exit0 & 0 Error/Critical/Warning/Unknown, static/global/audio manifests unchanged; report exact missing ART list, no adding Bibber art without approval; one path-only retry.
+Open: Badger buildable (L896 #3), Dreadnought #28, infantry L899, Stingray L855, C4, spy half, air passengers, torpedo x2, rest of doc.

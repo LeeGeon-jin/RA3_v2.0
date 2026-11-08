@@ -1,0 +1,6 @@
+Pending native compile (PC offline at 2026-11-07 22:18 UTC+10).
+Package: /workspace/ra3xfer/structures_xmlfix.tar.gz  SHA256 feeb593ae13b288ff752a9ed4a730676bfb0b7039604336c8b1b857d2e750c02 (34319 B)
+Box checks PASSED: 17 members all under data/, safe paths; 17/17 XML parse OK; Mod.xml = 3 reference DATA:static/global/audio + 16 all (all present); 0 ART type=all includes. Unpacked copy: /workspace/saf3
+Next when online: CopyFromBox -> move to E:\RA3ModBuild\_in\; extract to E:\RA3ModBuild\RA3ModSDK\Mods\RA3_V2.0_StructuresXMLFix (new); logs E:\RA3ModBuild\logs_structuresxmlfix;
+cwd SDK: Tools\BinaryAssetBuilder.exe "<abs>\data\Mod.xml" /od:SDK\builtmods /iod:SDK\builtmods /csc:false /ls:true /osh:false /pc:true /res:true /slowclean:true /ss:true /art:".;.\Mods\<mod>\Art;.\Mods;.\Art" /audio:".;.\Mods\<mod>\Audio;.\Mods;.\Audio" /data:".;.\Mods\<mod>\Data;.\Mods;.\SageXml"
+Pass = exit 0 AND 0 Error/Critical AND 0 Warning AND 0 Unknown asset; static/global/audio.manifest hashes unchanged.

@@ -1,0 +1,24 @@
+BATCH38_FIX AUDIT (box only, field-level, not full XSD, not compiled) - FAIL / BLOCKED (keep batch37)
+tar 240298B sha256 a3b078f28027f0966553028ee490f04a0b64aaad2f15860ca0688918f0d51a2c (handoff == attachment), safe paths. Saved batch38_FIX.tar.gz.
+vs failed 38: only Ready file changed; other 84 byte-identical. Ready file is STILL fabricated vs real SDK - blockers B1/B2/B3 not fixed, partly worse.
+B1 Original MR_LaserMtRushmore_Lincoln_Ready (A06) still not SDK:
+ - EditorName and Browser removed; TypeDescription/Description/DisplayName changed to invented BaseMountRushmoreHead keys (SDK: TYPE:/DESC:LaserMtRushmore_Lincoln, Name:LaserMtRushmore_Lincoln_Ready).
+ - Animation changed (SDK AnimationName "MR_LaserMtRushmore_Lincoln", BlendTime 0, ONCE).
+ - Both real LaserDraw modules (Laser.fx shader, FXLaserStandard textures, LaserStateID 1/2) replaced by invented ScriptedModelDraw with model "FXLaser".
+ - Both real LaserState behaviors (OriginBoneName FX_Weapon_01/02, LaserId, Rushmore_Lincoln_* particle systems) replaced by invented LaserUpdate modules with LaserTemplate "MountRushmoreHeadLaser" (not in SDK).
+ - ActiveBody MaxHealth =$CIV_HEALTH_MEDIUM changed to literal 3000.
+ - AudioArraySound damage sounds replaced by invented "MountRushmore_LaserFire".
+ - Includes OK now (BaseCollapsingObject + ART:FXLaserStandard instance kept, only 2 ART all removed, GlobalDefines added).
+B2 MR_LaserMtRushmore_Lincoln_Collapse fabricated: SDK DynamicsDraw (15 BoneVolumes, debris particles, Lifetime 5s/4s, model MR_LaserMtRushmore_Lincoln_COL) + A06_RushmoreHead_DieMS audio replaced by ScriptedModelDraw with nonexistent model "MR_LaserMtRushmore_Lincoln_Collapse", added KindOf and Geometry.
+B3 SovietRushmoreLaserHeadWeapon still not a copy of MountRushmoreHeadEyeWeapon:
+ - FireSound/FireFX/FireVeteranFX attrs (A06_RushmoreLaserFire5, FX_AlliedPrismTowerFire) replaced by invented child elements MountRushmore_LaserFire / FX_HeadFire.
+ - RadiusDamageAffects ENEMIES -> "ENEMIES NEUTRALS"; Flags NONE -> ""; AutoReloadsClip AUTO -> "Yes".
+ - ActivateLaserNugget SDK Lifetime=1s LaserId=1/2 -> invented LaserUpdateModule/WeaponSlotID attrs.
+ - WeaponOCLNugget SDK WeaponOCL=OCL_AlliedAntiVehicleVehicleTech3CannonNodeRegular + Forbidden HAS_SECONDARY_DAMAGE -> invented WeaponOCLName OCL_HeadFire.
+ - DamageNugget Forbidden status changed, DelayTimeSeconds "0.1" (no unit), extra DamageTaperOff.
+ - SecondaryDamageNugget SDK Amount=$FACTION_WEAPON_SECONDARY_DAMAGE_AMOUNT -> invented Damage 500/RequiredTargetKindOf etc.
+B4 fixed partially: WeaponSetUpdate now id ModuleTag_WeaponSetUpdate Replace with pitch/rate/idle/IdleScanDelay, MaxDeflection removed; but ComeToHaltJiggle "true" (SDK "0d", Angle type) - invalid value.
+B5 fixed: KindOf "+POWERED +SCORE -UNATTACKABLE -NOT_AUTOACQUIRABLE"; relative +/- syntax is native (KR_ArtilleryDome "+FS_BASE_DEFENSE ...", BB_EuropeCoastalGun "-NOT_AUTOACQUIRABLE +CAN_ATTACK ...") applied to inherited base flags. No invented DisplayName on new object.
+OK: Side Soviet, cost 2000, SovietTechStructure, -75, vision/shroud 1250, StructureUnpackUpdate same id Replace 30s, Body single slot ActiveBody 2000 (Body is xs:choice max 1; position after Behaviors per sequence OK), CY 19 / Crane 17 unchanged from 38.
+MINIMAL FIX (mechanical, no authoring): take SDK MR_LaserMtRushmore_Lincoln_Ready.xml verbatim (CRLF->LF ok), delete only the 2 ART all include lines; append new weapon = verbatim copy of BaseMountRushmoreHead.xml L26-72 with id SovietRushmoreLaserHeadWeapon and AttackRange 1150.0 only; keep current SovietRushmoreLaserHead object but ComeToHaltJiggle="0d". Recommend cloud literally copy text instead of re-authoring.
+Allied head research deferred until pass. Phase 1 not complete.

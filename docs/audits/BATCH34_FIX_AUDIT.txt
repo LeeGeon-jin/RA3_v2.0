@@ -1,0 +1,20 @@
+BATCH34_FIX AUDIT (box only, field-level, not full XSD, not compiled) - PASS
+tar 234414B sha256 ab9d924da299d6763a75f2ea8a50471d8fb90ebc613ae81c72b6ee5d552e22bd (handoff == attachment), safe paths. Saved batch34_FIX.tar.gz.
+vs failed 34: only the 2 new files: core BuildTime="5" attribute (element removed) and GlobalDefines DATA all include restored in core + MechaKing. Other 78 byte-identical.
+vs 33_FIX: new 2 / changed 3 (LogicCommand, LogicCommandSet, Mod) / 75 identical. All batch34 verified content unchanged: MechaKing only Speed 45->67.5 + ART all removed; core 4000/5s/VEHICLE/KindOf = EGG_KINDOFS minus EGG UNPACKS_INTO_BUILDING, no max/EquivalentTo/TechStructure dep, ReplaceSelf->JapanMechaKing 30.0s COPY_UPGRADES DISABLE_DURING_REPLACE CLEAR_LOCATION, health 400/armor/locomotors 65/JUEgg; Command_ConstructJapanMechaKingCore in WarFactory Base (9+1).
+80 XML, 3ref/79all 1:1, stray 0, ART all 0, ns0 0, top joinAction 0, unique IDs.
+Untested: unpack 30s anim/death during unpack, perf, strings, AI won't build.
+
+NEXT: Wave-Force Triple Cannon (doc L1062 req, L1065/L1066 impl, L33/L200/L203 360, L487 prereq) - read-only
+Requirement L1062: cost 2500, core build 3s, unpack 18s, no special ability.
+SDK object: Civilian/Floating_Island_FI/Buildings/FI_FloatingFortressMainGun.xml (1 GameObject + OCL; includes ART all FI_FloatingFortressMainGun.W3X, FXJapanLaser.xml, FXLaserJapanOverlay.xml; instance BaseStructure, YU_HotelDebris, FI_FloatingFortressMainGun_Collapse; loaded only via Civilian/Floating_Island.xml).
+ Values: inheritFrom BaseStructure, no Side, no BuildTime, no CommandSet, KindOf -NOT_AUTOACQUIRABLE +CAN_ATTACK +FS_BASE_DEFENSE, BuildCost 3000, MaxHealth 5000, Portrait_JapanTriCannonGun / Button_JapanTriCannonGun (native refs), 3 laser draws + 3 LaserState modules, WeaponSetUpdate ModuleTag_Weapon01SetUpdate: weapon JapanFloatingFortressMainGun (Weapon.xml L7701, static, range 1150), TurretTurnRate 60, idle scan 0/150, MaxDeflection 150d/150d. No SpecialPower.
+ Constraint (L1065/L203): NEW object, map placements (A05/J05/J06) untouched; J06 override applies only to placed original.
+Minimal batch:
+ 1 Include full FI file (minus ART all; keep GlobalDefines/instance includes).
+ 2 New GameObject JapanWaveForceTripleCannon inheritFrom FI_FloatingFortressMainGun (same file): Side="Japan"; ObjectResourceInfo BuildCost 2500; StructureUnpackUpdate UnpackTime="18s" (precedent JapanBaseDefenseAdvanced L961-963 id ModuleTag_StructureUnpack); WeaponSetUpdate same id + xai:joinAction="Replace" copying parent slot/TurretSettings minus MaxDeflection* (default 180d = 360; same pattern as passed AlliedCoastalGun); idle scan 150->180 is optional - do not change without user. No special power. Energy: doc gives none -> leave default (JapanBaseDefenseAdvanced uses -75, not authorized).
+ 3 New egg JapanWaveForceTripleCannonEgg = full copy of Japan/Eggs/JapanBaseDefenseAdvancedEgg.xml (minus ART all): BuildTime 5->3, BuildCost 1400->2500, ReplacementTemplate -> JapanWaveForceTripleCannon; KindOf =$BASE_DEFENSE_EGG_KINDOFS, prereq JapanPowerPlant + JapanTechStructure kept (doc L487 "同原版波能炮核心"), PackTime 3.0s, ReplaceOptions keep (CHECK_BUILD_ASSISTANT etc., it becomes a building). Portrait/Button -> JapanTriCannonGun native; names temp. CommandSet: new JapanWaveForceTripleCannonEggCommandSet with Command_UnPackJapanBaseDefenseAdvancedEgg (reuse shared command/SpecialPower_UnpackReplaceSelf) or reuse JapanBaseDefenseAdvancedEggCommandSet directly.
+ 4 LogicCommand Command_ConstructJapanWaveForceTripleCannonEgg (copy type of Command_ConstructJapanBaseDefenseAdvancedEgg L1814); add to JapanConstructionYardCommandSet (SDK L644, full SDK list kept). SDK Japan defense eggs are only in CY set; doc's "核心车命令集" has no SDK equivalent - flag.
+ 5 Mod +1 include (FI file) + 1 (egg file).
+Open decisions: (a) 18s vs 15s UnpackTime (doc: if PackTime 3 adds, use 15 - test); (b) energy cost none; (c) placement footprint/build-up anim untested; (d) turret back clipping untested.
+Remaining: Soviet Rushmore heads / Moai / ArtilleryDome, Allied/Japan Rushmore heads, others L1586. Phase 1 not complete; coverage list missing.

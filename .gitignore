@@ -1,0 +1,9 @@
+*.big
+*.w3x
+*.dds
+*.tga
+*.manifest
+*.bin
+*.zip
+*.tar.gz
+builtmods/

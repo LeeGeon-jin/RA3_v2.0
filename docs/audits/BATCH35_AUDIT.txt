@@ -1,0 +1,14 @@
+BATCH35 AUDIT (box only, field-level, not full XSD, not compiled) - FAIL / BLOCKED (keep batch34_FIX)
+tar 236211B sha256 6df655110d9aeffffd1b55413e885459ae7157748e3eea942882e1b58a7ae627 (handoff == attachment), safe paths. Saved batch35.tar.gz.
+vs 34_FIX: new 2 (Civilian/Floating_Island_FI/Buildings/FI_FloatingFortressMainGun.xml, Japan/Eggs/JapanWaveForceTripleCannonEgg.xml), changed 3 (LogicCommand, LogicCommandSet, Mod); 77 byte-identical (Executioner/coastal homing/King Oni/turbines/sprints intact).
+82 XML, 3ref/81all 1:1, stray 0, ART all 0, ns0 0, top joinAction 0, unique IDs.
+FI original vs SDK: 3 ART all removed; ADDED DATA GlobalDefines include (SDK original had none) - benign, macros resolve; note as deviation. Original object/OCL unchanged: 5000 HP, weapon JapanFloatingFortressMainGun (range 1150, shared, untouched), ±150d, no energy, no power.
+New JapanWaveForceTripleCannon: inheritFrom FI, Side Japan, cost 2500, StructureUnpackUpdate 18s (id/attr per JapanBaseDefenseAdvanced), WeaponSetUpdate Replace = parent module exactly minus MaxDeflection* (pitch -35d/63%/10, turn 60, idle 0-150, chooser data) -> default 180d. OK.
+New egg vs JapanBaseDefenseAdvancedEgg: only id/EditorName, Portrait/Button JapanTriCannonGun (native refs on FI object; asset existence unverified), BuildTime 5->3 attr, CommandSet new, cost 1400->2500, Replacement -> JapanWaveForceTripleCannon, Name/Desc/Type keys. Kept: =$BASE_DEFENSE_EGG_KINDOFS (real macro), PowerPlant+TechStructure prereq (doc L487 real), health 400, JapanEggArmor, locomotor 60, PackTime 3.0s, CHECK_BUILD_ASSISTANT DISABLE_DURING_REPLACE CLEAR_LOCATION. Original egg has no EquivalentTo/MaxSimultaneous - none leaked.
+Egg CommandSet JapanWaveForceTripleCannonEggCommandSet -> SDK Command_UnPackJapanBaseDefenseAdvancedEgg -> SpecialPower_UnpackReplaceSelf. OK.
+JapanConstructionYardCommandSet = SDK 12 cmds in order (commented lines dropped) + new at end. OK.
+BLOCKER B1: Command_ConstructJapanWaveForceTripleCannonEgg Type="CONSTRUCTION_YARD_CONSTRUCT" - SDK Japan egg construct commands (Command_ConstructJapanBaseDefenseAdvancedEgg L1812) are Type="UNIT_BUILD" (eggs are produced as units then unpacked). Wrong type for an egg. Fix: Type="UNIT_BUILD".
+UI TODO (non-blocking, temp): Name:/Desc:/Type:JapanWaveForceTripleCannon are new undefined string keys (labels missing). Prefer existing FI keys Name:FI_FloatingFortressMainGun / Desc:FI_FloatingFortressMainGun / Type:FI_FloatingFortressMainGun (referenced by SDK object; .csf existence still unverified). Images Portrait/Button_JapanTriCannonGun only referenced.
+Untested: 18s vs PackTime 3 overlap (doc: if additive use 15s), placement/anim, 360 clipping.
+MINIMAL FIX: B1 only (optionally switch string keys to FI_ ones).
+Next-item research deferred until pass. Phase 1 not complete; coverage list missing.

@@ -1,0 +1,18 @@
+Batch18 box-only audit 2026-11-08 ~02:40 UTC+10. PC not contacted; no compile; source unedited.
+Archive: handoff ra3v2_phase1_batch18.tar.gz = asset 01M6VD4D...gz: 176151 B, SHA256 d524514f8a99eb46ff9a785eef8b7ada4d3aeaafa24288affb5b08cdd489ae62 (both match claim). Saved /workspace/ra3xfer/batch18.tar.gz, unpacked /workspace/b32.
+Structure: safe paths; 61 XML parse; no ns0; Mod 3 reference + 60 all (Mod byte-identical to 17FIX); ART type=all ci 0; top-level joinAction 0.
+diff -r vs Batch17_FIX: only 3 files differ; 58 byte-identical (all prior values/prereqs unchanged).
+Asset/field whitelist (every node of every asset in the 3 files):
+ SovietAntiNavyShipTech1: only LandLocomotorSet Speed 50.0->80.0 (WaterLocomotorSet 100 unchanged).
+ Weapon.xml: only SovietAntiNavyShipTech1TeslaGun PreAttackDelay Min 0.5s->0.25s, Max 0.7s->0.35s (halved; doc gave 0.5->0.25, Max halving is the declared interpretation).
+ SpecialPowerTemplates.xml: only SpecialPower_TeslaNova RequiredConditions="OVER_WATER" removed; ReloadTime 60s, TargetType NONE, InitiateSound unchanged.
+ Auth: doc L851 + L855.
+VERDICT: SOURCE PASS - replaces Batch17_FIX as native-compile candidate. Not compiled/tested.
+Land-use residual risk (static, not game-verified): Stingray CircularDamageUpdate ModuleTag_CircularDamage (MaxRadius 175, SweepWeapon SovietAntiNavyShipTech1TeslaNovaImpact) has Flags="ONLY_ON_WATER" -> on land the nova may trigger (WeaponFireSpecialAbilityUpdate SpecialWeapon SovietAntiNavyShipTech1TeslaNova, Unpack 1s/Pack 2s) but the sweep damage likely does not apply. Doc L855 only named the template condition; removing ONLY_ON_WATER would be a further, separately approved change. Command_ActivateTeslaNova AI uses SovietAntiNavyShipTech1TeslaNovaImpact. Land animation/FX untested (doc L854).
+Next group - Tesla trooper (doc L731 "充能时间减半，特殊能力瘫痪车辆范围1.5倍 造价改为500"; L735 detail). SDK chain:
+ cost 500 & BuildTime 8: already done in Batch17_FIX.
+ (a) Weapon SovietHeavyAntiVehicleInfantryTeslaGun PreAttackDelay Min/Max 0.5s/0.5s -> 0.25s/0.25s (doc L735 explicit). (FiringDuration 1.3-1.7, ClipReload 0.3-0.7 unchanged.)
+ (b) Disable range x1.5: SpecialPower_ToggleShortCircuit -> ToggleStatusSpecialAbilityUpdate 2nd ToggleState StateWeapon SovietHeavyAntiVehicleInfantryShortCircuit: AttackRange 50.0, two ParalyzeNugget Radius 50.0 (Duration 1.1s). Also AttributeModifierAuraUpdate Range 50.0 applying AttributeMod_SovietShortCircuitRangeBoost (AREA_OF_EFFECT 105%, 0.5s) - aura that boosts nearby Tesla troopers' AoE. Doc says "半径数值待核". Proposed: ShortCircuit AttackRange 50->75 and both ParalyzeNugget Radius 50->75; leave aura Range/105% unchanged unless user wants the group-boost radius scaled too (flag as decision).
+ Files: Soviet/Units/SovietHeavyAntiVehicleInfantry.xml (only if aura changed), GlobalData/Weapon.xml.
+Not done/out of scope: campaign overrides, Stingray ONLY_ON_WATER decision, other doc items.
+Native plan: new Mods\RA3_V2.0_Batch18, same BAB cmd, 0 Error/Critical/Warning/Unknown, manifests unchanged, exact missing-ART list, one path-only retry.

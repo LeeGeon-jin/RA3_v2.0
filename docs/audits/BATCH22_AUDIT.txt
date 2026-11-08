@@ -1,0 +1,20 @@
+Batch22 box-only audit 2026-11-08 ~03:25 UTC+10. PC not contacted; no compile; source unedited.
+Archive: handoff = asset 01M6VFEC...gz: 208349 B, SHA256 213795e5c4ca22aca3f39ad809933bfba6ed2399be3e313d2f6a694e4ef0d4b7 (match). Saved /workspace/ra3xfer/batch22.tar.gz, unpacked /workspace/b37.
+diff -r vs Batch21: 62 old content files byte-identical; Mod.xml only +5 includes; 5 new files.
+Structure: safe paths; 68 XML parse; Mod 3 reference + 67 all exact, no dups; no ns0; top-level joinAction 0; ART type=all ci 0.
+Node diff vs full SDK (only BuildTime; includes removed = only ART type=all; kept DATA GlobalDefines all + Base* instance; xai ns correct):
+ JapanScoutInfantry 5->2 (cost 300; 9 ART-all removed)
+ JapanAntiInfantryInfantry 5->4 (150; 117 removed)
+ JapanAntiVehicleInfantry 5->4 (300; 80 removed); JapanAntiVehicleInfantry_Ambush identical to SDK
+ JapanEngineer 10->8 (500; 61 removed); sprint MovementSpecialPower/sounds identical
+ JapanAntiInfantryVehicle 10->8 (800; 16 removed); transform toggle identical
+ Auth doc L976 / L1012. Old 9 prereqs and cumulative values unchanged (bytes).
+ Note: SDK ART instance includes in these files: none kept beyond Base* (none existed).
+VERDICT: SOURCE PASS - replaces Batch21 as native-compile candidate. Not compiled/tested.
+Next group (read-only, doc L976 + L975 risk note):
+ JapanInfiltrationInfantry (Ninja): BuildTime 10 -> 8; GameDependency <NeededUpgrade>Upgrade_JapanBarracksTech2</NeededUpgrade> -> <RequiredObject>JapanWarFactory</RequiredObject> (deployed factory, not JapanWarFactoryEgg); cost 1000 unchanged.
+ JapanAntiVehicleInfantryTech3 (Rocket Angel): BuildTime 10 unchanged; NeededUpgrade Upgrade_JapanBarracksTech3 -> RequiredObject JapanTechStructure (not ...Egg); cost 900.
+ JapanCommandoTech1 (Yuriko): BuildTime 30 -> 20; NeededUpgrade Upgrade_JapanBarracksTech3 -> RequiredObject JapanTechStructure; cost 2000; MaxSimultaneousOfType="1" kept (doc row doesn't lift Yuriko's limit; verify separate Yuriko row before changing).
+ Whitelist: only those GameDependency child + BuildTime; full SDK objects; ART type=all removed ci.
+ Campaign: doc says 27 overrides + CampaignOverrides have no cost/time/prereq for these (J07 Yuriko block, S02 Warrior block lack such fields) - confirmed J07 has a JapanCommandoTech1 block (placed unit) - leave untouched. Side-effect (doc L975): Barracks Tech2/Tech3 no longer unlock units (upgrades still buyable, AI still buys); S03/S07 missions that relied on banning barracks upgrades may unlock these units earlier - accepted difficulty change.
+Native plan: new Mods\RA3_V2.0_Batch22, same BAB cmd, 0 Error/Critical/Warning/Unknown, manifests unchanged, exact missing-ART list, one path-only retry.

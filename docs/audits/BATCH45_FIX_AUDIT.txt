@@ -1,0 +1,4 @@
+BATCH45_FIX AUDIT (box only, field-level, not full XSD, not compiled) - SOURCE PASS (replaces batch44 as candidate)
+tar 246155B sha256 5414e57279163d8465938a14d4a20022bcde1ce0b9890cc1e720115483f66e49 (handoff == attachment), safe paths; saved batch45_FIX.tar.gz.
+vs 45: only Soviet/Structures/SovietHeroesStatue.xml; only lines 21-22 ProductionQueueType/BuildPlacementTypeFlag "STRUCTURE" -> "OTHER_STRUCTURE" (valid enum, SDK Soviet defence/SW/wall precedent). Other 90 files identical; 91 XML parse; Mod 90 all + 3 ref. All other Batch45 checks stand (verbatim SDK nodes, 2000/BuildTime 0/Unpack 20s/0 power/no prereq/Max 1/KindOf -NOT_AUTOACQUIRABLE +AUTO_ACQUIRABLE_BY_AI/MEDIUM 3000/death+OCL+collapse kept; CY 20, Crane 18). Collapse/W3X resolution = native build log item.
+Not compiled/tested. Phase 1 not complete.

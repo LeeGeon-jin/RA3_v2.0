@@ -1,0 +1,12 @@
+# BATCH80 AUDIT — SOURCE PASS. No full XSD / compile / in-game test; not Phase1 complete.
+- 321298 B, sha256 5e523988…ee1e18a3 match. data/ root, cumulative. 130 XML parse. Mod: 3 reference / 128 all (unchanged).
+- vs 79FIX: exactly 6 files differ, each by deleting the single line `MaxSimultaneousOfType="1"`:
+  - JapanEmperorFlagpoleStatue L19;
+  - JapanEmperorSonFlagpoleStatue L23;
+  - JapanImperialAdminBuilding L24;
+  - JapanMtFujiViewingTower L23;
+  - JapanStatueGuard01 L18;
+  - JapanStatueGuard03 L19.
+- The other 124 files are byte-identical.
+- **Remaining limit-1 objects:** AlliedStatueOfLiberty, SovietGreatKremlinPalace, SovietHeroesStatue (user L34 "只能造一个"), 3 quick production centers, the cloning center, and the SDK superweapons.
+- Guard02 stays unlimited (74FIX).

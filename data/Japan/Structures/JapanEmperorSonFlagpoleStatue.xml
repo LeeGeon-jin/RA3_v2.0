@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="us-ascii"?>
+<AssetDeclaration xmlns="uri:ea.com:eala:asset" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xai="uri:ea.com:eala:asset:instance">
+	<Tags></Tags>
+	<Includes>
+		<Include type="instance" source="DATA:BaseObjects/BaseCivilianStructureNoGarrisonDestructible.xml" />
+		<Include type="instance" source="DATA:Civilian/Yucatan_YU/Props/YU_HotelDebris.xml" />
+		<Include type="all" source="DATA:GlobalData/GlobalDefines.xml" />
+	</Includes>
+	<GameObject
+		id="JapanEmperorSonFlagpoleStatueBuildable"
+		inheritFrom="BaseCivilianStructureNoGarrisonDestructible"
+		EditorName="JapanEmperorSonFlagpoleStatueBuildable"	
+		KindOf="-NOT_AUTOACQUIRABLE"	
+		EditorSorting="STRUCTURE"
+		Browser="REGION Tokyo_Harbor_TH STRUCTURE"
+		SelectPortrait="Portrait_EmperorSonFlagPoleStatue"
+		ButtonImage="Button_EmperorSonFlagPoleStatue"
+		TypeDescription="TYPE:EmperorSonStatue"
+		Description="DESC:EmperorSonStatue"
+		Side="Japan"
+		BuildTime="10.0"
+		EnergyProduction="0"
+		ProductionQueueType="OTHER_STRUCTURE"
+		BuildPlacementTypeFlag="OTHER_STRUCTURE">
+		<DisplayName
+			xai:joinAction="Replace" xmlns:xai="uri:ea.com:eala:asset:instance">NAME:EmperorSonStatue</DisplayName> 
+		<ObjectResourceInfo>
+			<BuildCost Account="=$ACCOUNT_ORE" Amount="1000"/>
+		</ObjectResourceInfo> 
+		<Draws>
+			<ScriptedModelDraw
+				id="ModuleTag_Draw"
+				OkToChangeModelColor="true"
+				ExtraPublicBone="BONE_CONTACT_POINT_01 BONE_CONTACT_POINT_02 BONE_CONTACT_POINT_03 BONE_CONTACT_POINT_04 BONE_CONTACT_POINT_05 BONE_CONTACT_POINT_06 BONE_CONTACT_POINT_07 BONE_CONTACT_POINT_08 BONE_CONTACT_POINT_09 BONE_CONTACT_POINT_10 BONE_CONTACT_POINT_11 BONE_CONTACT_POINT_12 BONE_CONTACT_POINT_13 BONE_CONTACT_POINT_14 BONE_CONTACT_POINT_15 BONE_CONTACT_POINT_16 BONE_CONTACT_POINT_17 BONE_CONTACT_POINT_18 BONE_CONTACT_POINT_19 BONE_CONTACT_POINT_20">
+				<ModelConditionState
+					ParseCondStateType="PARSE_DEFAULT">
+					<Model
+						Name="TH_EmperorSonFlagpoleStatue" />
+				</ModelConditionState>
+			</ScriptedModelDraw>
+		</Draws>
+		<Behaviors>
+			<Physics
+				id="ModuleTag_Physics"/>
+
+			<BuildingDestructionBehavior
+				id="ModuleTag_BuildingDestruction">
+				<DieMuxData
+					DeathTypes="ALL" />
+				<Item
+					BonePrefix="BONE_CONTACT_POINT_"
+					FX="FX_BuildingDebrisExplosion"
+					CreationObject="YU_HotelDebris"
+					FlingVelocity="100.0"/>
+			</BuildingDestructionBehavior>
+
+			<FXListBehavior
+				xai:joinAction="Replace" xmlns:xai="uri:ea.com:eala:asset:instance" id="ModuleTag_FXList">
+				<DieMuxData
+					DeathTypes="ALL" />
+				<Event
+					Index="onDeath"
+					FX="FX_Civ_Explosion_Tiny" />
+				<Event Index="onDeath" FX="FX_Statue_DieExplosionAudio" />
+			</FXListBehavior>
+
+      <xi:include href="DATA:Includes/GenericBuildingRepair.xml" />
+      <xi:include href="DATA:Includes/GenericEngineerContain.xml" />
+      
+		</Behaviors>
+		<Body>
+			<ActiveBody
+				id="ModuleTag_Body"
+				MaxHealth="=$CIV_HEALTH_XLARGE"
+				/>
+		</Body>
+
+
+
+    <EvaEventArray>
+      <EvaEntry EvaEvent="CriticalStructureUnderAttack" EvaType="damagedAlly" />
+    </EvaEventArray>
+    
+		<Geometry
+			IsSmall="false">
+      <Shape
+     Type= "BOX"
+     MajorRadius = "30.4107"
+     MinorRadius = "23.8832"
+     Height = "92.1646"
+     ContactPointGeneration = "STRUCTURE" >
+        <Offset
+            x = "0.115633"
+            y = "-0.0187588"
+            z = "0.0" />
+      </Shape>
+		</Geometry>
+		<AudioArraySound>
+			<AudioEntry Sound="HumanFaction_MediumBuilding_LightDamageMS" AudioType="soundOnDamaged" />
+			<AudioEntry Sound="HumanFaction_MediumBuilding_HeavyDamageMS" AudioType="soundOnReallyDamaged" />
+		</AudioArraySound> 
+	</GameObject>
+</AssetDeclaration>

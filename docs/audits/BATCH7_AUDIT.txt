@@ -1,0 +1,17 @@
+Batch7 box-only audit 2026-11-08 00:07 UTC+10 (PC not contacted, no compile, source not edited).
+Archive (handoff) 130804 B SHA256 1e7a44d8edb3166033690915be50976449fd3c07de26558d4672b3f6516e95f5. Saved /workspace/ra3xfer/batch7.tar.gz, unpacked /workspace/b12.
+Structure PASS: 42 data/ files, 42/42 parse, Mod.xml 3 reference + 41 all (identical set to Batch6_FIX), DATA:, no dups, exact coverage, 0 ART all, 0 top-level joinAction.
+Vs Batch6_FIX: 39 files byte-identical; changed: AlliedAntiStructureVehicle, AlliedAntiVehicleVehicleTech3, GlobalData/Weapon.xml.
+Correct (doc L568-L580):
+ Weapon AlliedAntiVehicleVehicleTech1Cannon (Guardian) ClipReloadTime Min/Max 1.8 -> 0.8 (FiringDuration 0.2 unchanged) [L568/L572 OK]
+ Weapon AlliedAntiStructureSolarTargeter PreAttackDelay Min/Max 2.0 -> 0.5 [L574/L578 OK]
+ Athena AlliedAntiStructureVehicle Speed 50 -> 75; it has only ONE LocomotorSet (SDK original also 1) -> "double speed" claim in report is false, but single set fully covered [L578 OK]
+ Mirage AlliedAntiVehicleVehicleTech3 BuildCost 1600 -> 1500, BuildTime 15 kept [L580 OK]; Athena cost 1400 (<=1500, unchanged OK) but BuildTime 20 (>15) NOT changed -> L580 "雅典娜炮...若建造时间超过15秒改为15秒" not done.
+FAIL - REGRESSIONS (license):
+ AlliedAntiStructureVehicle (Athena) GameDependency RequiredObject AlliedTechStructure -> NeededUpgrade Upgrade_AlliedTech3
+ AlliedAntiVehicleVehicleTech3 (Mirage) GameDependency RequiredObject AlliedTechStructure -> NeededUpgrade Upgrade_AlliedTech3
+ (violates doc L454/L457/L1567; files evidently rebuilt from SDK original)
+New compile-risk ART instance includes: Athena (EXTnkTrack.xml, EX_Headlights.w3x), Mirage (EXTireTrack2.xml) — in addition to Miner / IFV / Bullfrog.
+PRE-EXISTING GAP found (all batches since Batch2, missed in earlier audits): AlliedSupportAircraft (Cryocopter) GameDependency still SDK original NeededUpgrade Upgrade_AlliedTech2; doc L458 maps Tech2 units -> RequiredObject AlliedAirfield; Batch2 report claimed it done. Other 6 of 9 units OK (Guardian/AssaultDestroyer Airfield, Spy WarFactory, Century/Aircraft carrier/Tanya TechStructure).
+Verdict: NOT a compile candidate. Batch6_FIX remains current candidate (note it also carries the Cryocopter Tech2 gap).
+Needed: restore Athena & Mirage RequiredObject AlliedTechStructure; Athena BuildTime 20->15 (L580); Cryocopter Tech2 -> RequiredObject AlliedAirfield (L458).

@@ -1,0 +1,254 @@
+<?xml version="1.0" encoding="utf-8"?>
+<AssetDeclaration xmlns="uri:ea.com:eala:asset" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xai="uri:ea.com:eala:asset:instance" xmlns:xi="http://www.w3.org/2001/XInclude">
+	<Tags></Tags>
+	<Includes>
+		<Include type="all" source="DATA:GlobalData/GlobalDefines.xml" />
+		<Include type="all" source="ART:AUSupersonicBomber.w3x" />
+		<Include type="instance" source="DATA:BaseObjects/BaseVehicle.xml" />
+	</Includes>
+	<GameObject
+		id="AlliedSupersonicBomber_Buildable"
+		inheritFrom="BaseVehicle"
+		SelectPortrait="Button_PlayerPower_PrecisionStrike"
+		ButtonImage="Button_PlayerPower_PrecisionStrike"
+		Side="Allies"
+		SubGroupPriority="605"
+		EditorSorting="UNIT"
+		BuildTime="10"
+		CommandSet="AlliedAntiGroundAircraftCommandSet"
+		KindOf="CAN_CAST_REFLECTIONS CAN_ATTACK SELECTABLE SCORE AIRCRAFT VEHICLE ASSAULT_AIRCRAFT LINE_OF_SIGHT_IGNORES_BUILDINGS CAN_BE_FAVORITE_UNIT SCORE LIMITED_PRODUCTION_AIRCRAFT NO_COLLIDE"
+		RadarPriority="UNIT"
+		ThreatLevel="10"
+		ProductionQueueType="AIRCRAFT"
+		UnitCategory="AIRCRAFT"
+		WeaponCategory="MISSILE"
+		VoicePriority="148"
+		EditorName="AlliedSupersonicBomber_Buildable"
+		Description="Desc:AlliedSupersonicBomber"
+		TypeDescription="Type:AlliedSupersonicBomber">
+		<DisplayName xai:joinAction="Replace">Name:AlliedSupersonicBomber</DisplayName>
+		<ObjectResourceInfo>
+			<BuildCost Account="=$ACCOUNT_ORE" Amount="1500"/>
+		</ObjectResourceInfo>
+		<ArmorSet
+			Armor="AlliedFighterAircraftArmor"
+			DamageFX="AircraftDamageFX" />
+		<LocomotorSet
+			Locomotor="BasicHelicopterTaxiLocomotor"
+			Condition="TAXIING"
+			Speed="10" />
+		<LocomotorSet
+			id="Locomotor_Normal"
+			Locomotor="AlliedSupersonicBomberLocomotor"
+			Condition="NORMAL"
+			Speed="400.0" />
+		<SkirmishAIInformation
+			UnitBuilderStandardCombatUnit="true"
+			ConquerMetricsOverrideDefendingAntiMask="ANTI_AIRBORNE_VEHICLE" />
+		<Draws>
+			<ScriptedModelDraw
+					id="ModuleTag_Draw"
+					OkToChangeModelColor="true"
+					ExtraPublicBone="FXCon01 FXCon02 FX_Jet_Exhaust_01 FX_Jet_Exhaust_02 FX_Jet_Exhaust_03 FX_Jet_Exhaust_04">
+				<ModelConditionState
+					ParseCondStateType="PARSE_DEFAULT">
+					<Model
+						Name="AUSupersonicBomber" />
+					<ParticleSysBone
+						BoneName="FX_Jet_Exhaust_01"
+						FXParticleSystemTemplate="AlliedSupersonicJetTrail"
+						FollowBone="true"
+						PersistID="1"
+						FXAction="SPAWN" />
+					<ParticleSysBone
+						BoneName="FX_Jet_Exhaust_01"
+						FXParticleSystemTemplate="AlliedJetTrailGlow"
+						FollowBone="true"
+						PersistID="2"
+						FXAction="SPAWN" />
+
+					<ParticleSysBone
+						BoneName="FX_Jet_Exhaust_02"
+						FXParticleSystemTemplate="AlliedSupersonicJetTrail"
+						FollowBone="true"
+						PersistID="3"
+						FXAction="SPAWN" />
+					<ParticleSysBone
+						BoneName="FX_Jet_Exhaust_02"
+						FXParticleSystemTemplate="AlliedJetTrailGlow"
+						FollowBone="true"
+						PersistID="4"
+						FXAction="SPAWN" />
+
+					<ParticleSysBone
+						BoneName="FX_Jet_Exhaust_03"
+						FXParticleSystemTemplate="AlliedSupersonicJetTrail"
+						FollowBone="true"
+						PersistID="5"
+						FXAction="SPAWN" />
+					<ParticleSysBone
+						BoneName="FX_Jet_Exhaust_03"
+						FXParticleSystemTemplate="AlliedJetTrailGlow"
+						FollowBone="true"
+						PersistID="6"
+						FXAction="SPAWN" />
+
+					<ParticleSysBone
+						BoneName="FX_Jet_Exhaust_04"
+						FXParticleSystemTemplate="AlliedSupersonicJetTrail"
+						FollowBone="true"
+						PersistID="7"
+						FXAction="SPAWN" />
+					<ParticleSysBone
+						BoneName="FX_Jet_Exhaust_04"
+						FXParticleSystemTemplate="AlliedJetTrailGlow"
+						FollowBone="true"
+						PersistID="8"
+						FXAction="SPAWN" />
+
+					<ParticleSysBone
+						BoneName="FXCon01"
+						FXParticleSystemTemplate="FireHawkConTrail"
+						FollowBone="true" />
+					<ParticleSysBone
+						BoneName="FXCon02"
+						FXParticleSystemTemplate="FireHawkConTrail"
+						FollowBone="true" />
+          
+					<WeaponLaunchBone
+						WeaponSlotID="1"
+						WeaponSlotType="PRIMARY_WEAPON"
+						BoneName="FXCON02" />
+				</ModelConditionState>
+				<ModelConditionState
+					ParseCondStateType="PARSE_NORMAL"
+					ConditionsYes="DAMAGED">
+					<Model
+						Name="AUSupersonicBomber" />
+					<ParticleSysBone
+						BoneName="FX_JET_EXHAUST_01"
+						FXParticleSystemTemplate="VehicleDamageSmoke"
+						FollowBone="true" />
+				</ModelConditionState>
+				<ModelConditionState
+					ParseCondStateType="PARSE_NORMAL"
+					ConditionsYes="REALLYDAMAGED">
+					<Model
+						Name="AUSupersonicBomber" />
+					<ParticleSysBone
+						BoneName="FX_JET_EXHAUST_01"
+						FXParticleSystemTemplate="VehicleDamageSmoke"
+						FollowBone="true" />
+					<ParticleSysBone
+						BoneName="FX_JET_EXHAUST_01"
+						FXParticleSystemTemplate="VehicleDamageFire"
+						FollowBone="true" />
+          <ParticleSysBone
+						BoneName="FX_JET_EXHAUST_01"
+						FXParticleSystemTemplate="VehicleDamageFire02"
+						FollowBone="true" />
+				</ModelConditionState>
+			</ScriptedModelDraw>
+
+		</Draws>
+		<Behaviors>
+			<Physics
+				id="ModuleTag_Physics" />
+			<WeaponSetUpdate
+				id="ModuleTag_WeaponSetUpdate">
+				<WeaponSlotHardpoint ID="1">
+					<Weapon Ordering="PRIMARY_WEAPON" Template="AlliedPrecisionBomb_Buildable"/>
+				</WeaponSlotHardpoint>
+			</WeaponSetUpdate>
+			<CreateObjectDie
+				id="ModuleTag_CreateObjectDie"
+				CreationList="AUBomberAircraft_Dying_OCL">
+				<DieMuxData
+					DeathTypes="ALL"
+					ExemptStatus="PARKED_AT_AIRFIELD"/>
+			</CreateObjectDie>
+			<CreateObjectDie
+				id="ModuleTag_CreateObjectDieAtAirfield"
+				CreationList="AUBomberAircraft_Die_OCL">
+				<DieMuxData
+					DeathTypes="ALL"
+					RequiredStatus="PARKED_AT_AIRFIELD"/>
+			</CreateObjectDie>
+			<DynamicsUpdate
+				id="ModuleTag_DefaultDynamicsUpdate"
+				xai:joinAction="Remove" />
+			<DestroyDie
+				id="ModuleTag_Die">
+				<DieMuxData
+					DeathTypes="ALL" />
+			</DestroyDie>
+			<FXListBehavior
+				id="ModuleTag_FXList">
+				<DieMuxData
+					DeathTypes="ALL" />
+				<Event Index="onDeath" FX="FX_ALL_VindicatorDie" />
+			</FXListBehavior>
+			<ReturnToProducerSpecialPower
+				id="ModuleTag_ReturnToProducerSpecialPower"
+				SpecialPowerTemplate="SpecialPowerReturnToProducer"
+				AttributeModifier="AttributeModifier_ReturnToBase"
+				AttributeModifierAffectsSelf="true"
+				SetModelCondition="USER_1"
+				SetModelConditionTime="30s"/>
+			<xi:include
+				href="DATA:Includes/AlliedAirPowerUpgrade.xml" />
+			<StatusBitsUpgrade
+				id="ModuleTag_UpgradeWeapon"
+				StatusToSet="WEAPON_UPGRADED_01">
+				<TriggeredBy>Upgrade_AlliedAirPower</TriggeredBy>
+			</StatusBitsUpgrade>
+		</Behaviors>
+		<AI>
+			<JetAIUpdate
+				id="ModuleTag_AI"
+				AutoAcquireEnemiesWhenIdle="NO"
+				NeedsRunway="false"
+				KeepsParkingSpaceWhenAirborne="true"
+				OutOfAmmoDamagePerSecond="1.5"
+				CirclesForAttack="true"
+				ReturnToBaseWhenVictimDead="true"
+				StateMachine="JetAIStateMachine">
+				<UnitAITargetChooserData
+					CanPickDynamicTargets="false"
+					CanPickDynamicTargetType="ATTACK_MOVE AGGRESSIVE_STANCE"
+					CheckVisionRange="true"/>
+			</JetAIUpdate>
+		</AI>
+		<Body>
+			<ActiveBody
+				id="ModuleTag_Body"
+				MaxHealth="2000" />
+		</Body>
+		<Geometry
+			IsSmall="false">
+			<Shape
+				Type="BOX"
+				MajorRadius="10.0"
+				MinorRadius="5.0"
+				Height="5.0"
+				ContactPointGeneration="VEHICLE">
+			</Shape>
+		</Geometry>
+		<AudioArrayVoice>
+			<AudioEntry Sound="ALL_Vindicator_VoiceMoveAttack" AudioType="voiceAttack" />
+			<AudioEntry Sound="ALL_Vindicator_VoiceCreate" AudioType="voiceCreated" />
+			<AudioEntry Sound="ALL_Vindicator_VoiceMove" AudioType="voiceMove" />
+			<AudioEntry Sound="ALL_Vindicator_VoiceRetreat" AudioType="voiceRetreatToCastle" />
+			<AudioEntry Sound="ALL_Vindicator_VoiceSelectMS" AudioType="voiceSelect" />
+			<AudioEntry Sound="ALL_Vindicator_VoiceSelectUnderFireMS" AudioType="voiceSelectUnderFire" /> 
+			<NamedEntry Sound="ALL_Vindicator_VoiceMoveReload" Name="ReturnToProducer" />
+			<NamedEntry Sound="ALL_Vindicator_VoiceRetreat" Name="ReturnToProducerWhileUnderAttack" />
+		</AudioArrayVoice>
+		<AudioArraySound>
+			<AudioEntry Sound="ALL_SurgicalStrike_FlyByLoop" AudioType="soundAmbient" />
+		</AudioArraySound>
+		<VisionInfo
+			VisionRange="150"
+			ShroudClearingRange="=$STANDARD_SHROUD_CLEAR" />
+	</GameObject>
+</AssetDeclaration>

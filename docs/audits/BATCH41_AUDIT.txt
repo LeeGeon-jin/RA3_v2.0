@@ -1,0 +1,19 @@
+BATCH41 AUDIT (box only, field-level, not full XSD, not compiled) - SOURCE PASS (replaces batch40_FIX2 as candidate)
+tar 243628B sha256 9928f0ad3a38f7f351fdeb74929f73dd08019c8e93b0ba794c661cde0b75a30f (handoff == attachment), safe paths; saved batch41.tar.gz.
+vs 40_FIX2: new 1 (Japan/Structures/JapanEmperorFlagpoleStatue.xml), changed 3 (Mod +1 all -> 86 all + 3 ref; LogicCommand +Command_ConstructJapanEmperorFlagpoleStatue CONSTRUCTION_YARD_CONSTRUCT <Object>JapanEmperorFlagpoleStatueBuildable</Object>; JapanConstructionYardCommandSet 14->15 pure append, order kept); other 83 identical. 87 XML parse.
+New file vs SDK TH_EmperorFlagpoleStatue.xml (CR stripped), only differences:
+ - ART all removed, Collapse include removed, GlobalDefines added; Destructible + YU_HotelDebris instance kept.
+ - id/EditorName JapanEmperorFlagpoleStatueBuildable; KindOf "+AIRCRAFT_PATH_AROUND -NOT_AUTOACQUIRABLE" (attribute moved, order irrelevant).
+ - added Side Japan, BuildTime 10.0, EnergyProduction 0, MaxSimultaneousOfType 1, ProductionQueueType/BuildPlacementTypeFlag OTHER_STRUCTURE; ObjectResourceInfo 1000 before Draws (legal xsd order); no GameDependency.
+ - removed AttributeModifierAuraUpdate (aura), CreateObjectDie, DestroyDie, Die_OCL block; one SDK comment line removed (cosmetic).
+ Verbatim kept: ScriptedModelDraw/model, Physics, BuildingDestruction, FXList Replace, both xi:includes (GenericBuildingRepair, GenericEngineerContain - same DATA:Includes form already used by 20 mod files), ActiveBody =$CIV_HEALTH_XLARGE, EvaEventArray, Geometry 39.0934/30.2243/160.456 offset -9.05782/7.36992, AudioArraySound.
+ Independent (inheritFrom Destructible, not TH) -> no aura/die modules inherited; J04 TH_EmperorFlagpoleStatue not in mod, untouched. AttributeModifer_EmperorsStatue remains only as unused global definition in AttributeModifier.xml (pre-existing SDK content, harmless; no dangling reference).
+ UI: SDK flagpole statue has no DisplayName/portrait/button -> UI pending, no invented keys (correct).
+Cloud wording "engineer repair" for GenericBuildingRepair is a report error only; source correct.
+Untested in game. Phase 1 not complete.
+
+NEXT: TH_EmperorSonFlagpoleStatue (doc L6/L1089: one of the five statues, 1000 / 10 s, 0 power, no prerequisite, limit 1, health =$CIV_HEALTH_XLARGE explicitly "天皇像 / 皇太子像 =$CIV_HEALTH_XLARGE", direct placement, remove aura/Die modules).
+SDK diff vs flagpole statue: same structure and same parent (BaseCivilianStructureNoGarrisonDestructible), same aura module (AttributeModifer_EmperorsStatue), same CreateObjectDie/DestroyDie/xi:includes; differences: model TH_EmperorSonFlagpoleStatue, Geometry 30.4107/23.8832/92.1646 STRUCTURE offset 0.115633/-0.0187588, and it HAS real UI: SelectPortrait Portrait_EmperorSonFlagPoleStatue, ButtonImage Button_EmperorSonFlagPoleStatue, TYPE:/DESC:/NAME:EmperorSonStatue (keep verbatim). Root lacks xmlns:xai (DisplayName declares it inline) - keep or add xmlns:xai on root, both legal.
+Implementation = exactly the Batch41 pattern: new file Japan/Structures/JapanEmperorSonFlagpoleStatue.xml, id JapanEmperorSonFlagpoleStatueBuildable, same allowed diffs, cost 1000, BuildTime 10; command Command_ConstructJapanEmperorSonFlagpoleStatue; JapanCY 15->16 append; Mod +1 (88 XML, 87 all).
+SDK paths to attach: Civilian/Tokyo_Harbor_TH/Buildings/TH_EmperorSonFlagpoleStatue.xml (+ package Japan/Structures/JapanEmperorFlagpoleStatue.xml as template). Parents/includes identical to previous list.
+Guard statues: doc health text "守卫像沿用原版或待定"; general landmark rule "血量沿用原版" -> use original (StatueGuard03 =$CIV_HEALTH_SMALL); 01/02 are OPTIMIZED_PROPS and need conversion to structure (doc explicit) - do after the son statue.

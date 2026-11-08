@@ -1,0 +1,16 @@
+Batch20 box-only audit 2026-11-08 ~03:05 UTC+10. PC not contacted; no compile; source unedited.
+Archive: handoff = asset 01M6VEM3...gz: 176149 B, SHA256 b1fcd8ebc150173e309994daf406df36c706e254221966799f9f458e0acfb625 (match). Saved /workspace/ra3xfer/batch20.tar.gz, unpacked /workspace/b35.
+diff -r vs Batch19: only SovietAntiStructureShip.xml and AttributeModifier.xml; 59 files byte-identical (Weapon.xml incl. V4Rocket 2.5/3.5 unchanged).
+Node whitelist: SovietAntiStructureShip only LoseHealthUpdate ModuleTag_RapidLaunchHealthDrain DamagePerSecond 50->25 (HealthTrigger 101%, RequiredStatus GENERIC_TOGGLE_STATE, Forbidden UNDER_IRON_CURTAIN, toggle module unchanged). AttributeModifier.xml only AttributeModifier_RapidLaunch RATE_OF_FIRE 300%->600% (Category, StartFX/EndFX unchanged); no other modifier changed. Auth doc L869/L873.
+Structure: safe paths; 61 XML parse; Mod 3 reference + 60 all exact; no ns0; top-level joinAction 0; ART type=all ci 0.
+VERDICT: SOURCE PASS - replaces Batch19 as native-compile candidate. ~1s special-mode interval is a doc estimate, not measured.
+BATCH20_NEXT_AUTHORIZED_ITEMS.md: NOT present in handoff or <store> (only DREADNOUGHT_RESEARCH.md, batch14_planning). Cloud's list (Dreadnought 20, Allied miner 12, ACV 8, IFV 8, Dolphin 8) all already in package - planning stale.
+Next groups (verified NOT in Batch20 final values; doc values explicit; SDK current values):
+ G1 Allied infantry, doc L524 (5.4 row, costs unchanged):
+  AlliedEngineer BuildTime 10 -> 8 (file IS in pack, currently 10 - not done); AlliedAntiInfantryInfantry (Peacekeeper) 5 -> 4 (cost 200; full SDK object); AlliedAntiVehicleInfantry (Javelin) 5 -> 4 (cost 300; full SDK object).
+ G2 Japan infantry/vehicle values, doc L976 & L1012 (costs unchanged):
+  JapanScoutInfantry (Burst Drone) 5 -> 2 (300); JapanAntiInfantryInfantry (Imperial Warrior) 5 -> 4 (150); JapanAntiVehicleInfantry (Tank Buster) 5 -> 4 (300); JapanEngineer 10 -> 8 (500); JapanAntiInfantryVehicle (Tengu) 10 -> 8 (800; no _Ground/_Naval variants, Jet form same object).
+ G3 (next, prereq changes L976): JapanInfiltrationInfantry (Ninja) 10->8 + NeededUpgrade Upgrade_JapanBarracksTech2 -> RequiredObject JapanWarFactory; JapanAntiVehicleInfantryTech3 (Rocket Angel) BuildTime 10 unchanged, Upgrade_JapanBarracksTech3 -> RequiredObject JapanTechStructure; JapanCommandoTech1 (Yuriko) 30->20 + same prereq. Verify SDK prereq nodes before.
+ Rules: full SDK objects, only listed fields, remove ART type=all (case-insensitive), Mod adds includes.
+Still open (not dropped): Soviet spy new unit, American GI/Heavy GI new units, Badger buildable, Ivan, campaign overrides phase, C4, spy half money, air passengers, torpedo x2, etc.
+Native plan: new Mods\RA3_V2.0_Batch20, same BAB cmd, 0 Error/Critical/Warning/Unknown, manifests unchanged, exact missing-ART list, one path-only retry.

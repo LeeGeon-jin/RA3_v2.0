@@ -1,0 +1,12 @@
+Batch18_FIX box-only audit 2026-11-08 ~02:45 UTC+10. PC not contacted; no compile; source unedited.
+Archive: handoff = asset 01M6VDD7...gz: 176142 B, SHA256 b00bec03d18bf6786ec78a1e8f4eb6082a3e16e21be85b948177a20ff1f2dafc (match). Saved /workspace/ra3xfer/batch18_fix.tar.gz, unpacked /workspace/b33.
+diff -r vs Batch18: only Soviet/Units/SovietAntiNavyShipTech1.xml; text diff = only Flags="ONLY_ON_WATER" removed from CircularDamageUpdate (lines 455-456). Node compare 164=164 nodes, single differing node ModuleTag_CircularDamage: id, MaxRadius 175, ArcDistance 50, SweepFXList FX_TeslaNovaDeath, SweepWeapon SovietAntiNavyShipTech1TeslaNovaImpact and ObjectFilter (ANY, ENEMIES NEUTRAL, VEHICLE INFANTRY TIME_BOMB) unchanged. 60 other files byte-identical (prior values/prereqs, Batch18 land speed 80 / TeslaGun pre 0.25-0.35 / TeslaNova condition removal kept).
+Chain: SpecialPower_TeslaNova -> WeaponFireSpecialAbilityUpdate SpecialWeapon SovietAntiNavyShipTech1TeslaNova -> Weapon nugget ActivateCircularDamageNugget (Lifetime 1.0s) -> this unit's CircularDamageUpdate (only one in the unit) -> sweeps SovietAntiNavyShipTech1TeslaNovaImpact. Linked to nova, not another ability.
+Schema: Modules/CircularDamageUpdate.xsd: Flags is optional CircularDamageUpdateOptionsTypeBitFlags with no default; only enum value ONLY_ON_WATER -> omitting = no flags (no water restriction in data). Engine behaviour not verified.
+Structure: safe paths; 61 XML parse; Mod 3 reference + 60 all exact; no ns0; top-level joinAction 0; ART type=all ci 0.
+VERDICT: SOURCE PASS - replaces Batch18 as native-compile candidate. Data-level water gates removed (template condition + damage flag); actual land casting, damage application, animation/FX on land NOT tested (doc L854). Cloud "complete functionality" is not evidence.
+Next group (read-only, doc L731/L735): Weapon.xml only:
+ SovietHeavyAntiVehicleInfantryTeslaGun PreAttackDelay Min/Max 0.5s -> 0.25s;
+ SovietHeavyAntiVehicleInfantryShortCircuit AttackRange 50.0 -> 75.0, both ParalyzeNugget Radius 50.0 -> 75.0 (DurationSeconds 1.1s unchanged);
+ unit aura AttributeModifierAuraUpdate Range 50 / AttributeMod_SovietShortCircuitRangeBoost 105% unchanged (unit file untouched). L735 "半径数值待核" -> 75 = 1.5x of SDK 50.
+Native plan: new Mods\RA3_V2.0_Batch18Fix, same BAB cmd, 0 Error/Critical/Warning/Unknown, manifests unchanged, exact missing-ART list, one path-only retry.

@@ -1,0 +1,5 @@
+Batch2 fix package pending native compile (PC offline at 2026-11-07 23:15 UTC+10).
+Package: /workspace/ra3xfer/batch2_fix.tar.gz SHA256 2e4de7fbca03acafbc9d7b5020476aa39b1ad514cf20901c4fb937b43cf5881e (62850 B). Unpacked: /workspace/b3
+Box checks PASSED: 29 files data/ safe; 29/29 parse; Mod.xml 3 reference DATA:static/global/audio + 28 all, full coverage; 0 ART type=all; 0 top-level joinAction; first 16 structures byte-identical to clean StructuresXMLFix (AlliedBarracks BuildTime=8).
+Watch: Includes/InfiltratorContainEconomic.xml is an XInclude fragment (root InfiltratorContain, SDK original form, only BlockedDuration 30s->0s, Amount 2000) but listed in Mod.xml as type=all.
+Next: E:\RA3ModBuild\RA3ModSDK\Mods\RA3_V2.0_Batch2 (new), logs E:\RA3ModBuild\logs_batch2, same BAB cmd /od /iod SDK\builtmods; pass = 0 Error/Critical/Warning/Unknown + manifests unchanged.

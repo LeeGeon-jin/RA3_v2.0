@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<AssetDeclaration xmlns="uri:ea.com:eala:asset">
+	<Includes>
+		<Include type="instance" source="DATA:GlobalData/ExperienceLevels.xml" />
+	</Includes>
+	<!-- ALLIED PRECISION BOMBER BUILDABLE (Batch 102) -->
+	<ExperienceLevelTemplate
+		id="AlliedSupersonicBomber_BuildableExperienceLevel_1"
+		inheritFrom="ExperienceLevel_AlliedRank1"
+		RequiredExperience="1"
+		ExperienceAward="10000">
+		<Target>AlliedSupersonicBomber_Buildable</Target>
+	</ExperienceLevelTemplate>
+</AssetDeclaration>

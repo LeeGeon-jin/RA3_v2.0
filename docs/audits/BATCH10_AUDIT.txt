@@ -1,0 +1,16 @@
+Batch10 box-only audit 2026-11-08 00:44 UTC+10 (PC not contacted, no compile, source not edited).
+Archive (handoff) 135061 B SHA256 22b8a0a28250cc013a1ef010e269f185f798925ae6dcd6955d00cdd6493009e6. Saved /workspace/ra3xfer/batch10.tar.gz, unpacked /workspace/b17.
+Structure: 45 data/ files, 45/45 parse; safe paths. Mod.xml (namespace-aware): 3 reference DATA:static/global/audio + 44 all, all DATA:, no dups, exactly matches 44 content files (incl. new AlliedAttackDrone). 0 ART all; 0 top-level joinAction.
+ NOTE/RISK: Mod.xml was re-serialized by a script with a namespace PREFIX: <ns0:AssetDeclaration xmlns:ns0="uri:ea.com:eala:asset"><ns0:Includes><ns0:Include .../>. XML-namespace-equivalent to previous default-namespace form, but every compiled Mod.xml so far used the default namespace; whether BinaryAssetBuilder accepts prefixed elements is unproven. Watch first lines of build log; if rejected, source fix = restore default xmlns (cloud side).
+Vs Batch9: 41 files byte-identical; changed: Mod.xml, Weapon.xml, JapanSuperWeaponAdvanced; new AlliedAttackDrone.
+ JapanSuperWeaponAdvanced (Psionic Decimator): only BuildCost 4000->3500 [doc L230/L233 OK; correct object]
+ Weapon AlliedAntiNavyShipTech1Cannon PreAttackDelay Min/Max 1.0->0.5; ClipReloadTime 1.0/1.0 unchanged, ClipSize 1 -> interval 0.5+1.0 = 1.5s [L676/L679 OK]
+ Weapon AlliedAntiStructureAttackDrones ClipReloadTime Min/Max 10.0->5.0 (ClipSize 5, Pre 1.0, Firing 0.5 unchanged) [L688/L691/L692 OK]
+ Weapon.xml: only these 2 templates differ (difflib, all lines). Torpedo ClipSize still 2.
+ AlliedAttackDrone (new): full SDK GameObject (not stub); only diffs vs SDK = its 3 ART includes removed and the single LocomotorSet Speed 225.0 -> 337.5 (SDK has exactly 1 LocomotorSet) [L691 OK].
+ Reference chain (SDK): carrier AlliedAntiStructureShip weapon AlliedAntiStructureAttackDrones -> WeaponOCLNugget OCL_AlliedAttackDrones -> ObjectCreationLists.xml <CreateObject>AlliedAttackDrone</CreateObject>; carrier parking/horde IncludeThing AlliedAttackDrone. CampaignOverrides redefines AlliedAttackDrone (inheritFrom self) without Speed/Locomotor -> campaign inherits new speed.
+9-unit deps (parser) unchanged: Guardian/Cryo/AssaultDestroyer Airfield, Spy WarFactory, Athena/Mirage/Century/Carrier/Tanya TechStructure; 0 NeededUpgrade AlliedTech2/3; Destroyer 15/65/75, Carrier 20, all earlier values preserved.
+Compile risk ART instance (unchanged): AlliedMiner, AlliedAntiAirVehicleTech1, SovietAntiAirShip, Athena, Mirage. Plus Mod.xml ns0 prefix (above).
+Still open: Tanya sprint skill (L526); C4 step2 conditional (L535); spy steals half (L514/L518); air passengers Century/Twinblade (L176/L179/L180); torpedo x2 optional (L560); all doc items outside Phase-1 batches.
+Verdict: source PASS - may supersede Batch9 as native-compile candidate (with Mod.xml prefix risk flagged). Not compiled, not game-verified.
+Plan when PC online: copy batch10.tar.gz -> E:\RA3ModBuild\_in; new E:\RA3ModBuild\RA3ModSDK\Mods\RA3_V2.0_Batch10; logs E:\RA3ModBuild\logs_batch10; entry ...\RA3_V2.0_Batch10\data\Mod.xml; same BAB cmd /od /iod SDK\builtmods; pass = exit0 + 0 Error/Critical/Warning/Unknown + static/global/audio manifests unchanged; check Mod.xml loading and ART instance lines; one path-only retry. If Mod.xml prefix is rejected, keep Batch9 as fallback.

@@ -1,0 +1,19 @@
+BATCH38_FIX2 AUDIT (box only, field-level, not full XSD, not compiled) - FAIL / BLOCKED (keep batch37)
+tar 240425B sha256 1bfd01f4ae861436cfa66985c8a69a7cf35b105236fde5b0c3a632233b1884e1 (handoff == attachment), safe paths; saved batch38_FIX2.tar.gz.
+vs 38_FIX: only MR_LaserMtRushmore_Lincoln_Ready.xml changed, other 84 identical.
+FIXED: B4 (Jiggle 0d; WSU = SDK minus 2 MaxDeflection, weapon swapped). Includes ok (2 ART all removed, GlobalDefines added, instances kept). Health macro restored. Weapon top attrs now = SDK (WeaponSpeed 999999 vs 999999.0 numerically equal, acceptable). New object unchanged and OK (flags, 2000 HP, cost 2000, lab, -75, 1250/1250, Unpack Replace 30).
+STILL BLOCKING (vs real SDK, CRLF ignored):
+B1 Ready object:
+ - EditorName/Browser kept OK; Description/TypeDescription case changed DESC:->Desc:, TYPE:->Type: (string keys likely case-insensitive but not SDK verbatim - restore).
+ - Both LaserDraw stripped to id ModuleTag_LaserDraw1/2 + invented AttachToBoneInAnotherModule; all Texture*/Fade/LaserWidth/WeaponSlotID and FXShader (Laser.fx, FXLaserStandard, ColorEmissive) removed. SDK id ModuleTag_LaserDraw.
+ - Both LaserState replaced by LaserUpdate with invented ParticleSys* attrs (Rushmore_Lincoln_EyeGlow/EyeFlash/Target not in SDK); SDK LaserState with LaserStart/EndParticleSystem children lost.
+B2 Collapse: DynamicsDraw lost Collision/FlingPerturbation/Explodiness, all 8 ParticleSysBone, all 15 real BoneVolumes (Mass/Box/Translation/Rotation) replaced by invented B_BONE01..15 MinLifetime/MaxLifetime; Lifetime 5s/4s removed; <Behaviors/> removed; audio soundAmbient->soundOnDeath.
+B3 weapon nuggets:
+ - DamageNugget DelayTimeSeconds 0.1s->0.1; ForbiddenTargetObjectStatus HAS_SECONDARY_DAMAGE -> AFLAME INSIDE_GARRISON UNDER_CONSTRUCTION.
+ - SecondaryDamageNugget SDK has ONLY Amount=$FACTION_WEAPON_SECONDARY_DAMAGE_AMOUNT; package adds invented Radius/Delay/DamageType/DeathType/Forbidden/RequiredTargetKindOf.
+ (Cloud claim "SDK DelayTimeSeconds 0.1 no unit" is false: SDK BaseMountRushmoreHead.xml has "0.1s".)
+MINIMAL FIX: file must be produced by script, not typed:
+  tr -d '\r' < SDK/Civilian/Mount_Rushmore_MR/Buildings/MR_LaserMtRushmore_Lincoln_Ready.xml, delete only the 2 ART all lines (optionally add GlobalDefines include);
+  append sed -n 26,72p SDK/BaseObjects/BaseMountRushmoreHead.xml with id->SovietRushmoreLaserHeadWeapon, AttackRange 9999.0->1150.0 only;
+  append current SovietRushmoreLaserHead object unchanged; close </AssetDeclaration>.
+Allied head research deferred until pass. Phase 1 not complete.

@@ -1,0 +1,15 @@
+BATCH39 AUDIT (box only, field-level, not full XSD, not compiled) - FAIL / BLOCKED (keep batch38_FIX3)
+tar 237943B sha256 a824eccfcc97410fc60e355cea154f5f3503a5c410508dff85b6ea8117e40587 (handoff == attachment), safe paths; saved batch39.tar.gz.
+vs 38_FIX3: exactly 3 files changed (Ready, LogicCommand, LogicCommandSet); other 82 identical; 85 XML parse; Mod unchanged; new ids unique.
+PASS parts:
+- Ready: pure append after Soviet object; original Ready/Collapse/weapon/Soviet object untouched. AlliedRushmoreLaserHead inheritFrom MR_LaserMtRushmore_Lincoln_Ready (not Soviet), Side Allies, BuildTime 30.0, -75, KindOf +POWERED +SCORE -UNATTACKABLE -NOT_AUTOACQUIRABLE, cost 2000 =$ACCOUNT_ORE, AlliedTechStructure, vision/shroud 1250, WeaponSetUpdate same-id Replace identical to Soviet (reuses SovietRushmoreLaserHeadWeapon), ActiveBody 2000; no Unpack override -> inherits 1.5s (doc L221); EditorName/DisplayName inherited from Ready (no invented strings); AIUpdate inherited; no AI build entry.
+- LogicCommandSet: AlliedConstructionYardCommandSetBase 14 -> 15 and AlliedCraneCommandSet 13 -> 14, pure append at end, all original commands in original order (CoastalGun kept). Append-after-Pack/Outpost acceptable.
+BLOCKER B1 LogicCommand Command_ConstructAlliedRushmoreLaserHead is not a construct command:
+  has invented Radius="100.0", Options="NEED_UPGRADE CONTEXTMODE_COMMAND", UnitSpecificSound; MISSING Type and <Object>. Without Type="CONSTRUCTION_YARD_CONSTRUCT" and <Object>AlliedRushmoreLaserHead</Object> the button cannot build the object (NEED_UPGRADE would also gate it on a nonexistent upgrade).
+MINIMAL FIX (copy Command_ConstructAlliedCoastalGun exactly):
+	<LogicCommand
+		id="Command_ConstructAlliedRushmoreLaserHead"
+		Type="CONSTRUCTION_YARD_CONSTRUCT">
+		<Object>AlliedRushmoreLaserHead</Object>
+	</LogicCommand>
+Nothing else needs change. Next-item research deferred until pass. Phase 1 not complete.

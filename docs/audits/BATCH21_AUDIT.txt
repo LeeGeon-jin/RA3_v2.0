@@ -1,0 +1,17 @@
+Batch21 box-only audit 2026-11-08 ~03:15 UTC+10. PC not contacted; no compile; source unedited.
+Archive: handoff = asset 01M6VF12...gz: 186762 B, SHA256 c340374a587b9b791cff709fa19ddebae9f1c76c6e4ebdadf6af3d1db92c8dc3 (match). Saved /workspace/ra3xfer/batch21.tar.gz, unpacked /workspace/b36.
+Structure: safe paths; 63 XML parse; Mod 3 reference + 62 all exact, no dups (Mod = Batch20 + 2 includes); no ns0; top-level joinAction 0; ART type=all ci 0.
+Byte-identical to Batch20: 59 files (61 old - AlliedEngineer - Mod.xml); cloud's "60" is wrong arithmetic.
+ AlliedEngineer vs Batch20: only BuildTime 10->8; ALLIED_HEALTH_TENT_RADIUS 150 define and all else unchanged.
+ AlliedAntiInfantryInfantry (Peacekeeper) vs full SDK: only BuildTime 5->4 (cost 200 unchanged); includes kept GlobalDefines(all)+BaseInfantry(instance); riot shield toggle still references AttributeModifier_RiotShield, which in pack is SPEED 70% (Batch10 value) -> shield speed change still effective.
+ AlliedAntiVehicleInfantry (Javelin) vs full SDK: only BuildTime 5->4 (cost 300 unchanged); same includes.
+ Auth doc L524 (costs unchanged). 9 unit prereqs untouched (files byte-identical).
+VERDICT: SOURCE PASS - replaces Batch20 as native-compile candidate. Not compiled/tested.
+Next Japan group (read-only): doc L976 (costs unchanged) + L1012; none of these files are in Batch21 (not done). SDK:
+ JapanScoutInfantry (Burst Drone) BuildTime 5 -> 2 (300); single object.
+ JapanAntiInfantryInfantry (Imperial Warrior) 5 -> 4 (150); single object.
+ JapanAntiVehicleInfantry (Tank Buster) 5 -> 4 (300); file also has JapanAntiVehicleInfantry_Ambush (inheritFrom JapanAntiVehicleInfantry, spawned by ambush power, not trained) - keep it unchanged; it will inherit 4 harmlessly.
+ JapanEngineer 10 -> 8 (500); keep SpecialPower_JapanEngineerSprint/MovementSpecialPower intact.
+ JapanAntiInfantryVehicle (Tengu) 10 -> 8 (800); Jet Tengu = same object toggle; CampaignOverrides line ~866 redefines JapanAntiInfantryVehicle (inheritFrom self) without time/cost - campaign untouched.
+ Notes: these SDK files have many ART type=all includes (Scout ~10, Warrior ~118 lines, TankBuster ~82, Engineer ~62, Tengu ~17 matches) - check case-insensitively (lowercase art: seen before); keep DATA includes and ART instance includes.
+Native plan: new Mods\RA3_V2.0_Batch21, same BAB cmd, 0 Error/Critical/Warning/Unknown, manifests unchanged, exact missing-ART list, one path-only retry.

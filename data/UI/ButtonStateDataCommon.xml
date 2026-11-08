@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<AssetDeclaration xmlns="uri:ea.com:eala:asset" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<ButtonSingleStateData
+		id="ButtonStateAbilityJapanYariSprint">
+		<State
+			Image="JUA_Engineer_Sprint"
+			Title="NAME:AbilityJapanEngineerSprint"
+			Description="DESC:AbilityJapanEngineerSprint" />
+	</ButtonSingleStateData>
+</AssetDeclaration>

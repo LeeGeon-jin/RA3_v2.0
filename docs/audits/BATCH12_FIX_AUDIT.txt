@@ -1,0 +1,10 @@
+Batch12_FIX box-only audit 2026-11-08 ~01:35 UTC+10. PC not contacted; no compile; source unedited.
+Archive 135336 B SHA256 73688dae358c027046df373eb19a174a6a91754902b6c9dd8b9b382249baee0d (size+hash match). Saved /workspace/ra3xfer/batch12_fix.tar.gz, unpacked /workspace/b23.
+Safe paths, 48 files all XML, 48/48 parse, no ns0. File set identical to Batch11_VALIDATED (none added/missing).
+Byte compare vs Batch11_VALIDATED: 47 files identical (incl. Mod.xml -> still 3 reference + 47 all, all checks of 11V carry over: no ART all, no top-level joinAction, 9 deps, all old values, Tanya sprint chain, shield 70, bribe 5, refinery InfiltratorContain 2000/0s).
+Only diff: BaseObjects/BaseOreNode.xml line 58 OreNodeBehavior MaximumGatheredValue 30000 -> 60000 (doc L168: total ore per node; all OreNode inherit). DeliveryAmount 500 (per-dock delivery, matches miner capacity 500) unchanged.
+Century AlliedBomberAircraft KillPassengersOnDeath="true" (original). No SovietAntiGroundAircraft file/include. Air passengers still undecided - not done.
+VERDICT: SOURCE PASS - replaces Batch11_VALIDATED as native-compile candidate. Not compiled/tested. Doc L168 risk: Bibber resource fix/WorldBuilder compat after ore changes (FAQ #48); in-game check node depletion.
+Native plan (PC online): copy tar to E:\RA3ModBuild\_in; new E:\RA3ModBuild\RA3ModSDK\Mods\RA3_V2.0_Batch12Fix; logs E:\RA3ModBuild\logs_batch12fix; same BAB command as clean 16-structure build (absolute data\Mod.xml, /od /iod SDK builtmods); pass = exit0 & 0 Error/Critical/Warning/Unknown, static/global/audio manifests unchanged; one path-only retry; return logs/manifests/outputs. Then in-game tests (Tanya sprint/button, ore 60000, etc).
+Risks: ART instance (AlliedMiner, AlliedAntiAirVehicleTech1, SovietAntiAirShip, Athena, Mirage); engineer UI reuse/no hotkey; single-asset global overrides unproven until compile.
+Open: C4 L535, spy half money, air passengers L176-180, torpedo x2 optional, Soviet/Japan miner speed, rest of doc.

@@ -1,0 +1,16 @@
+BATCH44 AUDIT (box only, field-level, not full XSD, not compiled) - SOURCE PASS (replaces batch43 as candidate)
+tar 245553B sha256 c0daa62b6deec191497241a9e78b4043d5528a92f81ae722f05ef774426b89f5 (handoff == attachment), safe paths; saved batch44.tar.gz.
+vs 43: new 1 (Japan/Structures/JapanMtFujiViewingTower.xml), changed 3 (Mod +1 -> 89 all + 3 ref; Command_ConstructJapanMtFujiViewingTower CONSTRUCTION_YARD_CONSTRUCT <Object>JapanMtFujiViewingTowerBuildable</Object>; JapanCY 17->18 pure append); other 86 identical; 90 XML parse.
+vs SDK MJ_MtFujiViewingTower.xml, only:
+ - root xmlns:xai; ART all + commented _GAR + Collapse include removed; parent include -> BaseCivilianStructureNoGarrisonDestructible; YU_HotelDebris kept; GlobalDefines added.
+ - id/EditorName new; inheritFrom NoGarrisonDestructible; KindOf "+AIRCRAFT_PATH_AROUND -NOT_AUTOACQUIRABLE"; Side Japan, BuildTime 20.0, EnergyProduction 0, Max 1, OTHER_STRUCTURE x2; ObjectResourceInfo 2000.
+ - ArmorSet DefaultArmor StructureArmor/GenericStructureDamageFX (same id as new parent's DefaultArmor -> overrides with identical values, no duplicate) + CryoBeamFrozenArmor SECONDARY_DAMAGE (verbatim from old BaseCivilianStructure); order DisplayName < ObjectResourceInfo < ArmorSet < Draws legal.
+ - GarrisonFlagArmorDraw xi:include removed; CreateObjectDie + OCL removed (0 residue).
+ - Body ActiveBody DefaultBody =$CIV_HEALTH_MEDIUM (3000 = original inherited from BaseCivilianStructureMedium), single slot, same id as parent.
+ Verbatim: ScriptedModelDraw (model, RUBBLE, AnimationState, bones), Physics, BuildingDestruction, FXList Replace, Geometry 70/70/165 + offset, audio, UI Portrait_/Button_Japan_MtFujiViewingTower + Desc:/Type:/Name:MtFujiViewingTower original case (references only, assets not verified).
+ Inherited-chain change (by design, doc garrison/death rule): lost from BaseCivilianStructure/Medium: ContestableGarrisonContain x2, garrison aura, DestroyDie, KindOf GARRISON/IGNORE_FOR_VICTORY/NOT_SELLABLE/CRUSHABLE_BUILDING; gains NoGarrison chain (same as admin building/statues). Note: without IGNORE_FOR_VICTORY the decoration counts as a structure for defeat (same as other Japan decorations; test item, not blocker). S07 original untouched.
+Not compiled/tested. Phase 1 not complete.
+
+JAPAN DECORATION STATUS (doc L1089 list): ① admin building done (B40), ② Fuji tower done (B44), statues: emperor (B41), son (B42), Guard03 (B43) done; Guard01/02 wait for user health value (no numeric original). Doc: other Japanese candidates (_02/_03, MJ_Structure_01-04, KenjiVilla, OldJapanTomb) "均待定" -> nothing else settled. UI strings/icons for flagpole/guard statues pending.
+
+NEXT (smallest settled, not done): Soviet heroes statue OD_SovietHeroesStatue_01 (see RESEARCH_NEXT_HEROSTATUE.txt). Cloning center (doc L806) is multi-file (CaptureAndGiveUpgrade/upgrade/barracks/every infantry ObjectCreationUpgrade, partly "需实测") -> larger; quick production center (L263) also mechanism-heavy.

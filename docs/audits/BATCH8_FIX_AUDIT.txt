@@ -1,0 +1,12 @@
+Batch8_FIX box-only audit 2026-11-08 00:24 UTC+10 (PC not contacted, no compile, source not edited).
+Archive (handoff) 134036 B SHA256 a234f895433760d3b520b306082277cd0d4c52a261c6ed20b56c473d0061ba39. Saved /workspace/ra3xfer/batch8_fix.tar.gz, unpacked /workspace/b15.
+Structure PASS: 44 data/ files, 44/44 parse, Mod.xml 3 reference + 43 all (same as Batch8), DATA:, no dups, exact coverage, 0 ART all, 0 top-level joinAction.
+Vs Batch8: exactly 2 files changed:
+ Weapon.xml: only AlliedAntiInfantryVehicleTorpedoLauncher ClipSize 4 -> 2 (back to SDK original; unrequested change reverted)
+ AlliedAntiGroundAircraft (Vindicator): BuildTime 15 -> 10, BuildCost 1200 -> 1000 [doc L646/L649 OK]; no GameDependency (SDK original has none; built at Airfield via command set, "前提不变")
+ Other 42 files byte-identical to Batch8.
+Kept values (parser): Spy BuildTime 8 / WarFactory / DominateRadius 130; Dolphin BuildTime 8 / 750; Vindicator MissilePod ClipSize 3, _AirPower 4; 9-unit deps Guardian/Cryo/AssaultDestroyer Airfield, Spy WarFactory, Athena/Mirage/Century/Carrier/Tanya TechStructure; 0 NeededUpgrade AlliedTech2/3; all earlier values unchanged.
+Still NOT implemented (open): Tanya sprint skill (L526: run x2 speed, 10s, cooldown 25s); C4 attach step2 conditional on measurement (L535); spy steals half money (L514/L518, still fixed 2000); air-unit passengers Century/Twinblade (L176/L179/L180 decision); ACV torpedo clip x2 optional (L560, now original 2); plus all doc items outside these batches.
+Compile risk ART instance (not in SDK Art): AlliedMiner, AlliedAntiAirVehicleTech1, SovietAntiAirShip, Athena, Mirage.
+Verdict: PASS - CURRENT native-compile candidate (supersedes Batch8). Not game-verified.
+Plan when PC online: copy batch8_fix.tar.gz -> E:\RA3ModBuild\_in; new E:\RA3ModBuild\RA3ModSDK\Mods\RA3_V2.0_Batch8Fix; logs E:\RA3ModBuild\logs_batch8fix; entry ...\RA3_V2.0_Batch8Fix\data\Mod.xml; same BAB cmd /od /iod SDK\builtmods; pass = exit0 + 0 Error/Critical/Warning/Unknown + static/global/audio manifests unchanged; check ART instance lines.

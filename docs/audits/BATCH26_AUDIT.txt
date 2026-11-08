@@ -1,0 +1,7 @@
+BATCH26 AUDIT (box only) - PASS
+tar 223161B sha256 676d1b49...f8bd matches; safe paths; saved batch26.tar.gz
+vs batch25: only new GlobalData/upgrade.xml + 1 Mod.xml include line; 73 old files byte-identical
+75 XML parse ok; Mod 77 includes (3 ref/74 all) exactly match content; no ns0, topjoinAction 0, ART all 0
+upgrade.xml: 92/92 templates vs SDK, only diffs: Upgrade_JapanWarFactoryTech2 & Upgrade_JapanNavalYardTech2 BuildTime 30.0s->10s (doc L951/L987). Costs 750, all deps, Allied/Soviet/Barracks/Tech3 unchanged. Not a stub.
+Coverage list: not found in handoff.
+Next: pure Japan numerics essentially exhausted; next = Shogun ramming->speed (L1077/1078), Yari kamikaze->sprint (L1083/1084).

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<AssetDeclaration xmlns="uri:ea.com:eala:asset">
+	<UnitAbilityButtonTemplate
+		id="ButtonTanyaSprint"
+		LogicCommand="Command_AlliedCommandoSprintSpecialPower">
+		<Data>
+			<SpecialPower
+				StateData="ButtonStateAbilityJapanEngineerSprint"/>
+		</Data>
+	</UnitAbilityButtonTemplate>
+
+	<UnitAbilityButtonTemplate
+		id="ButtonJapanYariSprint"
+		LogicCommand="Command_JapanYariSprintSpecialPower">
+		<Data>
+			<SpecialPower
+				StateData="ButtonStateAbilityJapanEngineerSprint"/>
+		</Data>
+	</UnitAbilityButtonTemplate>
+
+	<UnitAbilityButtonTemplate
+		id="Button_JASS_RammingSpeed"
+		LogicCommand="Command_RammingSpeed">
+		<Data>
+			<SpecialPower
+				StateData="ButtonStateAbilityJapanEngineerSprint"/>
+		</Data>
+	</UnitAbilityButtonTemplate>
+
+	<UnitAbilityButtonTemplate
+		id="ButtonTechAirportParadrop_Allied"
+		LogicCommand="Command_TechAirportParadrop_Allied">
+		<Data>
+			<TargetedSpecialPower
+				RadiusCursor="Target_Allied_Paradrop"
+				StateData="ButtonStateAbilityEjectPassengersUntargetted"
+				ValidTargetCursor="TargetAbility"/>
+		</Data>
+	</UnitAbilityButtonTemplate>
+
+	<UnitAbilityButtonTemplate
+		id="ButtonTechAirportParadrop_Soviet"
+		LogicCommand="Command_TechAirportParadrop_Soviet">
+		<Data>
+			<TargetedSpecialPower
+				RadiusCursor="Target_Allied_Paradrop"
+				StateData="ButtonStateAbilityEjectPassengersUntargetted"
+				ValidTargetCursor="TargetAbility"/>
+		</Data>
+	</UnitAbilityButtonTemplate>
+
+	<UnitAbilityButtonTemplate
+		id="ButtonTechAirportParadrop_Japan"
+		LogicCommand="Command_TechAirportParadrop_Japan">
+		<Data>
+			<TargetedSpecialPower
+				RadiusCursor="Target_Allied_Paradrop"
+				StateData="ButtonStateAbilityEjectPassengersUntargetted"
+				ValidTargetCursor="TargetAbility"/>
+		</Data>
+	</UnitAbilityButtonTemplate>
+</AssetDeclaration>

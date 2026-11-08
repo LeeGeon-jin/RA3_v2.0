@@ -1,0 +1,14 @@
+Batch8 box-only audit 2026-11-08 00:20 UTC+10 (PC not contacted, no compile, source not edited).
+Archive (handoff) 134046 B SHA256 92cd7d1f4a0baca2ab29f7fbf47ed93d68cae1c61bc31719dea33b4d2265638c. Saved /workspace/ra3xfer/batch8.tar.gz, unpacked /workspace/b14.
+Structure PASS: 44 data/ files, 44/44 parse, Mod.xml 3 reference + 43 all (Batch7_FIX set + AlliedAntiNavalScout + AlliedAntiGroundAircraft), DATA:, no dups, exact coverage, 0 ART all, 0 top-level joinAction; new files have no ART includes.
+Vs Batch7_FIX: 39 files byte-identical; changed: Mod.xml, AlliedInfiltrationInfantry, Weapon.xml; new: AlliedAntiNavalScout, AlliedAntiGroundAircraft.
+ Spy AlliedInfiltrationInfantry BuildTime 10->8 only; RequiredObject AlliedWarFactory and DominateRadius 130 kept [doc L520/L524 OK]
+ Dolphin AlliedAntiNavalScout (full SDK object) BuildTime 10->8 only [L550/L553 OK]
+ Weapon AlliedAntiGroundAircraftMissilePodWeapon ClipSize 2->3; _AirPower ClipSize 3->4 [L604/L608 OK]. Target identity: these are the Allied Vindicator (AlliedAntiGroundAircraft, doc L607 "维和轰炸机即 Vindicator"; its WeaponSetUpdate uses MissilePodWeapon and _AirPower on WEAPON_UPGRADED_01). Not the Soviet Twinblade (SovietAntiGroundAircraft, not in package). Report's "盟军双刃轰炸机" wording is wrong, files are right.
+ UNREPORTED: Weapon AlliedAntiInfantryVehicleTorpedoLauncher ClipSize 2->4 (ACV torpedo). Doc L560 lists it as optional ("如也要加倍 → 4") - plausible but not asked in this batch; needs user confirmation.
+ AlliedAntiGroundAircraft.xml: identical to SDK original except whitespace (no value change; BuildTime 15, cost 1200). Not needed for the clip change (weapons are in Weapon.xml); harmless full baseline. Doc L646/L649 Vindicator cost 1200->1000, BuildTime 15->10 NOT done (open).
+9-unit deps (parser): Guardian/Cryo/AssaultDestroyer Airfield; Spy WarFactory; Athena/Mirage/Century/Carrier/Tanya TechStructure; 0 NeededUpgrade AlliedTech2/3. Prior values unchanged.
+Open: Vindicator 1000/10s (L646/L649); Tanya sprint (L526); C4 step2 (L535); spy steal half (L514/L518); air passengers (L179/L180); torpedo 4 confirm.
+Compile risk ART instance: Miner, IFV, Bullfrog, Athena, Mirage (unchanged).
+Verdict: PASS as current native-compile candidate (supersedes Batch7_FIX), with note on unreported torpedo change. Not game-verified.
+Plan when PC online: copy batch8.tar.gz -> E:\RA3ModBuild\_in; new Mods\RA3_V2.0_Batch8; logs E:\RA3ModBuild\logs_batch8; entry ...\RA3_V2.0_Batch8\data\Mod.xml; same BAB cmd /od /iod SDK\builtmods; pass = exit0 + 0 Error/Critical/Warning/Unknown + manifests unchanged.

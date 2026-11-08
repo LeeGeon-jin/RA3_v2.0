@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<AssetDeclaration xmlns="uri:ea.com:eala:asset">
+	<Includes>
+		<Include type="instance" source="DATA:GlobalData/ExperienceLevels.xml" />
+	</Includes>
+	<!-- SOVIET INFILTRATION INFANTRY (Soviet Spy)_____________________________________ -->
+	<ExperienceLevelTemplate
+		id="SovietInfiltrationInfantryExperienceLevel_1"
+		inheritFrom="ExperienceLevel_SovietRank1"
+		RequiredExperience="1"
+		ExperienceAward="1000">
+		<Target>SovietInfiltrationInfantry</Target>
+	</ExperienceLevelTemplate>
+	<ExperienceLevelTemplate
+		id="SovietInfiltrationInfantryExperienceLevel_2"
+		inheritFrom="ExperienceLevel_SovietRank2"
+		Prerequisite="SovietInfiltrationInfantryExperienceLevel_1"
+		RequiredExperience="3000"
+		ExperienceAward="2000">
+		<Target>SovietInfiltrationInfantry</Target>
+	</ExperienceLevelTemplate>
+	<ExperienceLevelTemplate
+		id="SovietInfiltrationInfantryExperienceLevel_3"
+		inheritFrom="ExperienceLevel_SovietRank3"
+		Prerequisite="SovietInfiltrationInfantryExperienceLevel_2"
+		RequiredExperience="6000"
+		ExperienceAward="3000">
+		<Target>SovietInfiltrationInfantry</Target>
+	</ExperienceLevelTemplate>
+	<ExperienceLevelTemplate
+		id="SovietInfiltrationInfantryExperienceLevel_4"
+		inheritFrom="ExperienceLevel_SovietRank4"
+		Prerequisite="SovietInfiltrationInfantryExperienceLevel_3"
+		RequiredExperience="9000"
+		ExperienceAward="4000">
+		<Target>SovietInfiltrationInfantry</Target>
+	</ExperienceLevelTemplate>
+</AssetDeclaration>

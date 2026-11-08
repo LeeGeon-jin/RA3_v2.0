@@ -1,0 +1,7 @@
+Batch14_FIX box-only audit 2026-11-08 ~02:00 UTC+10. PC not contacted; no compile; source unedited.
+Archive 148435 B SHA256 0ac8b4213431c0eeecbe8c0b30a40fc24f3113a38d45b5671be18cca4422dfc2 (match). Saved /workspace/ra3xfer/batch14_fix.tar.gz, unpacked /workspace/b27.
+diff -r vs Batch14: only Soviet/Units/SovietAntiInfantryVehicle.xml - removed <Include type="all" source="art:FXSovietSickleFP.xml"/> (comment kept). Other 52 files incl. Mod.xml byte-identical to audited Batch14. (Duplicate GlobalDefines all include remains - harmless.)
+Safe paths; 53 files, all XML, all parse; no ns0; Mod 3 reference + 52 all exact match, no dups; ART/art type=all (case-insensitive) = 0; top-level joinAction 0. BuildTime Surveyor 10, Sickle 8, Stingray 8, Bullfrog 8; Batch14 asset-level SDK comparison and 13FIX regression checks carry over (unchanged bytes).
+VERDICT: SOURCE PASS - replaces Batch13_FIX as native-compile candidate. Not compiled/tested.
+ART instance risk: EX_Headlights.w3x, EXTnkTrack.xml (+ earlier units) Bibber/unshipped.
+Native plan (PC online): tar -> E:\RA3ModBuild\_in; new Mods\RA3_V2.0_Batch14Fix; logs\batch14fix; same BAB cmd (absolute data\Mod.xml, /od /iod SDK builtmods); pass = exit0 & 0 Error/Critical/Warning/Unknown, static/global/audio manifests unchanged; report exact missing ART list, no adding Bibber art without approval; one path-only retry.

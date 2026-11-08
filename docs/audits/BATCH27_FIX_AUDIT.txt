@@ -1,0 +1,20 @@
+BATCH27_FIX AUDIT (box only, field-level checks, not full XSD, not in-game) - PASS
+tar 223304B sha256 8d8515475c8e233488521d368e6a775e5b47047bd58513e3ffbc9bd84cf94452 (handoff == attachment), safe paths. Saved batch27_FIX.tar.gz.
+Diff vs 27 is exactly the 4 fixes + AI fields; vs 26: AttributeModifier, LogicCommand, LogicCommandSet, SpecialPowerTemplates, UnitAbilityButtonTemplates, JapanNavyScoutShip changed; ButtonStateDataCommon new; Mod +1. Others byte-identical to 26.
+B1 fixed: SpecialPower_JapanYariSprint ReloadTime 15s TargetType NONE WaypointModeTerminal false, no sound; only addition in file.
+B2 fixed: ButtonTanyaSprint lines identical to 26, original xmlns (no xsi); ButtonJapanYariSprint appended, SpecialPower (non-target) type.
+B3 fixed: '/>>' gone; scan of all 76 XML: 0 non-whitespace text/tail in mixed elements.
+B4 fixed as TEMPORARY: Yari button StateData=ButtonStateAbilityJapanEngineerSprint (SDK, Image JUA_Engineer_Sprint, NAME/DESC:AbilityJapanEngineerSprint real). New ButtonStateAbilityJapanYariSprint is defined but now UNUSED (orphan, harmless). No in-file "temporary" comment; UI not complete/localized.
+AI: UseInMicroManagerState (MicroManagerStateList) and UseNearTacticalTarget (SageBool) exist in AssetTypeAISpecialPower.xsd.
+Chain: unit MovementSpecialPower(NONE,5s,AffectsSelf) -> SpecialPower_JapanYariSprint -> AttributeModifier_JapanYariSprint SPEED150% 5s -> Command_JapanYariSprintSpecialPower SPECIAL_POWER/SPEED_BOOST -> JapanNavyScoutShipCommandSet (+AttackMove) -> ButtonJapanYariSprint. All resolve; 0 duplicate top-level IDs.
+Tanya 25s, Japan engineer 30s + JAP_Engineer_SprintMS intact. 76 XML, Mod 3ref/75all 1:1, ART all 0, ns0 0, top joinAction 0.
+Minor: orphan ButtonStateAbilityJapanYariSprint; button temp assets.
+NEXT SCOPE Shogun doc L1077/1078 (JapanAntiStructureShip):
+- Modify module ModuleTag_RammingSpeedspecialPower (unit L419-430): MovementType -> NONE, remove ObjectStatus="SPECIALABILITY_ACTIVE NO_SQUISHCOLLIDE_DELAY" and LocomotorSet="NORMAL_UPGRADED", AttributeModifier -> new AttributeModifier_JapanShogunSprint (SPEED 150%, Duration 5s), Duration 5s.
+- Weapon slots L345-349, L369-373: delete the RushAttackWeapon slot entries; drop ForbiddenObjectStatus SPECIALABILITY_ACTIVE on main weapon (becomes no-op; optional, prefer keep minimal = delete only rush slots).
+- SpecialPower_RammingSpeed ReloadTime 120s -> 20s, TargetType -> NONE (all refs only Shogun: unit, LogicCommand -> not shared; safe to edit in place, or new ID).
+- Command_RammingSpeed: AISpecialPowerInfo RUSH_ATTACK -> SPEED_BOOST MICRO_MANAGER UseInMicroManagerState="RETREAT COMBAT CLEANUP" UseNearTacticalTarget="true" (drop target Distance/filter).
+- Button_JASS_RammingSpeed: TargetedSpecialPower -> SpecialPower (no ValidTargetCursor), StateData temp sprint asset. Also present in UI/Joypad ButtonTemplates (console, not needed).
+- Keep: JapanAntiStructureShipCommandSet (cmd ID unchanged), NORMAL_UPGRADED locomotor def L51 (unused, harmless per doc), RushAttackWeapon in Weapon.xml (unreferenced), Shogun BuildTime 20/ClipReload 3.5-4.0, Leech override 7-8s, unrelated modules full.
+- Residual to test: RammingSpeedShieldOn/Off sounds on UNPACKING/PACKING (L501/503), VoiceRammingSpeed voice — cosmetic.
+- Refinement: SpecialPower_RammingSpeed is TargetType OBJECT_OR_LOCATION with targeting Flags (NEEDS_OBJECT_FILTER etc.) + child filter + VoiceRammingSpeed. Cleaner minimal: NEW SpecialPower_JapanShogunSprint (ReloadTime 20s, TargetType NONE, WaypointModeTerminal false) and point unit + Command_RammingSpeed at it; leave old template unreferenced. CollisionBounce* attrs become irrelevant (may drop).

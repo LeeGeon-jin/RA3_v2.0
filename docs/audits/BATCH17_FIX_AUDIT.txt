@@ -1,0 +1,14 @@
+Batch17_FIX box-only audit 2026-11-08 ~02:30 UTC+10. PC not contacted; no compile; source unedited.
+Real archive: handoff ra3v2_phase1_batch17_fix.tar.gz = 176156 B, SHA256 a7f85a8869c147d98187e3cd47e4bff489b4029abc98178c9cdb2b063f17ab82. Asset 01M6VCV6P4BM46VXHQB1XYJ4FM.gz identical (176156 B, same hash). Hash claim correct; size claim 176520 wrong. Saved /workspace/ra3xfer/batch17_fix.tar.gz.
+diff -r vs audited Batch17: only Soviet/Units/SovietCommandoTech1.xml differs; other 60 files incl. Mod.xml byte-identical (so 56 old = Batch16_FIX, Engineer/Flak/Tesla values carry over).
+Natasha: 1450 -> 1261 lines (-189 = 63 includes x 3 lines each). Include-level: removed exactly 63, all type=all ART:; none added; kept DATA:GlobalData/GlobalDefines.xml (all) + DATA:BaseObjects/BaseInfantry.xml (instance). Every diff line is include syntax. GameObject SovietCommandoTech1 node-identical to Batch17 (349 nodes; = SDK except BuildTime 30->20), prereq SovietTechStructure.
+Structure: safe paths; 61 XML parse; no ns0; Mod 3 reference + 60 all exact; ART type=all (case-insensitive) whole tar 0; top-level joinAction 0.
+VERDICT: SOURCE PASS - replaces Batch16_FIX as native-compile candidate (4-unit skirmish group only). Not compiled/tested.
+Not done: Flak 300 campaign overrides (CampaignOverrides + 14 missions, needs mission map rebuild - not via Mod.xml), A08 Tesla override check, Natasha S01/S02 exceptions verification, Tesla L731 charge/range.
+ART instance risk unchanged (none in these 4 files).
+Next group - Stingray (doc L851 "磁暴快艇充能时间减半，陆地模式速度改为80，且可使用特殊技能", detail L855):
+ 1 Soviet/Units/SovietAntiNavyShipTech1.xml LocomotorSet id=LandLocomotorSet (SovietAntiNavyShipTech1LandLocomotor, NORMAL) Speed 50.0 -> 80.0; WaterLocomotorSet 100.0 unchanged.
+ 2 GlobalData/Weapon.xml SovietAntiNavyShipTech1TeslaGun PreAttackDelay: SDK Min 0.5s Max 0.7s; doc says 0.5 -> 0.25 (halve charge). Max not specified - recommend halving both (0.25s/0.35s) and declaring it; get user OK if exact 0.25/0.25 wanted.
+ 3 GlobalData/SpecialPowerTemplates.xml SpecialPower_TeslaNova remove RequiredConditions="OVER_WATER" (ReloadTime 60s unchanged). Doc L854: land casting animation/FX untested.
+ All 3 files already in pack; expect only these fields changed.
+Native plan: new Mods\RA3_V2.0_Batch17Fix, same BAB cmd (absolute data\Mod.xml, /od /iod SDK builtmods), 0 Error/Critical/Warning/Unknown, manifests unchanged, exact missing-ART list, one path-only retry.

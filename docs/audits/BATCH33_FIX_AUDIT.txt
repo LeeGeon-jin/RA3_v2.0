@@ -1,0 +1,23 @@
+BATCH33_FIX AUDIT (box only, field-level, not full XSD, not compiled) - PASS
+tar 229313B sha256 63ac90b0facec1fe47d6c661b037e20c9e9a4a1689ae82380f4387dbd85363b1 (handoff == attachment), safe paths. Saved batch33_FIX.tar.gz.
+vs failed 33: only FXCostalGunProjectileHoming ActiveBody(100) -> PropBody id ModuleTag_Body, Geometry removed. Nothing else.
+vs 32_FIX: only BB_EuropeCoastalGun.xml: + FXCostalGunProjectileHoming (identical to original projectile except id/EditorName and BezierProjectile replacing ProjectileUpdate; PropBody as BaseProjectile precedent), weapon WeaponSpeed 800->2000, ProjectileTemplate -> new id. Other 77 files + Mod byte-identical. Original projectile kept; parent ±25, child 360 unchanged; all old values intact.
+78 XML, 3ref/77all 1:1, stray 0, ART all 0, ns0 0, top joinAction 0, unique IDs; refs FX_CostalGunImpact/warhead/model resolve in same file. Homing behavior untested (L1610).
+
+NEXT: Shogun Executioner + core (doc L1056 requirement, L1059/L1060 implementation) - read-only
+Requirement L1056: speed x1.5; War Factory builds core for 4000 / 5s, core then unpacks in 30s; unlimited; core from War Factory (not CY).
+SDK facts:
+- Unit: Japan/Units_SinglePlayerCampaign/JapanMechaKing.xml (1170 lines, 1 GameObject JapanMechaKing; ~26 ART all includes; instance DATA:GlobalData/weapon.xml + BaseVehicle). Loaded only via Neutral/NeutralMapSpecific.xml (map stream) -> must be in mod. Real values: inheritFrom BaseVehicle, Side Japan, BuildTime 6, MaxHealth 10000, Armor MechaKingArmor, Locomotor JapanMechaKingLocomotor Speed 45, KindOf incl. COMMANDO AMPHIBIOUS, CommandSet JapanMechaKingCommandSet (AttackMove + Command_ActivateMechaKingShockwave, button ButtonMechaKingShockwave exists), Portrait_JapanMechaKing / Button_JapanMechaKing, no BuildCost, no MaxSimultaneousOfType. Rocket projectile JapanMechaKingRocketProjectile already static (Japan.xml L110).
+  Change: Speed 45 -> 67.5 only; remove ART all per convention; nothing else (no health/armor invention, NOT inherit King Oni).
+- Core template = real native egg Japan/Eggs/JapanSuperWeaponEgg.xml (inheritFrom BaseEgg: model JUEgg, JapanEggArmor, JapanEggLocomotor/WaterLocomotor 65, MaxHealth 400, GenericUnpackPower include, ReplaceSelfSpecialAbility SpecialPower_UnpackReplaceSelf PackTime 3.0s). Vehicle->replace precedent: Japan/Units/JapanMCV.xml (BaseVehicle, ReplaceSelf to JapanConstructionYard, Command_UnPackJapanMCV).
+  New JapanMechaKingCore (new file, copy of JapanSuperWeaponEgg minus ART all) with ONLY:
+   id/EditorName JapanMechaKingCore; ProductionQueueType="VEHICLE" (BaseEgg sets OTHER_STRUCTURE); KindOf = EGG_KINDOFS minus EGG UNPACKS_INTO_BUILDING (doc), i.e. "SELECTABLE CAN_CAST_REFLECTIONS VEHICLE FS_FACTORY EXPANSION_UNIT CAN_BE_FAVORITE_UNIT IGNORES_SELECT_ALL CYCLE_SELECTION AMPHIBIOUS SCORE" (FS_FACTORY/EXPANSION_UNIT kept literally - flag);
+   BuildCost 4000, BuildTime="5";
+   REMOVE MaxSimultaneousOfType="1" (unlimited), REMOVE <EquivalentTo>JapanSuperWeapon</EquivalentTo> (else counts as superweapon), REMOVE GameDependency JapanTechStructure (doc gives no prereq - confirm with user);
+   ReplaceSelf: ReplacementTemplate JapanMechaKing, PackTime 30s, ReplaceOptions "COPY_UPGRADES DISABLE_DURING_REPLACE CLEAR_LOCATION" (all in ReplaceSelfSpecialAbility.xsd enum);
+   Portrait/Button -> Portrait_JapanMechaKing/Button_JapanMechaKing (native); DisplayName/Description: reuse Name:JapanMechaKing (temp) - new strings missing; UnitIntro Nanocore/PlacementViewAngle cosmetic, keep or drop (decide).
+   CommandSet: reuse existing JapanSuperWeaponEggCommandSet (only Command_UnPackJapanSuperWeaponEgg -> SpecialPower_UnpackReplaceSelf, shared power, no new IDs) or new set with same cmd.
+- Production: new LogicCommand Command_ConstructJapanMechaKingCore UNIT_BUILD <Object>JapanMechaKingCore</Object>; add to JapanWarFactoryCommandSetBase override (current 9 cmds kept, append). Mod: +2 includes.
+Shared effects: SpecialPower_UnpackReplaceSelf / unpack command shared, not modified. No campaign override for JapanMechaKing found in doc; global rule applies.
+Risks (static): 30s PackTime animation freezes on last frame; large model needs clear space (CLEAR_LOCATION); map-specific double definition; many 10000HP units perf; AI won't build; strings missing; untested death during unpack.
+Remaining after that: Wave-force triple cannon L1065, Soviet Rushmore/Moai/ArtilleryDome, others L1586. Phase 1 not complete; coverage list still missing.

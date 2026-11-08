@@ -1,0 +1,29 @@
+BATCH40 AUDIT (box only, field-level, not full XSD, not compiled) - FAIL / BLOCKED (keep batch39_FIX)
+tar 238790B sha256 71a81746424f0cd5c679ce36b9b66c6266f89ebf934a60d14fb01cff5ffb9775 (handoff == attachment), safe paths; saved batch40.tar.gz.
+vs 39_FIX: new 1 (Japan/Structures/JapanImperialAdminBuilding.xml), changed 3 (Mod +1 all, LogicCommand +1, LogicCommandSet JapanCY 13->14 append, order kept); other 82 identical. Command form OK (CONSTRUCTION_YARD_CONSTRUCT + Object).
+BLOCKERS (new object is a fabricated stub, not a copy of SDK VL_ImperialMilitaryAdminBuilding_01):
+B1 No Draws at all -> no model (SDK: ScriptedModelDraw Model VL_ImperialAdminBuilding_01 + ExtraPublicBone contact points). Object would be invisible. No ART include for the W3X.
+B2 Invented geometry BOX 50x50x80 offset 0 (SDK: 58.885 x 55.967 x 129.934, offset 2.76049/0.523178/0).
+B3 Wrong base: inherits BaseCivilianStructureNoGarrison (KindOf UNATTACKABLE...) instead of SDK parent BaseCivilianStructureNoGarrisonDestructible; and KindOf fully overwritten with invented list.
+B4 KindOf "FS_LANDMARK" does not exist in Schemas/xsd/Includes/KindOf.xsd -> invalid enum. "CAN_ATTACK" means the object can attack, not that it can be attacked; object has no weapon -> must not be added.
+B5 One-per-player not implemented: must be MaxSimultaneousOfType="1" (SageUnsignedShort attribute, used on JapanCommandoTech1/SW).
+B6 Missing SDK modules: Physics, BuildingDestructionBehavior (YU_HotelDebris), FXListBehavior Replace (FX_Civ_Explosion_Medium), AudioArraySound damage sounds; ArmorSet inherited only from base default.
+B7 Missing ProductionQueueType/BuildPlacementTypeFlag: native Japan CY direct-build precedent JapanWallPiece uses ProductionQueueType="OTHER_STRUCTURE" BuildPlacementTypeFlag="OTHER_STRUCTURE" (Japan CY ProjectedBuildability accepts OTHER_STRUCTURE only).
+B8 TYPE/DESC keys changed case (SDK "DESC:ImperialAdminBuilding"/"TYPE:ImperialAdminBuilding").
+Death modules (technical evidence, not a user decision): CreateObjectDie (VL_ImperialAdminBuilding_01_Die_OCL) and DestroyDie are defined ONLY in the VL object file; none of BaseObject / BaseCivilianStructureNoGarrison / ...Destructible defines any DestroyDie/CreateObjectDie (grep rc=1). Base FXList handles onTransitionToRubble. Doc L1089 text: "新副本去掉任务 / 剧情行为（…XML 内的 CreateObjectDie / DestroyDie、雕像光环 AttributeModifierAuraUpdate、驻军模块一律去掉）". Therefore: if the new object inheritFrom the VL object, both modules are inherited (inheritance cannot delete); an independent full copy inheriting from BaseCivilianStructureNoGarrisonDestructible and omitting the two modules satisfies the doc with nothing re-inherited. Building then dies via BuildingDestructionBehavior + KEEP_CLASSIFIED_WHEN_DEAD rubble (RUBBLE state; untested in game, note as test item, not blocker).
+Attackable: Destructible base KindOf contains NOT_AUTOACQUIRABLE (no UNATTACKABLE); VL object already "-CIVILIAN_BUILDING +AUTO_ACQUIRABLE_BY_AI". New copy: KindOf="-CIVILIAN_BUILDING +AUTO_ACQUIRABLE_BY_AI -NOT_AUTOACQUIRABLE" (relative syntax, native).
+MINIMAL FIX (copy, do not author):
+ Japan/Structures/JapanImperialAdminBuilding.xml (or add SDK file verbatim) containing an independent GameObject = SDK VL_ImperialMilitaryAdminBuilding_01 node-for-node (Draws, Behaviors Physics/BuildingDestruction/FXList, ActiveBody =$CIV_HEALTH_MEDIUM, real Geometry, AudioArraySound, inheritFrom BaseCivilianStructureNoGarrisonDestructible, Name/DESC/TYPE/portrait/button) with only:
+   id JapanImperialAdminBuildingBuildable; KindOf add "-NOT_AUTOACQUIRABLE"; remove CreateObjectDie + DestroyDie (and the then-unused Die_OCL/Collapse include may be omitted); add Side="Japan" BuildTime="20" EnergyProduction="0" MaxSimultaneousOfType="1" ProductionQueueType="OTHER_STRUCTURE" BuildPlacementTypeFlag="OTHER_STRUCTURE"; ObjectResourceInfo BuildCost =$ACCOUNT_ORE 2000; no GameDependency.
+ Includes: instance DATA:BaseObjects/BaseCivilianStructureNoGarrisonDestructible.xml, type all ART:VL_ImperialAdminBuilding_01.W3X is ART all -> per project rule removed (model comes from global art; keep consistent with previous batches), instance DATA:Civilian/Yucatan_YU/Props/YU_HotelDebris.xml (already used by other mod files), all DATA:GlobalData/GlobalDefines.xml.
+SDK SOURCE PATHS to attach to cloud (relative to SDK XMLFiles/):
+ Civilian/Vladivostok_VL/Buildings/VL_ImperialMilitaryAdminBuilding_01.xml   (object to copy)
+ BaseObjects/BaseCivilianStructureNoGarrisonDestructible.xml                (direct parent)
+ BaseObjects/BaseCivilianStructureNoGarrison.xml                            (grandparent, KindOf/FXList/armor)
+ BaseObjects/BaseObject.xml                                                 (root)
+ Civilian/Yucatan_YU/Props/YU_HotelDebris.xml                               (BuildingDestructionBehavior CreationObject)
+ Civilian/Vladivostok_VL/Props/VL_ImperialMilitaryAdminBuilding_01_Collapse.xml (only if death OCL kept; doc says remove)
+ Japan/Structures/JapanWallPiece.xml                                        (direct-build ProductionQueueType/BuildPlacementTypeFlag precedent)
+ GlobalData/GlobalDefines.xml                                               (CIV_HEALTH_MEDIUM=3000, ACCOUNT_ORE)
+ ../Schemas/xsd/Includes/KindOf.xsd                                          (valid KindOf enum)
+Not compiled / not tested. Phase 1 not complete.

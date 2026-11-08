@@ -1,0 +1,12 @@
+# BATCH89 AUDIT — PASS (static, read-only) 2026-11-08 22:20 UTC+10
+- **Package:** batch89.tar.gz, 347158 B, sha256 73feb81ccba70bd6a45b516fb8a5671047718b140a407696729a8d38cf8b91ba (matches).
+- **File count:** 139 XML. Mod.xml has 136 type="all" + 3 reference.
+- **Diff against 88FIX:** only GlobalData/Weapon.xml differs; the other 138 files are byte-identical.
+- **Weapon.xml:** exactly 3 attribute lines changed, nothing else.
+  - L2480 AlliedAntiVehicleVehicleTech3PrismCannon: AcceptableAimDelta 10d→180d.
+  - L2552 _Veteran: CanFireWhileMoving false→true.
+  - L2556 _Veteran: AcceptableAimDelta 10d→180d.
+- **Untouched:** all other weapon semantics (81/87 etc.), the core-field fire ban, and the display masks. The file parses as well-formed XML.
+- **Normal Mirage:** Speed 80 kept. Cloning center MaxSimultaneousOfType="1" kept (user 22:18: one per player in all packages).
+- **Advanced Mirage:** not created in this package. Veteran Mirage ≠ Advanced Mirage.
+- **Unproven:** runtime behaviour (move-fire, turning to aim) and compile.

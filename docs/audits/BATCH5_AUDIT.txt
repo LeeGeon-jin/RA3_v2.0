@@ -1,0 +1,16 @@
+Batch5 box-only audit 2026-11-07 23:53 UTC+10 (PC not contacted, no compile, source not edited).
+Archive (AgentStore handoff) 123163 B SHA256 b2d5e16a9588b55c8ea2796ad6a4ae6e5b3732ed53ad9eaa9a375641f7562307. Saved /workspace/ra3xfer/batch5.tar.gz, unpacked /workspace/b9.
+Structure PASS: 37 members all data/ (data/Mod.xml + 36 content); 37/37 parse; Mod.xml 3 reference DATA:static/global/audio + 36 all, all DATA:, no dups, exact coverage; 0 ART type=all; 0 top-level joinAction. Mod.xml vs Batch4_FIX: only +2 includes (AlliedAntiInfantryVehicle, AlliedAntiAirVehicleTech1).
+Whitelist diff vs Batch4_FIX: 34 prior files byte-identical except Weapon.xml (licenses/deps, refinery module, Tanya, miner, etc. unchanged).
+ Weapon AlliedAntiInfantryVehicleChaingun ClipSize 5->10  [doc L556/L560 OK; torpedo AlliedAntiInfantryVehicleTorpedoLauncher ClipSize 2 not doubled - doc marks optional "如也要加倍"]
+ Weapon AAAVT1_SovietHeavyAntiVehicleInfantryTeslaGun PreAttackDelay Min/Max 0.75->0.375 [doc L562/L566 OK; both Min and Max]
+New vs SDK original (non-ART):
+ AlliedAntiInfantryVehicle BuildTime 10->8 [L544/L548 OK]; nothing else (no GameDependency added/removed)
+ AlliedAntiAirVehicleTech1 BuildTime 10->8 [L544 OK]; TransportContain KillPassengersOnDeath true->false [L562/L566 OK]; nothing else
+Open / not done (kept as open requirements):
+ ACV AlliedAntiInfantryVehicle KillPassengersOnDeath still "true" (line 297) and AlliedBomberAircraft still "true" - doc L176/L180 "all transports: passengers survive on land" lists both; not in this batch.
+ Miner capacity x2 (L170/L174): evidence of target exists in SDK: BaseObjects/BaseMiner.xml OreMinerBehavior DeliveryCapacity="250" and BaseObjects/BaseOreNode.xml OreNodeBehavior DeliveryAmount="250" (doc: change both to 500, which one effective needs testing). So not "no parameter".
+ Tanya sprint skill (L526); C4 step 2 conditional (L535); spy steal half (L514/L518).
+Compile risk: type="instance" ART includes not in SDK Art: AlliedMiner (EXTireTrack2.xml, EX_Headlights.w3x) and now AlliedAntiAirVehicleTech1 (EXTnkTrack.xml, EXTireTrack2.xml, EX_Headlights.w3x). May give "Input file not found" errors.
+Verdict: PASS as current native-compile candidate (supersedes Batch4_FIX). Not game-verified; not full requirement pass.
+Plan when PC online: new Mods\RA3_V2.0_Batch5; entry E:\RA3ModBuild\RA3ModSDK\Mods\RA3_V2.0_Batch5\data\Mod.xml; logs E:\RA3ModBuild\logs_batch5; same BAB cmd /od /iod SDK\builtmods; pass = exit0 + 0 Error/Critical/Warning/Unknown + manifests unchanged; check ART instance lines.

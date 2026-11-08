@@ -1,0 +1,15 @@
+# 来源说明（生成时间 2026-11-09 09:20 UTC+10）
+- `data/`：来自 batch102fix.tar.gz（365841 B，sha256 053c6b498c5e28b82e31eaa312229221cc48a1a16d8ba15cc61f4f0df077bdca），原样解包，没有任何修改。
+- `docs/` 和 `scripts/`：从项目工作目录复制。下面 4 个文件把内部存储路径脱敏成了 `<handoff>`、`<agent-asset>`、`<store>`，内容其余部分不变：
+  - BATCH63_AUDIT.md
+  - BATCH78FIX_AUDIT.md
+  - BATCH20_AUDIT.txt
+  - BATCH17_PENDING.txt
+- **排除的内容：**
+  - EA SDK 原文件和参考包：*_sdk_refs.tar.gz、refs_*.tar.gz、ra3-sdk-build-input.zip、sagexml-fill.zip；
+  - 编译产物 sbres/mod.bin；
+  - 编译日志和结果包：build_logs*.zip、*_result.zip、minimalfix_*.zip、mod_*.tar.gz、structures_*；
+  - 155 个历史 batch 包（内容与 data/ 重复，以哈希记录在进度 md 的附录 A）；
+  - 临时 diff 文件 _fd_main.txt、_fulldiff_b85.txt；
+  - 游戏美术，以及本机的 w3x 占位文件。
+- **敏感信息扫描：** 扫了 token、password、私钥、ghp_、github_pat、Users 路径、主机名、邮箱和个人姓名，脱敏后**没有命中**。

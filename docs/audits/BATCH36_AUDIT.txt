@@ -1,0 +1,12 @@
+BATCH36 AUDIT (box only, field-level, not full XSD, not compiled) - FAIL / BLOCKED (keep batch35_FIX)
+tar 237497B sha256 06d3b865dce997a41181522d40329ed24b408cac1a08b816d6db43b399b61f22 (handoff == attachment), safe paths. Saved batch36.tar.gz.
+vs 35_FIX: new 1 (Civilian/Easter_Island_EI/Buildings/EI_EasterIslandHeadDefense.xml), changed 3 (LogicCommand, LogicCommandSet, Mod); 79 byte-identical.
+83 XML, 3ref/82all 1:1, stray 0, ART all 0, ns0 0, top joinAction 0, unique IDs.
+EI original vs SDK: 3 ART all removed, DATA GlobalDefines added (benign, as FI file); original object/OCL/weapon ref EI_EasterIslandHeadDefenseTeslaGun (static Weapon.xml) unchanged -> S08 untouched.
+SovietMoaiTeslaHeadGun vs EI_EasterIslandHeadDefenseTeslaGun: identical (inheritFrom SovietBaseDefenseAdvancedTeslaGun, AntiMask, DamageNugget 300 TESLA/SOVIET_TESLA/ELECTROCUTED/0.7s) except ClipSize 6->1, PreAttackDelay 3.0->0.9s. Range 350/FiringDuration 0.5/ClipReload 0.1 and FX inherited from Tesla coil weapon.
+SovietMoaiTeslaHead: inheritFrom EI, Side Soviet, cost 750, prereq SovietPowerPlantAdvanced, StructureUnpackUpdate 15s, BuildTime 0 inherited, HP 2000 inherited. KindOf = real base (BaseCivilianStructureNoGarrisonDestructible) flags minus NOT_AUTOACQUIRABLE + FS_BASE_DEFENSE POWERED SCORE. WeaponSetUpdate Replace = original module exactly but Template new weapon; AIUpdate Replace = original exactly but AutoAcquire YES. No invented strings (inherits EasterIslandDefense keys/images), no optional particles.
+Command_ConstructSovietMoaiTeslaHead CONSTRUCTION_YARD_CONSTRUCT (= Tesla coil precedent). SovietConstructionYardCommandSet: SDK has 16 active Cmd (my earlier "18" counted 2 commented lines - corrected; cloud 16->17 correct), all kept in order + new. SovietCraneCommandSet SDK 14 kept + new = 15.
+BLOCKER B1: EnergyProduction="-75" missing (inherits EI 0). Doc resolves it, no need to ask user: L788 "耗电 EnergyProduction=\"-75\"（同磁暴线圈 / 光谱塔，建议值）"; L794 (本人最终定) "其余沿用上一条：血量 2000…、前提 ★超级反应堆…、耗电 -75、射程 350…" -> final -75. Fix: add EnergyProduction="-75" on SovietMoaiTeslaHead.
+Cloud coverage-list errors (report only; tar verified no regression): Japan turbine actual BuildTime 10.0s / BuildCost 300 / EnergyBonus 50 (cloud wrote 150/5/+25); MechaKingCore actual PackTime 30.0s (no separate Unpack 30). Coverage list still incomplete.
+MINIMAL FIX: B1 only.
+Next research deferred until pass. Phase 1 not complete.

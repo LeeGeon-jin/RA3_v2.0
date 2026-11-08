@@ -1,0 +1,20 @@
+BATCH29 AUDIT (box only, field-level, not full XSD, not in-game) - PASS
+tar 223362B sha256 7fbdcb3449ffc237f38ed3c979545568c81786ce5c5549c93d7275e9aa1768cd (handoff == attachment), safe paths. Saved batch29.tar.gz.
+vs 28: only upgrade.xml, LogicCommandSet.xml, JapanPowerPlant.xml changed; other 73 byte-identical.
+upgrade.xml: 92/92 vs SDK; diffs only WarFactoryTech2/NavalYardTech2 BuildTime 10s (kept) + Upgrade_JapanPowerPlantTurbine BuildCost 500->300. Type OBJECT, BuildTime 10.0s, inheritFrom BasePurchasableUpgrade unchanged.
+LogicCommandSet: new override JapanPowerPlantCommandSet (SDK empty) with only Command_UpgradeJapanPowerPlantTurbine (SDK, OBJECT_UPGRADE -> Upgrade_JapanPowerPlantTurbine).
+JapanPowerPlant vs SDK: ART all removed, UnpackTime 10s->8s and BuildTime 10 kept (prior), EnergyBonus 10->50, +PowerUpgrade ModuleTag_Turbines TriggeredBy Upgrade_JapanPowerPlantTurbine (PowerUpgrade.xsd = UpgradeModuleData, valid). ProductionUpdate present (needed to research object upgrade). Attribute indentation cosmetic only.
+Chain: button ButtonUpgradeJapanPowerPlantTurbine (SDK, ObjectUpgrade) -> command -> upgrade -> PowerUpgrade. Resolves.
+Once-only basis: UpgradeTemplate Type OBJECT is per-object, cannot be re-researched once owned.
+Mechanism basis (static): SDK only uses EnergyBonus on 4 power plants, and only Soviet plants have PowerUpgrade -> EnergyBonus is the amount PowerUpgrade adds; 100+50 = 1.5x. Japan plant had no PowerUpgrade before, so EnergyBonus 10 was inert; raising to 50 has no static side effect before upgrade. Untested in game.
+TODO (non-blocking): button strings NAME:UpgradeJapanPowerPlantTurbine / DESCRIPTION:UpgradeJapanPowerPlantTurbine and UpgradeName/Type/Desc:JapanPowerPlantTurbine are only referenced; no string files in SDK to verify (DESCRIPTION: prefix unusual vs DESC:). Hotkey F not verifiable. AI has no turbine entries -> AI never buys.
+Structure: 76 XML, 3ref/75all 1:1, stray 0, ART all 0, ns0 0, top joinAction 0, no dup IDs. Batch28 sprint/main gun/Leech values preserved (files byte-identical).
+
+NEXT smallest definite item: Allied power plant turbine, doc L478 (requirement) / L482 (impl) - same pattern as batch29, all SDK pieces exist:
+- upgrade.xml Upgrade_AlliedPowerPlantTurbine (L190) BuildCost 500 -> 300; BuildTime 10.0s, Type OBJECT keep.
+- LogicCommandSet: AlliedPowerPlantCommandSet (SDK L156, empty) add <Cmd>Command_UpgradeAlliedPowerPlantTurbine</Cmd> (SDK LogicCommand L330).
+- Allied/Structures/AlliedPowerPlant.xml (already in package, BuildTime 8 prior): EnergyBonus 10 -> 50 (doc "原值的50%", EnergyProduction 100), add <PowerUpgrade id="ModuleTag_Turbines"><TriggeredBy>Upgrade_AlliedPowerPlantTurbine</TriggeredBy></PowerUpgrade>; ProductionUpdate already present.
+- Button ButtonBuildAlliedPowerPlantTurbine exists (ObjectUpgrade); its StateData image is Button_UpgradeTimeBomb (SDK oddity, temp; strings NAME/DESC:AlliedPowerPlantTurbine unverified).
+- Do NOT touch AlliedPowerPlantTurbine object / AlliedPowerPlantTurbineCommandSet (separate old structure) or commented UpgradeSoundSelector.
+Risks: same as Japan; untested.
+Larger items still pending (not phase complete): King Oni L1050 (new buildable unit, 2200, <=20s, needs JapanTechStructure); Shogun Executioner core L1059/1060 (new egg unit 4000/5s from WarFactory, speed 45->67.5); FI_FloatingFortressMainGun buildable L1065; plus Allied/Soviet hidden-unit items (e.g. L484 coastal gun 2000/30s, L1586 summary). Full coverage list still not delivered by cloud.

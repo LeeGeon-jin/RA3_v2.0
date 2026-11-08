@@ -1,0 +1,15 @@
+BATCH32 AUDIT (box only, field-level, not full XSD, not compiled) - FAIL / BLOCKED (keep batch31_FIX)
+tar 229165B sha256 b11901c2516371835947456ed512d28d4016ba2e8fa5d0e1d3be509387a86321 (handoff == attachment), safe paths. Saved batch32.tar.gz.
+vs 31_FIX: new 1 (Civilian/Brighton_Beach_BB/Buildings/BB_EuropeCoastalGun.xml), changed 3 (LogicCommand, LogicCommandSet, Mod); 74 byte-identical (King Oni/turbine/sprint values intact).
+78 XML, 3ref/77all 1:1, stray 0, ART all 0, ns0 0, top joinAction 0, unique IDs.
+Original BB_EuropeCoastalGun + FXCostalGunProjectile + FX_CostalGunImpact + weapon + warhead + OCL vs SDK: only 2 ART all removed, comments/blank lines and one indent changed; all values intact (MaxHealth 10000, range 2000/min 100, speed 800, clip 2/5s, turn 60, aim 25d, MaxDeflection 25d/25d kept, NOT_SELLABLE, no power). Shared weapon untouched.
+Deps YU_HotelDebris / BB_EuropeCoastalGun_Collapse: type=instance DATA: paths exist in SDK (resolved like BaseStructure; not in package) - OK statically.
+New LogicCommand Command_ConstructAlliedCoastalGun CONSTRUCTION_YARD_CONSTRUCT -> AlliedCoastalGun OK.
+CY Base override = SDK 13 cmds in order + CoastalGun after BaseDefenseAdvanced (SDK commented-out lines dropped, harmless); Crane = SDK 12 cmds + CoastalGun. CY/Level2 inherit Base. OK.
+360/inheritance: child AlliedCoastalGun inheritFrom BB_EuropeCoastalGun with WeaponSetUpdate same id + xai:joinAction="Replace" (SDK precedent Tutorial_AlliedTech1Tank inheritFrom + Replace on ModuleTag_WeaponSetUpdate). Replace drops parent module; TurretAI.xsd default MaxDeflectionClockwise/AntiClockwise = 180d -> full rotation. Replacement keeps turn 60, pitch, idle scan 10/25, aim is weapon-side 25d (shared, unchanged). Static basis only, untested; parent keeps 25d.
+BLOCKERS
+B1 CommandSet="AlliedStructureCommandSet" - not defined in SDK or package -> unresolved reference. Parent has no CommandSet; doc did not ask for one. Remove attribute (or use an existing empty set only if needed).
+B2 KindOf +SCORE added - not in doc L484/487/488 authorization. Remove (keep parent KindOf) unless user authorizes.
+Non-blocking: Side="Allies" added (needed for Allied build; doc L488 assumed it). EditorSorting/SelectPortrait/ButtonImage/DisplayName repeated = parent values (redundant, harmless). Strings Name:EuropeCoastalGun, Button_EuropeCoastalGun/Portrait existence unverified. No build-up animation/placement tests. AI won't build.
+MINIMAL FIX: in AlliedCoastalGun delete CommandSet="AlliedStructureCommandSet" and change KindOf to parent's (or omit KindOf). Nothing else.
+Pending (not done): homing shell doc L493; remaining big items (Executioner core, triple cannon, Soviet heads/dome, etc.). Phase 1 not complete.

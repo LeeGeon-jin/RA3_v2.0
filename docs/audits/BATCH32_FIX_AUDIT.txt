@@ -1,0 +1,17 @@
+BATCH32_FIX AUDIT (box only, field-level, not full XSD, not compiled) - PASS
+tar 229141B sha256 d75109ee26d57a347d727dbbd1b5bf75f4e83d1d805d4d79e52949fb09b1f989 (handoff == attachment), safe paths. Saved batch32_FIX.tar.gz.
+vs failed 32: only AlliedCoastalGun lost CommandSet="AlliedStructureCommandSet" and KindOf(+SCORE) attributes; no other byte change. Child now inherits parent KindOf (-NOT_AUTOACQUIRABLE +CAN_ATTACK +FS_BASE_DEFENSE +NOT_SELLABLE), no CommandSet reference. Replace WeaponSetUpdate module full (weapon slot, TurretSettings turn/pitch/idle scan, TurretAITargetChooserData), no MaxDeflection -> schema default 180d (static).
+vs 31_FIX: same 1 new + 3 changed as batch32; other 74 byte-identical; CY Base/Crane chain as audited in batch32.
+78 XML, 3ref/77all 1:1, stray 0, ART all 0, ns0 0, top joinAction 0, unique IDs.
+TODO/untested: strings/images, build-up animation/placement, AI won't build, 360 visual clipping.
+
+NEXT: homing shell doc L490/493/494 (authorized; NOT implemented)
+Edit only in data/Civilian/Brighton_Beach_BB/Buildings/BB_EuropeCoastalGun.xml (already loaded by Mod -> new defs resolvable; no new include needed):
+1 New GameObject id e.g. FXCostalGunProjectileHoming (new id; keep FXCostalGunProjectile untouched). Copy original projectile (Side Allies, ArmorSet NoArmor, ScriptedModelDraw Model EXSovietShell, DestroyDie ALL, FXListBehavior onDeath/onTerrainCollision FX_CostalGunImpact, VisionRange 0) but replace ProjectileUpdate with:
+   <BezierProjectile id="ModuleTag_BezierProjectileBehavior" Flags="ORIENT_TO_FLIGHT_PATH DETONATE_CALLS_KILL" FirstHeightMin="0" FirstHeightMax="0" SecondHeightMin="0" SecondHeightMax="0" FlightPathAdjustDistPerSecond="1000" GroundHitFX="FX_CostalGunImpact"/>
+   All attrs exist in Modules/BezierProjectile.xsd (Flags enum has both values; GroundHitFX FXListRef; FlightPathAdjustDistPerSecond Velocity). FirstPercentIndent/SecondPercentIndent/CurveFlattenMinDist not specified by doc -> omit (tank-shell precedent 33/66/300 only if user agrees).
+   Body: original uses PropBody, no Geometry; tank-shell precedent (Allied/Props/AlliedTankShell_Large.xml) uses ActiveBody MaxHealth 100 + Geometry SPHERE 0.8 with DETONATE_CALLS_KILL. Doc silent -> flag: keep PropBody (literal) or follow precedent; test either.
+2 BB_EuropeCoastalGunWeapon: WeaponSpeed 800 -> 2000; ProjectileNugget ProjectileTemplate FXCostalGunProjectile -> new id; WarheadTemplate BB_EuropeCoastalGunWeaponWarhead and all other fields/nuggets unchanged.
+Shared effect: weapon is used by parent BB_EuropeCoastalGun (A01 map, 4 neutral guns) and AlliedCoastalGun -> both become homing/faster; doc L493 accepts this. A01 guns keep 25d deflection (parent WeaponSetUpdate untouched); new gun keeps 360.
+Model/FX chain: EXSovietShell (ART all include removed by convention; referenced by name as before), FX_CostalGunImpact defined in same file; warhead in same file. No other files.
+Pending after that: in-game hit test (L1610). Other big items remain; Phase 1 not complete; coverage list missing.

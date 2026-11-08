@@ -1,0 +1,32 @@
+BATCH40_FIX AUDIT (box only, field-level, not full XSD, not compiled) - FAIL (1 small blocker); keep batch39_FIX
+tar 239461B sha256 a7bf6f2c6e54b6005287d514804a36514811a41db8b049a698ee6fbc5839a86e (handoff == attachment), safe paths; saved batch40_FIX.tar.gz.
+vs 40: only JapanImperialAdminBuilding.xml changed; other 85 identical (82 old == 39_FIX, Mod/command/JapanCY 14 append as in 40). 86 XML parse.
+vs SDK VL_ImperialMilitaryAdminBuilding_01 (CR stripped) - only differences:
+ - includes: ART all W3X removed (project rule), Collapse include removed, GlobalDefines added, Destructible + YU_HotelDebris kept.
+ - id/EditorName -> JapanImperialAdminBuildingBuildable; KindOf + "-NOT_AUTOACQUIRABLE" only.
+ - added Side Japan, BuildTime 20.0, EnergyProduction 0, MaxSimultaneousOfType 1, ProductionQueueType/BuildPlacementTypeFlag OTHER_STRUCTURE (JapanWallPiece precedent); ObjectResourceInfo 2000 after DisplayName (xsd AssetTypeGameObject: DisplayName L386 < ObjectResourceInfo L389 < Draws L400 - legal). No GameDependency.
+ - CreateObjectDie and DestroyDie removed.
+ Everything else verbatim: Draw/model/ExtraPublicBone, Physics, BuildingDestruction, FXList Replace, ActiveBody =$CIV_HEALTH_MEDIUM, Geometry with offset, AudioArraySound, DESC:/TYPE: keys, portrait/button, Browser. No FS_LANDMARK/CAN_ATTACK. Parents (BaseObject/NoGarrison/Destructible) define no Die modules -> nothing re-inherited.
+BLOCKER B1: ObjectCreationList id="VL_ImperialAdminBuilding_01_Die_OCL" still present (file L94-106) though unused; it references VL_ImperialAdminBuilding_01_Collapse whose include was removed and which is not defined anywhere in the mod -> unresolved reference at build; also reuses an SDK campaign id. 
+MINIMAL FIX: delete the whole <ObjectCreationList id="VL_ImperialAdminBuilding_01_Die_OCL">...</ObjectCreationList> block. Nothing else.
+
+NEXT ITEM (recommended): Emperor flagpole statue TH_EmperorFlagpoleStatue
+Doc L6/L1086/L1089: five statues all open ("都可以造"), each 1000 / 10 s, EnergyProduction 0, no prerequisite, Japan direct placement CONSTRUCTION_YARD_CONSTRUCT (no core/unpack/animation), new ID copy, J04 original untouched, remove aura AttributeModifer_EmperorsStatue (AttributeModifierAuraUpdate) "及其他能力" and CreateObjectDie/DestroyDie; landmark rules: attackable (-NOT_AUTOACQUIRABLE), one per player (MaxSimultaneousOfType 1), health original: emperor/son statue =$CIV_HEALTH_XLARGE (doc explicit), armor inherited, AI not.
+Not a duplicate of earlier buildings (no TH_ file in package).
+SDK object: inherits BaseCivilianStructureNoGarrisonDestructible (same clean parent as admin building), KindOf "+AIRCRAFT_PATH_AROUND"; local modules: ScriptedModelDraw, AttributeModifierAuraUpdate (remove), Physics, BuildingDestructionBehavior, FXList Replace, CreateObjectDie (remove), DestroyDie (remove), xi:include GenericBuildingRepair.xml + GenericEngineerContain.xml, ActiveBody =$CIV_HEALTH_XLARGE, EvaEventArray, Geometry, Audio, OCL (remove with collapse include).
+ Note: the 2 xi:includes are "other abilities" (engineer contain = enter/capture-type, repair). Doc says remove aura "及其他能力" -> recommend removing GenericEngineerContain; GenericBuildingRepair is ordinary building repair - recommend removing too for literal compliance (pure decoration); state it in the batch note.
+ New object fields: id e.g. JapanEmperorStatueBuildable, KindOf "+AIRCRAFT_PATH_AROUND -NOT_AUTOACQUIRABLE", Side Japan, BuildTime 10, EnergyProduction 0, MaxSimultaneousOfType 1, ProductionQueueType/BuildPlacementTypeFlag OTHER_STRUCTURE, ObjectResourceInfo BuildCost =$ACCOUNT_ORE 1000 (SDK object has none); new LogicCommand CONSTRUCTION_YARD_CONSTRUCT; JapanConstructionYardCommandSet append (14->15); Mod +1.
+ Verified: SDK statue file has NO DisplayName/SelectPortrait/ButtonImage -> button/name UI is a pending item; do not invent keys (may temporarily omit; flag as UI incomplete).
+Why not Fuji tower (MJ_MtFujiViewingTower): parent BaseCivilianStructureMedium carries ContestableGarrisonContain (garrison) which doc requires removed and inheritance cannot delete -> needs a re-parented copy; larger step. Guard statues 01/02 are OPTIMIZED_PROPS needing conversion; health "待定".
+SDK paths to attach (relative to SDK XMLFiles/):
+ Civilian/Tokyo_Harbor_TH/Buildings/TH_EmperorFlagpoleStatue.xml
+ BaseObjects/BaseCivilianStructureNoGarrisonDestructible.xml
+ BaseObjects/BaseCivilianStructureNoGarrison.xml
+ BaseObjects/BaseObject.xml
+ Civilian/Yucatan_YU/Props/YU_HotelDebris.xml
+ Includes/GenericBuildingRepair.xml, Includes/GenericEngineerContain.xml (to see what is removed)
+ GlobalData/GlobalDefines.xml (CIV_HEALTH_XLARGE)
+ GlobalData/AttributeModifier.xml (AttributeModifer_EmperorsStatue, reference only)
+ Japan/Structures/JapanWallPiece.xml (direct-build precedent)
+ plus current package Japan/Structures/JapanImperialAdminBuilding.xml as the template pattern.
+Phase 1 not complete.

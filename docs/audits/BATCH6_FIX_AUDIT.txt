@@ -1,0 +1,11 @@
+Batch6_FIX box-only audit 2026-11-08 00:01 UTC+10 (PC not contacted, no compile, source not edited).
+Archive (handoff) 130699 B SHA256 6ef331aabb8f3922b41053de8a10ee19b10f67de220078bbd7d5a0c60b6e5e62. Saved /workspace/ra3xfer/batch6_fix.tar.gz, unpacked /workspace/b11.
+Structure PASS: 42 members all data/; 42/42 parse; Mod.xml 3 reference DATA:static/global/audio + 41 all, all DATA:, no dups, exact coverage; 0 ART type=all; 0 top-level joinAction.
+Vs blocked Batch6: only Allied/Structures/AlliedBaseDefense.xml changed: BuildTime 20 -> 10 (doc L215). All other 41 files byte-identical to Batch6.
+Vs Batch5: AlliedBaseDefense differs only by trailing tabs on line 7 (whitespace) -> semantically identical to Batch5 (BuildTime 10, KillPassengersOnDeath false). All other Batch6 findings stand (capacity 500/500 on full base objects; ACV/Bullfrog/JLTV/JTV2 passengers false; air units still true = open decision L176/L179/L180).
+Compile risk (type="instance" ART not in SDK Art): AlliedMiner (EXTireTrack2.xml, EX_Headlights.w3x), AlliedAntiAirVehicleTech1 (EXTnkTrack.xml, EXTireTrack2.xml, EX_Headlights.w3x), SovietAntiAirShip (EXTnkTrack.xml).
+Open requirements: Tanya sprint (L526), C4 step2 conditional (L535), spy steal half (L514/L518), air-unit passengers (L179/L180), torpedo clip optional (L560).
+Verdict: CURRENT native-compile candidate (supersedes Batch5). Not game-verified; not full requirement pass.
+Plan when PC online: copy /workspace/ra3xfer/batch6_fix.tar.gz -> E:\RA3ModBuild\_in; extract to new E:\RA3ModBuild\RA3ModSDK\Mods\RA3_V2.0_Batch6Fix (must not exist); logs E:\RA3ModBuild\logs_batch6fix; cwd SDK:
+ Tools\BinaryAssetBuilder.exe "E:\RA3ModBuild\RA3ModSDK\Mods\RA3_V2.0_Batch6Fix\data\Mod.xml" /od:"E:\RA3ModBuild\RA3ModSDK\builtmods" /iod:(same) /csc:false /ls:true /osh:false /pc:true /res:true /slowclean:true /ss:true /art:".;.\Mods\RA3_V2.0_Batch6Fix\Art;.\Mods;.\Art" /audio:".;.\Mods\RA3_V2.0_Batch6Fix\Audio;.\Mods;.\Audio" /data:".;.\Mods\RA3_V2.0_Batch6Fix\Data;.\Mods;.\SageXml"
+ pass = exit0 + 0 Error/Critical/Warning/Unknown + static/global/audio.manifest hashes unchanged; check ART instance lines; one path-only retry allowed.

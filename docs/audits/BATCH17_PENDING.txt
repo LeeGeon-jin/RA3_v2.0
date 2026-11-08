@@ -1,0 +1,8 @@
+Batch17 audit BLOCKED 2026-11-08 ~02:15 UTC+10: ra3v2_phase1_batch17.tar.gz (claimed 177152 B, SHA256 517c21f262900593a6c304edc2de97dd02f303254d796d7a606423df648aa99b) NOT present in <handoff>/ (latest there: batch16_fix 01:55, batch14_planning dir 02:10) nor anywhere under <store>. No stub used. Candidate remains Batch16_FIX.
+Pre-read doc for when it arrives (L899/L903, 5.5 row 33):
+ SovietEngineer BuildTime 10->8 (cost 500) OK.
+ SovietAntiVehicleInfantry (Flak) 5->4 (400). Doc also says the 300-cost campaign overrides (14 missions + CampaignOverrides) "deleted per 5.1" -> check whether Batch17 touches CampaignOverrides; if not, note campaign still 300 (separate campaign-file item, not a source blocker for skirmish).
+ SovietHeavyAntiVehicleInfantry (Tesla) 10->8; cost 750->500 is authorized by "造价按5.5磁暴步兵条 750->500" (cross-ref to separate Tesla row; verify that row too); prereq SovietPowerPlantAdvanced unchanged.
+ SovietCommandoTech1 (Natasha) 30->20 per "见5.5娜塔莎条"; prereq SovietTechStructure unchanged; S01/S02 campaign Natasha override blocks must stay untouched.
+ Soviet spy (new unit) not part of this batch.
+Audit steps when present: sha/size, safe tar, all XML parse, Mod 3ref+60all exact, ART all ci 0, ns0/top joinAction 0, 56 old files byte-identical to batch16_fix, 4 units node-by-node vs SDK, ART instance list.

@@ -1,0 +1,14 @@
+Batch15 box-only audit 2026-11-08 ~02:05 UTC+10. PC not contacted; no compile; source unedited.
+Archive 151407 B SHA256 d86f9adaba3d9621b6618a86b64900bda9f444df72e670726ab9e6c6633a56ce (match). Saved /workspace/ra3xfer/batch15.tar.gz, unpacked /workspace/b28.
+Structure: safe paths; 55 files all XML parse; no ns0; Mod 3 reference + 54 all exact, no dups (Mod = 14FIX + 2 includes); ART type=all case-insensitive 0; top-level joinAction 0.
+vs Batch14_FIX: 51 files byte-identical (9 deps, miners, ore, Tanya sprint, shield/bribe, 4 Soviet build times etc unchanged). Changed: Weapon.xml, Mod.xml; new SovietAntiNavyShipTech2, SovietAntiStructureShip.
+Asset-level compare (every node/attr) vs full SDK:
+ Akula SovietAntiNavyShipTech2: only BuildTime 20->15 (doc L860-861: >15s -> 15, cost 1800 unchanged).
+ Dreadnought SovietAntiStructureShip: only BuildTime 30->20 (doc L866-867: >20s -> 20, cost 2000 unchanged). Models/weapons/armor/cost/RapidLaunch ability intact; only ART type=all includes removed; no ART instance includes in either file; xai ns correct.
+ Weapon.xml vs 14FIX: only SovietAntiStructureShipV4Rocket ClipReloadTime Min 4.5s->2.5s, Max 5.5s->3.5s (doc L866-867). ClipSize 3, AutoReloadsClip AUTO, FiringDuration 1.0/1.0 unchanged; no other weapon changed; no weapon inherits from V4Rocket; used by Dreadnought weapon slot (line 321).
+ AttributeModifier.xml unchanged (RapidLaunch 300% not touched) - #28 (600%/half damage) not mixed in.
+Interval: per doc model 3 x 1.0s + reload avg 3.0s (2.5-3.5) ~= 6s (range ~5.5-6.5s); estimate only, real cadence (FiringDuration semantics, AI/aim) needs in-game measurement. Not confirmed exact 6s.
+VERDICT: SOURCE PASS - replaces Batch14_FIX as native-compile candidate. Not compiled/tested.
+ART instance risk: none new in these files; existing (EX_Headlights, EXTnkTrack, Miner/IFV/Bullfrog/Athena/Mirage).
+Native plan (PC online): tar -> E:\RA3ModBuild\_in; new Mods\RA3_V2.0_Batch15; logs\batch15; same BAB cmd (absolute data\Mod.xml, /od /iod SDK builtmods); pass = exit0 & 0 Error/Critical/Warning/Unknown, static/global/audio manifests unchanged; report exact missing ART list, no adding Bibber art without approval; one path-only retry.
+Open: Dreadnought special #28, Twinblade/Kirov L896, Badger, infantry L899, Stingray L855, C4, spy half, air passengers, torpedo x2, rest of doc.

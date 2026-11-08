@@ -1,0 +1,14 @@
+Batch12 box-only audit 2026-11-08 ~01:30 UTC+10. PC not contacted; no compile; source unedited.
+Archive: SHA256 4318e7ce...daab4 matches claim; real size 135217 B (claim 135678 wrong). Saved /workspace/ra3xfer/batch12.tar.gz, unpacked /workspace/b22.
+Structure: safe paths; 49 XML files (48 content + Mod.xml) all parse; Mod.xml 3 reference + 48 all (cloud "49 all" wrong); exact match, no dups; no ns0; 0 ART all; 0 top-level joinAction.
+vs Batch11_VALIDATED: 45 identical; changed AlliedBomberAircraft, BaseOreNode, Mod.xml (+1 include); new Soviet/Units/SovietAntiGroundAircraft.xml.
+VERDICT: FAIL - not a candidate. Batch11_VALIDATED stays candidate.
+ S1 UNAUTHORIZED SCOPE: AlliedBomberAircraft (Century) TransportContain KillPassengersOnDeath true->false. Doc L179 says air-vehicle passenger survival "needs testing"; user decision pending. Revert to true.
+ S2 Twinblade file SovietAntiGroundAircraft.xml is an 11-line STUB (SDK 404 lines): <GameObject id="SovietAntiGroundAircraft"> with only Behaviors/TransportContain KillPassengersOnDeath=false; no inheritFrom, no joinAction, no Draws/Body/Locomotor/Weapons; xmlns:xai bound to WRONG URI (XMLSchema-instance instead of uri:ea.com:eala:asset:instance). As type=all it would redefine/replace the whole Twinblade with an empty object (or fail schema/compile: TransportContain missing required fields). Also unauthorized (same as S1). Remove file and its Mod.xml include.
+ S3 BaseOreNode MaximumGatheredValue 30000->60000 is NEW in Batch12 (Batch11_VALIDATED and SDK = 30000), contradicting cloud claim "already done". Change itself matches doc L168 (BaseOreNode, all OreNode inherit) and is in-scope; DeliveryAmount 500 unchanged. Acceptable if declared; keep or split per instruction.
+ Claim "all miners Speed 75" FALSE: only AlliedMiner (both LocomotorSets 50->75) is in package; SovietMiner and JapanMiner are not in package (SDK 50/50). Doc L170/743/1002 says miner speed x1.5 - Soviet/Japan miners still open.
+ Spy: three refineries' inline InfiltratorContain Amount=2000 BlockedDuration=0s unchanged (no regression). Spy half-money still not implemented.
+ 9 unit deps and all other values: unchanged (45 files byte-identical; others above).
+Minimal correction: Batch11_VALIDATED + BaseOreNode 60000 only (if accepted), Century KillPassengersOnDeath back to true, drop SovietAntiGroundAircraft.xml + include (back to 47 all). Optional separate batch: SovietMiner/JapanMiner Speed 75 as full SDK objects.
+Native plan unchanged (for Batch11_VALIDATED or corrected pack, PC online): new Mods dir, separate logs, same BAB cmd (absolute data\Mod.xml, /od /iod SDK builtmods), pass = exit0 & 0 Error/Critical/Warning/Unknown, static/global/audio manifests unchanged, one path-only retry. ART instance risk (Miner, IFV, SovietAntiAirShip, Athena, Mirage) persists.
+Open: C4 L535, spy half money, air passengers decision L176-180, torpedo x2 optional, Soviet/Japan miner speed, rest of doc.

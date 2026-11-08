@@ -1,0 +1,13 @@
+BATCH34 AUDIT (box only, field-level, not full XSD, not compiled) - FAIL / BLOCKED (keep batch33_FIX)
+tar 234458B sha256 5e16c99f898aafcfd4fb8164a6c50aa095c80fa938d570c08dc7cb6ba63b76b0 (handoff == attachment), safe paths. Saved batch34.tar.gz.
+vs 33_FIX: new 2 (Japan/Units_SinglePlayerCampaign/JapanMechaKing.xml, Japan/Eggs/JapanMechaKingCore.xml), changed 3 (LogicCommand, LogicCommandSet, Mod); other 75 byte-identical. 80 XML, 3ref/79all 1:1, stray 0, ART all 0, ns0 0, top joinAction 0, unique IDs.
+OK: Command_ConstructJapanMechaKingCore UNIT_BUILD; JapanWarFactoryCommandSetBase = previous 9 + new appended. Mod +2.
+OK: JapanMechaKing nodes vs SDK: only Speed 45 -> 67.5 besides include block; health 10000/MechaKingArmor/katana/shockwave/CommandSet intact. xmlns:xai dropped from root but only xai use declares it locally - OK.
+OK: core KindOf equals real EGG_KINDOFS macro minus EGG UNPACKS_INTO_BUILDING exactly (SELECTABLE CAN_CAST_REFLECTIONS VEHICLE FS_FACTORY EXPANSION_UNIT CAN_BE_FAVORITE_UNIT IGNORES_SELECT_ALL CYCLE_SELECTION AMPHIBIOUS SCORE). ProductionQueueType VEHICLE (GameObject attr). Removed MaxSimultaneousOfType, EquivalentTo JapanSuperWeapon, GameDependency TechStructure. Cost 4000. ReplaceSelf -> JapanMechaKing, PackTime 30.0s, COPY_UPGRADES DISABLE_DURING_REPLACE CLEAR_LOCATION (no CHECK_BUILD_ASSISTANT: native precedent AlliedConstructionYard->AlliedMCV). Portrait/Button JapanMechaKing native; names temp reuse Name/Desc/Type:JapanMechaKing. Health 400, JapanEggArmor, egg locomotors 65, JUEgg model, Kamikaze includes, CommandSet JapanSuperWeaponEggCommandSet (Command_UnPackJapanSuperWeaponEgg -> SpecialPower_UnpackReplaceSelf) kept. Residual SW ties: only draw Lua subobject "SuperWeaponEgg" (cosmetic) and UnitIntro Nanocore.
+BLOCKERS
+B1 Core: <BuildTime>5</BuildTime> written as child ELEMENT. Schema defines BuildTime only as GameObject attribute (AssetTypeGameObject.xsd L446). Invalid/unknown element in sequence; build time not applied. Fix: BuildTime="5" attribute, remove element.
+B2 Both new files removed <Include type="all" source="DATA:GlobalData/GlobalDefines.xml"/> - a DATA include, not ART; convention only removes ART all. Files use =$ macros (core =$ACCOUNT_ORE etc., MechaKing 3 =$ refs incl. =$STANDARD_SHROUD_CLEAR style). All other 70 package files keep it. Restore in both.
+Cosmetic: core DisplayName/ObjectResourceInfo lines run together on UnitIntro line (whitespace only).
+MINIMAL FIX: B1 + B2 only.
+Untested: 30s unpack anim, death during unpack, speed 67.5, perf, AI won't build, strings.
+Next research (wave-force triple cannon L1065) deferred until pass. Phase 1 not complete; coverage list missing.

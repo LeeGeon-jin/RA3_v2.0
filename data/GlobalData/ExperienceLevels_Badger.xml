@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<AssetDeclaration xmlns="uri:ea.com:eala:asset">
+	<Includes>
+		<Include type="instance" source="DATA:GlobalData/ExperienceLevels.xml" />
+	</Includes>
+	<!-- SOVIET SUPPORT BOMBER BUILDABLE (Badger)_____________________________________ -->
+	<ExperienceLevelTemplate
+		id="SovietSupportBomber_BuildableExperienceLevel_1"
+		inheritFrom="ExperienceLevel_SovietRank1"
+		RequiredExperience="1"
+		ExperienceAward="2000">
+		<Target>SovietSupportBomber_Buildable</Target>
+	</ExperienceLevelTemplate>
+	<ExperienceLevelTemplate
+		id="SovietSupportBomber_BuildableExperienceLevel_2"
+		inheritFrom="ExperienceLevel_SovietRank2"
+		Prerequisite="SovietSupportBomber_BuildableExperienceLevel_1"
+		RequiredExperience="6000"
+		ExperienceAward="4000">
+		<Target>SovietSupportBomber_Buildable</Target>
+	</ExperienceLevelTemplate>
+	<ExperienceLevelTemplate
+		id="SovietSupportBomber_BuildableExperienceLevel_3"
+		inheritFrom="ExperienceLevel_SovietRank3"
+		Prerequisite="SovietSupportBomber_BuildableExperienceLevel_2"
+		RequiredExperience="12000"
+		ExperienceAward="6000">
+		<Target>SovietSupportBomber_Buildable</Target>
+	</ExperienceLevelTemplate>
+	<ExperienceLevelTemplate
+		id="SovietSupportBomber_BuildableExperienceLevel_4"
+		inheritFrom="ExperienceLevel_SovietRank4"
+		Prerequisite="SovietSupportBomber_BuildableExperienceLevel_3"
+		RequiredExperience="18000"
+		ExperienceAward="8000">
+		<Target>SovietSupportBomber_Buildable</Target>
+	</ExperienceLevelTemplate>
+</AssetDeclaration>

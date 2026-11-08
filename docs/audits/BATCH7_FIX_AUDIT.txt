@@ -1,0 +1,14 @@
+Batch7_FIX box-only audit 2026-11-08 00:13 UTC+10 (PC not contacted, no compile, source not edited).
+Archive (handoff) 130779 B SHA256 d91d26d5d334695532bcd895512aa0de6a492128d51a1f3858de59adef98eb16. Saved /workspace/ra3xfer/batch7_fix.tar.gz, unpacked /workspace/b13.
+Structure PASS: 42 data/ files, 42/42 parse, Mod.xml 3 reference + 41 all, DATA:, no dups, exact coverage, 0 ART all, 0 top-level joinAction.
+Vs blocked Batch7: only 3 files changed, exactly the requested fixes:
+ Athena AlliedAntiStructureVehicle: BuildTime 20->15; NeededUpgrade Tech3 -> RequiredObject AlliedTechStructure
+ Mirage AlliedAntiVehicleVehicleTech3: NeededUpgrade Tech3 -> RequiredObject AlliedTechStructure
+ Cryocopter AlliedSupportAircraft: NeededUpgrade Tech2 -> RequiredObject AlliedAirfield
+ Weapon.xml byte-identical to Batch7 (Guardian ClipReload 0.8/0.8, SolarTargeter Pre 0.5/0.5). Other 38 files byte-identical to Batch6_FIX.
+9-unit dependencies read from files (parser): Guardian/Cryocopter/AssaultDestroyer = RequiredObject AlliedAirfield; Spy = AlliedWarFactory; Athena/Mirage/Century/Carrier/Tanya = AlliedTechStructure. Package-wide 0 NeededUpgrade Upgrade_AlliedTech2/3.
+Values: Athena BuildTime 15, cost 1400, Speed 75 (1 LocomotorSet); Mirage cost 1500, BuildTime 15; Tanya BuildTime 20, no MaxSimultaneousOfType; all earlier batch values unchanged.
+Open (not regressions): Spy AlliedInfiltrationInfantry BuildTime still 10 (doc L520/L524: 10->8; never in any batch); Tanya sprint (L526); C4 step2 conditional (L535); spy steal half (L514/L518); air-unit passengers (L179/L180); torpedo clip optional (L560).
+Compile risk (type=instance ART not in SDK Art): AlliedMiner, AlliedAntiAirVehicleTech1, SovietAntiAirShip, Athena (EXTnkTrack, EX_Headlights), Mirage (EXTireTrack2).
+Verdict: CURRENT native-compile candidate (supersedes Batch6_FIX). Not game-verified.
+Plan when PC online: copy batch7_fix.tar.gz -> E:\RA3ModBuild\_in; new E:\RA3ModBuild\RA3ModSDK\Mods\RA3_V2.0_Batch7Fix; logs E:\RA3ModBuild\logs_batch7fix; entry ...\RA3_V2.0_Batch7Fix\data\Mod.xml; same BAB cmd /od /iod SDK\builtmods; pass = exit0 + 0 Error/Critical/Warning/Unknown + manifests unchanged; check ART instance lines.

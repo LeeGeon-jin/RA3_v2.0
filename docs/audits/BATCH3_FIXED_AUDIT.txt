@@ -1,0 +1,17 @@
+Batch3_FIXED box-only audit, 2026-11-07 23:32 UTC+10 (PC not contacted).
+Archive: assets copy and AgentStore handoff/ra3v2_phase1_batch3_FIXED.tar.gz are the SAME file: 114719 B, SHA256 6064be1bac64e6098c0e8c058fe0e8b367a756c0c31a2be8f660d31bc839052a. Report's SHA matches; report's size 115636 is WRONG.
+Saved: /workspace/ra3xfer/batch3_fixed.tar.gz, unpacked /workspace/b5.
+Layout: 33 members = root Mod.xml + 32 data/*.xml (not 33 data XML). Mod.xml content byte-identical to previous batch3 data/Mod.xml; only its location moved to archive root.
+ Mod.xml: 3 reference DATA:static/global/audio + 32 all "DATA:<path>"; all 32 resolve under data/; 33/33 parse OK; 0 ART all; 0 top-level joinAction.
+ Layout risk: SDK DefaultScript.cs expects ModXml = Mods\<Mod>\data\mod.xml (output stream builtmods\mods\<Mod>\data\mod). Root Mod.xml => entry Mods\<Mod>\Mod.xml, output stream path changes (likely builtmods\mods\<Mod>\mod). DATA: resolves via /data ".\Mods\<Mod>\Data" so includes should resolve, but the old plan (entry ...\data\Mod.xml) does NOT apply as-is.
+Changes vs batch3 (b4), whitespace-insensitive:
+ SpecialPower_Bribe ReloadTime 10s->5s  [FIXED, doc L517-518]
+ SpecialPower_TimeBelt reverted to 30s  [FIXED]
+ Weapon JapanCommandoTech1AirborneKiller Max reverted 4.0s; JapanAntiStructureVehicleBeamWeapon reverted 4.0s [FIXED]
+ Spy DominateRadius 65->130 [FIXED, doc L518]
+ Refineries (Allied/Japan/Soviet): Replace element now carries Effect=STEAL_MONEY Amount=2000 BlockedDuration=0s.
+Remaining vs SDK originals: AAAVT1 ClipReload 4.0/4.0->0.5/0.5; Bribe 10s->5s; RiotShield SPEED 50%->70%; Engineer tent radius 100->150 (+DominateRadius 130). Nothing else.
+Turret javelin: AlliedBaseDefense uses ABD_AlliedAntiVehicleInfantryMissileLauncher, which in SDK Weapon.xml L5970 is inheritFrom="AAAVT1_AlliedAntiVehicleInfantryMissileLauncher" with only AttackRange override -> should inherit the 0.5s reload. Covered by inheritance (not a separate edit); verify after compile.
+Refinery module: STILL duplicate same-id. After <xi:include DATA:Includes/InfiltratorContainEconomic.xml/> (SDK original, id ModuleTag_InfiltratorContain, BlockedDuration 30s) a second <InfiltratorContain id="ModuleTag_InfiltratorContain" ... xai:joinAction="Replace"/> sits in the same full GameObject (not an inherited override). Now complete for Effect/Amount/BlockedDuration; other attributes fall to schema defaults (Modules/InfiltratorContain.xsd), same as original which also set none. Risk: duplicate module id error or unspecified which wins. Compile will show error/none; game test needed for effect.
+Requirements still not met: spy steals half (fixed 2000 kept; doc L518 "待确认"). Not a full-requirement pass.
+Compile candidate: YES with adjusted entry Mods\RA3_V2.0_Batch3Fixed\Mod.xml (absolute), /od /iod SDK\builtmods, otherwise same BAB cmd; pass = 0 Error/Critical/Warning/Unknown + manifests unchanged; specifically watch duplicate ModuleTag_InfiltratorContain messages and output stream path.

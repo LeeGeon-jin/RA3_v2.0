@@ -1,0 +1,14 @@
+Batch9 box-only audit 2026-11-08 00:32 UTC+10 (PC not contacted, no compile, source not edited).
+Archive (handoff) 134071 B SHA256 ab1ba3201c6284fe7462cc71651fd978b35e657af0e2a155032fc61909cb5db2. Saved /workspace/ra3xfer/batch9.tar.gz, unpacked /workspace/b16.
+Structure PASS: 44 data/ files, 44/44 parse, Mod.xml 3 reference + 43 all (same set as Batch8_FIX), DATA:, no dups, exact coverage, 0 ART all, 0 top-level joinAction.
+Vs Batch8_FIX: 41 files byte-identical; 3 changed:
+ AlliedBarracks.xml: ONLY an XML comment text ("原版：BuildTime=10" -> "=8"); no value change. The "6 building items done in Batch1" are not new progress; Weapon.xml and other structures untouched.
+ AlliedAntiNavyShipTech1 (Assault Destroyer): BuildTime 20->15; LAND TestReactiveLocomotorSHIPLAND Speed 50->65; WATER SHIPWATER 75 = SDK original, unchanged (doc L679: "不低于 60，不改") [L676/L679 OK]
+ AlliedAntiStructureShip (Aircraft Carrier): BuildTime 30->20 [L682/L685 OK]
+NOT done from same doc lines: Destroyer attack interval (L676 "攻击间隔若超过1.5秒改为1.5秒"; L679: AlliedAntiNavyShipTech1Cannon PreAttackDelay 1.0s -> 0.5s) - Weapon.xml unchanged. Carrier drone speed x1.5 (225->337.5) and reload 10s->5s (L688/L691/L692, AlliedAntiStructureAttackDrones) - not done.
+9-unit deps (parser): unchanged correct (Airfield x3, WarFactory, TechStructure x5); 0 NeededUpgrade AlliedTech2/3; all earlier values preserved.
+Superweapon target identification (SDK read-only): SovietSuperWeapon = Iron Curtain (1500), SovietSuperWeaponAdvanced = Vacuum Imploder (2500), JapanSuperWeaponAdvanced = Psionic Decimator (4000), JapanSuperWeapon = Nanoswarm Hive (3000); doc L233 table: only Psionic Decimator >3500 -> 3500. So cloud looked at the wrong object (Soviet Advanced = Vacuum Imploder 2500, correctly needs no change). Correct target JapanSuperWeaponAdvanced is in the package with BuildCost Amount=4000 - NOT done (open; doc L230 user: "帝国超级武器造价不能超过3500"). Note Batch2 report claimed "JapanSuperWeaponAdvanced BuildCost 3500" - false, file has 4000.
+Open: Destroyer cannon PreAttackDelay 0.5 (L679); Carrier drones speed/reload (L691); Psionic Decimator 4000->3500 (L230/L233); Tanya sprint (L526); C4 step2 (L535); spy half money (L514/L518); air passengers (L176/L179/L180).
+Compile risk ART instance: Miner, IFV, Bullfrog, Athena, Mirage.
+Verdict: PASS (no regression) - CURRENT native-compile candidate (supersedes Batch8_FIX). Not game-verified; real new progress = Destroyer build/land speed + Carrier build only.
+Plan when PC online: copy batch9.tar.gz -> E:\RA3ModBuild\_in; new Mods\RA3_V2.0_Batch9; logs E:\RA3ModBuild\logs_batch9; entry ...\RA3_V2.0_Batch9\data\Mod.xml; same BAB cmd /od /iod SDK\builtmods; pass = exit0 + 0 Error/Critical/Warning/Unknown + manifests unchanged.

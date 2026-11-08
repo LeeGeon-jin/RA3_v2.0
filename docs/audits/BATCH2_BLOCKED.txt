@@ -1,0 +1,6 @@
+Batch1-2 package a93c9a21... (63861 B) NOT transferred/compiled (2026-11-07 23:07 UTC+10).
+Pass: 29 files, data/ prefix, safe paths, 29/29 XML parse, Mod.xml 3 reference DATA:static/global/audio + 28 all, full coverage; first 16 structures byte-identical to compiled-clean StructuresXMLFix.
+FAIL 1: 10 new files still contain ART type="all" includes (AlliedTechStructure + 9 Allied/Units) -> same art-not-found error class as StructuresBase run.
+FAIL 2: top-level xai:joinAction="Merge" in Includes/InfiltratorContainEconomic.xml and SkirmishAI/Personalities/CoopBasePersonality.xml (old stub form that failed SDK schema earlier).
+Known requirement gap (by cloud report): spy steals fixed Amount=2000, not half.
+Unpacked copy: /workspace/b2

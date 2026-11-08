@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<AssetDeclaration xmlns="uri:ea.com:eala:asset">
+	<Includes>
+		<Include type="instance" source="DATA:GlobalData/ExperienceLevels.xml" />
+	</Includes>
+	<!-- ADVANCED MIRAGE TANK (AlliedAdvancedMirageTank)_____________________________________ -->
+	<ExperienceLevelTemplate
+		id="AlliedAdvancedMirageTankExperienceLevel_1"
+		inheritFrom="ExperienceLevel_AlliedRank1"
+		RequiredExperience="1"
+		ExperienceAward="1600">
+		<Target>AlliedAdvancedMirageTank</Target>
+	</ExperienceLevelTemplate>
+	<ExperienceLevelTemplate
+		id="AlliedAdvancedMirageTankExperienceLevel_2"
+		inheritFrom="ExperienceLevel_AlliedRank2"
+		Prerequisite="AlliedAdvancedMirageTankExperienceLevel_1"
+		RequiredExperience="4800"
+		ExperienceAward="3200">
+		<Target>AlliedAdvancedMirageTank</Target>
+	</ExperienceLevelTemplate>
+	<ExperienceLevelTemplate
+		id="AlliedAdvancedMirageTankExperienceLevel_3"
+		inheritFrom="ExperienceLevel_AlliedRank3"
+		Prerequisite="AlliedAdvancedMirageTankExperienceLevel_2"
+		RequiredExperience="8400"
+		ExperienceAward="9600">
+		<Target>AlliedAdvancedMirageTank</Target>
+	</ExperienceLevelTemplate>
+	<ExperienceLevelTemplate
+		id="AlliedAdvancedMirageTankExperienceLevel_4"
+		inheritFrom="ExperienceLevel_AlliedRank4"
+		Prerequisite="AlliedAdvancedMirageTankExperienceLevel_3"
+		RequiredExperience="14400"
+		ExperienceAward="6400">
+		<Target>AlliedAdvancedMirageTank</Target>
+	</ExperienceLevelTemplate>
+</AssetDeclaration>

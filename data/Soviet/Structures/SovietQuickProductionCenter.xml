@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="us-ascii"?>
+<AssetDeclaration xmlns="uri:ea.com:eala:asset" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xai="uri:ea.com:eala:asset:instance" xmlns:xi="http://www.w3.org/2001/XInclude">
+	<Tags></Tags>
+	<Includes>
+		<Include type="instance" source="DATA:BaseObjects/BaseSovietStructure.xml" />
+		<Include type="all"	source="ART:AM_AlliedFutureTechHQ.W3X" />
+		<Include type="instance" source="DATA:Civilian/Yucatan_YU/Props/YU_HotelDebris.xml" />
+		<Include type="instance" source="DATA:Civilian/Amsterdam_AM/Props/AM_AlliedFutureTechHQ_Collapse.xml" />
+		
+	</Includes>
+	<GameObject
+		id="SovietQuickProductionCenter"
+		inheritFrom="BaseSovietStructure"
+		Side="Soviet"
+		EditorName="SovietQuickProductionCenter"	
+    	EditorSorting="STRUCTURE"
+		Browser="STRUCTURE"
+		KindOf="+AIRCRAFT_PATH_AROUND"
+		SelectPortrait="Portrait_Special_FutureTech"
+		ButtonImage="Button_Special_FutureTech"
+		BuildTime="0.0"
+		EnergyProduction="-75"
+		MaxSimultaneousOfType="1"
+		ProductionQueueType="OTHER_STRUCTURE"
+		BuildPlacementTypeFlag="OTHER_STRUCTURE"
+		TypeDescription="Type:QuickProductionCenter"
+		Description="Desc:QuickProductionCenter">
+		<DisplayName
+			xai:joinAction="Replace" xmlns:xai="uri:ea.com:eala:asset:instance">Name:QuickProductionCenter</DisplayName>
+		<GameDependency>
+			<RequiredObject>SovietTechStructure</RequiredObject>
+		</GameDependency>
+		<ObjectResourceInfo>
+			<BuildCost Account="=$ACCOUNT_ORE" Amount="2000"/>
+		</ObjectResourceInfo>
+		<Draws>
+			<ScriptedModelDraw
+				id="ModuleTag_Draw"
+				OkToChangeModelColor="true"
+				ExtraPublicBone="BONE_CONTACT_POINT_01 BONE_CONTACT_POINT_02 BONE_CONTACT_POINT_03 BONE_CONTACT_POINT_04 BONE_CONTACT_POINT_05 BONE_CONTACT_POINT_06 BONE_CONTACT_POINT_07 BONE_CONTACT_POINT_08 BONE_CONTACT_POINT_09 BONE_CONTACT_POINT_10 BONE_CONTACT_POINT_11 BONE_CONTACT_POINT_12 BONE_CONTACT_POINT_13 BONE_CONTACT_POINT_14 BONE_CONTACT_POINT_15 BONE_CONTACT_POINT_16 BONE_CONTACT_POINT_17 BONE_CONTACT_POINT_18 BONE_CONTACT_POINT_19 BONE_CONTACT_POINT_20">
+				<ModelConditionState
+					ParseCondStateType="PARSE_DEFAULT">
+					<Model
+						Name="AM_AlliedFutureTechHQ" />
+				</ModelConditionState>
+			</ScriptedModelDraw>
+		</Draws>
+		<Behaviors>
+			<Physics
+				id="ModuleTag_Physics"/>
+
+			<StructureUnpackUpdate
+				id="ModuleTag_StructureUnpack"
+				UnpackTime="28s" />
+
+			<AttributeModifierAuraUpdate
+				id="ModuleTag_QuickProductionAura"
+				InitiallyActive="true"
+				Range="99999"
+				RefreshDelay="0.5s"
+				AttributeModifierName="AttributeModifier_QuickProduction">
+				<ObjectFilter
+					Rule="ANY"
+					Relationship="SAME_PLAYER"
+					Include="FS_FACTORY"
+					Exclude="CONSTRUCTION_YARD" />
+			</AttributeModifierAuraUpdate>
+
+			<xi:include
+				href="DATA:Includes/GenericBuildingRepair.xml" />
+			<xi:include
+				href="DATA:Includes/GenericEngineerContain.xml" />
+
+			<BuildingDestructionBehavior
+				id="ModuleTag_BuildingDestruction">
+				<DieMuxData
+					DeathTypes="ALL" />
+				<Item
+					BonePrefix="BONE_CONTACT_POINT_"
+					FX="FX_BuildingDebrisExplosion"
+					CreationObject="YU_HotelDebris"
+					FlingVelocity="100.0"/>
+			</BuildingDestructionBehavior>
+
+			<FXListBehavior
+				xai:joinAction="Replace" xmlns:xai="uri:ea.com:eala:asset:instance" id="ModuleTag_FXList">
+				<DieMuxData
+					DeathTypes="ALL" />
+				<Event
+					Index="onDeath"
+					FX="FX_YU_Hotel02_Explode" />
+			</FXListBehavior>
+
+			<CreateObjectDie
+				id="ModuleTag_CreateObjectDie"
+				CreationList="AM_AlliedFutureTechHQ_Die_OCL">
+				<DieMuxData
+					DeathTypes="ALL" />
+			</CreateObjectDie>	
+			
+			<DestroyDie
+				id="ModuleTag_DestroyDie">
+				<DieMuxData
+					DeathTypes="ALL" />
+			</DestroyDie>				
+		</Behaviors>
+		<Body>
+			<ActiveBody
+				id="ModuleTag_Body"
+				MaxHealth="2000"
+				InitialHealth="2000" />
+		</Body>
+		
+		<ArmorSet
+			Armor="AlliedConYardArmor"
+			DamageFX="FactionStructureDamageFX" />
+		
+		<Geometry
+			IsSmall="false">
+			<Shape 
+				Type= "BOX"
+				MajorRadius = "30.0"
+				MinorRadius = "30.0"
+				Height = "40.0"
+				ContactPointGeneration="STRUCTURE" >
+				<Offset
+					x = "0.0"
+					y = "0.0"
+					z = "0.0" />
+			</Shape>
+		</Geometry>
+		<AudioArraySound>
+			<AudioEntry Sound="HumanFaction_MediumBuilding_LightDamageMS" AudioType="soundOnDamaged" />
+			<AudioEntry Sound="HumanFaction_MediumBuilding_HeavyDamageMS" AudioType="soundOnReallyDamaged" />
+		</AudioArraySound>
+				
+	</GameObject>
+
+	<ObjectCreationList
+		id="AM_AlliedFutureTechHQ_Die_OCL">
+		<CreateObject
+			Options="IGNORE_ALL_OBJECTS"
+			Disposition="LIKE_EXISTING RANDOM_FORCE"
+			Count="1"
+			MinForceMagnitude="1.0"
+			MaxForceMagnitude="2.0"
+			MinForcePitch="90d"
+			MaxForcePitch="75d">
+			<CreateObject>AM_AlliedFutureTechHQ_Collapse</CreateObject>
+		</CreateObject>
+	</ObjectCreationList>	
+</AssetDeclaration>

@@ -1,0 +1,16 @@
+Batch19 box-only audit 2026-11-08 ~02:55 UTC+10. PC not contacted; no compile; source unedited.
+Archive: handoff = asset 01M6VE6D...gz: 176141 B, SHA256 1af29d99f8a7e4fd9a6afb16fd04e2274b0e16e2e518507a20a2a335a64c975d (match). Saved /workspace/ra3xfer/batch19.tar.gz, unpacked /workspace/b34.
+diff -r vs Batch18_FIX: only GlobalData/Weapon.xml; 60 files byte-identical (Tesla cost 500/BuildTime 8, aura Range 50 + AttributeMod_SovietShortCircuitRangeBoost 105%, all prior values unchanged).
+Weapon.xml asset/node compare (all weapon templates): exactly 5 values in 2 objects:
+ SovietHeavyAntiVehicleInfantryTeslaGun PreAttackDelay Min 0.5s->0.25s, Max 0.5s->0.25s
+ SovietHeavyAntiVehicleInfantryShortCircuit AttackRange 50.0->75.0; ParalyzeNugget Radius 50.0->75.0 (x2); DurationSeconds unchanged.
+ Auth doc L731/L735.
+Structure: safe paths; 61 XML parse; Mod 3 reference + 60 all exact; no ns0; top-level joinAction 0; ART type=all ci 0.
+VERDICT: SOURCE PASS - replaces Batch18_FIX as native-compile candidate. Not compiled/tested (charge/paralyze feel in game untested).
+Read-only: Dreadnought special (doc L869 original: "无畏级战舰的特殊技能状态下掉血速度减半，射速比现在的特殊技能状态再加倍，两拨导弹的间隔时间从2秒改为1秒"; L873 detail).
+ "掉血速度减半" = the ship's own self-drain while in rapid-launch mode (ability sacrifices its health), NOT halving damage dealt/taken. L873 names it explicitly: ModuleTag_RapidLaunchHealthDrain LoseHealthUpdate DamagePerSecond 50 -> 25.
+ SDK chain: SovietAntiStructureShip SpecialPower ModuleTag_ToggleRapidLaunchTrigger (SpecialPower_ToggleRapidLaunch) -> ToggleStatusSpecialAbilityUpdate 2nd ToggleState ObjectStatus GENERIC_TOGGLE_STATE, AttributeModifier="AttributeModifier_RapidLaunch", enables ModuleId ModuleTag_RapidLaunchHealthDrain -> LoseHealthUpdate DamagePerSecond 50 (RequiredStatus GENERIC_TOGGLE_STATE, Forbidden UNDER_IRON_CURTAIN).
+ AttributeModifier_RapidLaunch (GlobalData/AttributeModifier.xml, StartFX/EndFX SacrificeLaunchers) Modifier RATE_OF_FIRE 300% -> 600%. Used only by Dreadnought in SDK (no other references) - safe to edit globally.
+ Interval: normal ~6s after Batch15 (3x1.0 + 2.5-3.5); x6 rate -> ~1s estimate (doc reasoning); not measured; whether RATE_OF_FIRE scales FiringDuration and ClipReload both is engine behaviour to verify in game.
+ Authorized: yes, explicit (L869 + L873). Exact next batch: SovietAntiStructureShip.xml DamagePerSecond 50->25 only; AttributeModifier.xml RapidLaunch RATE_OF_FIRE 300%->600% only; V4Rocket reload stays 2.5/3.5 (do not revert). Enemy damage not halved.
+Native plan: new Mods\RA3_V2.0_Batch19, same BAB cmd, 0 Error/Critical/Warning/Unknown, manifests unchanged, exact missing-ART list, one path-only retry.

@@ -1,0 +1,19 @@
+Batch23 box-only audit 2026-11-08 ~03:35 UTC+10. PC not contacted; no compile; source unedited.
+Archive: handoff = asset 01M6VFVR...gz: 215564 B, SHA256 cf9ac1b8075270f093bd457360fe6e8b71ae0a222dd034e00857a164e58b0eec (match). Saved /workspace/ra3xfer/batch23.tar.gz, unpacked /workspace/b38.
+diff -r vs Batch22: 67 old content files byte-identical; Mod only +3 includes; 3 new files.
+Structure: safe paths; 71 XML parse; Mod 3 reference + 70 all exact; no ns0; top-level joinAction 0; ART type=all ci 0.
+Node diff vs full SDK:
+ JapanInfiltrationInfantry (Ninja): BuildTime 10->8; GameDependency NeededUpgrade Upgrade_JapanBarracksTech2 -> RequiredObject JapanWarFactory (single child, same GameDependency element); cost 1000. 50 ART-all removed; kept GlobalDefines/BaseInfantry.
+ JapanAntiVehicleInfantryTech3 (Rocket Angel): BuildTime 10 kept; Upgrade_JapanBarracksTech3 -> RequiredObject JapanTechStructure; cost 900. 12 ART-all removed; kept GlobalDefines, ART:FXBeam.xml instance, BaseInfantry.
+ JapanCommandoTech1 (Yuriko): BuildTime 30->20; Tech3 -> RequiredObject JapanTechStructure; MaxSimultaneousOfType 1 kept; cost 2000. 37 removed.
+ No Egg objects used; no other node differs (models/abilities/commands intact). Auth doc L975/L976. Upgrades/buttons/AI untouched (files not in pack). Campaign/J07 not verified.
+VERDICT: SOURCE PASS - replaces Batch22 as native-compile candidate. Not compiled/tested.
+Yuriko limit: doc L994 explicitly "G: Japan/Units/JapanCommandoTech1.xml：MaxSimultaneousOfType 1 → 取消" - authorized, not implemented (report only).
+Next Japan groups (doc explicit; files not in pack / values unchanged):
+ J1 L1071 Naginata JapanAntiVehicleShip BuildTime 18 -> 15 (cost 1800; no campaign overrides).
+ J2 L1083 Yari Mini-Sub JapanNavyScoutShip BuildTime 10 -> 5 (cost 800). (New ability part of that row = separate complex item.)
+ J3 L1077 Shogun Battleship JapanAntiStructureShip BuildTime 22 -> 20 (cost 2200) + Weapon JapanAntiStructureShipWeapon ClipReloadTime 7.0/8.0 -> 3.5/4.0 (ClipSize 3, FiringDuration 0.25 unchanged). L987: its prereq NeededUpgrade (NavalYard Tech3) -> RequiredObject JapanTechStructure (verify SDK node).
+ J4 L970 GlobalData/SpecialPowerTemplates.xml SpecialPower_JapanEngineerSprint ReloadTime 60s -> 30s (currently 60s in pack; shared template only used by JapanEngineer - verify).
+ J5 L994 Yuriko MaxSimultaneousOfType 1 -> remove.
+ Also authorized but separate (upgrade.xml): L951/L952 Upgrade_JapanWarFactoryTech2 BuildTime 30.0s->10s; L987 Upgrade_JapanNavalYardTech2 30.0s->10s; L946 Upgrade_JapanPowerPlantTurbine cost 500->300 (+module hookup = complex).
+Native plan: new Mods\RA3_V2.0_Batch23, same BAB cmd, 0 Error/Critical/Warning/Unknown, manifests unchanged, exact missing-ART list (note ART:FXBeam.xml instance new), one path-only retry.

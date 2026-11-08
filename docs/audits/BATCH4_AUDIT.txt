@@ -1,0 +1,18 @@
+Batch4 box-only audit 2026-11-07 23:42 UTC+10 (PC not contacted, no compile, source not edited).
+Archive 118731 B SHA256 c6e67b520a68535f7189463c7b2e049c34085db39b555e5d64541af29597351e. Saved /workspace/ra3xfer/batch4.tar.gz, unpacked /workspace/b7.
+Structure: 35 members all data/; 35/35 parse. NOT A VALID CANDIDATE:
+ B1 Mod.xml rewritten (comments/xsi ns stripped) and 3 includes appended as source="data/Allied/..." (no DATA: prefix, relative to data\Mod.xml -> resolves to data\data\..., missing). AlliedCommandoTech1 now listed twice (DATA:... and data/...). 35 all entries for 34 content files.
+ B2 ART type=all reintroduced: AlliedCommandoTech1 68, AlliedMiner 10(12 ART lines), AlliedOutPost 6 -> same art-not-found class as StructuresBase run.
+ B3 REGRESSION AlliedCommandoTech1 GameDependency: <NeededUpgrade>Upgrade_AlliedTech3</NeededUpgrade> re-added beside RequiredObject AlliedTechStructure. Batch2/REFINED had removed it per devdoc L454/L457/L1567 (licenses no longer unlock units). File appears rebuilt from SDK original + edits, not from REFINED.
+Vs Batch3_REFINED: other 31 files byte-identical (refinery unique module, bribe 5s, radius 130, etc. preserved). Weapon.xml dup ids are nugget ids, pre-existing; JapanBaseDefenseAdvanced dup ModuleTag_LaserDraw pre-existing/unchanged.
+Value diffs:
+ Tanya AlliedCommandoTech1: BuildTime 30->20 [doc L526 OK]; MaxSimultaneousOfType="1" removed [L526 unlimited OK]
+ Weapon AlliedCommandoDesertEagles AttackRange 140->210 [L526 pistol range x1.5 OK; only pistol weapon in Tanya's set; ABD_PistolWeapon (Tanya in turret) untouched - doc doesn't require]
+ Weapon AlliedCommandoDetonationWeapon PreAttackDelay 1.0->0.5 [L535 plan step 1 OK; AttachWeapon FiringDuration 1.0 unchanged = conditional step 2 pending measurement]
+ Tanya "special skill -> sprint x2 10s, cooldown 25s" (L526): NOT done (SpecialPower_TimeBelt untouched)
+ AlliedOutpost ALLIED_OUTPOST_LOCAL_UNPACK_TIME 30s->15s [L538 OK]
+ AlliedMiner BuildTime 20->12 [L548 OK; AlliedMiner_Naval inherits]
+ Speed: target identity = AlliedMiner IS the Prospector (SDK AlliedMiner.xml: FX_ALL_ProspectorDie, ReplaceSelfSpecialAbility ReplacementTemplate=AlliedOutpost); AlliedOutPost.xml has no locomotor. So AlliedMiner is the correct target for "勘探者速度1.5倍"(L538) and "采矿车速度1.5倍"(L170) — but NOT APPLIED: both LocomotorSets still Speed="50.0" (expected 75). Report's "speed 75" claim is false.
+ Miner capacity x2 (L170) not in this batch.
+Needed before compile: fix Mod.xml (DATA: prefix, no duplicate), remove ART all in 3 files, drop Tech3 NeededUpgrade from Tanya, apply Speed 75 on both AlliedMiner LocomotorSets (or document why not).
+Plan once corrected & PC online: new Mods\RA3_V2.0_Batch4, entry ...\data\Mod.xml, logs E:\RA3ModBuild\logs_batch4, same BAB cmd /od /iod SDK\builtmods; pass = exit0 + 0 Error/Critical/Warning/Unknown + manifests unchanged. Until then Batch3_REFINED remains the compile candidate.

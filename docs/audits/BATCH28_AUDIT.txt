@@ -1,0 +1,23 @@
+BATCH28 AUDIT (box only, field-level, not full XSD, not in-game) - PASS
+tar 223281B sha256 b3e97d18c565fd2bd71bfbe86983ebc7c4a23709300d34c7d2cb0facaf235f24 (handoff == attachment), safe paths. Saved batch28.tar.gz.
+vs 27_FIX: exactly 5 files changed (AttributeModifier, LogicCommand, SpecialPowerTemplates, JapanAntiStructureShip, UnitAbilityButtonTemplates); other 71 byte-identical; Mod unchanged.
+Shogun vs full SDK: only ART all removal, BuildTime 22->20, NavalYardTech3->RequiredObject JapanTechStructure (prior batches), both RushAttackWeapon slots deleted, MovementSpecialPower -> SpecialPower_JapanShogunSprint / AttributeModifier_JapanShogunSprint, MovementType NONE, Duration 5s, AffectsSelf kept; ObjectStatus/LocomotorSet/BusyDurationOnExit/CollisionBounce removed. No unit refs to RushAttackWeapon/old power/old modifier.
+New: SpecialPower_JapanShogunSprint ReloadTime 20s TargetType NONE (no target flags/filter/voice); AttributeModifier_JapanShogunSprint SPEED 150% 5s; Command_RammingSpeed override SPECIAL_POWER -> new power, SPEED_BOOST MICRO_MANAGER RETREAT COMBAT CLEANUP / UseNearTacticalTarget (schema attrs exist); CommandSet SDK JapanAntiStructureShipCommandSet uses Command_RammingSpeed (ID kept); Button_JASS_RammingSpeed SpecialPower non-target, temp StateData ButtonStateAbilityJapanEngineerSprint (real SDK icon/strings; temporary, UI not localized).
+Residual (non-blocking): main weapon ForbiddenObjectStatus SPECIALABILITY_ACTIVE (status never set now, no-op); NORMAL_UPGRADED/_Ramming locomotor def unused; old templates remain unreferenced in global files; ShieldOn sound on UNPACKING + VoiceRammingSpeed kept - untested; Joypad button not overridden (PC irrelevant).
+Base speed independently: SDK water locomotors Speed 50.0 (not 125; 125 is Yari). Skirmish 50 -> 75 during sprint; campaign overrides 70 -> 105. Not blocking.
+Preserved: cost 2200, Build 20, main gun clip 3.5/4.0, Leech 7/8 (Weapon.xml identical to 27_FIX), Tanya 25s+button, Yari 15s/150%/5s, Japan engineer 30s+JAP_Engineer_SprintMS.
+76 XML, Mod 3ref/75all 1:1, stray text/tail 0, ART all 0, ns0 0, top joinAction 0, duplicate top-level IDs 0.
+
+NEXT (read-only) doc L942/L946 Japan power plant turbine:
+Requirement L942: press F on power plant, pay 300 -> 1.5x power, once only, 10s.
+SDK facts:
+- Upgrade_JapanPowerPlantTurbine exists (upgrade.xml L513): Type OBJECT, BuildTime 10.0s (ok), BuildCost 500 -> 300 (only change). Type OBJECT = once per building.
+- Command_UpgradeJapanPowerPlantTurbine exists (LogicCommand L2096, OBJECT_UPGRADE).
+- ButtonUpgradeJapanPowerPlantTurbine exists (UnitAbilityButtonTemplates L885, ObjectUpgrade, StateData ButtonStateUpgradeJapanPowerPlantTurbine, icon JUA_Nanotech_Upgrade1, strings NAME/DESCRIPTION:UpgradeJapanPowerPlantTurbine - existence in game .csf unverified).
+- JapanPowerPlantCommandSet is EMPTY (LogicCommandSet L725) -> must add <Cmd>Command_UpgradeJapanPowerPlantTurbine</Cmd>.
+- JapanPowerPlant (already in package) has ProductionUpdate (needed to research) but no PowerUpgrade; add <PowerUpgrade id="ModuleTag_Turbines"><TriggeredBy>Upgrade_JapanPowerPlantTurbine</TriggeredBy></PowerUpgrade> (PowerUpgrade.xsd: UpgradeModuleData, no own fields).
+- Soviet template references Upgrade_PowerPlantTurbine which is NOT defined in SDK upgrade.xml (dead template) -> copy only module shape, use Japan upgrade ID.
+- Mechanism: PowerUpgrade adds the object's EnergyBonus to production. JapanPowerPlant EnergyProduction 100, EnergyBonus 10 -> only 1.1x. For doc's 1.5x the derived value is EnergyBonus 10 -> 50 (follows directly from 1.5x, not a free choice); flag to user for confirmation, and EnergyBonus may also be used by other bonus paths - test.
+- AI: no SkirmishAI references to turbine -> AI won't buy (acceptable/note).
+- Hotkey "F" depends on button slot/string; not guaranteed - note.
+Minimal next batch files: upgrade.xml (cost), LogicCommandSet.xml (Cmd), JapanPowerPlant.xml (module + EnergyBonus), optionally button already SDK (no override needed).

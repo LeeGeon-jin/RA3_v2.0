@@ -1,0 +1,16 @@
+Batch24 box-only audit 2026-11-08 ~03:45 UTC+10. PC not contacted; no compile; source unedited.
+Archive: handoff = asset 01M6VG6Z...gz: 215549 B, SHA256 80d0d568ca0297b5d45bfb0e9803ddbdfd33ec71195cf3534d63208c689a89d1 (match). Saved /workspace/ra3xfer/batch24.tar.gz, unpacked /workspace/b39.
+diff -r vs Batch23: only Japan/Units/JapanCommandoTech1.xml and GlobalData/SpecialPowerTemplates.xml; 69 files byte-identical (Mod 3 ref + 70 all unchanged).
+Node whitelist:
+ JapanCommandoTech1: only GameObject attribute MaxSimultaneousOfType="1" removed; BuildTime 20, cost 2000, RequiredObject JapanTechStructure unchanged. (doc L994)
+ SpecialPowerTemplates: only SpecialPower_JapanEngineerSprint ReloadTime 60s -> 30s (InitiateSound etc unchanged). (doc L970) Template users: JapanEngineer MovementSpecialPower + Command_JapanEngineerSprint only. Tanya uses separate SpecialPower_AlliedCommandoSprint (25s, unchanged). All other templates (Bribe 5s, TeslaNova etc) unchanged.
+Structure: safe paths; 71 XML parse; no ns0; top-level joinAction 0; ART type=all ci 0.
+VERDICT: SOURCE PASS - replaces Batch23 as native-compile candidate. Not compiled/tested.
+Next Japan naval group (read-only; SDK + doc L987/L1071/L1077/L1083):
+ JapanAntiVehicleShip (Naginata, 409 lines, 8 ART-all lines): BuildTime 18 -> 15 (line 30); cost 1800; prereq NeededUpgrade Upgrade_JapanNavalYardTech2 KEEP (doc L987: Tech2 still unlocks Naginata). Keep SpecialPower_TorpedoSpread modules. No derived objects; no CampaignOverrides/mission overrides (0/0) - matches doc.
+ JapanNavyScoutShip (Yari, 448 lines): BuildTime 10 -> 5 (line 34); cost 800; keep SpecialPower_KamikazeAttack as-is (new non-suicide ability in L1083 = separate complex item, do NOT mix). No overrides (0/0).
+ JapanAntiStructureShip (Shogun, 542 lines): BuildTime 22 -> 20 (line 24); cost 2200; GameDependency NeededUpgrade Upgrade_JapanNavalYardTech3 -> RequiredObject JapanTechStructure (line 40; L987). Keep SpecialPower_RammingSpeed (L1077 ability changes separate). CampaignOverrides has an inheritFrom=JapanAntiStructureShip block (locomotor only) and 15 mission overrides define it - none contain BuildTime/BuildCost/prereq.
+ Weapon JapanAntiStructureShipWeapon ClipReloadTime Min 7.0s/Max 8.0s -> 3.5s/4.0s (ClipSize 3, FiringDuration 0.25s unchanged). SIDE EFFECT: Leech_ShipWeapon (Weapon.xml ~7177, Soviet leech-beam copy weapon) inheritFrom JapanAntiStructureShipWeapon -> would also get halved reload unless it overrides; flag for decision (doc doesn't mention).
+ Interval ~8.25s -> ~4.5s per doc estimate; not measured.
+ Also related (not in this group): Upgrade_JapanNavalYardTech2 BuildTime 30.0s -> 10s (L987), upgrade.xml.
+Native plan: new Mods\RA3_V2.0_Batch24, same BAB cmd, 0 Error/Critical/Warning/Unknown, manifests unchanged, exact missing-ART list, one path-only retry.

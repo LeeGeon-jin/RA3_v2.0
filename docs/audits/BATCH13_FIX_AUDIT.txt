@@ -1,0 +1,12 @@
+Batch13_FIX box-only audit 2026-11-08 ~01:45 UTC+10. PC not contacted; no compile; source unedited.
+Archive 141948 B SHA256 e2067e2d115840fefbfbd3fcb4f8594aee42426200222d8d16119bdfc999fcb4 (match). Saved /workspace/ra3xfer/batch13_fix.tar.gz, unpacked /workspace/b25.
+Structure: safe paths; 50 XML all parse; no ns0; Mod.xml 3 reference + 49 all exact match, no dups; 0 ART all; 0 top-level joinAction. Mod.xml byte-identical to Batch13 (= Batch12_FIX + 2 includes SovietMiner, JapanMiner). Other 47 files byte-identical to Batch12_FIX (9 deps, Tanya sprint, ore 60000, DeliveryAmount 500, shield 70, bribe 5 etc unchanged).
+Miners: full SDK files. Asset-level compare (ElementTree, every element/attr/text) vs SDK:
+ SovietMiner 141 nodes = SDK; only diffs BuildTime 20->12, LocomotorSet TestReactiveLocomotorTANK/NORMAL 50.0->75.0, SovietMinerWaterLocomotor/NORMAL 50.0->75.0. SovietMiner_Naval identical.
+ JapanMiner 222 nodes = SDK; only diffs BuildTime 20->12 and same two LocomotorSets (JapanMinerWaterLocomotor) 50->75. JapanMiner_Naval identical.
+ So kept: models/Draws, Body, harvest behaviors, ArmorSet, CommandSet, cost 1400, Soviet ToggleArmorUp, Japan JapanMinerGun, portraits/strings. Includes: ART type=all removed (Soviet 13, Japan 25), GlobalDefines all kept, DATA:BaseObjects/BaseMiner.xml instance kept, ART:EX_Headlights.w3x instance kept; xai namespace correct.
+ Authorization: doc L173-174/L747/L1006 (speed all factions 50->75), L753/L1012 (BuildTime 20->12, Naval inherits).
+ART instance risk: new references ART:EX_Headlights.w3x (both miners) - exists only in Bibber Art/ex/ex_headlights.w3x, which was EXCLUDED from build input zip; same file already referenced by AlliedMiner, AlliedAntiAirVehicleTech1, AlliedAntiStructureVehicle (existing risk). Model names in Draws (SUHarvester_*, JUHarvester_*) are resolved from game static data like other units (pattern compiled clean in 16-structure build).
+VERDICT: SOURCE PASS - replaces Batch12_FIX as native-compile candidate. Not compiled/tested.
+Native plan (PC online): tar -> E:\RA3ModBuild\_in; new Mods\RA3_V2.0_Batch13Fix; logs\batch13fix; same BAB command (absolute data\Mod.xml, /od /iod SDK builtmods); pass = exit0 & 0 Error/Critical/Warning/Unknown, static/global/audio manifests unchanged; if only EX_Headlights missing, report exact list (Bibber Art file available on box) - do not add without approval; one path-only retry.
+Open: C4 L535, spy half money, air passengers decision, torpedo x2 optional, rest of doc.

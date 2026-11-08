@@ -1,0 +1,16 @@
+Batch14 box-only audit 2026-11-08 ~01:55 UTC+10. PC not contacted; no compile; source unedited.
+Archive 148454 B SHA256 74df22593561187a84da7a4c4ce90838c507e5a1e813a01d0d64c830d8bae0d6 (match). Saved /workspace/ra3xfer/batch14.tar.gz, unpacked /workspace/b26.
+Structure: safe paths; 53 XML parse; no ns0; Mod.xml 3 reference + 52 all exact match, no dups (Mod = 13FIX + 3 includes). 0 top-level joinAction. 49 other files byte-identical to Batch13_FIX except SovietAntiAirShip (only BuildTime line). => 9 deps, miners (12s/75), ore 60000/500, Tanya sprint, shield/bribe etc unchanged.
+Asset compare vs full SDK (every node/attr):
+ SovietSurveyor 101 nodes, only BuildTime 20->10; SovietSurveyor_Naval identical, inheritFrom SovietSurveyor, no own BuildTime -> inherits 10.
+ SovietAntiInfantryVehicle (Sickle) 157 nodes, only BuildTime 10->8.
+ SovietAntiNavyShipTech1 (Stingray) 159 nodes, only BuildTime 10->8.
+ SovietAntiAirShip (Bullfrog) only BuildTime 10->8 + previously approved KillPassengersOnDeath false (kept); _Ground inherits, no own BuildTime -> 8.
+ Authorization real doc text: L749/L753 (Surveyor 20->10, Sickle 10->8, Bullfrog 10->8, costs unchanged), L755/L758 (Stingray 10->8). Planning cites "L748#8/L753#9" (row numbers) - text confirmed.
+VERDICT: FAIL (single blocker) - does not replace Batch13_FIX yet.
+ B1 SovietAntiInfantryVehicle.xml still has <Include type="all" source="art:FXSovietSickleFP.xml"/> (lowercase "art:" slipped past cleanup; SDK line 7). File exists only in Bibber Art/fx/fxsovietsicklefp.xml (excluded from build input) -> expected missing-file Error, like the earlier ART-all failures. Also a duplicated <Include type="all" source="DATA:GlobalData/GlobalDefines.xml"/> in the same Includes (harmless but untidy).
+ Minimal fix: remove that art: type=all include (and duplicate GlobalDefines); nothing else.
+ART instance refs (new): EX_Headlights.w3x (Surveyor, Sickle), EXTnkTrack.xml (Surveyor; Bullfrog already) - Bibber-Art-only/unshipped, same existing risk class.
+Planning review: batch14_todo_internal.md lists only this 4-unit group and wrongly says "Mod.xml unchanged (49 all)"; soviet_items_full.txt says "5.5 total: 3 items" - clearly NOT complete coverage of doc 5.5 Soviet section (dozens of rows: L699-L9xx incl. infantry build times L899, Stingray land speed/TeslaNova L855, Dreadnought, Akula, Twinblade/Kirov/Badger, Ivan, etc). "All Soviet vehicles done" is overstated.
+Suggested next small group (doc text, not done): (a) L860-861 Akula SovietAntiNavyShipTech2 BuildTime 20->15; (b) L866-867 Dreadnought SovietAntiStructureShip BuildTime 30->20 + Weapon SovietAntiStructureShipV4Rocket ClipReloadTime 4.5/5.5 -> 2.5/3.5 (Weapon.xml already in pack). Then (c) L896 Twinblade BuildTime 15->12 (full SDK object, keep KillPassengersOnDeath true - air passengers undecided) and Kirov SovietBomberAircraft cost 2500->2000, BuildTime 25->20. Hold #28 (rapid-launch 600%, damage-halving) and Badger buildable for separate batch.
+Native plan (after fixed Batch14 passes; PC online): new Mods\RA3_V2.0_Batch14Fix, separate logs, same BAB cmd (absolute data\Mod.xml, /od /iod SDK builtmods), pass = exit0 & 0 Error/Critical/Warning/Unknown, manifests unchanged; report exact ART missing list (no adding Bibber art without approval); one path-only retry. Until then Batch13_FIX is the candidate.
