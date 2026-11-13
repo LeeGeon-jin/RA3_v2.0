@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="us-ascii"?>
+<AssetDeclaration xmlns="uri:ea.com:eala:asset" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xai="uri:ea.com:eala:asset:instance">
+	<!-- r20 (2026-11-14): buildable Heart of the Kremlin = Empire mission 8 (Moscow) objective KR_HeartBuilding (worldbuilder object).
+	     Soviet Battle Lab menu, requires Soviet Battle Lab, $2000, 30s (StructureUnpack, same as Cloning Center), no power.
+	     Model / health / geometry / destruction = original KR_HeartBuilding. Art exported from worldbuilder data into SDK Art (PC only). -->
+	<Tags></Tags>
+	<Includes>
+		<Include type="all" source="ART:KR_HeartBuilding.w3x" />
+		<Include type="all" source="ART:KR_HeartBuilding.xml" />
+		<Include type="all" source="ART:KR_HeartBuilding_NRM.xml" />
+		<Include type="all" source="ART:KR_HeartBuilding_SPM.xml" />
+		<Include type="instance" source="DATA:BaseObjects/BaseCivilianStructureNoGarrisonDestructible.xml" />
+		<Include type="instance" source="DATA:Civilian/Yucatan_YU/Props/YU_HotelDebris.xml" />
+		<Include type="instance" source="DATA:Civilian/Kremlin_KR/Props/KR_HeartBuilding_Collapse.xml" />
+		<Include type="all" source="DATA:GlobalData/GlobalDefines.xml" />
+	</Includes>
+	<GameObject
+		id="SovietKremlinHeartBuildable"
+		Description="Desc:SovietKremlinHeartBuildable"
+		TypeDescription="Type:SovietKremlinHeartBuildable"
+		inheritFrom="BaseCivilianStructureNoGarrisonDestructible"
+		EditorName="SovietKremlinHeartBuildable"
+		KindOf="-NOT_AUTOACQUIRABLE +AUTO_ACQUIRABLE_BY_AI -AUTO_RALLYPOINT -CIVILIAN_BUILDING +AIRCRAFT_PATH_AROUND"
+		EditorSorting="STRUCTURE"
+		Browser="REGION Kremlin_KR STRUCTURE"
+		SelectPortrait="Portrait_TheHeartBuilding"
+		ButtonImage="Button_TheHeartBuilding"
+		Side="Soviet"
+		BuildTime="0"
+		EnergyProduction="0"
+		ProductionQueueType="OTHER_STRUCTURE"
+		BuildPlacementTypeFlag="OTHER_STRUCTURE">
+		<DisplayName xai:joinAction="Replace" xmlns:xai="uri:ea.com:eala:asset:instance">Name:SovietKremlinHeartBuildable</DisplayName>
+		<GameDependency>
+			<RequiredObject>SovietTechStructure</RequiredObject>
+		</GameDependency>
+		<ObjectResourceInfo>
+			<BuildCost Account="=$ACCOUNT_ORE" Amount="2000"/>
+		</ObjectResourceInfo>
+		<ArmorSet
+			id="DefaultArmor"
+			Armor="StructureArmor"
+			DamageFX="GenericStructureDamageFX" />
+		<ArmorSet
+			Armor="CryoBeamFrozenArmor"
+			DamageFX="VehicleDamageFX"
+			Conditions="SECONDARY_DAMAGE"/>
+		<Draws>
+			<ScriptedModelDraw
+				id="ModuleTag_Draw"
+				OkToChangeModelColor="true"
+				ExtraPublicBone="BONE_CONTACT_POINT_01 BONE_CONTACT_POINT_02 BONE_CONTACT_POINT_03 BONE_CONTACT_POINT_04 BONE_CONTACT_POINT_05 BONE_CONTACT_POINT_06 BONE_CONTACT_POINT_07 BONE_CONTACT_POINT_08 BONE_CONTACT_POINT_09 BONE_CONTACT_POINT_10 BONE_CONTACT_POINT_11 BONE_CONTACT_POINT_12 BONE_CONTACT_POINT_13 BONE_CONTACT_POINT_14 BONE_CONTACT_POINT_15 BONE_CONTACT_POINT_16 BONE_CONTACT_POINT_17 BONE_CONTACT_POINT_18 BONE_CONTACT_POINT_19 BONE_CONTACT_POINT_20">
+				<ModelConditionState
+					ParseCondStateType="PARSE_DEFAULT">
+					<Model
+						Name="KR_HeartBuilding" />
+				</ModelConditionState>
+			</ScriptedModelDraw>
+		</Draws>
+		<Behaviors>
+			<Physics
+				id="ModuleTag_Physics"/>
+			<BuildingDestructionBehavior
+				id="ModuleTag_BuildingDestruction">
+				<DieMuxData
+					DeathTypes="ALL" />
+				<Item
+					BonePrefix="BONE_CONTACT_POINT_"
+					FX="FX_BuildingDebrisExplosion"
+					CreationObject="YU_HotelDebris"
+					FlingVelocity="100.0"/>
+			</BuildingDestructionBehavior>
+			<FXListBehavior
+				xai:joinAction="Replace" xmlns:xai="uri:ea.com:eala:asset:instance" id="ModuleTag_FXList">
+				<DieMuxData
+					DeathTypes="ALL" />
+				<Event
+					Index="onDeath"
+					FX="FX_Civ_Explosion_Large" />
+				<Event Index="onDeath" FX="FX_Audio_RA3ExtraLargeBuildingDie" />
+			</FXListBehavior>
+			<CreateObjectDie
+				id="ModuleTag_CreateObjectDie"
+				CreationList="SovietKremlinHeart_Die_OCL">
+				<DieMuxData
+					DeathTypes="ALL" />
+			</CreateObjectDie>
+			<DestroyDie
+				id="ModuleTag_DestroyDie">
+				<DieMuxData
+					DeathTypes="ALL" />
+			</DestroyDie>
+			<StructureUnpackUpdate
+				id="ModuleTag_StructureUnpack"
+				UnpackTime="30s" />
+		</Behaviors>
+		<AI>
+			<AIUpdate id="ModuleTag_AI" AutoAcquireEnemiesWhenIdle="NO" />
+		</AI>
+		<Body>
+			<ActiveBody
+				id="DefaultBody"
+				MaxHealth="=$CIV_HEALTH_MEDIUM" />
+		</Body>
+		<Geometry
+			IsSmall="false">
+			<Shape
+				Type="BOX"
+				MajorRadius="72.3996"
+				MinorRadius="116.247"
+				Height="322.177"
+				ContactPointGeneration="STRUCTURE">
+				<Offset
+					x="0.823669"
+					y="-2.39964"
+					z="0.0" />
+			</Shape>
+		</Geometry>
+		<AudioArraySound>
+			<AudioEntry Sound="BuildingUnderConstructionLoop" AudioType="soundUnderConstruction" />
+			<AudioEntry Sound="HumanFaction_MediumBuilding_LightDamageMS" AudioType="soundOnDamaged" />
+			<AudioEntry Sound="HumanFaction_MediumBuilding_HeavyDamageMS" AudioType="soundOnReallyDamaged" />
+		</AudioArraySound>
+		<EvaEventArray xai:joinAction="Replace" xmlns:xai="uri:ea.com:eala:asset:instance">
+			<EvaEntry EvaEvent="BuildingConstructionStarted" EvaType="productionStarted" />
+			<EvaEntry EvaEvent="BuildingConstructionComplete" EvaType="productionComplete" />
+			<EvaEntry EvaEvent="StructureUnderAttack" EvaType="damagedOwner" />
+			<EvaEntry EvaEvent="AllyStructureUnderAttack" EvaType="damagedAlly" />
+			<EvaEntry EvaEvent="StructureSold" EvaType="soldOwner" />
+			<EvaEntry EvaEvent="StructureRepairing" EvaType="repairingOwner" />
+			<EvaEntry EvaEvent="EnemyCampSighted" EvaType="enemyObjectSighted" />
+			<EvaEntry EvaEvent="NewConstructionOptions" EvaType="availableForProduction" />
+			<EvaEntry EvaEvent="StructurePlacementFailed" EvaType="placementFailed" />
+			<EvaEntry EvaEvent="StructureCannotBuildDueToFullBuildQueue" EvaType="cannotBuildDueToFullBuildQueue" />
+			<EvaEntry EvaEvent="BuildOnHold" EvaType="buildOnHold" />
+			<EvaEntry EvaEvent="BuildCancelled" EvaType="buildCancelled" />
+			<EvaEntry EvaEvent="BuildingManuallyPoweredDown" EvaType="manuallyPoweredOff" />
+			<EvaEntry EvaEvent="BuildingManuallyPoweredUp" EvaType="manuallyPoweredOn" />
+		</EvaEventArray>
+	</GameObject>
+
+	<!-- own OCL id so the worldbuilder KR_HeartBuilding_Die_OCL is not shadowed -->
+	<ObjectCreationList
+		id="SovietKremlinHeart_Die_OCL">
+		<CreateObject
+			Options="IGNORE_ALL_OBJECTS"
+			Disposition="LIKE_EXISTING RANDOM_FORCE"
+			Count="1"
+			MinForceMagnitude="1.0"
+			MaxForceMagnitude="2.0"
+			MinForcePitch="90d"
+			MaxForcePitch="75d">
+			<CreateObject>KR_HeartBuilding_Collapse</CreateObject>
+		</CreateObject>
+	</ObjectCreationList>
+</AssetDeclaration>

@@ -9322,25 +9322,29 @@ Flags="NOT_ATTRACTED_BY_MAGNETS"
 	     the blast itself comes from the death weapon so it is identical on attack and on death. -->
 	<WeaponTemplate
 		id="SovietDemolitionTruckDetonateWeapon"
-		AttackRange="25.0"
+		AttackRange="30.0"
 		ClipSize="1"
 		AcceptableAimDelta="180d"
 		CanFireWhileMoving="true"
-		RadiusDamageAffects="SELF"
+		RadiusDamageAffects="ENEMIES NEUTRALS SELF"
 		Flags="NOT_ATTRACTED_BY_MAGNETS"
 		RequiredAntiMask="ANTI_GROUND ANTI_STRUCTURE ANTI_WATER">
+		<!-- r20 fix: r16/r19 weapon did no damage to the target (first nugget Damage=0, second nugget filtered to SELF only), so the engine rated the weapon
+		     as useless against any target and never fired it -> truck drove up and did nothing. Now (vanilla kamikaze pattern, JapanNavalScoutShipKamikazeAttackWarhead /
+		     JapanCommandoTech1AirplaneCrashWeapon): nugget 1 = 1 point of real damage on the contacted target (makes the weapon valid / fireable),
+		     nugget 2 = Radius 0 OnlyKillOwnerWhenTriggered -> the truck's own health drops to zero on contact; its FireWeaponWhenDead then fires
+		     SovietDemolitionTruckDeathWeapon (medium time bomb 1000 / r200 + Desolator fallout). -->
 		<Nuggets>
+			<DamageNugget
+				Damage="1.0"
+				Radius="0.0"
+				DamageType="EXPLOSIVE"
+				DeathType="NORMAL" />
 			<DamageNugget
 				Radius="0"
 				OnlyKillOwnerWhenTriggered="true"
 				DamageType="UNRESISTABLE"
 				DamageFXType="JAPAN_CANNON"
-				DeathType="SUICIDED" />
-			<!-- r19: the Radius=0 nugget above lands on the target, not on the truck, so the truck never died. This self-only blast (RadiusDamageAffects=SELF) kills the truck at the target; its FireWeaponWhenDead then fires the medium time bomb + Desolator field -->
-			<DamageNugget
-				Damage="100000.0"
-				Radius="400.0"
-				DamageType="UNRESISTABLE"
 				DeathType="SUICIDED" />
 		</Nuggets>
 	</WeaponTemplate>

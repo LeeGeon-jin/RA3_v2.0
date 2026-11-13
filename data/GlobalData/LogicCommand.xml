@@ -113,6 +113,12 @@
 		Type="CONSTRUCTION_YARD_CONSTRUCT">
 		<Object>SovietGreatKremlinPalaceBuildable</Object>
 	</LogicCommand>
+	<!-- r20: Heart of the Kremlin (Empire mission 8 objective), Battle Lab menu -->
+	<LogicCommand
+		id="Command_ConstructSovietKremlinHeart"
+		Type="CONSTRUCTION_YARD_CONSTRUCT">
+		<Object>SovietKremlinHeartBuildable</Object>
+	</LogicCommand>
 	<LogicCommand
 		id="Command_ConstructJapanStatueGuard01"
 		Type="CONSTRUCTION_YARD_CONSTRUCT">

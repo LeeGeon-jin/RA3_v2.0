@@ -412,7 +412,7 @@
 		HealthBoxHeightOffset="30"
 		BuildTime="10"
 		CommandSet="AlliedAntiInfantryVehicleCommandSet"
-		KindOf="SELECTABLE CAN_ATTACK CAN_CAST_REFLECTIONS SCORE VEHICLE CAN_BE_FAVORITE_UNIT TRANSPORT AMPHIBIOUS GARRISON"
+		KindOf="SELECTABLE CAN_ATTACK CAN_CAST_REFLECTIONS SCORE VEHICLE CAN_BE_FAVORITE_UNIT TRANSPORT AMPHIBIOUS"
 		RadarPriority="UNIT"
 		ProductionQueueType="VEHICLE"
 		UnitCategory="VEHICLE"
@@ -440,7 +440,8 @@
 			Condition="NORMAL"
 			Speed="90.0" />
 		<SkirmishAIInformation
-			UnitBuilderStandardCombatUnit="true" />
+			UnitBuilderStandardCombatUnit="true"
+			ContainedMembersProvideWeapon="true" />
 		<Draws>
 			<TruckDraw
 				id="ModuleTag_Draw"
@@ -598,14 +599,7 @@
 		<Behaviors>
 			<WeaponSetUpdate
 				id="ModuleTag_WeaponSetUpdate">
-				<!-- r18 Battle Fortress: full-map no-damage dummy, only while occupied (prevents the RA3 force-attack-out-of-range crash of fire-out containers) -->
-				<WeaponSlotHardpoint
-					ID="3">
-					<Weapon
-						Ordering="PRIMARY_WEAPON"
-						Template="AlliedBattleFortressContainerDummy"
-						ObjectStatus="CONTAINER_OCCUPIED" />
-				</WeaponSlotHardpoint>
+				<!-- r20: r18 full-map zero-damage dummy slot removed (it was picked as the attack weapon while occupied, so the fortress "attacked" from anywhere with no effect) -->
 				<WeaponSlotTurret
 					ID="1">
 					<Weapon
@@ -655,6 +649,43 @@
 							IdleScanDelay="=$FAST_IDLE_SCAN_DELAY"/>
 					</TurretSettings>
 				</WeaponSlotTurret>
+				<!-- r20 Battle Fortress: Multigunner IFV rider weapons (same AAAVT1_* weapons and Uprade_IFV_* upgrades, granted by the IFV SecondaryObjectListener below).
+				     Slots 1/2 (Riptide chaingun / torpedoes) are untouched and always active. One slot per weapon group so different passenger types fire together. -->
+				<WeaponSlotHardpoint
+					ID="3"
+					AutoChooseWeapon="false">
+					<Weapon Template="AAAVT1_AlliedAntiVehicleInfantryMissileLauncher" Upgrade="Uprade_IFV_MissleTrooper" Ordering="PRIMARY_WEAPON"/>
+					<Weapon Template="AAAVT1_SovietAntiVehicleFlakLauncher" Upgrade="Uprade_IFV_FlakTrooper" Ordering="SECONDARY_WEAPON"/>
+					<Weapon Template="AAAVT1_JapanAntiVehicleInfantryPlasmaBazooka" Upgrade="Uprade_IFV_PlasmaBazooka" Ordering="TERTIARY_WEAPON"/>
+				</WeaponSlotHardpoint>
+				<WeaponSlotHardpoint
+					ID="4"
+					AutoChooseWeapon="false">
+					<Weapon Template="AAAVT1_MachineGun" Upgrade="Uprade_IFV_MachineGun" Ordering="PRIMARY_WEAPON"/>
+					<Weapon Template="AAAVT1_JapanMachineGun" Upgrade="Uprade_IFV_JapanMachineGun" Ordering="SECONDARY_WEAPON"/>
+					<Weapon Template="AAAVT1_ShotgunWeapon" Upgrade="Uprade_IFV_Shotgun" Ordering="TERTIARY_WEAPON"/>
+				</WeaponSlotHardpoint>
+				<WeaponSlotHardpoint
+					ID="5"
+					AutoChooseWeapon="false">
+					<Weapon Template="AAAVT1_PistolWeapon" Upgrade="Uprade_IFV_GoldenGun" Ordering="PRIMARY_WEAPON"/>
+					<Weapon Template="AAAVT1_CommandoPistolWeapon" Upgrade="Uprade_IFV_Pistol" Ordering="SECONDARY_WEAPON"/>
+					<Weapon Template="AAAVT1_SovietCommandoSniperRifle" Upgrade="Uprade_IFV_SovietCommando" Ordering="TERTIARY_WEAPON"/>
+					<Weapon Template="AAAVT1_JapanInfiltrationShiruken" Upgrade="Uprade_IFV_Shuriken" Ordering="QUATERNARY_WEAPON"/>
+				</WeaponSlotHardpoint>
+				<WeaponSlotHardpoint
+					ID="6"
+					AutoChooseWeapon="false">
+					<Weapon Template="AAAVT1_SovietHeavyAntiVehicleInfantryTeslaGun" Upgrade="Uprade_IFV_TeslaTrooper" Ordering="PRIMARY_WEAPON"/>
+					<Weapon Template="AAAVT1_RoarWeapon" Upgrade="Uprade_IFV_Roar" Ordering="SECONDARY_WEAPON"/>
+					<Weapon Template="AAAVT1_RepairWeapon" Upgrade="Uprade_IFV_Repair" Ordering="TERTIARY_WEAPON"/>
+				</WeaponSlotHardpoint>
+				<WeaponSlotHardpoint
+					ID="7"
+					AutoChooseWeapon="false">
+					<Weapon Template="AAAVT1_JapanCommandoTech1PsyonicCrush" Upgrade="Uprade_IFV_PsyonicCrush" Ordering="PRIMARY_WEAPON"/>
+					<Weapon Template="AAAVT1_JapanCommandoTech1PsyonicAntiAirCrush" Upgrade="Uprade_IFV_PsyonicCrush" Ordering="SECONDARY_WEAPON"/>
+				</WeaponSlotHardpoint>
 			</WeaponSetUpdate>
 			<Physics
 				id="ModuleTag_Physics" />
@@ -682,12 +713,11 @@
 				StatusToSet="WEAPON_UPGRADED_01">
 				<TriggeredBy>Upgrade_Veterancy_HEROIC</TriggeredBy>
 			</StatusBitsUpgrade>
-			<!-- r19 Battle Fortress: passengers fire out. r18 HordeTransportContain + CAN_ATTACK did not work (transport contain never runs the garrison fire AI).
-			     Now a mobile garrison (GarrisonContain MobileGarrison=true, same contain type the Soviet Battle Bunker uses for fire-out) -->
-			<GarrisonContain
+			<!-- r20 Battle Fortress: back to the Riptide TransportContain (5 infantry). r19 GarrisonContain MobileGarrison (not used by any vanilla unit) is dropped;
+			     passengers now give the fortress IFV-style weapons instead of firing out themselves. -->
+			<TransportContain
 				id="ModuleTag_Contain"
-				MobileGarrison="true"
-				ObjectStatusOfContained="ENCLOSED UNSELECTABLE CAN_ATTACK"
+				ObjectStatusOfContained="UNSELECTABLE ENCLOSED NO_ATTACK"
 				ContainMax="5"
 				AllowEnemiesInside="false"
 				AllowAlliesInside="true"
@@ -696,7 +726,8 @@
 				ShowPips="true"
 				EnterSound="VehicleEnter"
 				ExitSound="VehicleExit"
-				KillPassengersOnDeath="false">
+				KillPassengersOnDeath="false"
+				ConditionForEntry="INVALID">
 				<PassengerFilter
 					Rule="ANY"
 					Include="INFANTRY" />
@@ -705,10 +736,36 @@
 				<PassengerData
 					BonePrefix="NONE">
 					<Filter
-						Rule="ANY"
+						Rule="NONE"
 						Include="INFANTRY" />
 				</PassengerData>
-			</GarrisonContain>			
+			</TransportContain>
+			<!-- r20: IFV helper modules (copied from AlliedAntiAirVehicleTech1): laser state for the plasma bazooka, tracer / repair status bits, psionic lift -->
+			<LaserState
+				id="ModuleTag_LaserState"
+				LaserId="1" />
+			<StatusBitsUpgrade
+				id="ModuleTag_BF_TracerUpgrade"
+				StatusToSet="ENABLE_TRACER_DRAW">
+				<TriggeredBy>Uprade_IFV_MachineGun</TriggeredBy>
+				<TriggeredBy>Uprade_IFV_JapanMachineGun</TriggeredBy>
+			</StatusBitsUpgrade>
+			<StatusBitsUpgrade
+				id="ModuleTag_BF_RepairUpgrade"
+				StatusToSet="REPAIR_ALLIES_WHEN_IDLE">
+				<TriggeredBy>Uprade_IFV_Repair</TriggeredBy>
+			</StatusBitsUpgrade>
+			<LiftObjectUpdate
+				id="ModuleTag_PsyonicCrushLiftUpdate"
+				CrusherModifiesVelocity="false"
+				LiftVelocity="4.0"
+				MaxElevationFromGround="200.0"
+				TimeIncrement="0.5s"
+				MaxTimeLifted="8.0s"
+				MaxStructureShakeVelocity="0.25"
+				AirplaneCrashWeapon="JapanCommandoTech1AirplaneCrashWeapon" />
+			<xi:include
+				href="DATA:Includes/InfantryFighting/IF_SecondaryObjectListener.xml" />			
 		</Behaviors>
 		<AI>
 			<AIUpdate

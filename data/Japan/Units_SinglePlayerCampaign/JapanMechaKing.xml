@@ -1011,14 +1011,7 @@
 				RefreshDelay="0.5s"
 				AllowSelf="true">				
 			</AttributeModifierAuraUpdate>
-		<!-- r19: Shogun Executioner boot-up lock, 30s after the core unpacks -->
-			<FireWeaponUpdate
-				id="ModuleTag_MechaKingBootLock">
-				<FireWeaponNugget
-					WeaponName="JapanMechaKingBootLockWeapon"
-					FireDelay="0.1s"
-					OneShot="true" />
-			</FireWeaponUpdate>
+		<!-- r20: r19 30s boot-up lock removed (user 2026-11-14): the Shogun Executioner is operational immediately after the core unpacks -->
 		</Behaviors>		<AI>
 			<AIUpdate
 				id="ModuleTag_AI"
@@ -1129,21 +1122,5 @@
 		Category="NONE"
 		ObjectStatusToSet="NO_SQUISHCOLLIDE_DELAY">		
 	</AttributeModifier>
-	<!-- r19: Shogun Executioner cannot move/attack for 30s after unpacking -->
-	<WeaponTemplate
-		id="JapanMechaKingBootLockWeapon"
-		RadiusDamageAffects="SELF"
-		AttackRange="10.0">
-		<Nuggets>
-			<AttributeModifierNugget
-				AttributeModifierOwnerName="AttributeModifier_MechaKingBootLock"
-				Radius="0" />
-		</Nuggets>
-	</WeaponTemplate>
 
-	<AttributeModifier
-		id="AttributeModifier_MechaKingBootLock"
-		Category="NONE"
-		ObjectStatusToSet="IMMOBILE NO_ATTACK NO_AUTO_ACQUIRE NO_SPECIAL_ABILITY"
-		Duration="30s" />
 </AssetDeclaration>

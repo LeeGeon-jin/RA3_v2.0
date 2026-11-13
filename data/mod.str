@@ -155,7 +155,7 @@ Type:SovietDemolitionTruck
 END
 
 Desc:SovietDemolitionTruck
-"Suicide truck that rams enemies. Explodes on attack and on death with the force of a medium time bomb and leaves a radioactive fallout zone (Desolator Airstrike level 1). Ability: 1.5x speed boost for 5s (10s cooldown). Requires a Super Reactor."
+"Suicide truck built on an Ore Collector chassis (cannot harvest ore). Drives into its target and detonates on contact, and also explodes when destroyed, with the force of a medium time bomb, leaving a radioactive fallout zone (Desolator Airstrike level 1). Same speed as the Ore Collector. Ability: 1.5x speed boost for 5s (10s cooldown). Requires a Super Reactor."
 END
 
 Name:SpySatellite
@@ -179,7 +179,7 @@ Type:AlliedBattleFortress
 END
 
 Desc:AlliedBattleFortress
-"Heavily armored amphibious assault transport built on the Riptide ACV hull. Carries up to 5 infantry who can fire from inside, even while it moves. Twice the armor of a Riptide ACV. Built at the War Factory."
+"Heavily armored amphibious assault transport built on the Riptide ACV hull. Keeps the Riptide machine gun and torpedoes. Carries up to 5 infantry; like the Multigunner IFV, passengers add their own weapons to the fortress. Twice the armor of a Riptide ACV. Built at the War Factory."
 END
 
 Desc:AlliedMarine1_Buildable
@@ -252,4 +252,16 @@ END
 
 Name:JapanMechaKingCore
 "Shogun Executioner Core"
+END
+
+Name:SovietKremlinHeartBuildable
+"Heart of the Kremlin"
+END
+
+Type:SovietKremlinHeartBuildable
+"Landmark"
+END
+
+Desc:SovietKremlinHeartBuildable
+"The Heart of the Kremlin from the Moscow battle, rebuilt for the Soviet Union. Monument with no weapons. Requires a Battle Lab. Uses no power."
 END

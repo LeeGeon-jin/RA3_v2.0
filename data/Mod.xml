@@ -148,6 +148,7 @@
 		<Include type="all" source="DATA:Soviet/Structures/SovietAirfield.xml" />
 		<Include type="all" source="DATA:Soviet/Structures/SovietHeroesStatue.xml" />
 		<Include type="all" source="DATA:Soviet/Structures/SovietGreatKremlinPalace.xml" />
+		<Include type="all" source="DATA:Soviet/Structures/SovietKremlinHeart.xml" />
 		<Include type="all" source="DATA:Soviet/Structures/SovietCloningCenter.xml" />
 		<Include type="all" source="DATA:Civilian/Geneva_GE/Props/GE_SovietVIPBunkerSubStructure_Collapse.xml" />
 		<Include type="all" source="DATA:Japan/Structures/JapanBarracks.xml" />

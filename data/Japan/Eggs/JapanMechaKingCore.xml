@@ -16,7 +16,7 @@
 		ButtonImage="Button_JapanMechaKing"
 		Side="Japan"
 		ProductionQueueType="VEHICLE"
-		BuildTime="5"
+		BuildTime="30"
 		CommandSet="JapanMechaKingCoreCommandSet"
 		KindOf="SELECTABLE CAN_CAST_REFLECTIONS VEHICLE FS_FACTORY EXPANSION_UNIT CAN_BE_FAVORITE_UNIT IGNORES_SELECT_ALL CYCLE_SELECTION AMPHIBIOUS SCORE"
 		PlacementViewAngle="225d"
@@ -202,11 +202,12 @@
 			<xi:include
 				href="DATA:Includes/GenericPackPower.xml" />
 
+			<!-- r20: build time 5s -> 30s; F unpack 30s -> 3s (same as the vanilla Imperial cores) so F turns it straight into the Shogun Executioner -->
 			<ReplaceSelfSpecialAbility
 				id="ModuleTag_ReplaceSelf"
 				SpecialPowerTemplate="SpecialPower_PackReplaceSelf"
 				Options="IGNORE_FACING_CHECK"
-				PackTime="30.0s"
+				PackTime="3.0s"
 				StartAbilityRange="2.0"
 				ReplaceOptions="COPY_UPGRADES DISABLE_DURING_REPLACE CLEAR_LOCATION">
 				<ReplacementTemplate>JapanMechaKing</ReplacementTemplate>

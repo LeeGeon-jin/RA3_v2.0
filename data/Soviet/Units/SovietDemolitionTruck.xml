@@ -1,16 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <AssetDeclaration xmlns="uri:ea.com:eala:asset" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xi="http://www.w3.org/2001/XInclude">
-	<!-- r16: Soviet Demolition Truck. Model = vanilla Japan Sudden Transport (JULightTransportVehicle, also used by the campaign JapanOdessaSpecialTransportVehicle).
-	     Art is included as type="reference" (same as the vanilla campaign object), so nothing is compiled into the mod and no vanilla asset is shadowed. -->
+	<!-- r16: Soviet Demolition Truck. r20: model / textures / portrait / button = vanilla Soviet Ore Collector (SovietMiner, SUHarvester).
+	     It is NOT a harvester: inherits BaseVehicle (not BaseMiner), no HARVESTER KindOf, no OreMinerBehavior / dock AI, own command set (attack + sprint only). -->
 	<Tags></Tags>
 	<Includes>
 		<Include type="all" source="DATA:GlobalData/GlobalDefines.xml" />
-		<Include
-			type="reference"
-			source="ART:JULightTransportVehicle.w3x" />
-		<Include
-			type="reference"
-			source="ART:JULightTransportVehicle_02_D.xml" />
+		<!-- r20: model = vanilla Soviet Ore Collector (SUHarvester). Art is already in the vanilla streams -> reference only, nothing compiled into the mod. -->
+		<Include type="reference" source="ART:SUHarvester_SKN.w3x" />
+		<Include type="reference" source="ART:SUHarvester_D.xml" />
+		<Include type="reference" source="ART:SUHarvester_IDLA.w3x" />
+		<Include type="reference" source="ART:SUHarvester_MOVA.w3x" />
+		<Include type="reference" source="ART:SUHarvester_WIDL.w3x" />
+		<Include type="reference" source="ART:SUHarvester_WMOV.w3x" />
+		<Include type="reference" source="ART:SUHarvester_WTRA.w3x" />
 		<Include
 			type="instance"
 			source="DATA:BaseObjects/BaseVehicle.xml" />
@@ -18,8 +20,8 @@
 	<GameObject
 		id="SovietDemolitionTruck"
 		inheritFrom="BaseVehicle"
-		SelectPortrait="Portrait_JapanLightTransportVehicle"
-		ButtonImage="Button_JapanLightTransportVehicle"
+		SelectPortrait="Portrait_SovietHarvester_big"
+		ButtonImage="Button_SovietHarvester_small"
 		Side="Soviet"
 		SubGroupPriority="20"
 		EditorSorting="UNIT"
@@ -34,7 +36,7 @@
 		EditorName="SovietDemolitionTruck"
 		Description="Desc:SovietDemolitionTruck"
 		TypeDescription="Type:SovietDemolitionTruck"
-		HealthBoxHeightOffset="35">
+		HealthBoxHeightOffset="15">
 		<DisplayName
 			xai:joinAction="Replace" xmlns:xai="uri:ea.com:eala:asset:instance">Name:SovietDemolitionTruck</DisplayName>
 		<GameDependency>
@@ -46,37 +48,39 @@
 		<ArmorSet
 			Armor="JapanLightTransportVehicleArmor"
 			DamageFX="VehicleDamageFX" />
+		<!-- r20: same locomotors and speed as the mod Ore Collector (SovietMiner 75 on land and water); F sprint = x1.5 (AttributeModifier_JapanYariSprint SPEED 150%) -->
 		<LocomotorSet
-			Locomotor="JapanLightTransportVehicleLocomotor"
+			Locomotor="TestReactiveLocomotorTANK"
 			Condition="NORMAL"
-			Speed="58.0" />
+			Speed="75.0" />
 		<LocomotorSet
-			Locomotor="JapanLightTransportVehicle_WaterLocomotor"
+			Locomotor="SovietMinerWaterLocomotor"
 			Condition="NORMAL"
-			Speed="58.0" />
+			Speed="75.0" />
 		<SkirmishAIInformation
 			UnitBuilderStandardCombatUnit="true" />
 		<Draws>
+			<!-- r20: Ore Collector truck draw (vanilla SovietMiner ModuleTag_Draw), without the ore / armour sub-draws -->
 			<TruckDraw
 				id="ModuleTag_Draw"
 				OkToChangeModelColor="true"
-				TrackMarksOnlyWhenCorneringQuickly="true"
-				TrackMarksLeftBone="Bone_TireLR"
-				TrackMarksRightBone="Bone_TireRR"
-				LeftFrontTireBone="Bone_TireLF"
-				RightFrontTireBone="Bone_TireRF"
-				MidLeftRearTireBone="Bone_TireLR"
-				MidRightRearTireBone="Bone_TireRR"
-				LeftRearTireBone="Bone_TireLR1"
-				RightRearTireBone="Bone_TireRR1"
+				TrackMarks="EXTnkTrack"
+				TrackMarksOnlyWhenCorneringQuickly="false"
+				TrackMarksLeftBone="Bone_Tire_L_03"
+				TrackMarksRightBone="Bone_Tire_R_03"
+				LeftFrontTireBone="Bone_Tire_L_01"
+				RightFrontTireBone="Bone_Tire_R_01"
+				MidLeftRearTireBone="Bone_Tire_L_02"
+				MidRightRearTireBone="Bone_Tire_R_02"
+				LeftRearTireBone="Bone_Tire_L_03"
+				RightRearTireBone="Bone_Tire_R_03"
 				TireRotationMultiplier="0.2"
-				PowerslideRotationAddition="1.25"
-				ExtraPublicBone="FXWeapon">
-				<TreadTerrainParticles>DefaultTankTerrainParticleMapping</TreadTerrainParticles>
+				PowerslideRotationAddition="1.25">
+				<TreadTerrainParticles>AmphibiousTankTerrainParticleMapping</TreadTerrainParticles>
 				<ModelConditionState
 					ParseCondStateType="PARSE_DEFAULT">
 					<Model
-						Name="JULightTransportVehicle" />
+						Name="SUHarvester_SKN" />
 					<WeaponFireFXBone
 						WeaponSlotID="1"
 						WeaponSlotType="PRIMARY_WEAPON"
@@ -88,37 +92,110 @@
 				</ModelConditionState>
 				<ModelConditionState
 					ParseCondStateType="PARSE_NORMAL"
-					ConditionsYes="FORMATION_PREVIEW">
-					<Model
-						Name="JULightTransportVehicle" />
-				</ModelConditionState>
-				<ModelConditionState
-					ParseCondStateType="PARSE_NORMAL"
 					ConditionsYes="DAMAGED">
 					<Model
-						Name="JULightTransportVehicle" />
+						Name="SUHarvester_SKN" />
+					<Texture
+						Original="SUHarvester"
+						New="SUHarvester_D" />
 					<ParticleSysBone
-						BoneName="JAPANLIGHTTRANSPORTVEHICLE02"
-						FXParticleSystemTemplate="JapanVehicleDamagedSmoke"
+						BoneName="Bone_Tire_R_03"
+						FXParticleSystemTemplate="VehicleDamageSmoke"
 						FollowBone="true" />
 				</ModelConditionState>
 				<ModelConditionState
 					ParseCondStateType="PARSE_NORMAL"
+					RetainSubObjects="true"
 					ConditionsYes="REALLYDAMAGED">
 					<Model
-						Name="JULightTransportVehicle" />
+						Name="SUHarvester_SKN" />
 					<Texture
-						Original="JULightTransportVehicle_02"
-						New="JULightTransportVehicle_02_D" />
+						Original="SUHarvester"
+						New="SUHarvester_D" />
 					<ParticleSysBone
-						BoneName="JAPANLIGHTTRANSPORTVEHICLE02"
-						FXParticleSystemTemplate="JapanVehicleDamagedSmoke"
+						BoneName="Bone_Tire_R_03"
+						FXParticleSystemTemplate="VehicleDamageSmoke"
 						FollowBone="true" />
 					<ParticleSysBone
-						BoneName="JAPANLIGHTTRANSPORTVEHICLE02"
-						FXParticleSystemTemplate="JapanVehicleDamagedFire"
+						BoneName="Bone_Tire_R_03"
+						FXParticleSystemTemplate="VehicleDamageFire"
 						FollowBone="true" />
 				</ModelConditionState>
+				<ModelConditionState
+					ParseCondStateType="PARSE_NORMAL"
+					ConditionsYes="FORMATION_PREVIEW">
+					<Model
+						Name="SUHarvester_SKN" />
+				</ModelConditionState>
+				<AnimationState
+					ParseCondStateType="PARSE_DEFAULT"
+					StateName="STATE_OnLAND">
+					<Animation
+						AnimationName="SUHarvester_IDLA"
+						AnimationMode="LOOP"
+						AnimationBlendTime="15" />
+					<Script>
+						Prev = CurDrawablePrevAnimationState()
+						if Prev == "STATE_OnWater" and Prev ~= "TRANS_toLand" then CurDrawableSetTransitionAnimState("TRANS_toLand")	end
+					</Script>
+				</AnimationState>
+				<AnimationState
+					ParseCondStateType="PARSE_NORMAL"
+					ConditionsYes="MOVING OVER_WATER"
+					StateName="STATE_OnWater">
+					<Animation
+						AnimationName="SUHarvester_WMOV"
+						AnimationMode="LOOP"
+						AnimationBlendTime="15" />
+					<Script>
+						Prev = CurDrawablePrevAnimationState()
+						if Prev == "STATE_OnLAND" and Prev ~= "TRANS_" then CurDrawableSetTransitionAnimState("TRANS_toWater")	end
+					</Script>
+					<ParticleSysBone
+						BoneName="None"
+						FXParticleSystemTemplate="StingrayWaterWake"
+						FollowBone="false" />
+				</AnimationState>
+				<AnimationState
+					ParseCondStateType="PARSE_NORMAL"
+					ConditionsYes="MOVING"
+					StateName="STATE_OnLAND">
+					<Animation
+						AnimationName="SUHarvester_MOVA"
+						AnimationMode="LOOP" />
+					<Script>
+						Prev = CurDrawablePrevAnimationState()
+						if Prev == "STATE_OnWater" and Prev ~= "TRANS_toLand" then CurDrawableSetTransitionAnimState("TRANS_toLand")	end
+					</Script>
+				</AnimationState>
+				<AnimationState
+					ParseCondStateType="PARSE_NORMAL"
+					ConditionsYes="OVER_WATER"
+					StateName="STATE_OnWater">
+					<Animation
+						AnimationName="SUHarvester_WIDL"
+						AnimationMode="LOOP"
+						AnimationBlendTime="15" />
+					<Script>
+						Prev = CurDrawablePrevAnimationState()
+						if Prev == "STATE_OnLAND" and Prev ~= "TRANS_toWater" then CurDrawableSetTransitionAnimState("TRANS_toWater")	end
+					</Script>
+				</AnimationState>
+				<AnimationState
+					ParseCondStateType="PARSE_TRANSITION"
+					StateName="TRANS_toWater">
+					<Animation
+						AnimationName="SUHarvester_WTRA"
+						AnimationMode="ONCE"/>
+				</AnimationState>
+				<AnimationState
+					ParseCondStateType="PARSE_TRANSITION"
+					Flags="START_FRAME_LAST"
+					StateName="TRANS_toLand">
+					<Animation
+						AnimationName="SUHarvester_WTRA"
+						AnimationMode="ONCE_BACKWARDS" />
+				</AnimationState>
 			</TruckDraw>
 		</Draws>
 		<Behaviors>
@@ -151,7 +228,7 @@
 			</FireWeaponWhenDead>
 			<CreateObjectDie
 				id="ModuleTag_CreateObjectDie"
-				CreationList="JULightTransportVehicle_Die_OCL">
+				CreationList="SBMiner_Die_OCL">
 				<DieMuxData
 					DeathTypes="ALL" />
 			</CreateObjectDie>
@@ -177,12 +254,12 @@
 				Type="BOX"
 				MajorRadius="20.0"
 				MinorRadius="10.0"
-				Height="11.5"
+				Height="15.0"
 				ContactPointGeneration="VEHICLE" />
 		</Geometry>
 		<AudioArraySound>
 			<AudioEntry
-				Sound="AudioEvent:JAP_SuddenTransport_MoveStartLand"
+				Sound="SOV_OreCollector_MoveStart"
 				AudioType="soundMoveStart" />
 		</AudioArraySound>
 		<VisionInfo

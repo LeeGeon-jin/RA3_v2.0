@@ -1,0 +1,7 @@
+RA3_V2.0_Batch102FIX source snapshot r20 (2026-11-14 09:40 UTC+10).
+Content: mod data XML + mod.str only (same layout as repo data/): 202 XML + 1 mod.str. No EA art (w3x/dds/tga), no UI art, no built bigs/manifests. XML files only reference ART: names.
+Identical (MD5, all 203 files, list in ../pc_src_md5_r20.txt) to E:\RA3ModBuild\RA3ModSDK\Mods\RA3_V2.0_Batch102FIX\data on the PC (the 10 changed files were verified by MD5 after transfer).
+Status: compiled (BAB Critical 0 / Error 55 / Warning 359; +7 are benign SUHarvester art reference warnings) and installed 2026-11-14 09:31 UTC+10; .big 93,428,268 bytes MD5 3662709B6481263E911421B439E119C4; str 6,010 bytes MD5 8501D2B9FD68A02D3AF6618A0C762B9A. Direct-launcher start OK. Compile/launch success does NOT prove gameplay; in-game checks pending.
+r20 vs r19b changed files (10): SovietDemolitionTruck.xml, Weapon.xml, LogicCommandSet.xml, LogicCommand.xml, Mod.xml, JapanMechaKing.xml, JapanMechaKingCore.xml, AlliedAntiInfantryVehicle.xml, SovietKremlinHeart.xml (new), mod.str.
+Art-side r20 (PC only, not in this repo): exported KR_HeartBuilding (+_COL, 3 textures) from worldbuilder data into SDK Art\kr.
+r20b (2026-11-14 09:55 UTC+10): art-only fix (NUMarine1 rotor/body mesh flags in SDK Art\nu, PC only); no XML or mod.str change, this snapshot is still current.
