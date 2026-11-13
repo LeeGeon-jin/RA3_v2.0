@@ -343,7 +343,11 @@
 		id="JapanWaveForceTripleCannon"
 		inheritFrom="FI_FloatingFortressMainGun"
 		Side="Japan"
-		EditorName="JapanWaveForceTripleCannon">
+		EditorName="JapanWaveForceTripleCannon"
+		EnergyProduction="-75"
+		KindOf="+POWERED"
+		Description="Desc:JapanWaveForceTripleCannon"
+		TypeDescription="Type:JapanWaveForceTripleCannon">
 		<DisplayName xai:joinAction="Replace" xmlns:xai="uri:ea.com:eala:asset:instance">Name:JapanWaveForceTripleCannon</DisplayName>
 		<ObjectResourceInfo>
 			<BuildCost Account="=$ACCOUNT_ORE" Amount="2500"/>

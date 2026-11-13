@@ -25,7 +25,7 @@
 		TypeDescription="Type:JapanMechaKing"
 		HealthBoxHeightOffset="60"
 		UnitIntro="Japan_Nanocore_UnitIntro">		<DisplayName
-			xai:joinAction="Replace">Name:JapanMechaKing</DisplayName>		<ObjectResourceInfo>
+			xai:joinAction="Replace">Name:JapanMechaKingCore</DisplayName>		<ObjectResourceInfo>
 			<BuildCost Account="=$ACCOUNT_ORE" Amount="4000"/>
 		</ObjectResourceInfo>
 		<ArmorSet

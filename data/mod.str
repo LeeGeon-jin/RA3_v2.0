@@ -47,11 +47,11 @@ Desc:SovietSupportBomber_Buildable
 END
 
 Name:JapanEmperorMecha
-"Emperor Mecha"
+"Advanced King Oni"
 END
 
 Desc:JapanEmperorMecha
-"Imperial campaign mecha, now available in skirmish."
+"Advanced King Oni, the Empire's heaviest assault mecha. Can attack both ground and air targets."
 END
 
 Type:JapanEmperorMecha
@@ -59,7 +59,7 @@ Type:JapanEmperorMecha
 END
 
 Name:JapanMechaKing
-"Mecha King"
+"Shogun Executioner"
 END
 
 Desc:JapanMechaKing
@@ -184,4 +184,72 @@ END
 
 Desc:AlliedMarine1_Buildable
 "Presidential transport helicopter armed with prism weaponry. Can attack both air and ground targets. Carries up to 5 passengers."
+END
+
+Type:JapanWaveForceTripleCannon
+"Advanced Base Defense"
+END
+
+Desc:JapanWaveForceTripleCannon
+"Buildable copy of the Floating Fortress Wave-Force Tricannon. Heavy long-range triple-barrel base defense. Requires a Power Plant and a Nanotech Mainframe. Uses 75 power."
+END
+
+Type:JapanStatueGuard01Buildable
+"Monument"
+END
+
+Desc:JapanStatueGuard01Buildable
+"Buildable Imperial guardian statue. Decorative monument with no weapons. Uses no power."
+END
+
+Type:JapanStatueGuard02Buildable
+"Monument"
+END
+
+Desc:JapanStatueGuard02Buildable
+"Buildable Imperial guardian statue. Decorative monument with no weapons. Uses no power."
+END
+
+Type:JapanStatueGuard03Buildable
+"Monument"
+END
+
+Desc:JapanStatueGuard03Buildable
+"Buildable Imperial guardian statue. Decorative monument with no weapons. Uses no power."
+END
+
+Type:JapanEmperorFlagpoleStatueBuildable
+"Monument"
+END
+
+Desc:JapanEmperorFlagpoleStatueBuildable
+"Buildable statue of the Emperor with flagpoles. Decorative monument with no weapons. Uses no power."
+END
+
+Type:SovietHeroesStatueBuildable
+"Monument"
+END
+
+Desc:SovietHeroesStatueBuildable
+"Buildable Heroes of the Soviet Union statue. Decorative monument with no weapons. Uses no power."
+END
+
+Type:SovietGreatKremlinPalaceBuildable
+"Landmark"
+END
+
+Desc:SovietGreatKremlinPalaceBuildable
+"Buildable Great Kremlin Palace. Decorative landmark with no weapons. Uses no power."
+END
+
+Type:SovietInfiltrationInfantry
+"Infiltration Infantry"
+END
+
+Desc:SovietInfiltrationInfantry
+"Soviet version of the Allied Spy. Disguises itself as enemy infantry and infiltrates enemy structures, with the same abilities as the Allied Spy. Requires a War Factory."
+END
+
+Name:JapanMechaKingCore
+"Shogun Executioner Core"
 END

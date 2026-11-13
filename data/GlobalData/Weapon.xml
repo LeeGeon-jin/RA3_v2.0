@@ -9336,6 +9336,12 @@ Flags="NOT_ATTRACTED_BY_MAGNETS"
 				DamageType="UNRESISTABLE"
 				DamageFXType="JAPAN_CANNON"
 				DeathType="SUICIDED" />
+			<!-- r19: the Radius=0 nugget above lands on the target, not on the truck, so the truck never died. This self-only blast (RadiusDamageAffects=SELF) kills the truck at the target; its FireWeaponWhenDead then fires the medium time bomb + Desolator field -->
+			<DamageNugget
+				Damage="100000.0"
+				Radius="400.0"
+				DamageType="UNRESISTABLE"
+				DeathType="SUICIDED" />
 		</Nuggets>
 	</WeaponTemplate>
 	<!-- = medium time bomb (AlliedTimeBomb_Level2): 1000 dmg, radius 200, taper 600, EXPLOSIVE, FX_TimeBombExplosionLvl2,

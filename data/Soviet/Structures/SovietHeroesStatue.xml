@@ -14,6 +14,8 @@
 	</Includes>
 	<GameObject
 		id="SovietHeroesStatueBuildable"
+		Description="Desc:SovietHeroesStatueBuildable"
+		TypeDescription="Type:SovietHeroesStatueBuildable"
 		inheritFrom="BaseCivilianStructureNoGarrisonDestructible"
 		EditorName="SovietHeroesStatueBuildable"
 		KindOf="-NOT_AUTOACQUIRABLE +AUTO_ACQUIRABLE_BY_AI -AUTO_RALLYPOINT -CIVILIAN_BUILDING"

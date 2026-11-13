@@ -422,11 +422,17 @@
 
 
 	<!-- r16: Allied Coastal Gun only - attack interval halved (ClipReloadTime 5s -> 2.5s) -->
+	<!-- r19: halved again (2.5s -> 1.25s); 2-shell volley = ClipSize 2, one shell per barrel (FX_FireWeapon01/02 bones restored in r19), 0.15s between the two shells -->
 	<WeaponTemplate
 		id="AlliedCoastalGunWeapon"
-		inheritFrom="BB_EuropeCoastalGunWeapon">
+		inheritFrom="BB_EuropeCoastalGunWeapon"
+		ClipSize="2"
+		ShotsPerBarrel="1">
+		<FiringDuration
+			MinSeconds="0.15s"
+			MaxSeconds="0.15s" />
 		<ClipReloadTime
-			MinSeconds="2.5s"
-			MaxSeconds="2.5s" />
+			MinSeconds="1.25s"
+			MaxSeconds="1.25s" />
 	</WeaponTemplate>
 </AssetDeclaration>

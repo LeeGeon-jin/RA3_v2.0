@@ -12,6 +12,8 @@
 	</Includes>
 	<GameObject
 		id="JapanEmperorFlagpoleStatueBuildable"
+		Description="Desc:JapanEmperorFlagpoleStatueBuildable"
+		TypeDescription="Type:JapanEmperorFlagpoleStatueBuildable"
 		inheritFrom="BaseCivilianStructureNoGarrisonDestructible"
 		EditorName="JapanEmperorFlagpoleStatueBuildable"	
 		KindOf="+AIRCRAFT_PATH_AROUND -NOT_AUTOACQUIRABLE -AUTO_RALLYPOINT -CIVILIAN_BUILDING"	

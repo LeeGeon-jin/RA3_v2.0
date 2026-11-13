@@ -412,7 +412,7 @@
 		HealthBoxHeightOffset="30"
 		BuildTime="10"
 		CommandSet="AlliedAntiInfantryVehicleCommandSet"
-		KindOf="SELECTABLE CAN_ATTACK CAN_CAST_REFLECTIONS SCORE VEHICLE CAN_BE_FAVORITE_UNIT TRANSPORT AMPHIBIOUS"
+		KindOf="SELECTABLE CAN_ATTACK CAN_CAST_REFLECTIONS SCORE VEHICLE CAN_BE_FAVORITE_UNIT TRANSPORT AMPHIBIOUS GARRISON"
 		RadarPriority="UNIT"
 		ProductionQueueType="VEHICLE"
 		UnitCategory="VEHICLE"
@@ -682,11 +682,13 @@
 				StatusToSet="WEAPON_UPGRADED_01">
 				<TriggeredBy>Upgrade_Veterancy_HEROIC</TriggeredBy>
 			</StatusBitsUpgrade>
-			<!-- r18 Battle Fortress: passengers fire out (Riptide: TransportContain + NO_ATTACK) -->
-			<HordeTransportContain
+			<!-- r19 Battle Fortress: passengers fire out. r18 HordeTransportContain + CAN_ATTACK did not work (transport contain never runs the garrison fire AI).
+			     Now a mobile garrison (GarrisonContain MobileGarrison=true, same contain type the Soviet Battle Bunker uses for fire-out) -->
+			<GarrisonContain
 				id="ModuleTag_Contain"
-				ObjectStatusOfContained="UNSELECTABLE ENCLOSED CAN_ATTACK"
-				ContainMax="5"				
+				MobileGarrison="true"
+				ObjectStatusOfContained="ENCLOSED UNSELECTABLE CAN_ATTACK"
+				ContainMax="5"
 				AllowEnemiesInside="false"
 				AllowAlliesInside="true"
 				AllowNeutralInside="false"
@@ -694,8 +696,7 @@
 				ShowPips="true"
 				EnterSound="VehicleEnter"
 				ExitSound="VehicleExit"
-				KillPassengersOnDeath="false"
-				ConditionForEntry="INVALID">
+				KillPassengersOnDeath="false">
 				<PassengerFilter
 					Rule="ANY"
 					Include="INFANTRY" />
@@ -704,10 +705,10 @@
 				<PassengerData
 					BonePrefix="NONE">
 					<Filter
-						Rule="NONE"
+						Rule="ANY"
 						Include="INFANTRY" />
 				</PassengerData>
-			</HordeTransportContain>			
+			</GarrisonContain>			
 		</Behaviors>
 		<AI>
 			<AIUpdate

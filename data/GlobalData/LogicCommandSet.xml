@@ -147,7 +147,6 @@
 		<Cmd>Command_ConstructSovietSuperWeaponAdvanced</Cmd>
 		<Cmd>Command_PackSovietMCV</Cmd>
 		<Cmd>Command_ConstructSovietCloningCenter</Cmd>
-		<Cmd>Command_ConstructSovietMoaiTeslaHead</Cmd>
 		<Cmd>Command_ConstructSovietArtilleryDome</Cmd>
 	</LogicCommandSet>
 
@@ -167,7 +166,6 @@
 		<Cmd>Command_ConstructSovietBaseDefenseAir</Cmd>
 		<Cmd>Command_ConstructSovietBaseDefenseAdvanced</Cmd>
 		<Cmd>Command_ConstructSovietSpySatellite</Cmd>
-		<Cmd>Command_ConstructSovietMoaiTeslaHead</Cmd>
 		<Cmd>Command_ConstructSovietArtilleryDome</Cmd>
 		<Cmd>Command_ConstructSovietAntiVehicleVehicleTech2</Cmd>
 		<Cmd>Command_ConstructSovietDemolitionTruck</Cmd>
@@ -281,6 +279,7 @@
 		<Cmd>Command_ConstructSovietHeroesStatue</Cmd>
 		<Cmd>Command_ConstructSovietGreatKremlinPalace</Cmd>
 		<Cmd>Command_ConstructSovietRushmoreLaserHead</Cmd>
+		<Cmd>Command_ConstructSovietMoaiTeslaHead</Cmd>
 	</LogicCommandSet>
 	<LogicCommandSet
 		id="JapanTechStructureCommandSet">

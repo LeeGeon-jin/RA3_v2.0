@@ -11,6 +11,8 @@
 	</Includes>
 	<GameObject
 		id="JapanStatueGuard02Buildable"
+		Description="Desc:JapanStatueGuard02Buildable"
+		TypeDescription="Type:JapanStatueGuard02Buildable"
 		inheritFrom="BaseCivilianStructureNoGarrisonDestructible"
 		EditorName="JapanStatueGuard02Buildable"
 		KindOf="-NOT_AUTOACQUIRABLE -AUTO_RALLYPOINT -CIVILIAN_BUILDING"

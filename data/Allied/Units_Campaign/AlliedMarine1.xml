@@ -4,8 +4,12 @@
 	<Includes>
 		<Include type="all" source="DATA:GlobalData/GlobalDefines.xml" />
 		<Include type="instance" source="DATA:Neutral/Props/NUMarine1_Collapse.xml" />
-		<Include type="reference" source="ART:NUMarine1.w3x" />
-		<Include type="reference" source="ART:NUMarine1_D.xml" />		
+		<!-- r19: NUMarine1 art is not in static/global (worldbuilder/campaign only) -> compile it into the mod -->
+		<Include type="all" source="ART:NUMarine1.w3x" />
+		<Include type="all" source="ART:NUMarine1.xml" />
+		<Include type="all" source="ART:NuMarine1_NRM.xml" />
+		<Include type="all" source="ART:NuMarine1_SPM.xml" />
+		<Include type="all" source="ART:NUMarine1_D.xml" />		
 		<!-- Base Object -->
 		<Include
 			type="instance"

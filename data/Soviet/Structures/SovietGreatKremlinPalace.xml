@@ -16,6 +16,8 @@
 	</Includes>
 	<GameObject
 		id="SovietGreatKremlinPalaceBuildable"
+		Description="Desc:SovietGreatKremlinPalaceBuildable"
+		TypeDescription="Type:SovietGreatKremlinPalaceBuildable"
 		inheritFrom="BaseCivilianStructureNoGarrisonDestructible"
 		EditorName="SovietGreatKremlinPalaceBuildable"
 		KindOf="-NOT_AUTOACQUIRABLE +AUTO_ACQUIRABLE_BY_AI -AUTO_RALLYPOINT -CIVILIAN_BUILDING"

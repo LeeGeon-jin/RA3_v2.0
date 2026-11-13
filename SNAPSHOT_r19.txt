@@ -1,0 +1,6 @@
+RA3_V2.0_Batch102FIX source snapshot r19 (2026-11-13 23:15 UTC+10).
+Content: mod data XML + mod.str only (same layout as repo data/): 201 XML + 1 mod.str. No EA art (w3x/dds/tga), no UI art, no built bigs/manifests. XML files only reference ART: names.
+Identical (MD5, all 202 files, list in ../pc_src_md5_r19.txt) to E:\RA3ModBuild\RA3ModSDK\Mods\RA3_V2.0_Batch102FIX\data on the PC (excluding one local .bak file).
+Status: compiled (BAB Critical 0 / Error 55 / Warning 352) and installed 2026-11-13 23:11 UTC+10; .big 88,530,885 bytes MD5 C1A8F064E20715B92DFDF9AC0C3AF3CD. Compile/launch success does NOT prove gameplay; in-game checks pending.
+r19 vs r18 changed files (13): BB_EuropeCoastalGun.xml, FI_FloatingFortressMainGun.xml, AlliedMarine1.xml, AlliedAntiInfantryVehicle.xml, LogicCommandSet.xml, Weapon.xml, JapanEmperorFlagpoleStatue.xml, JapanStatueGuard01/02/03.xml, SovietHeroesStatue.xml, SovietGreatKremlinPalace.xml, mod.str.
+Art-side r19 fixes (PC only, not in this repo): restored hashed bone names in jumechaking_skl / jumechaking_torso_skl / bb_europecoastalgun / ei_easterislandheaddefense_skl / shiphangartechstructure_skl; exported NUMarine1 art (President's Chopper) into SDK Art\nu.
