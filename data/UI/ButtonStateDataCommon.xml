@@ -7,4 +7,20 @@
 			Title="NAME:AbilityJapanEngineerSprint"
 			Description="DESC:AbilityJapanEngineerSprint" />
 	</ButtonSingleStateData>
+
+	<!-- r14 -->
+	<ButtonSingleStateData
+		id="ButtonStateUpgradeSovietPowerPlantTurbine">
+		<State
+			Image="Button_SovietPowerPlant_small"
+			Title="NAME:UpgradeSovietPowerPlantTurbine"
+			Description="DESC:UpgradeSovietPowerPlantTurbine" />
+	</ButtonSingleStateData>
+	<ButtonSingleStateData
+		id="ButtonStateUpgradeSovietPowerPlantAdvancedTurbine">
+		<State
+			Image="Button_SovietPowerPlantAdv_small"
+			Title="NAME:UpgradeSovietPowerPlantAdvancedTurbine"
+			Description="DESC:UpgradeSovietPowerPlantAdvancedTurbine" />
+	</ButtonSingleStateData>
 </AssetDeclaration>

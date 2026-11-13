@@ -2,6 +2,9 @@
 <AssetDeclaration xmlns="uri:ea.com:eala:asset" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xai="uri:ea.com:eala:asset:instance">
 	<Tags></Tags>
 	<Includes>
+		<Include type="all" source="ART:AUAntiVehicleVehicleTech3Fake.xml" />
+		<Include type="all" source="ART:AUAntiVehicleVehicleTech3Fake_NRM.xml" />
+		<Include type="all" source="ART:AUAntiVehicleVehicleTech3Fake_SPM.xml" />
 		<Include type="instance" source="DATA:Allied/Units/AlliedAntiVehicleVehicleTech3.xml" />
 		<Include type="all" source="ART:AUAntiVehicleVehicleTech3_FAKE.w3x" />
 		<Include type="all" source="ART:AUAntiVehicleVehicleTech3_IDLZ.w3x" />
@@ -21,10 +24,10 @@
 	BuildTime="15">
 		<DisplayName
 			xai:joinAction="Replace" xmlns:xai="uri:ea.com:eala:asset:instance">Name:AlliedAdvancedMirageTank</DisplayName>
-		<ObjectResourceInfo>
+		<ObjectResourceInfo xai:joinAction="Replace" xmlns:xai="uri:ea.com:eala:asset:instance">
 			<BuildCost Account="=$ACCOUNT_ORE" Amount="1500"/>
 		</ObjectResourceInfo>
-		<GameDependency>
+		<GameDependency xai:joinAction="Replace">
 			<RequiredObject>AlliedTechStructure</RequiredObject>
 		</GameDependency>
 		<LocomotorSet

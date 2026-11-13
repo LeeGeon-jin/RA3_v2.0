@@ -55,11 +55,12 @@
 			Speed="150.0" />
 
 		<!-- Need ConquerMetricsOverrideDefendingAntiMask or else the TAXIING locomotor will make the AI try to build anti-ground units against this -->
+		<!-- r18 cryo anti-air: AI metrics include air -->
 		<SkirmishAIInformation
 			UnitBuilderStandardCombatUnit="true"
 			ConquerMetricsOverrideDPS="6"
 			ConquerMetricsOverrideDamageType="EXPLOSIVE"
-			ConquerMetricsOverrideAntiMask="ANTI_GROUND ANTI_WATER ANTI_STRUCTURE"
+			ConquerMetricsOverrideAntiMask="ANTI_GROUND ANTI_WATER ANTI_STRUCTURE ANTI_AIRBORNE_VEHICLE ANTI_AIRBORNE_INFANTRY"
 			ConquerMetricsOverrideDefendingAntiMask="ANTI_AIRBORNE_VEHICLE"
       DoesSecondaryDamage="true"/>
 		<Draws>

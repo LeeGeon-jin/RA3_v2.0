@@ -33,7 +33,7 @@
 			<BuildCost Account="=$ACCOUNT_ORE" Amount="150"/>
 		</ObjectResourceInfo>
 		<ArmorSet
-			Armor="JapanAntiInfantryInfantryArmor"
+			Armor="JapanAntiInfantryInfantryArmorUpgraded"
 			DamageFX="InfantryDamageFX" />
 		<ArmorSet
 			Conditions="PLAYER_UPGRADE"
@@ -43,7 +43,7 @@
 			id="HumanLocomotor"
 			Locomotor="TestReactiveLocomotorHUMAN"
 			Condition="NORMAL"
-			Speed="50" />
+			Speed="75" />
 		<SkirmishAIInformation
 			UnitBuilderStandardCombatUnit="true" />
 		<Draws>
@@ -1269,6 +1269,7 @@
 					<Weapon
 						Ordering="PRIMARY_WEAPON"
 						Template="JapanAntiInfantryInfantryWeapon"
+						ForbiddenObjectStatus="WEAPON_UPGRADED_02"
 					/>
 					<Weapon
 						Ordering="PRIMARY_WEAPON"
@@ -1385,15 +1386,30 @@
 				id="ModuleTag_SpecialPower"
 				SpecialPowerTemplate="SpecialPower_JapanAntiInfantryInfantryBonzai"
 				UpdateModuleStartsAttack="true"
-				AttributeModifier="AttributeModifier_JapanAntiInfantryInfantryBonzai"
-				AttributeModifierAffectsSelf="true"
 			/>
-			<SpecialAbilityUpdate
+			<!-- r16: F toggles rifle <-> sword (was: 10s Bonzai charge buff, 30s reload) -->
+			<ToggleStatusSpecialAbilityUpdate
 				id="ModuleTag_SpecialAbilityUpdate"
 				SpecialPowerTemplate="SpecialPower_JapanAntiInfantryInfantryBonzai"
-				UnpackTime="0s"
-				Options="RECONSTITUTE_STORED_COMMAND"
-			/>
+				Options="RECONSTITUTE_STORED_COMMAND">
+				<ToggleState>
+					<SkirmishAiInfo
+						ToggleHint="TOGGLE_DEFAULT"
+						NeverUseWhenClear="true">
+						<StateWeapon
+							Weapon="JapanAntiInfantryInfantryWeapon"/>
+					</SkirmishAiInfo>
+				</ToggleState>
+				<ToggleState
+					ObjectStatus="WEAPON_UPGRADED_02"
+					ModelConditions="USER_1">
+					<SkirmishAiInfo
+						ToggleHint="TOGGLE_TRANSFORM">
+						<StateWeapon
+							Weapon="JapanAntiInfantryInfantryWeaponBonzai"/>
+					</SkirmishAiInfo>
+				</ToggleState>
+			</ToggleStatusSpecialAbilityUpdate>
 				<!-- ActiveLoopSound="JAP_ImperialWarrior_Weapon_SwordSheathFakeLoop" no worky didn't loop at all -->
 
 			<!-- Allied Parachute Behaviors -->

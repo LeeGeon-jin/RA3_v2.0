@@ -31,6 +31,7 @@
 		<Include type="all" source="DATA:Soviet/Structures/SovietBaseDefenseGround.xml" />
 		<Include type="all" source="DATA:Soviet/Structures/SovietBaseDefenseAir.xml" />
 		<Include type="all" source="DATA:Soviet/Structures/SovietBaseDefenseAdvanced.xml" />
+		<Include type="all" source="DATA:Soviet/Structures/SovietBunker.xml" />
 		<Include type="all" source="DATA:Soviet/Structures/SovietPowerPlantAdvanced.xml" />
 		<Include type="all" source="DATA:Soviet/Structures/SovietTechStructure.xml" />
 		<Include type="all" source="DATA:Soviet/Structures/SovietQuickProductionCenter.xml" />
@@ -72,6 +73,7 @@
 	<Include type="all" source="DATA:Japan/Units/JapanAntiVehicleVehicleTech1.xml" />
 	<Include type="all" source="DATA:Soviet/Units/SovietAntiVehicleVehicleTech1.xml" />
 	<Include type="all" source="DATA:Soviet/Units/SovietAntiVehicleVehicleTech2.xml" />
+	<Include type="all" source="DATA:Soviet/Units/SovietDemolitionTruck.xml" />
 	<Include type="all" source="DATA:Soviet/Units/SovietAntiAirShip.xml" />
 		<Include type="all" source="DATA:Soviet/Units/SovietAntiNavyShipTech1.xml" />
 		<Include type="all" source="DATA:Soviet/Units/SovietAntiNavyShipTech2.xml" />
@@ -121,12 +123,18 @@
 		<Include type="all" source="DATA:Neutral/Structures/AirportTechStructure.xml" />
 		<Include type="all" source="DATA:Neutral/Structures/AirportTechStructureBuildable.xml" />
 		<Include type="all" source="DATA:Neutral/Structures/VeterancyTechStructureBuildable.xml" />
+		<Include type="all" source="DATA:Neutral/Structures/ObservationPostTechStructureBuildable.xml" />
+		<Include type="all" source="DATA:Neutral/Structures/SpySatellite.xml" />
+		<Include type="all" source="DATA:Neutral/Structures/OilDerrickTechStructureBuildable.xml" />
+		<Include type="all" source="DATA:Neutral/Structures/SwissBankTechStructureBuildable.xml" />
 		<Include type="all" source="DATA:Neutral/Structures/TechAirportParadrop.xml" />
 		<Include type="all" source="DATA:Japan/Structures/JapanEmperorFlagpoleStatue.xml" />
 		<Include type="all" source="DATA:Japan/Structures/JapanEmperorSonFlagpoleStatue.xml" />
 		<Include type="all" source="DATA:Japan/Structures/JapanStatueGuard03.xml" />
 		<Include type="all" source="DATA:Japan/Structures/JapanStatueGuard02.xml" />
 		<Include type="all" source="DATA:Japan/Structures/JapanMtFujiViewingTower.xml" />
+		<Include type="all" source="DATA:Japan/Structures/JapanRoboticsLab.xml" />
+		<Include type="all" source="DATA:Japan/Structures/JapanTechStructure.xml" />
 		<Include type="all" source="DATA:Japan/Structures/JapanStatueGuard01.xml" />
 		<Include type="all" source="DATA:Japan/Units/JapanAntiStructureVehicle.xml" />
 		<Include type="all" source="DATA:Soviet/Units/SovietMCV.xml" />
@@ -135,6 +143,7 @@
 		<Include type="all" source="DATA:Soviet/Structures/SovietPowerPlant.xml" />
 		<Include type="all" source="DATA:Soviet/Structures/SovietBarracks.xml" />
 		<Include type="all" source="DATA:Soviet/Structures/SovietWarFactory.xml" />
+		<Include type="all" source="DATA:Soviet/Structures/SovietCrane.xml" />
 		<Include type="all" source="DATA:Soviet/Structures/SovietNavalYard.xml" />
 		<Include type="all" source="DATA:Soviet/Structures/SovietAirfield.xml" />
 		<Include type="all" source="DATA:Soviet/Structures/SovietHeroesStatue.xml" />
@@ -152,5 +161,42 @@
 		<Include type="all" source="DATA:GlobalData/ExperienceLevels_AdvancedMirage.xml" />
 		<Include type="all" source="DATA:GlobalData/ExperienceLevels_Badger.xml" />
 		<Include type="all" source="DATA:GlobalData/ExperienceLevels_PrecisionBuildable.xml" />
+		<Include type="all" source="DATA:GlobalData/Locomotor_PrecisionBuildable.xml" />
+		<Include type="all" source="DATA:Neutral/Structures/OreNode.xml" />
+		<Include type="all" source="DATA:Neutral/Structures/OreNode2a.xml" />
+		<Include type="all" source="DATA:Neutral/Structures/OreNode2b.xml" />
+		<Include type="all" source="DATA:Neutral/Structures/OreNode4a.xml" />
+		<Include type="all" source="DATA:Neutral/Structures/OreNode4b.xml" />
+		<Include type="all" source="DATA:Neutral/Structures/OreNode4c.xml" />
+		<Include type="all" source="DATA:Neutral/Structures/OreNode4d.xml" />
+		<Include type="all" source="DATA:Japan/Eggs/JapanBarracksEgg.xml" />
+		<Include type="all" source="DATA:Japan/Eggs/JapanBaseDefenseAdvancedEgg.xml" />
+		<Include type="all" source="DATA:Japan/Eggs/JapanBaseDefenseEgg.xml" />
+		<Include type="all" source="DATA:Japan/Eggs/JapanNavalYardEgg.xml" />
+		<Include type="all" source="DATA:Japan/Eggs/JapanPowerPlantEgg.xml" />
+		<Include type="all" source="DATA:Japan/Eggs/JapanRefineryEgg.xml" />
+		<Include type="all" source="DATA:Japan/Eggs/JapanSuperWeaponAdvancedEgg.xml" />
+		<Include type="all" source="DATA:Japan/Eggs/JapanSuperWeaponEgg.xml" />
+		<Include type="all" source="DATA:Japan/Eggs/JapanTechStructureEgg.xml" />
+		<Include type="all" source="DATA:Japan/Eggs/JapanWarFactoryEgg.xml" />
+		<Include type="all" source="DATA:Allied/Props/AlliedSatelliteSweepShroudRevealer.xml" />
+		<Include type="all" source="DATA:Allied/Units/AlliedAntiAirShip.xml" />
+		<Include type="all" source="DATA:Allied/Units/AlliedFighterAircraft.xml" />
+		<Include type="all" source="DATA:Allied/Units/AlliedSupersonicBomber.xml" />
+		<Include type="all" source="DATA:Allied/Units_Campaign/A04_EscapeBoat.xml" />
+		<Include type="all" source="DATA:Allied/Units_Campaign/AlliedLimo1.xml" />
+		<Include type="all" source="DATA:Allied/Units_Campaign/AlliedMarine1.xml" />
+		<Include type="all" source="DATA:Allied/Units_Campaign/AlliedSalvageShip.xml" />
+		<Include type="all" source="DATA:Allied/Units_Campaign/AlliedSUV1.xml" />
+		<Include type="all" source="DATA:Japan/Units/JapanAntiAirShip.xml" />
+		<Include type="all" source="DATA:Japan/Units/JapanAntiAirVehicleTech1.xml" />
+		<Include type="all" source="DATA:Japan/Units/JapanAntiVehicleVehicleTech3.xml" />
+		<Include type="all" source="DATA:Japan/Units_SinglePlayerCampaign/JapanOdessaSpecialTransportVehicle.xml" />
+		<Include type="all" source="DATA:Japan/Units_SinglePlayerCampaign/JapanRadarShip.xml" />
+		<Include type="all" source="DATA:Neutral/Units/NeutralBombBoat.xml" />
+		<Include type="all" source="DATA:Soviet/Units/BaseSovietSupportBomber.xml" />
+		<Include type="all" source="DATA:Soviet/Units/SovietFighterAircraft.xml" />
+		<Include type="all" source="DATA:Soviet/Units_Campaign/RussianTrain.xml" />
+		<Include type="all" source="DATA:Soviet/Units_Campaign/S09_Car.xml" />
 	</Includes>
 </AssetDeclaration>

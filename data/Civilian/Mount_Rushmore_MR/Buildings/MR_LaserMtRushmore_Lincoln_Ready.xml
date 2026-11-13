@@ -2,6 +2,16 @@
 <AssetDeclaration xmlns="uri:ea.com:eala:asset" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xai="uri:ea.com:eala:asset:instance">
 	<Tags></Tags>
 	<Includes>
+		<Include type="all" source="ART:MtRushmore.xml" />
+		<Include type="all" source="ART:MtRushmore_NRM.xml" />
+		<Include type="all" source="ART:MtRushmore_SPM.xml" />
+		<Include type="all" source="ART:MtRushmore_Lincoln.xml" />
+		<Include type="all" source="ART:MtRushmore_Lincoln_NRM.xml" />
+		<Include type="all" source="ART:MtRushmore_Lincoln_Rbot.xml" />
+		<Include type="all" source="ART:MtRushmore_Lincoln_Rbot_NRM.xml" />
+		<Include type="all" source="ART:MtRushmore_Lincoln_Rbot_SPM.xml" />
+		<Include type="all" source="ART:MtRushmore_Rbot_Eyes2.xml" />
+		<Include type="all" source="ART:MtRushmore_Rbot_Eyes_SPM.xml" />
 		<Include type="instance" source="DATA:BaseObjects/BaseMountRushmoreHead.xml" />
 		<Include type="instance" source="DATA:BaseObjects/BaseCollapsingObject.xml" />
 		<Include type="all" source="ART:MR_LaserMtRushmore_Lincoln.W3X" />
@@ -369,7 +379,9 @@
 		Side="Soviet"
 		KindOf="+POWERED +SCORE -UNATTACKABLE -NOT_AUTOACQUIRABLE"
 		BuildTime="0.0"
-		EnergyProduction="-75">
+		EnergyProduction="-75"
+		ProductionQueueType="OTHER_STRUCTURE"
+		BuildPlacementTypeFlag="OTHER_STRUCTURE">
 		<ObjectResourceInfo>
 			<BuildCost Account="=$ACCOUNT_ORE" Amount="2000"/>
 		</ObjectResourceInfo>
@@ -414,7 +426,26 @@
 				id="ModuleTag_Body"
 				MaxHealth="2000" />
 		</Body>
-	</GameObject>		
+		<EvaEventArray xai:joinAction="Replace" xmlns:xai="uri:ea.com:eala:asset:instance">
+			<EvaEntry EvaEvent="BuildingConstructionStarted" EvaType="productionStarted" />
+			<EvaEntry EvaEvent="BuildingConstructionComplete" EvaType="productionComplete" />
+			<EvaEntry EvaEvent="StructureUnderAttack" EvaType="damagedOwner" />
+			<EvaEntry EvaEvent="AllyStructureUnderAttack" EvaType="damagedAlly" />
+			<EvaEntry EvaEvent="StructureSold" EvaType="soldOwner" />
+			<EvaEntry EvaEvent="StructureRepairing" EvaType="repairingOwner" />
+			<EvaEntry EvaEvent="EnemyCampSighted" EvaType="enemyObjectSighted" />
+			<EvaEntry EvaEvent="NewConstructionOptions" EvaType="availableForProduction" />
+			<EvaEntry EvaEvent="StructurePlacementFailed" EvaType="placementFailed" />
+			<EvaEntry EvaEvent="StructureCannotBuildDueToFullBuildQueue" EvaType="cannotBuildDueToFullBuildQueue" />
+			<EvaEntry EvaEvent="BuildOnHold" EvaType="buildOnHold" />
+			<EvaEntry EvaEvent="BuildCancelled" EvaType="buildCancelled" />
+			<EvaEntry EvaEvent="BuildingManuallyPoweredDown" EvaType="manuallyPoweredOff" />
+			<EvaEntry EvaEvent="BuildingManuallyPoweredUp" EvaType="manuallyPoweredOn" />
+		</EvaEventArray>
+		<AudioArraySound xai:joinAction="Append" xmlns:xai="uri:ea.com:eala:asset:instance">
+			<AudioEntry Sound="BuildingUnderConstructionLoop" AudioType="soundUnderConstruction" />
+		</AudioArraySound>
+</GameObject>		
 
 	<!-- Allied Buildable Rushmore Laser Head -->
 	<GameObject
@@ -423,7 +454,9 @@
 		Side="Allies"
 		KindOf="+POWERED +SCORE -UNATTACKABLE -NOT_AUTOACQUIRABLE"
 		BuildTime="30.0"
-		EnergyProduction="-75">
+		EnergyProduction="-75"
+		ProductionQueueType="OTHER_STRUCTURE"
+		BuildPlacementTypeFlag="OTHER_STRUCTURE">
 		<ObjectResourceInfo>
 			<BuildCost Account="=$ACCOUNT_ORE" Amount="2000"/>
 		</ObjectResourceInfo>
@@ -464,7 +497,26 @@
 				id="ModuleTag_Body"
 				MaxHealth="2000" />
 		</Body>
-	</GameObject>	
+		<EvaEventArray xai:joinAction="Replace" xmlns:xai="uri:ea.com:eala:asset:instance">
+			<EvaEntry EvaEvent="BuildingConstructionStarted" EvaType="productionStarted" />
+			<EvaEntry EvaEvent="BuildingConstructionComplete" EvaType="productionComplete" />
+			<EvaEntry EvaEvent="StructureUnderAttack" EvaType="damagedOwner" />
+			<EvaEntry EvaEvent="AllyStructureUnderAttack" EvaType="damagedAlly" />
+			<EvaEntry EvaEvent="StructureSold" EvaType="soldOwner" />
+			<EvaEntry EvaEvent="StructureRepairing" EvaType="repairingOwner" />
+			<EvaEntry EvaEvent="EnemyCampSighted" EvaType="enemyObjectSighted" />
+			<EvaEntry EvaEvent="NewConstructionOptions" EvaType="availableForProduction" />
+			<EvaEntry EvaEvent="StructurePlacementFailed" EvaType="placementFailed" />
+			<EvaEntry EvaEvent="StructureCannotBuildDueToFullBuildQueue" EvaType="cannotBuildDueToFullBuildQueue" />
+			<EvaEntry EvaEvent="BuildOnHold" EvaType="buildOnHold" />
+			<EvaEntry EvaEvent="BuildCancelled" EvaType="buildCancelled" />
+			<EvaEntry EvaEvent="BuildingManuallyPoweredDown" EvaType="manuallyPoweredOff" />
+			<EvaEntry EvaEvent="BuildingManuallyPoweredUp" EvaType="manuallyPoweredOn" />
+		</EvaEventArray>
+		<AudioArraySound xai:joinAction="Append" xmlns:xai="uri:ea.com:eala:asset:instance">
+			<AudioEntry Sound="BuildingUnderConstructionLoop" AudioType="soundUnderConstruction" />
+		</AudioArraySound>
+</GameObject>	
 
 	<!-- Japan Buildable Rushmore Laser Head -->
 	<GameObject
@@ -473,7 +525,9 @@
 		Side="Japan"
 		KindOf="+POWERED +SCORE -UNATTACKABLE -NOT_AUTOACQUIRABLE"
 		BuildTime="30.0"
-		EnergyProduction="-75">
+		EnergyProduction="-75"
+		ProductionQueueType="OTHER_STRUCTURE"
+		BuildPlacementTypeFlag="OTHER_STRUCTURE">
 		<ObjectResourceInfo>
 			<BuildCost Account="=$ACCOUNT_ORE" Amount="2000"/>
 		</ObjectResourceInfo>
@@ -514,5 +568,24 @@
 				id="ModuleTag_Body"
 				MaxHealth="2000" />
 		</Body>
-	</GameObject>	
+		<EvaEventArray xai:joinAction="Replace" xmlns:xai="uri:ea.com:eala:asset:instance">
+			<EvaEntry EvaEvent="BuildingConstructionStarted" EvaType="productionStarted" />
+			<EvaEntry EvaEvent="BuildingConstructionComplete" EvaType="productionComplete" />
+			<EvaEntry EvaEvent="StructureUnderAttack" EvaType="damagedOwner" />
+			<EvaEntry EvaEvent="AllyStructureUnderAttack" EvaType="damagedAlly" />
+			<EvaEntry EvaEvent="StructureSold" EvaType="soldOwner" />
+			<EvaEntry EvaEvent="StructureRepairing" EvaType="repairingOwner" />
+			<EvaEntry EvaEvent="EnemyCampSighted" EvaType="enemyObjectSighted" />
+			<EvaEntry EvaEvent="NewConstructionOptions" EvaType="availableForProduction" />
+			<EvaEntry EvaEvent="StructurePlacementFailed" EvaType="placementFailed" />
+			<EvaEntry EvaEvent="StructureCannotBuildDueToFullBuildQueue" EvaType="cannotBuildDueToFullBuildQueue" />
+			<EvaEntry EvaEvent="BuildOnHold" EvaType="buildOnHold" />
+			<EvaEntry EvaEvent="BuildCancelled" EvaType="buildCancelled" />
+			<EvaEntry EvaEvent="BuildingManuallyPoweredDown" EvaType="manuallyPoweredOff" />
+			<EvaEntry EvaEvent="BuildingManuallyPoweredUp" EvaType="manuallyPoweredOn" />
+		</EvaEventArray>
+		<AudioArraySound xai:joinAction="Append" xmlns:xai="uri:ea.com:eala:asset:instance">
+			<AudioEntry Sound="BuildingUnderConstructionLoop" AudioType="soundUnderConstruction" />
+		</AudioArraySound>
+</GameObject>	
 </AssetDeclaration>

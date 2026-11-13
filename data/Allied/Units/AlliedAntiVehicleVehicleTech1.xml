@@ -306,6 +306,14 @@
 					</TurretSettings>
 				</WeaponSlotTurret>
         -->
+				<!-- r14: second slot fires the Cryo Sat L1 strike at the painted target only while painter mode is on -->
+				<WeaponSlotHardpoint
+					ID="2">
+					<Weapon
+						Ordering="PRIMARY_WEAPON"
+						Template="AlliedAntiVehicleVehicleTech1PainterCryoStrike"
+						ObjectStatus="GENERIC_TOGGLE_STATE"/>
+				</WeaponSlotHardpoint>
       </WeaponSetUpdate>
 			<LaserState
 				id="ModuleTag_LaserState"

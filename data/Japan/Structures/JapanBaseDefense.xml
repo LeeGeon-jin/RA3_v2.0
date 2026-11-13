@@ -835,12 +835,10 @@
 					ID="1">
 					<Weapon
 						Ordering="PRIMARY_WEAPON"
-						Template="JapanBaseDefenseGunGround"
-						ForbiddenObjectStatus="GENERIC_TOGGLE_STATE"/>
+						Template="JapanBaseDefenseGunGround"/>
 					<Weapon
 						Ordering="PRIMARY_WEAPON"
-						Template="JapanBaseDefenseGunAir"
-						ObjectStatus="GENERIC_TOGGLE_STATE" />
+						Template="JapanBaseDefenseGunAir"/>
 					<TurretSettings
 						TurretTurnRate="480"
 						TurretPitchRate="360"

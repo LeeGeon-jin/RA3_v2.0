@@ -1,0 +1,187 @@
+Name:QuickProductionCenter
+"Quick Production Center"
+END
+
+Type:QuickProductionCenter
+"Structure"
+END
+
+Desc:QuickProductionCenter
+"Emits an aura that doubles the production speed of nearby buildings. Requires a Defense Bureau."
+END
+
+Name:AlliedAdvancedMirageTank
+"Advanced Mirage Tank"
+END
+
+Type:AlliedAdvancedMirageTank
+"Tank"
+END
+
+Desc:AlliedAdvancedMirageTank
+"An advanced Mirage Tank variant. Requires a Defense Bureau."
+END
+
+Name:AlliedSupersonicBomber
+"Precision Strike Bomber"
+END
+
+Type:AlliedSupersonicBomber
+"Aircraft"
+END
+
+Desc:AlliedSupersonicBomber
+"A fast bomber that delivers a single high-yield bomb, then returns to base to reload."
+END
+
+Name:SovietSupportBomber_Buildable
+"Support Bomber"
+END
+
+Type:SovietSupportBomber_Buildable
+"Aircraft"
+END
+
+Desc:SovietSupportBomber_Buildable
+"A buildable Soviet support bomber."
+END
+
+Name:JapanEmperorMecha
+"Emperor Mecha"
+END
+
+Desc:JapanEmperorMecha
+"Imperial campaign mecha, now available in skirmish."
+END
+
+Type:JapanEmperorMecha
+"Vehicle"
+END
+
+Name:JapanMechaKing
+"Mecha King"
+END
+
+Desc:JapanMechaKing
+"Imperial campaign mecha, now available in skirmish."
+END
+
+Type:JapanMechaKing
+"Vehicle"
+END
+
+Name:SovietInfiltrationInfantry
+"Spy"
+END
+
+Name:JapanWaveForceTripleCannon
+"Wave-Force Triple Cannon"
+END
+
+Name:SovietGreatKremlinPalaceBuildable
+"Great Kremlin Palace"
+END
+
+Name:SovietHeroesStatueBuildable
+"Heroes of the Soviet Union Statue"
+END
+
+Name:JapanStatueGuard01Buildable
+"Guardian Statue I"
+END
+
+Name:JapanStatueGuard02Buildable
+"Guardian Statue II"
+END
+
+Name:JapanStatueGuard03Buildable
+"Guardian Statue III"
+END
+
+Name:JapanEmperorFlagpoleStatueBuildable
+"Emperor's Flagpole Statue"
+END
+
+UpgradeName:SovietPowerPlantTurbine
+"Reactor Turbines"
+END
+
+UpgradeName:SovietPowerPlantAdvancedTurbine
+"Super Reactor Turbines"
+END
+
+NAME:UpgradeSovietPowerPlantTurbine
+"Upgrade Reactor: +50% power ($300, 10s)"
+END
+
+DESC:UpgradeSovietPowerPlantTurbine
+"Increases this Reactor's power output by 50%. One-time upgrade."
+END
+
+NAME:UpgradeSovietPowerPlantAdvancedTurbine
+"Upgrade Super Reactor: +50% power ($550, 10s)"
+END
+
+DESC:UpgradeSovietPowerPlantAdvancedTurbine
+"Increases this Super Reactor's power output by 50%. One-time upgrade."
+END
+
+Name:JapanImperialPalaceBuildable
+"Imperial Palace"
+END
+
+Name:JapanRoboticsLabBuildable
+"Robotics Lab"
+END
+
+Name:SovietCloningCenter
+"Clone Center"
+END
+
+Type:SovietCloningCenter
+"Structure"
+END
+
+Desc:SovietCloningCenter
+"Clones infantry: every infantry unit trained at your Barracks comes out together with an identical free copy. Limit one per player. Requires a Battle Lab. Uses 75 power."
+END
+
+Name:SovietDemolitionTruck
+"Demolition Truck"
+END
+
+Type:SovietDemolitionTruck
+"Suicide Vehicle"
+END
+
+Desc:SovietDemolitionTruck
+"Suicide truck that rams enemies. Explodes on attack and on death with the force of a medium time bomb and leaves a radioactive fallout zone (Desolator Airstrike level 1). Ability: 1.5x speed boost for 5s (10s cooldown). Requires a Super Reactor."
+END
+
+Name:SpySatellite
+"Spy Satellite"
+END
+
+Type:SpySatellite
+"Intelligence Structure"
+END
+
+Desc:SpySatellite
+"Satellite uplink that reveals the entire battlefield while it stands. Requires a tech lab (Defense Bureau, Battle Lab or Nanotech Mainframe). Uses 75 power."
+END
+
+Name:AlliedBattleFortress
+"Battle Fortress"
+END
+
+Type:AlliedBattleFortress
+"Armored Transport"
+END
+
+Desc:AlliedBattleFortress
+"Heavily armored amphibious assault transport built on the Riptide ACV hull. Carries up to 5 infantry who can fire from inside, even while it moves. Twice the armor of a Riptide ACV. Built at the War Factory."
+END
+
+Desc:AlliedMarine1_Buildable
+"Presidential transport helicopter armed with prism weaponry. Can attack both air and ground targets. Carries up to 5 passengers."
+END

@@ -23,7 +23,7 @@
 		EditorSorting="UNIT"		
 		BuildTime="20"
 		CommandSet="SovietCommandoTech1CommandSet"
-		KindOf="SELECTABLE CAN_ATTACK CAN_CAST_REFLECTIONS AMPHIBIOUS INFANTRY COMMANDO SCORE UNIQUE_UNIT SKIRMISH_AI_DONT_GARRISON IGNORE_FORCE_MOVE CAN_PLACE_CHARGE SNIPER CAN_BE_FAVORITE_UNIT"
+		KindOf="SELECTABLE CAN_ATTACK CAN_CAST_REFLECTIONS AMPHIBIOUS INFANTRY COMMANDO SCORE SKIRMISH_AI_DONT_GARRISON IGNORE_FORCE_MOVE CAN_PLACE_CHARGE SNIPER CAN_BE_FAVORITE_UNIT"
 		ThreatLevel="10"
 		WeaponCategory="GUN"
 		VoicePriority="120"
@@ -988,9 +988,6 @@
 				<Weapon
 					Ordering="PRIMARY_WEAPON"
 					Template="SovietCommandoSniperRifle" />
-				<Weapon
-					Ordering="SECONDARY_WEAPON"
-					Template="SovietCommandoCallBombingRun" />
 				<Weapon
 					Ordering="TERTIARY_WEAPON"
 					Template="SovietCommandoCallBombingRunStructure" />

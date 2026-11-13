@@ -709,9 +709,9 @@
 		</Nuggets>
 	</WeaponTemplate>
 		
-	<WeaponTemplate
+	<!-- r14:range+20% --><WeaponTemplate
 		id="SovietCommandoSniperRifle"
-		AttackRange="300.0"
+		AttackRange="360.0"
 		WeaponSpeed="999999.0"
 		FireSound="SOV_Commando_GunFire"
 		FireFX="FX_SovietSniperFire"
@@ -1564,10 +1564,11 @@
 		CanFireWhileMoving="true"
 		AcceptableAimDelta="20d"
 		ReAcquireDetailType="PER_CLIP"
-		RequiredAntiMask="ANTI_STRUCTURE ANTI_GROUND ANTI_WATER">
+		RequiredAntiMask="ANTI_STRUCTURE ANTI_GROUND ANTI_WATER ANTI_AIRBORNE_VEHICLE ANTI_AIRBORNE_INFANTRY">
 		<FiringDuration
 			MinSeconds="1.0s"
 			MaxSeconds="1.0s" />
+		<!-- r18 cryo anti-air: may target aircraft; AIRBORNE_TARGET excludes removed -->
 		<Nuggets>
 			<ActivateLaserNugget
 				Lifetime="1.0s"
@@ -1576,7 +1577,7 @@
 					Rule="ANY"
 					Include="INFANTRY VEHICLE HUGE_VEHICLE AIRCRAFT STRUCTURE TIME_BOMB"
 					Exclude="BRIDGE_GATEHOUSE" 
-					StatusBitFlagsExclude="SUBMERGED AIRBORNE_TARGET PARACHUTING"/>
+					StatusBitFlagsExclude="SUBMERGED PARACHUTING"/>
 			</ActivateLaserNugget>
 			<!-- Normal Weapon -->
 			<SecondaryDamageNugget
@@ -1584,7 +1585,7 @@
 				<SpecialObjectFilter
 					Rule="ALL"
 					Exclude="BRIDGE_GATEHOUSE" 
-					StatusBitFlagsExclude="SUBMERGED AIRBORNE_TARGET PARACHUTING UNDER_IRON_CURTAIN">
+					StatusBitFlagsExclude="SUBMERGED PARACHUTING UNDER_IRON_CURTAIN">
 				</SpecialObjectFilter>
 				<ForbiddenUpgrade>Upgrade_AlliedHighTechnology</ForbiddenUpgrade>
 			</SecondaryDamageNugget>
@@ -1595,7 +1596,7 @@
 				<SpecialObjectFilter
 					Rule="ALL"
 					Exclude="BRIDGE_GATEHOUSE" 
-					StatusBitFlagsExclude="SUBMERGED AIRBORNE_TARGET PARACHUTING UNDER_IRON_CURTAIN">
+					StatusBitFlagsExclude="SUBMERGED PARACHUTING UNDER_IRON_CURTAIN">
 				</SpecialObjectFilter>
 				<RequiredUpgrade>Upgrade_AlliedHighTechnology</RequiredUpgrade>
 			</SecondaryDamageNugget>
@@ -1744,7 +1745,7 @@
 		FireSound="SOV_MigFighter_MissileFire"
 		FireFX="FX_SovietMigMissilesFire"
 		FireVeteranFX="FX_SovietMigMissilesFire_Vet"
-		RequiredAntiMask="ANTI_AIRBORNE_VEHICLE ANTI_AIRBORNE_INFANTRY"
+		RequiredAntiMask="ANTI_AIRBORNE_VEHICLE ANTI_AIRBORNE_INFANTRY ANTI_GROUND ANTI_STRUCTURE ANTI_WATER"
 		CanFireWhileMoving="true"
 		InstantLoadClipOnActivate="true"
 		VirtualDamage="SHARE"
@@ -1776,7 +1777,7 @@
 		ProjectileCollidesWith="ENEMIES"
 		RadiusDamageAffects="ENEMIES NEUTRALS"
 		Flags="ATTACK_NEEDS_LINE_OF_SIGHT NOT_ATTRACTED_BY_MAGNETS"
-		RequiredAntiMask="ANTI_AIRBORNE_VEHICLE ANTI_AIRBORNE_INFANTRY">
+		RequiredAntiMask="ANTI_AIRBORNE_VEHICLE ANTI_AIRBORNE_INFANTRY ANTI_GROUND ANTI_STRUCTURE ANTI_WATER">
 		<Nuggets>
 			<DamageNugget
 				id="DefaultDamageNugget"
@@ -2846,7 +2847,7 @@
 		AttackRange="200.0"
 		MinimumAttackRange="10"
 		AcceptableAimDelta="10d"
-		RequiredAntiMask="ANTI_AIRBORNE_VEHICLE ANTI_AIRBORNE_INFANTRY ANTI_PARACHUTE"
+		RequiredAntiMask="ANTI_AIRBORNE_VEHICLE ANTI_AIRBORNE_INFANTRY ANTI_PARACHUTE ANTI_GROUND ANTI_STRUCTURE ANTI_WATER"
 		CanFireWhileMoving="true"
 		ClipSize="90"
 		Flags="ATTACK_NEEDS_LINE_OF_SIGHT NOT_ATTRACTED_BY_MAGNETS"
@@ -3313,7 +3314,7 @@
 		FireFX="FX_PhalanxGunFire"
 		FireVeteranFX="FX_PhalanxGunFire_Vet"
 		AttackRange="300.0"
-		RequiredAntiMask="ANTI_AIRBORNE_VEHICLE ANTI_AIRBORNE_INFANTRY ANTI_PARACHUTE"
+		RequiredAntiMask="ANTI_AIRBORNE_VEHICLE ANTI_AIRBORNE_INFANTRY ANTI_PARACHUTE ANTI_GROUND ANTI_STRUCTURE ANTI_WATER"
 		CanFireWhileMoving="true"
 		ClipSize="=$UNLIMITED_CLIP_SIZE"
 		Flags="ATTACK_NEEDS_LINE_OF_SIGHT"
@@ -5223,8 +5224,8 @@ Flags="NOT_ATTRACTED_BY_MAGNETS"
 			MinSeconds="0.5s"
 			MaxSeconds="0.5s" />
         <ClipReloadTime
-			MinSeconds="2s"
-			MaxSeconds="2s" />
+			MinSeconds="0s"
+			MaxSeconds="0s" />
         <Nuggets>
             <DamageNugget
 				Damage="50.0"
@@ -5846,12 +5847,13 @@ Flags="NOT_ATTRACTED_BY_MAGNETS"
 		FireFX="FX_AAAVT1_Spy"
     FireVeteranFX="FX_AAAVT1_Spy"
 		inheritFrom="AAGA_PistolWeapon">
+		<!-- r18 IFV spy x2: 0.5s -> 0.25s -->
 		<FiringDuration
-			MinSeconds="0.5s"
-			MaxSeconds="0.5s" />
+			MinSeconds="0.25s"
+			MaxSeconds="0.25s" />
 		<ClipReloadTime
-			MinSeconds="0.5s"
-			MaxSeconds="0.5s" />
+			MinSeconds="0.25s"
+			MaxSeconds="0.25s" />
 	</WeaponTemplate>
 
 	<!-- Pistol (Tanya) -->
@@ -7568,6 +7570,7 @@ Flags="NOT_ATTRACTED_BY_MAGNETS"
 	<WeaponTemplate
 		id="JapanAntiAirVehicleTech1_LandMissileLauncher_JapanAdvancedMissilePacks"
 		inheritFrom="JapanAntiAirVehicleTech1_LandMissileLauncher"
+		RequiredAntiMask="ANTI_AIRBORNE_VEHICLE ANTI_AIRBORNE_INFANTRY ANTI_GROUND ANTI_STRUCTURE ANTI_WATER"
 		ClipSize="6">
 		<ClipReloadTime
 			MinSeconds=".5s"
@@ -7587,7 +7590,7 @@ Flags="NOT_ATTRACTED_BY_MAGNETS"
 		ReAcquireDetailType="PRE_FIRE"
 		ClipSize="5"
 		Flags="ATTACK_NEEDS_LINE_OF_SIGHT"
-		RequiredAntiMask="ANTI_GROUND ANTI_STRUCTURE ANTI_WATER"
+		RequiredAntiMask="ANTI_GROUND ANTI_STRUCTURE ANTI_WATER ANTI_AIRBORNE_VEHICLE ANTI_AIRBORNE_INFANTRY"
 		FinishAttackOnceStarted="true"
 		CanFireWhileMoving="true">
 		<FiringDuration
@@ -7806,7 +7809,7 @@ Flags="NOT_ATTRACTED_BY_MAGNETS"
 		ClipSize="8"
 		AutoReloadsClip="AUTO"
 		Flags="ATTACK_NEEDS_LINE_OF_SIGHT"
-		RequiredAntiMask="ANTI_GROUND ANTI_WATER ANTI_STRUCTURE"
+		RequiredAntiMask="ANTI_GROUND ANTI_WATER ANTI_STRUCTURE ANTI_AIRBORNE_VEHICLE ANTI_AIRBORNE_INFANTRY"
 		CanFireWhileMoving="true"
 		ReAcquireDetailType="PER_SHOT"
 		ForbiddenFiringObjectStatus="AIRBORNE_TARGET"
@@ -7841,7 +7844,7 @@ Flags="NOT_ATTRACTED_BY_MAGNETS"
 		ClipSize="=$UNLIMITED_CLIP_SIZE"
 		AutoReloadsClip="AUTO"
 		Flags="ATTACK_NEEDS_LINE_OF_SIGHT NOT_ATTRACTED_BY_MAGNETS"
-		RequiredAntiMask="ANTI_AIRBORNE_VEHICLE ANTI_AIRBORNE_INFANTRY"
+		RequiredAntiMask="ANTI_AIRBORNE_VEHICLE ANTI_AIRBORNE_INFANTRY ANTI_GROUND ANTI_STRUCTURE ANTI_WATER"
 		CanFireWhileMoving="true"		
 		ReAcquireDetailType="PER_SHOT"
 		AcceptableAimDelta="20d"
@@ -9224,12 +9227,209 @@ Flags="NOT_ATTRACTED_BY_MAGNETS"
 		</Nuggets>
 	</WeaponTemplate>
 
+	<!-- Buildable Precision Bomber warhead: copy of AlliedPrecisionBombWarhead (r15: OCL_DynamicsImpact restored) -->
+	<WeaponTemplate
+		id="AlliedPrecisionBombWarhead_Buildable"
+        Flags="NOT_ATTRACTED_BY_MAGNETS"
+		ProjectileCollidesWith  = "ALLIES ENEMIES NEUTRAL STRUCTURES WALLS"
+		RadiusDamageAffects="ALLIES ENEMIES NEUTRALS" 
+		RequiredAntiMask="ANTI_WATER ANTI_GROUND ANTI_STRUCTURE">
+		<Nuggets>
+			<DamageNugget
+				id="ModuleTag_DamageNugget" 
+				Damage="575.0"
+				Radius="50"
+				RadiusAffectsBridges="true" 
+				DamageTaperOff="0"
+				DamageType="EXPLOSIVE"
+				DamageFXType="ALLIED_PRESISIONBOMB"
+				DeathType="NORMAL">
+				<DamageScalarDetails Scalar= "75%">
+					<Filter
+					Rule="NONE">
+						<IncludeThing>SovietMiner</IncludeThing>
+						<IncludeThing>AlliedMiner</IncludeThing>
+						<IncludeThing>JapanMiner</IncludeThing>
+					</Filter>		
+					</DamageScalarDetails>
+				</DamageNugget>
+        <WeaponOCLNugget
+				WeaponOCL="OCL_DynamicsImpact"/>
+        <MetaImpactNugget
+				ShockWaveAmount="89.0"
+				ShockWaveRadius="50.0"
+				ShockWaveZMult="1.50" />
+		</Nuggets>
+	</WeaponTemplate>
+
 	<!-- Buildable Precision Bomber weapon with RTB reload (Batch 102) -->
 	<WeaponTemplate
 		id="AlliedPrecisionBomb_Buildable"
 		inheritFrom="AlliedPrecisionBomb"
-		AutoReloadsClip="RETURN_TO_BASE">
+		ClipSize="3"
+		AutoReloadsClip="RETURN_TO_BASE"
+		IgnoresContactPoints="true">
+		<ClipReloadTime
+			MinSeconds="0.1s"
+			MaxSeconds="0.1s" />
+		<Nuggets xai:joinAction="Replace" xmlns:xai="uri:ea.com:eala:asset:instance">
+			<ProjectileNugget
+				ProjectileTemplate="AlliedPrecisionBombProjectile"
+				WarheadTemplate="AlliedPrecisionBombWarhead_Buildable"/>
+			<InformTargetNugget />
+		</Nuggets>
 	</WeaponTemplate>
+
+
+	<!-- r14: Guardian Target Painter extra effect - Cryo Sat L1 beam on the painted unit, one wave every 4.0s = Cryo L1 beam lifetime, waves back-to-back -->
+	<WeaponTemplate
+		id="AlliedAntiVehicleVehicleTech1PainterCryoStrike"
+		AttackRange="300.0"
+		CanFireWhileMoving="true"
+		WeaponSpeed="999999.0"
+		RadiusDamageAffects="ENEMIES"
+		AcceptableAimDelta="180d"
+		ClipSize="1"
+		AutoReloadsClip="AUTO"
+		ReAcquireDetailType="PER_CLIP"
+		Flags="ATTACK_NEEDS_LINE_OF_SIGHT NOT_ATTRACTED_BY_MAGNETS"
+		RequiredAntiMask="ANTI_GROUND ANTI_STRUCTURE ANTI_WATER"
+		RequiredFiringObjectStatus="GENERIC_TOGGLE_STATE">
+		<ClipReloadTime
+			MinSeconds="4.0s"
+			MaxSeconds="4.0s" />
+		<Nuggets>
+			<WeaponOCLNugget
+				WeaponOCL="OCL_CryoSatelliteLvl1" />
+		</Nuggets>
+	</WeaponTemplate>
+
+	<!-- r16: Striker-VX ground mode, also hits ground (base weapon is shared with the Apocalypse, so a copy) -->
+	<WeaponTemplate
+		id="JapanAntiAirVehicleTech1_LandMissileLauncher_AG"
+		inheritFrom="JapanAntiAirVehicleTech1_LandMissileLauncher"
+		RequiredAntiMask="ANTI_AIRBORNE_VEHICLE ANTI_AIRBORNE_INFANTRY ANTI_GROUND ANTI_STRUCTURE ANTI_WATER" />
+
+
+	<!-- r16: Sea-Wing water mode secondary gun: ground, naval, structures, submerged -->
+	<WeaponTemplate
+		id="JapanAntiAirShipGun_SeaMode"
+		inheritFrom="JapanAntiAirShipGun"
+		RequiredAntiMask="ANTI_GROUND ANTI_WATER ANTI_STRUCTURE ANTI_SUBMERGED" />
+
+
+	<!-- r16: Demolition Truck. Attack = drive up and self-destruct (kills itself, SUICIDED);
+	     the blast itself comes from the death weapon so it is identical on attack and on death. -->
+	<WeaponTemplate
+		id="SovietDemolitionTruckDetonateWeapon"
+		AttackRange="25.0"
+		ClipSize="1"
+		AcceptableAimDelta="180d"
+		CanFireWhileMoving="true"
+		RadiusDamageAffects="SELF"
+		Flags="NOT_ATTRACTED_BY_MAGNETS"
+		RequiredAntiMask="ANTI_GROUND ANTI_STRUCTURE ANTI_WATER">
+		<Nuggets>
+			<DamageNugget
+				Radius="0"
+				OnlyKillOwnerWhenTriggered="true"
+				DamageType="UNRESISTABLE"
+				DamageFXType="JAPAN_CANNON"
+				DeathType="SUICIDED" />
+		</Nuggets>
+	</WeaponTemplate>
+	<!-- = medium time bomb (AlliedTimeBomb_Level2): 1000 dmg, radius 200, taper 600, EXPLOSIVE, FX_TimeBombExplosionLvl2,
+	     + Desolator Airstrike Level 1 fallout: vanilla OCL_SovietDesolatorBombWarhead -> DesolatorField_DesolatorBomb
+	       (radius 150, 30s, Weapon_DesolatorBombFieldUpdate every 0.1s) -->
+	<WeaponTemplate
+		id="SovietDemolitionTruckDeathWeapon"
+		ClipSize="1"
+		WeaponSpeed="500"
+		FireFX="FX_TimeBombExplosionLvl2"
+		Flags="NOT_ATTRACTED_BY_MAGNETS"
+		RadiusDamageAffects="ENEMIES NEUTRALS ALLIES"
+		AcceptableAimDelta="180d"
+		CanFireWhileMoving="true"
+		RequiredAntiMask="ANTI_GROUND ANTI_STRUCTURE ANTI_WATER ANTI_SUBMERGED">
+		<Nuggets>
+			<DamageNugget
+				id="ModuleTag_DamageNugget"
+				Damage="1000.0"
+				DamageTaperOff="600"
+				Radius="200"
+				DamageType="EXPLOSIVE"
+				DamageFXType="ALLIED_BOMBLVL2"
+				DeathType="NORMAL"
+				RadiusAffectsBridges="true">
+			</DamageNugget>
+			<MetaImpactNugget
+				ShockWaveAmount="89.0"
+				ShockWaveRadius="175.0"
+				ShockWaveZMult="1.50" />
+			<WeaponOCLNugget
+				WeaponOCL="OCL_SovietDesolatorBombWarhead" />
+		</Nuggets>
+	</WeaponTemplate>
+
+	<!-- r18 Battle Fortress: container range dummy (no damage). Whole-map range so a force-attack never lands outside the container weapon range. -->
+	<WeaponTemplate
+		id="AlliedBattleFortressContainerDummy"
+		AttackRange="99999.0"
+		MinimumAttackRange="0"
+		HitPercentage="0%"
+		CanFireWhileMoving="true"
+		AcceptableAimDelta="180d"
+		ClipSize="=$UNLIMITED_CLIP_SIZE"
+		AutoReloadsClip="AUTO"
+		FireFX="FX_None"
+		FireVeteranFX="FX_None"
+		RequiredAntiMask="ANTI_GROUND ANTI_STRUCTURE ANTI_WATER"
+		Flags="NOT_ATTRACTED_BY_MAGNETS">
+		<FiringDuration
+			MinSeconds="1.0s"
+			MaxSeconds="1.0s" />
+		<Nuggets>
+			<ProjectileNugget
+				WarheadTemplate="DummyWeaponWarhead" />
+		</Nuggets>
+	</WeaponTemplate>
+
+	<!-- r18: fired on itself every 0.2s by airborne units (FireWeaponUpdate ModuleTag_AirborneFrozenCrash); kills only if it is frozen -->
+	<WeaponTemplate
+		id="AirborneFrozenCrashWeapon"
+		AttackRange="10.0"
+		RequiredAntiMask="ANTI_GROUND ANTI_AIRBORNE_VEHICLE ANTI_AIRBORNE_INFANTRY"
+		RadiusDamageAffects="SELF"
+		AcceptableAimDelta="180d"
+		CanFireWhileMoving="true"
+		Flags="NOT_ATTRACTED_BY_MAGNETS">
+		<FiringDuration
+			MinSeconds="0.1s"
+			MaxSeconds="0.1s" />
+		<Nuggets>
+			<DamageNugget
+				Damage="999999.0"
+				Radius="10.0"
+				DamageType="UNRESISTABLE"
+				DeathType="NORMAL">
+				<SpecialObjectFilter
+					Rule="ANY"
+					Include="VEHICLE HUGE_VEHICLE AIRCRAFT INFANTRY"
+					StatusBitFlags="UNDER_FROZEN"
+					StatusBitFlagsExclude="UNDER_IRON_CURTAIN" />
+			</DamageNugget>
+		</Nuggets>
+	</WeaponTemplate>
+
+	<!-- r18: President's Chopper = Mirage Tank prism cannon (inherits damage/laser/OCL/FX), may also hit air -->
+	<WeaponTemplate
+		id="AlliedMarine1PrismCannon"
+		inheritFrom="AlliedAntiVehicleVehicleTech3PrismCannon"
+		RequiredAntiMask="ANTI_GROUND ANTI_STRUCTURE ANTI_WATER ANTI_AIRBORNE_VEHICLE ANTI_AIRBORNE_INFANTRY" />
+	<WeaponTemplate
+		id="AlliedMarine1PrismCannon_Veteran"
+		inheritFrom="AlliedAntiVehicleVehicleTech3PrismCannon_Veteran"
+		RequiredAntiMask="ANTI_GROUND ANTI_STRUCTURE ANTI_WATER ANTI_AIRBORNE_VEHICLE ANTI_AIRBORNE_INFANTRY" />
 
 </AssetDeclaration>
 

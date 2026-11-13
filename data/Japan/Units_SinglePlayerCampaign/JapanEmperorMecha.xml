@@ -4,6 +4,8 @@
 	<Includes>
 		<Include type="all" source="DATA:GlobalData/GlobalDefines.xml" />
 		<Include type="instance" source="DATA:BaseObjects/BaseVehicle.xml" />
+		<Include type="all" source="ART:JUEmperorMecha_SKN.w3x" />
+		<Include type="all" source="ART:JUEmperorMecha_DIE_SKN.w3x" />
 	</Includes>
 	<GameObject
 		id="JapanEmperorMecha"
@@ -509,7 +511,13 @@
 				CrushableLevel="30" 
 				ModelConditionMatch="USER_6" />
 		</CrusherInfo>
-	</GameObject>
+		<AudioArrayVoice>
+			<AudioEntry Sound="JAP_ShogunExecutioner_VoiceAttackMS" AudioType="voiceAttack" />
+			<AudioEntry Sound="JAP_ShogunExecutioner_VoiceCreateMS" AudioType="voiceCreated" />
+			<AudioEntry Sound="JAP_ShogunExecutioner_VoiceMoveMS" AudioType="voiceMove" />
+			<AudioEntry Sound="JAP_ShogunExecutioner_VoiceSelectMS" AudioType="voiceSelect" />
+		</AudioArrayVoice>
+</GameObject>
 
 
   <GameObject

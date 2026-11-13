@@ -2,7 +2,11 @@
 <AssetDeclaration xmlns="uri:ea.com:eala:asset" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xai="uri:ea.com:eala:asset:instance" xmlns:xi="http://www.w3.org/2001/XInclude">
 	<Tags></Tags>
 	<Includes>
+		<Include type="all" source="ART:NUAirportTechStructure.xml" />
+		<Include type="all" source="ART:NUAirportTechStructure_NRM.xml" />
+		<Include type="all" source="ART:NUAirportTechStructure_SPM.xml" />
 		<Include type="instance" source="DATA:BaseObjects/BaseTechStructure.xml" />
+		<Include type="all" source="ART:NUAirportTechStructure.w3x" />
 		<Include type="instance" source="DATA:BaseObjects/BaseTechStructure.xml" />
 		<Include type="instance" source="DATA:Civilian/Yucatan_YU/Props/YU_HotelDebris.xml" />
 		<Include type="instance" source="DATA:Neutral/Props/AirportTechStructure_Collapse.xml" />
@@ -12,7 +16,7 @@
 	<GameObject
 		id="AlliedAirportTechStructureBuildable"
 		inheritFrom="BaseTechStructure"
-		KindOf="+DONT_UNATTACH_WHEN_HEALING"
+		KindOf="+DONT_UNATTACH_WHEN_HEALING -NEUTRAL_TECH"
 		SelectPortrait="Portrait_Neutral_Airport"
 		ButtonImage="Button_Neutral_Airport"
 		CommandSet="TechAirportParadropCommandSet"
@@ -196,6 +200,7 @@
 			<AudioEntry Sound="NEU_AirportTechBuilding_Select" AudioType="voiceSelect" />
 		</AudioArrayVoice>
 		<AudioArraySound>
+			<AudioEntry Sound="BuildingUnderConstructionLoop" AudioType="soundUnderConstruction" />
 			<AudioEntry Sound="HumanFaction_MediumBuilding_LightDamageMS" AudioType="soundOnDamaged" />
 			<AudioEntry Sound="HumanFaction_MediumBuilding_HeavyDamageMS" AudioType="soundOnReallyDamaged" />
 		</AudioArraySound>
@@ -205,7 +210,23 @@
 		<ProjectedBuildabilityInfo
 			Radius="0.0"
 			BuildPlacementTypes="MAIN_STRUCTURE OTHER_STRUCTURE" />
-	</GameObject>
+		<EvaEventArray xai:joinAction="Replace" xmlns:xai="uri:ea.com:eala:asset:instance">
+			<EvaEntry EvaEvent="BuildingConstructionStarted" EvaType="productionStarted" />
+			<EvaEntry EvaEvent="BuildingConstructionComplete" EvaType="productionComplete" />
+			<EvaEntry EvaEvent="StructureUnderAttack" EvaType="damagedOwner" />
+			<EvaEntry EvaEvent="AllyStructureUnderAttack" EvaType="damagedAlly" />
+			<EvaEntry EvaEvent="StructureSold" EvaType="soldOwner" />
+			<EvaEntry EvaEvent="StructureRepairing" EvaType="repairingOwner" />
+			<EvaEntry EvaEvent="EnemyCampSighted" EvaType="enemyObjectSighted" />
+			<EvaEntry EvaEvent="NewConstructionOptions" EvaType="availableForProduction" />
+			<EvaEntry EvaEvent="StructurePlacementFailed" EvaType="placementFailed" />
+			<EvaEntry EvaEvent="StructureCannotBuildDueToFullBuildQueue" EvaType="cannotBuildDueToFullBuildQueue" />
+			<EvaEntry EvaEvent="BuildOnHold" EvaType="buildOnHold" />
+			<EvaEntry EvaEvent="BuildCancelled" EvaType="buildCancelled" />
+			<EvaEntry EvaEvent="BuildingManuallyPoweredDown" EvaType="manuallyPoweredOff" />
+			<EvaEntry EvaEvent="BuildingManuallyPoweredUp" EvaType="manuallyPoweredOn" />
+		</EvaEventArray>
+</GameObject>
 
 	<GameObject
 		id="SovietAirportTechStructureBuildable"
@@ -224,7 +245,8 @@
 		id="JapanAirportTechStructureBuildable"
 		inheritFrom="AlliedAirportTechStructureBuildable"
 		Side="Japan"
-		EditorName="JapanAirportTechStructureBuildable" />
+		EditorName="JapanAirportTechStructureBuildable"
+		BuildPlacementTypeFlag="OTHER_STRUCTURE" />
 
 	<ObjectCreationList
 		id="NUAirportTechStructureBuildable_Die_OCL">

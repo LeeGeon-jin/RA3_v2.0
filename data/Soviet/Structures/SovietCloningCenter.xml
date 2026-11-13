@@ -4,6 +4,10 @@
 	<Includes>
 		<Include type="instance" source="DATA:BaseObjects/BaseSovietStructure.xml" />
 		<Include type="all"	source="ART:GE_SovietVIPBunkerSubStructure.W3X" />
+		<!-- r16: textures (were not included -> purple) -->
+		<Include type="all" source="ART:GE_SovietVIPBunkerSubStructure.xml" />
+		<Include type="all" source="ART:GE_SovietVIPBunkerSubStructure_NRM.xml" />
+		<Include type="all" source="ART:GE_SovietVIPBunkerSubStructure_SPM.xml" />
 		<Include type="instance" source="DATA:Civilian/Yucatan_YU/Props/YU_HotelDebris.xml" />
 		<Include type="instance" source="DATA:Civilian/Geneva_GE/Props/GE_SovietVIPBunkerSubStructure_Collapse.xml" />
 		
@@ -19,7 +23,7 @@
 		SelectPortrait="Portrait_Soviet_VIPBunker"
 		ButtonImage="Button_Soviet_VIPBunker"
 		BuildTime="0.0"
-		EnergyProduction="-100"
+		EnergyProduction="-75"
 		MaxSimultaneousOfType="1"
 		ProductionQueueType="OTHER_STRUCTURE"
 		BuildPlacementTypeFlag="OTHER_STRUCTURE"
@@ -68,6 +72,19 @@
 				<UpgradeMap OwnershipAmount="5" ProvidedUpgrade="Upgrade_SovietCloning" />
 				<UpgradeMap OwnershipAmount="6" ProvidedUpgrade="Upgrade_SovietCloning" />
 			</CaptureAndGiveUpgradeBehavior>
+			<!-- r18: CaptureAndGiveUpgradeBehavior only fires on capture, so a building the player builds never got the upgrade.
+			     Grant it when construction completes and remove it again when this building dies. -->
+			<GrantUpgradeCreate
+				id="ModuleTag_CloningGrantOnBuild"
+				UpgradeToGrant="Upgrade_SovietCloning"
+				GiveOnBuildComplete="true" />
+			<CreateObjectDie
+				id="ModuleTag_CloningLostOCL"
+				CreationList="OCL_SovietCloningCenterLost">
+				<DieMuxData
+					DeathTypes="ALL"
+					ExemptStatus="UNDER_CONSTRUCTION" />
+			</CreateObjectDie>
 
 			<xi:include
 				href="DATA:Includes/GenericBuildingRepair.xml" />
@@ -134,6 +151,7 @@
 			</Shape>
 		</Geometry>
 		<AudioArraySound>
+			<AudioEntry Sound="BuildingUnderConstructionLoop" AudioType="soundUnderConstruction" />
 			<AudioEntry Sound="" AudioType="soundOnDamaged" />
 			<AudioEntry Sound="" AudioType="soundOnReallyDamaged" />
 		</AudioArraySound>
@@ -153,4 +171,65 @@
 			<CreateObject>GE_SovietVIPBunkerSubStructure_Collapse</CreateObject>
 		</CreateObject>
 	</ObjectCreationList>	
+
+	<!-- r18: invisible helper spawned when the building dies; removes the player upgrade, then deletes itself -->
+	<GameObject
+		id="SovietCloningCenterLostHelper"
+		EditorSorting="SYSTEM"
+		TransportSlotCount="0"
+		IsTrainable="false"
+		KindOf="UNATTACKABLE NOT_AUTOACQUIRABLE NO_COLLIDE INERT"
+		EditorName="SovietCloningCenterLostHelper">
+		<DisplayName>SovietCloningCenterLostHelper</DisplayName>
+		<ArmorSet
+			Armor="NoArmor" />
+		<Draws>
+			<ScriptedModelDraw
+				id="ModuleTag_Draw">
+				<ModelConditionState
+					ParseCondStateType="PARSE_DEFAULT">
+					<Model Name="" />
+				</ModelConditionState>
+			</ScriptedModelDraw>
+		</Draws>
+		<Behaviors>
+			<GrantUpgradeCreate
+				id="ModuleTag_GrantTrigger"
+				UpgradeToGrant="Upgrade_CloningCenterLost" />
+			<RemoveUpgradeUpgrade
+				id="ModuleTag_RemovePlayerUpgrade">
+				<TriggeredBy>Upgrade_CloningCenterLost</TriggeredBy>
+				<UpgradeToRemove>Upgrade_SovietCloning</UpgradeToRemove>
+			</RemoveUpgradeUpgrade>
+			<LifetimeUpdate
+				id="ModuleTag_Lifetime"
+				MinLifetime="1s"
+				MaxLifetime="1s" />
+			<DestroyDie
+				id="ModuleTag_DieDestroy">
+				<DieMuxData
+					DeathTypes="ALL" />
+			</DestroyDie>
+		</Behaviors>
+		<Body>
+			<PropBody
+				id="ModuleTag_Body" />
+		</Body>
+		<Geometry
+			IsSmall="true">
+			<Shape
+				Type="CYLINDER"
+				MajorRadius="1.0"
+				Height="1.0" />
+		</Geometry>
+	</GameObject>
+
+	<ObjectCreationList
+		id="OCL_SovietCloningCenterLost">
+		<CreateObject
+			Options="IGNORE_ALL_OBJECTS"
+			Disposition="LIKE_EXISTING">
+			<CreateObject>SovietCloningCenterLostHelper</CreateObject>
+		</CreateObject>
+	</ObjectCreationList>
 </AssetDeclaration>

@@ -59,4 +59,42 @@
 				ValidTargetCursor="TargetAbility"/>
 		</Data>
 	</UnitAbilityButtonTemplate>
+
+	<!-- r14 -->
+	<UnitAbilityButtonTemplate
+		id="ButtonUpgradeSovietPowerPlantTurbine"
+		LogicCommand="Command_UpgradeSovietPowerPlantTurbine">
+		<Data>
+			<ObjectUpgrade
+				StateData="ButtonStateUpgradeSovietPowerPlantTurbine"/>
+		</Data>
+	</UnitAbilityButtonTemplate>
+	<UnitAbilityButtonTemplate
+		id="ButtonUpgradeSovietPowerPlantAdvancedTurbine"
+		LogicCommand="Command_UpgradeSovietPowerPlantAdvancedTurbine">
+		<Data>
+			<ObjectUpgrade
+				StateData="ButtonStateUpgradeSovietPowerPlantAdvancedTurbine"/>
+		</Data>
+	</UnitAbilityButtonTemplate>
+
+	<UnitAbilityButtonTemplate
+		id="ButtonUnPackJapanMechaKingCore"
+		LogicCommand="Command_UnPackJapanMechaKingCore">
+		<Data>
+			<SpecialPower
+				StateData="ButtonStateAbilityUnPackJapanSuperWeaponEgg"/>
+		</Data>
+	</UnitAbilityButtonTemplate>
+
+
+	<UnitAbilityButtonTemplate
+		id="ButtonSovietDemolitionTruckSprint"
+		LogicCommand="Command_SovietDemolitionTruckSprint">
+		<Data>
+			<SpecialPower
+				StateData="ButtonStateAbilityJapanEngineerSprint"/>
+		</Data>
+	</UnitAbilityButtonTemplate>
+
 </AssetDeclaration>

@@ -23,7 +23,7 @@
 		BuildTime="0.0"
 		EnergyProduction="-75"
 		CommandSet="SovietTechStructureCommandSet"
-		KindOf="+FS_TECHNOLOGY +POWERED +FS_TECH_CENTER"
+		KindOf="+FS_TECHNOLOGY +POWERED +FS_TECH_CENTER +CONSTRUCTION_YARD +FS_FACTORY +CRANE"
 		RadarPriority="STRUCTURE"
 		PlacementViewAngle="315d"
 		ProductionQueueType="MAIN_STRUCTURE"
@@ -419,6 +419,8 @@
 			<xi:include
 				href="DATA:Includes/InfiltratorContainParalyze.xml" />								
 
+					<ProductionUpdate id="ModuleTag_TechCenterMainProductionUpdate" Type="MAIN_STRUCTURE" MaxQueueEntries="1" />
+					<ProductionUpdate id="ModuleTag_TechCenterOtherProductionUpdate" Type="OTHER_STRUCTURE" MaxQueueEntries="1" />
 		</Behaviors>
 		
 		<Body>

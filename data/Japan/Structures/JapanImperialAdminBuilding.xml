@@ -2,6 +2,10 @@
 <AssetDeclaration xmlns="uri:ea.com:eala:asset" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xai="uri:ea.com:eala:asset:instance">
 	<Tags></Tags>
 	<Includes>
+		<Include type="all" source="ART:VL_ImperialAdminBuilding_01.W3X" />
+		<Include type="all" source="ART:VL_ImperialAdminBuilding_01.xml" />
+		<Include type="all" source="ART:VL_ImperialAdminBuilding_01_NRM.xml" />
+		<Include type="all" source="ART:VL_ImperialAdminBuilding_01_SPM.xml" />
 		<Include type="instance" source="DATA:BaseObjects/BaseCivilianStructureNoGarrisonDestructible.xml" />
 			<Include type="instance" source="DATA:Civilian/Yucatan_YU/Props/YU_HotelDebris.xml" />
 			<Include type="all" source="DATA:GlobalData/GlobalDefines.xml" />
@@ -11,7 +15,7 @@
 		id="JapanImperialAdminBuildingBuildable"
 		inheritFrom="BaseCivilianStructureNoGarrisonDestructible"
 		EditorName="JapanImperialAdminBuildingBuildable"	
-  KindOf="-CIVILIAN_BUILDING +AUTO_ACQUIRABLE_BY_AI -NOT_AUTOACQUIRABLE"	
+  KindOf="-CIVILIAN_BUILDING +AUTO_ACQUIRABLE_BY_AI -NOT_AUTOACQUIRABLE -AUTO_RALLYPOINT"	
     EditorSorting="STRUCTURE"
     		Description="DESC:ImperialAdminBuilding"
     		TypeDescription="TYPE:ImperialAdminBuilding" 
@@ -63,7 +67,11 @@
 					FX="FX_Civ_Explosion_Medium" />
 			</FXListBehavior>
 
+					<StructureUnpackUpdate id="ModuleTag_StructureUnpackUpdate" UnpackTime="0.0s" />
 		</Behaviors>
+		<AI>
+			<AIUpdate id="ModuleTag_AI" AutoAcquireEnemiesWhenIdle="NO" />
+		</AI>
 		<Body>
 			<ActiveBody
 				id="ModuleTag_Body"
@@ -85,8 +93,25 @@
 </Shape>
 		</Geometry>
 		<AudioArraySound>
+			<AudioEntry Sound="BuildingUnderConstructionLoop" AudioType="soundUnderConstruction" />
 			<AudioEntry Sound="HumanFaction_MediumBuilding_LightDamageMS" AudioType="soundOnDamaged" />
 			<AudioEntry Sound="HumanFaction_MediumBuilding_HeavyDamageMS" AudioType="soundOnReallyDamaged" />
-		</AudioArraySound> 
-	</GameObject>
+		</AudioArraySound>
+		<EvaEventArray xai:joinAction="Replace" xmlns:xai="uri:ea.com:eala:asset:instance">
+			<EvaEntry EvaEvent="BuildingConstructionStarted" EvaType="productionStarted" />
+			<EvaEntry EvaEvent="BuildingConstructionComplete" EvaType="productionComplete" />
+			<EvaEntry EvaEvent="StructureUnderAttack" EvaType="damagedOwner" />
+			<EvaEntry EvaEvent="AllyStructureUnderAttack" EvaType="damagedAlly" />
+			<EvaEntry EvaEvent="StructureSold" EvaType="soldOwner" />
+			<EvaEntry EvaEvent="StructureRepairing" EvaType="repairingOwner" />
+			<EvaEntry EvaEvent="EnemyCampSighted" EvaType="enemyObjectSighted" />
+			<EvaEntry EvaEvent="NewConstructionOptions" EvaType="availableForProduction" />
+			<EvaEntry EvaEvent="StructurePlacementFailed" EvaType="placementFailed" />
+			<EvaEntry EvaEvent="StructureCannotBuildDueToFullBuildQueue" EvaType="cannotBuildDueToFullBuildQueue" />
+			<EvaEntry EvaEvent="BuildOnHold" EvaType="buildOnHold" />
+			<EvaEntry EvaEvent="BuildCancelled" EvaType="buildCancelled" />
+			<EvaEntry EvaEvent="BuildingManuallyPoweredDown" EvaType="manuallyPoweredOff" />
+			<EvaEntry EvaEvent="BuildingManuallyPoweredUp" EvaType="manuallyPoweredOn" />
+		</EvaEventArray>
+</GameObject>
 </AssetDeclaration>

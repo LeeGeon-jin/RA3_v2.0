@@ -8,52 +8,52 @@
 			type="all"
 			source="DATA:GlobalData/GlobalDefines.xml" />
 		<Include
-			type="all"
+			type="reference"
 			source="ART:SBAirfield_SKN.w3x" />		
 		<Include
-			type="all"
+			type="reference"
 			source="ART:SBAirfield_BLD.w3x" />	
 		<Include
-			type="all"
+			type="reference"
 			source="ART:SBAirfield_FX.w3x" />		
 		<Include
-			type="all"
+			type="reference"
 			source="ART:SBAirfield_FX.w3x" />		
 		<Include
-			type="all"
+			type="reference"
 			source="ART:SBAirfield_DOOR_01_SKN.w3x" />
 		<Include
-			type="all"
+			type="reference"
 			source="ART:SBAirfield_DOOR_02_SKN.w3x" />
 		<Include
-			type="all"
+			type="reference"
 			source="ART:SBAirfield_DOOR_03_SKN.w3x" />
 		<Include
-			type="all"
+			type="reference"
 			source="ART:SBAirfield_DOOR_04_SKN.w3x" />
 		<Include
-			type="all"
+			type="reference"
 			source="ART:SBAirfield_DOOR_05_SKN.w3x" />			
 		<Include
-			type="all"
+			type="reference"
 			source="ART:SBAirfield_DOOR_OPN.w3x" />
 		<Include
-			type="all"
+			type="reference"
 			source="ART:SBAirfield_DOOR_BLD.w3x" />
 			<Include
-			type="all"
+			type="reference"
 			source="ART:SBAirfield_LIGHTS.w3x" />
 		<Include
-			type="all"
+			type="reference"
 			source="ART:SBAirfield_Platform.w3x" />
 		<Include
-			type="all"
+			type="reference"
 			source="ART:SBAirfield_Platform_BLD.w3x" />			
 		<Include
-			type="all"
+			type="reference"
 			source="ART:SBAirfield_Scaffold.w3x" />
 	    <Include
-			type="all"
+			type="reference"
 			source="ART:FXInvisBone.w3x" />
     <!-- Base Object -->
 		<Include

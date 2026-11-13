@@ -280,4 +280,129 @@
 		<Object>AlliedSupersonicBomber_Buildable</Object>
 	</LogicCommand>
 
+
+	<!-- r14 -->
+	<LogicCommand
+		Type="OBJECT_UPGRADE"
+		id="Command_UpgradeSovietPowerPlantTurbine">
+		<Upgrade>Upgrade_SovietPowerPlantTurbine</Upgrade>
+	</LogicCommand>
+	<LogicCommand
+		Type="OBJECT_UPGRADE"
+		id="Command_UpgradeSovietPowerPlantAdvancedTurbine">
+		<Upgrade>Upgrade_SovietPowerPlantAdvancedTurbine</Upgrade>
+	</LogicCommand>
+
+	<LogicCommand
+		id="Command_ConstructJapanRoboticsLab"
+		Type="CONSTRUCTION_YARD_CONSTRUCT">
+		<Object>JapanRoboticsLabBuildable</Object>
+	</LogicCommand>
+
+	<LogicCommand
+		id="Command_ConstructAlliedObservationPostTechStructure"
+		Type="CONSTRUCTION_YARD_CONSTRUCT">
+		<Object>AlliedObservationPostTechStructureBuildable</Object>
+	</LogicCommand>
+	<LogicCommand
+		id="Command_ConstructSovietObservationPostTechStructure"
+		Type="CONSTRUCTION_YARD_CONSTRUCT">
+		<Object>SovietObservationPostTechStructureBuildable</Object>
+	</LogicCommand>
+	<LogicCommand
+		id="Command_ConstructJapanObservationPostTechStructure"
+		Type="CONSTRUCTION_YARD_CONSTRUCT">
+		<Object>JapanObservationPostTechStructureBuildable</Object>
+	</LogicCommand>
+	<LogicCommand
+		id="Command_ConstructAlliedOilDerrickTechStructure"
+		Type="CONSTRUCTION_YARD_CONSTRUCT">
+		<Object>AlliedOilDerrickTechStructureBuildable</Object>
+	</LogicCommand>
+	<LogicCommand
+		id="Command_ConstructSovietOilDerrickTechStructure"
+		Type="CONSTRUCTION_YARD_CONSTRUCT">
+		<Object>SovietOilDerrickTechStructureBuildable</Object>
+	</LogicCommand>
+	<LogicCommand
+		id="Command_ConstructJapanOilDerrickTechStructure"
+		Type="CONSTRUCTION_YARD_CONSTRUCT">
+		<Object>JapanOilDerrickTechStructureBuildable</Object>
+	</LogicCommand>
+	<LogicCommand
+		id="Command_ConstructAlliedSwissBankTechStructure"
+		Type="CONSTRUCTION_YARD_CONSTRUCT">
+		<Object>AlliedSwissBankTechStructureBuildable</Object>
+	</LogicCommand>
+	<LogicCommand
+		id="Command_ConstructSovietSwissBankTechStructure"
+		Type="CONSTRUCTION_YARD_CONSTRUCT">
+		<Object>SovietSwissBankTechStructureBuildable</Object>
+	</LogicCommand>
+	<LogicCommand
+		id="Command_ConstructJapanSwissBankTechStructure"
+		Type="CONSTRUCTION_YARD_CONSTRUCT">
+		<Object>JapanSwissBankTechStructureBuildable</Object>
+	</LogicCommand>
+
+	<!-- r16: Shogun Executioner core - F unpacks in place (no location click) -->
+	<LogicCommand
+		Type="SPECIAL_POWER"
+		id="Command_UnPackJapanMechaKingCore">
+		<SpecialPower>SpecialPower_PackReplaceSelf</SpecialPower>
+		<AISpecialPowerInfo Heuristic="UNPACK" Manager="TACTIC"/>
+	</LogicCommand>
+
+
+	<!-- r16: Demolition Truck -->
+	<LogicCommand
+		Type="UNIT_BUILD"
+		id="Command_ConstructSovietDemolitionTruck">
+		<Object>SovietDemolitionTruck</Object>
+	</LogicCommand>
+	<LogicCommand
+		id="Command_SovietDemolitionTruckSprint"
+		Type="SPECIAL_POWER">
+		<SpecialPower>SpecialPower_SovietDemolitionTruckSprint</SpecialPower>
+		<AISpecialPowerInfo
+			Heuristic="SPEED_BOOST"
+			Manager="MICRO_MANAGER"
+			UseInMicroManagerState="RETREAT COMBAT CLEANUP"
+			UseNearTacticalTarget="true"/>
+	</LogicCommand>
+
+	<!-- r18: Spy Satellite -->
+	<LogicCommand
+		id="Command_ConstructAlliedSpySatellite"
+		Type="CONSTRUCTION_YARD_CONSTRUCT">
+		<Object>AlliedSpySatellite</Object>
+	</LogicCommand>
+	<LogicCommand
+		id="Command_ConstructSovietSpySatellite"
+		Type="CONSTRUCTION_YARD_CONSTRUCT">
+		<Object>SovietSpySatellite</Object>
+	</LogicCommand>
+	<LogicCommand
+		id="Command_ConstructJapanSpySatellite"
+		Type="CONSTRUCTION_YARD_CONSTRUCT">
+		<Object>JapanSpySatellite</Object>
+	</LogicCommand>
+	<!-- r18: Battle Fortress (War Factory only) -->
+	<LogicCommand
+		Type="UNIT_BUILD"
+		id="Command_ConstructAlliedBattleFortress">
+		<Object>AlliedBattleFortress</Object>
+	</LogicCommand>
+	<!-- r18: Battle Bunker from the Soviet defense list (engineer keeps Command_ConstructSovietBunker) -->
+	<LogicCommand
+		id="Command_ConstructSovietBunker_Buildable"
+		Type="CONSTRUCTION_YARD_CONSTRUCT">
+		<Object>SovietBunker_Buildable</Object>
+	</LogicCommand>
+	<!-- r18: President's Chopper (Allied Airfield) -->
+	<LogicCommand
+		Type="UNIT_BUILD"
+		id="Command_ConstructAlliedMarine1_Buildable">
+		<Object>AlliedMarine1_Buildable</Object>
+	</LogicCommand>
 </AssetDeclaration>

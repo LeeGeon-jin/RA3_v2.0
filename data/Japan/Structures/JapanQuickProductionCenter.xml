@@ -3,9 +3,17 @@
 	<Tags></Tags>
 	<Includes>
 		<Include type="instance" source="DATA:BaseObjects/BaseStructure.xml" />
-		<Include type="all"	source="ART:AM_AlliedFutureTechHQ.W3X" />
-		<Include type="instance" source="DATA:Civilian/Yucatan_YU/Props/YU_HotelDebris.xml" />
-		<Include type="instance" source="DATA:Civilian/Amsterdam_AM/Props/AM_AlliedFutureTechHQ_Collapse.xml" />
+		<Include type="all" source="ART:SA_LAMediaCenter.w3x" />
+		<Include type="all" source="ART:SA_LAMediaCenter.xml" />
+		<Include type="all" source="ART:SA_LAMediaCenter_NRM.xml" />
+		<Include type="all" source="ART:SA_LAMediaCenter_SPM.xml" />
+		<Include type="all" source="ART:CBBuilding_Filler.xml" />
+		<Include type="all" source="ART:CBBuilding_Holes.xml" />
+		<Include type="all" source="ART:CBBuilding_Wood.xml" />
+		<Include type="all" source="ART:CBBuilding_Wood_NRM.xml" />
+		<Include type="all" source="ART:CBBuilding_Wood_SPM.xml" />
+		<Include type="instance" source="DATA:Civilian/Santa_Monica_SA/Props/SA_LAMediaCenter_Collapse.xml" />
+		<Include type="instance" source="DATA:Allied/Props/AlliedBarracks_Debris.xml" />
 		
 	</Includes>
 	<GameObject
@@ -18,10 +26,11 @@
 		KindOf="+AIRCRAFT_PATH_AROUND"
 		SelectPortrait="Portrait_Special_FutureTech"
 		ButtonImage="Button_Special_FutureTech"
+		CommandSet="EmptyCommandSet"
 		BuildTime="28"
 		EnergyProduction="-75"
 		MaxSimultaneousOfType="1"
-		ProductionQueueType="OTHER_STRUCTURE"
+		ProductionQueueType="MAIN_STRUCTURE"
 		BuildPlacementTypeFlag="OTHER_STRUCTURE"
 		TypeDescription="Type:QuickProductionCenter"
 		Description="Desc:QuickProductionCenter">
@@ -41,7 +50,7 @@
 				<ModelConditionState
 					ParseCondStateType="PARSE_DEFAULT">
 					<Model
-						Name="AM_AlliedFutureTechHQ" />
+						Name="SA_LAMediaCenter" />
 				</ModelConditionState>
 			</ScriptedModelDraw>
 		</Draws>
@@ -58,8 +67,7 @@
 				<ObjectFilter
 					Rule="ANY"
 					Relationship="SAME_PLAYER"
-					Include="FS_FACTORY"
-					Exclude="CONSTRUCTION_YARD" />
+					Include="STRUCTURE" />
 			</AttributeModifierAuraUpdate>
 
 			<xi:include
@@ -74,7 +82,7 @@
 				<Item
 					BonePrefix="BONE_CONTACT_POINT_"
 					FX="FX_BuildingDebrisExplosion"
-					CreationObject="YU_HotelDebris"
+					CreationObject="AlliedBarracks_Debris"
 					FlingVelocity="100.0"/>
 			</BuildingDestructionBehavior>
 
@@ -89,7 +97,7 @@
 
 			<CreateObjectDie
 				id="ModuleTag_CreateObjectDie"
-				CreationList="AM_AlliedFutureTechHQ_Die_OCL">
+				CreationList="JapanQuickProductionCenter_Die_OCL">
 				<DieMuxData
 					DeathTypes="ALL" />
 			</CreateObjectDie>	
@@ -100,6 +108,9 @@
 					DeathTypes="ALL" />
 			</DestroyDie>				
 		</Behaviors>
+		<AI>
+			<AIUpdate id="ModuleTag_AI" AutoAcquireEnemiesWhenIdle="NO" />
+		</AI>
 		<Body>
 			<ActiveBody
 				id="ModuleTag_Body"
@@ -115,9 +126,9 @@
 			IsSmall="false">
 			<Shape 
 				Type= "BOX"
-				MajorRadius = "30.0"
-				MinorRadius = "30.0"
-				Height = "40.0"
+				MajorRadius = "53.2422"
+				MinorRadius = "44.4629"
+				Height = "80.0"
 				ContactPointGeneration="STRUCTURE" >
 				<Offset
 					x = "0.0"
@@ -126,6 +137,7 @@
 			</Shape>
 		</Geometry>
 		<AudioArraySound>
+			<AudioEntry Sound="BuildingUnderConstructionLoop" AudioType="soundUnderConstruction" />
 			<AudioEntry Sound="HumanFaction_MediumBuilding_LightDamageMS" AudioType="soundOnDamaged" />
 			<AudioEntry Sound="HumanFaction_MediumBuilding_HeavyDamageMS" AudioType="soundOnReallyDamaged" />
 		</AudioArraySound>
@@ -133,7 +145,7 @@
 	</GameObject>
 
 	<ObjectCreationList
-		id="AM_AlliedFutureTechHQ_Die_OCL">
+		id="JapanQuickProductionCenter_Die_OCL">
 		<CreateObject
 			Options="IGNORE_ALL_OBJECTS"
 			Disposition="LIKE_EXISTING RANDOM_FORCE"
@@ -142,7 +154,7 @@
 			MaxForceMagnitude="2.0"
 			MinForcePitch="90d"
 			MaxForcePitch="75d">
-			<CreateObject>AM_AlliedFutureTechHQ_Collapse</CreateObject>
+			<CreateObject>SA_LAMediaCenter_Collapse</CreateObject>
 		</CreateObject>
 	</ObjectCreationList>	
 </AssetDeclaration>

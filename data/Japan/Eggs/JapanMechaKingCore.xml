@@ -17,7 +17,7 @@
 		Side="Japan"
 		ProductionQueueType="VEHICLE"
 		BuildTime="5"
-		CommandSet="JapanSuperWeaponEggCommandSet"
+		CommandSet="JapanMechaKingCoreCommandSet"
 		KindOf="SELECTABLE CAN_CAST_REFLECTIONS VEHICLE FS_FACTORY EXPANSION_UNIT CAN_BE_FAVORITE_UNIT IGNORES_SELECT_ALL CYCLE_SELECTION AMPHIBIOUS SCORE"
 		PlacementViewAngle="225d"
 		EditorName="JapanMechaKingCore"
@@ -200,12 +200,12 @@
 			</FXListBehavior>
 			
 			<xi:include
-				href="DATA:Includes/GenericUnpackPower.xml" />
+				href="DATA:Includes/GenericPackPower.xml" />
 
 			<ReplaceSelfSpecialAbility
 				id="ModuleTag_ReplaceSelf"
-				SpecialPowerTemplate="SpecialPower_UnpackReplaceSelf"
-				Options="IGNORE_FACING_CHECK USE_OBJECT_GEOMETRY_FOR_WITHIN_RANGE_CHECK FAIL_WITH_INVALID_APPROACH"
+				SpecialPowerTemplate="SpecialPower_PackReplaceSelf"
+				Options="IGNORE_FACING_CHECK"
 				PackTime="30.0s"
 				StartAbilityRange="2.0"
 				ReplaceOptions="COPY_UPGRADES DISABLE_DURING_REPLACE CLEAR_LOCATION">

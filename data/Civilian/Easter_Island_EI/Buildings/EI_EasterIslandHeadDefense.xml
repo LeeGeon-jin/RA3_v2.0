@@ -6,7 +6,14 @@
 		<Include type="all" source="DATA:GlobalData/GlobalDefines.xml" />
 		<Include type="instance" source="DATA:GlobalData/Weapon.xml" />
 		<Include type="instance" source="DATA:Civilian/Yucatan_YU/Props/YU_HotelDebris.xml" />
-		<Include type="instance" source="DATA:Civilian/Easter_Island_EI/Props/EI_EasterIslandHeadDefense_Collapse.xml" />		
+		<Include type="instance" source="DATA:Civilian/Easter_Island_EI/Props/EI_EasterIslandHeadDefense_Collapse.xml" />
+		<Include type="all" source="ART:EI_EasterIslandHeadDefense_SKL.w3x" />
+		<Include type="all" source="ART:EI_EasterIslandHeadDefense_SKN.w3x" />
+		<Include type="all" source="ART:EI_EasterIslandHeadDefense_GAG.w3x" />
+		<Include type="all" source="ART:EI_EasterIslandHeadDefense.xml" />
+		<Include type="all" source="ART:EI_EasterIslandHeadDefense_NRM.xml" />
+		<Include type="all" source="ART:EI_EasterIslandHeadDefense_SPM.xml" />
+		<Include type="all" source="ART:CBBuilding_Holes.xml" />		
 	</Includes>
 	<GameObject
 		id="EI_EasterIslandHeadDefense"
@@ -225,7 +232,9 @@
 		Side="Soviet"
 		EditorName="SovietMoaiTeslaHead"
 		EnergyProduction="-75"
-		KindOf="SELECTABLE STRUCTURE IMMOBILE CAN_CAST_REFLECTIONS AUTO_RALLYPOINT COVER KEEP_CLASSIFIED_WHEN_DEAD COVER CIVILIAN_BUILDING RESIST_EMP ALWAYS_VISIBLE_IN_RADAR FS_BASE_DEFENSE POWERED SCORE">
+		KindOf="SELECTABLE STRUCTURE IMMOBILE CAN_CAST_REFLECTIONS COVER KEEP_CLASSIFIED_WHEN_DEAD COVER RESIST_EMP ALWAYS_VISIBLE_IN_RADAR FS_BASE_DEFENSE POWERED SCORE"
+		ProductionQueueType="OTHER_STRUCTURE"
+		BuildPlacementTypeFlag="OTHER_STRUCTURE">
 		<ObjectResourceInfo>
 			<BuildCost Account="=$ACCOUNT_ORE" Amount="750"/>
 		</ObjectResourceInfo>
@@ -267,5 +276,24 @@
 				<UnitAITargetChooserData />
 			</AIUpdate>
 		</AI>
-	</GameObject>	
+		<EvaEventArray xai:joinAction="Replace" xmlns:xai="uri:ea.com:eala:asset:instance">
+			<EvaEntry EvaEvent="BuildingConstructionStarted" EvaType="productionStarted" />
+			<EvaEntry EvaEvent="BuildingConstructionComplete" EvaType="productionComplete" />
+			<EvaEntry EvaEvent="StructureUnderAttack" EvaType="damagedOwner" />
+			<EvaEntry EvaEvent="AllyStructureUnderAttack" EvaType="damagedAlly" />
+			<EvaEntry EvaEvent="StructureSold" EvaType="soldOwner" />
+			<EvaEntry EvaEvent="StructureRepairing" EvaType="repairingOwner" />
+			<EvaEntry EvaEvent="EnemyCampSighted" EvaType="enemyObjectSighted" />
+			<EvaEntry EvaEvent="NewConstructionOptions" EvaType="availableForProduction" />
+			<EvaEntry EvaEvent="StructurePlacementFailed" EvaType="placementFailed" />
+			<EvaEntry EvaEvent="StructureCannotBuildDueToFullBuildQueue" EvaType="cannotBuildDueToFullBuildQueue" />
+			<EvaEntry EvaEvent="BuildOnHold" EvaType="buildOnHold" />
+			<EvaEntry EvaEvent="BuildCancelled" EvaType="buildCancelled" />
+			<EvaEntry EvaEvent="BuildingManuallyPoweredDown" EvaType="manuallyPoweredOff" />
+			<EvaEntry EvaEvent="BuildingManuallyPoweredUp" EvaType="manuallyPoweredOn" />
+		</EvaEventArray>
+		<AudioArraySound xai:joinAction="Append" xmlns:xai="uri:ea.com:eala:asset:instance">
+			<AudioEntry Sound="BuildingUnderConstructionLoop" AudioType="soundUnderConstruction" />
+		</AudioArraySound>
+</GameObject>	
 </AssetDeclaration>

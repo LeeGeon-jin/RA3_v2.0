@@ -992,7 +992,8 @@
 		<AttributeModifier
 		id="AttributeModifier_QuickProduction"
 		Category="NONE"
-		Duration="1.0s">
+		Duration="1.0s"
+		StackingLimit="1">
 		<Modifier Type="PRODUCTION" Value="200%"/>
 	</AttributeModifier>
 	

@@ -1,0 +1,6 @@
+RA3_V2.0_Batch102FIX source snapshot r18 FINAL (2026-11-13 21:40 UTC+10).
+Content: mod data XML + mod.str only (same layout as repo data/): 201 XML + 1 mod.str. No EA art (w3x/dds/tga), no UI art, no built bigs/manifests.
+Status: compiled and installed on the PC 2026-11-13 21:34 UTC+10 (BAB Critical 0 / Error 59 / Warning 358); 75 s direct-launcher self-test passed (responding, no new dumps). Compile/launch success does NOT prove the in-game features work; in-game checks pending.
+Identical (MD5, all 202 files) to E:\RA3ModBuild\RA3ModSDK\Mods\RA3_V2.0_Batch102FIX\data on the PC (excluding one local .bak file).
+r18 = r17 + apply_r18.py sections 1-11 (Academy/Clone Center grant-on-build, Clone Center power -75, Spy Satellite x3, Academy max 1, IFV spy pistol 0.25 s, Allied Battle Fortress, Cryocopter anti-air + frozen aircraft crash, buildable Battle Bunker, buildable President's Chopper).
+Spy Satellite: model TH_ImperialLongRangeRadar from Empire mission 4 Pearl Harbor (camp_j04_pearlharbor_davis), NOT J07 Yokohama; art exported from worldbuilder data into the PC's SDK Art\th only (never in this repo). XML includes ART:TH_ImperialLongRangeRadar.W3X + 8 texture XMLs (TH_ImperialLongRangeRadar[_NRM/_SPM], CBBuilding_Holes/Metal[_NRM/_SPM]/Filler).

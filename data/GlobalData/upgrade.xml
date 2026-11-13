@@ -641,4 +641,34 @@
   id="Confetti_Weapon_Upgrade"
   Type="OBJECT"
 	/>
+
+	<!-- r14: Soviet power plant upgrades, same mechanism as Upgrade_AlliedPowerPlantTurbine / Upgrade_JapanPowerPlantTurbine -->
+	<UpgradeTemplate
+		id="Upgrade_SovietPowerPlantTurbine"
+		inheritFrom="BasePurchasableUpgrade"
+		DisplayName="UpgradeName:SovietPowerPlantTurbine"
+		TypeDescription="UpgradeType:SovietPowerPlantTurbine"
+		Description="UpgradeDesc:SovietPowerPlantTurbine"
+		Type="OBJECT"
+		BuildTime="10.0s"
+		BuildCost="300"
+		IconImage="Button_UpgradeAdvancedTurbines" />
+	<UpgradeTemplate
+		id="Upgrade_SovietPowerPlantAdvancedTurbine"
+		inheritFrom="BasePurchasableUpgrade"
+		DisplayName="UpgradeName:SovietPowerPlantAdvancedTurbine"
+		TypeDescription="UpgradeType:SovietPowerPlantAdvancedTurbine"
+		Description="UpgradeDesc:SovietPowerPlantAdvancedTurbine"
+		Type="OBJECT"
+		BuildTime="10.0s"
+		BuildCost="550"
+		IconImage="Button_UpgradeAdvancedTurbines" />
+
+	<!-- r18: object-level trigger upgrades used by the "lost" helpers -->
+	<UpgradeTemplate id="Upgrade_VeterancyAcademyLost"
+		Type="OBJECT"
+	/>
+	<UpgradeTemplate id="Upgrade_CloningCenterLost"
+		Type="OBJECT"
+	/>
 </AssetDeclaration>

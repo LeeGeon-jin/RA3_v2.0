@@ -7,7 +7,12 @@
     <Include type="instance" source="DATA:Civilian/Yucatan_YU/Props/YU_HotelDebris.xml" />
     <Include type="instance" source="DATA:Civilian/Floating_Island_FI/Props/FI_FloatingFortressMainGun_Collapse.xml" />
 
-  </Includes>
+  	<Include type="all" source="ART:FI_FloatingFortressMainGun.w3x" />
+		<Include type="all" source="ART:FI_FloatingFortressMainGun_COL.w3x" />
+		<Include type="all" source="ART:FI_FloatingFortressMainGun.xml" />
+		<Include type="all" source="ART:FI_FloatingFortressMainGun_NRM.xml" />
+		<Include type="all" source="ART:FI_FloatingFortressMainGun_SPM.xml" />
+	</Includes>
 	<GameObject
 		id="FI_FloatingFortressMainGun"
 		inheritFrom="BaseStructure"
@@ -339,6 +344,7 @@
 		inheritFrom="FI_FloatingFortressMainGun"
 		Side="Japan"
 		EditorName="JapanWaveForceTripleCannon">
+		<DisplayName xai:joinAction="Replace" xmlns:xai="uri:ea.com:eala:asset:instance">Name:JapanWaveForceTripleCannon</DisplayName>
 		<ObjectResourceInfo>
 			<BuildCost Account="=$ACCOUNT_ORE" Amount="2500"/>
 		</ObjectResourceInfo>

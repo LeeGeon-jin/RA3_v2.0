@@ -3,7 +3,7 @@
 	<Tags></Tags>
 	<Includes>
 		<Include type="all" source="DATA:GlobalData/GlobalDefines.xml" />
-		<Include type="all" source="ART:AUSupersonicBomber.w3x" />
+		<Include type="reference" source="ART:AUSupersonicBomber.w3x" />
 		<Include type="instance" source="DATA:BaseObjects/BaseVehicle.xml" />
 	</Includes>
 	<GameObject
@@ -16,7 +16,7 @@
 		EditorSorting="UNIT"
 		BuildTime="10"
 		CommandSet="AlliedAntiGroundAircraftCommandSet"
-		KindOf="CAN_CAST_REFLECTIONS CAN_ATTACK SELECTABLE SCORE AIRCRAFT VEHICLE ASSAULT_AIRCRAFT LINE_OF_SIGHT_IGNORES_BUILDINGS CAN_BE_FAVORITE_UNIT SCORE LIMITED_PRODUCTION_AIRCRAFT NO_COLLIDE"
+		KindOf="CAN_CAST_REFLECTIONS CAN_ATTACK SELECTABLE SCORE AIRCRAFT VEHICLE ASSAULT_AIRCRAFT LINE_OF_SIGHT_IGNORES_BUILDINGS CAN_BE_FAVORITE_UNIT SCORE LIMITED_PRODUCTION_AIRCRAFT"
 		RadarPriority="UNIT"
 		ThreatLevel="10"
 		ProductionQueueType="AIRCRAFT"
@@ -39,7 +39,7 @@
 			Speed="10" />
 		<LocomotorSet
 			id="Locomotor_Normal"
-			Locomotor="AlliedSupersonicBomberLocomotor"
+			Locomotor="AlliedSupersonicBomber_BuildableLocomotor"
 			Condition="NORMAL"
 			Speed="400.0" />
 		<SkirmishAIInformation

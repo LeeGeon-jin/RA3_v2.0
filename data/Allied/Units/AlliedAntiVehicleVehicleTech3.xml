@@ -20,7 +20,7 @@
 		SubGroupPriority="535" 
 		EditorSorting="UNIT"
 		HealthBoxHeightOffset="25"
-		BuildTime="15"
+		BuildTime="12"
 		CommandSet="AlliedAntiVehicleVehicleTech3CommandSet"
 		KindOf="SELECTABLE CAN_ATTACK CAN_CAST_REFLECTIONS SCORE VEHICLE CAN_BE_FAVORITE_UNIT DISGUISER T3_UNIT"
 		WeaponCategory="CANNON"
@@ -35,7 +35,7 @@
 			<RequiredObject>AlliedTechStructure</RequiredObject>
 		</GameDependency>
 		<ObjectResourceInfo>
-			<BuildCost Account="=$ACCOUNT_ORE" Amount="1500"/>
+			<BuildCost Account="=$ACCOUNT_ORE" Amount="1100"/>
 		</ObjectResourceInfo>
 		<ArmorSet
 			Armor="AlliedAntiVehicleVehicleTech3Armor"

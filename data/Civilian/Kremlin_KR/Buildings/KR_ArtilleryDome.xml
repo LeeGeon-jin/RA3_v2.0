@@ -2,6 +2,10 @@
 <AssetDeclaration xmlns="uri:ea.com:eala:asset" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 	<Tags></Tags>
 	<Includes>
+		<Include type="all" source="ART:KR_ArtilleryDome.W3X" />
+		<Include type="all" source="ART:KR_ArtilleryDome.xml" />
+		<Include type="all" source="ART:KR_ArtilleryDome_NRM.xml" />
+		<Include type="all" source="ART:KR_ArtilleryDome_SPM.xml" />
 		<Include type="instance" source="DATA:BaseObjects/BaseStructure.xml" />
 		<Include type="all" source="DATA:GlobalData/GlobalDefines.xml" />
 		<Include type="instance" source="DATA:Civilian/Yucatan_YU/Props/YU_HotelDebris.xml" />
@@ -147,6 +151,7 @@
 			</Shape>
 		</Geometry>
 		<AudioArraySound>
+			<AudioEntry Sound="BuildingUnderConstructionLoop" AudioType="soundUnderConstruction" />
 			<AudioEntry Sound="HumanFaction_MediumBuilding_LightDamageMS" AudioType="soundOnDamaged" />
 			<AudioEntry Sound="HumanFaction_MediumBuilding_HeavyDamageMS" AudioType="soundOnReallyDamaged" />
 		</AudioArraySound>
@@ -356,8 +361,8 @@
 			MinSeconds="1.0s"
 			MaxSeconds="1.0s" />
 		<ClipReloadTime
-			MinSeconds="5s"
-			MaxSeconds="5s"
+			MinSeconds="2.5s"
+			MaxSeconds="2.5s"
 		/>
 		<Nuggets>
 			<ProjectileNugget
@@ -379,7 +384,9 @@
 		Side="Soviet"
 		EditorName="SovietArtilleryDome"
 		BuildTime="0.0"
-		EnergyProduction="-75">
+		EnergyProduction="-75"
+		ProductionQueueType="OTHER_STRUCTURE"
+		BuildPlacementTypeFlag="OTHER_STRUCTURE">
 		<ObjectResourceInfo>
 			<BuildCost Account="=$ACCOUNT_ORE" Amount="2000"/>
 		</ObjectResourceInfo>

@@ -19,13 +19,14 @@
 		EditorSorting="STRUCTURE"
 		BuildTime="30"
 		CommandSet="AlliedOutpostCommandSet"
-		KindOf="+ACTIVATE_AFTER_UNPACK +OUTPOST +IGNORE_FOR_VICTORY"
+		KindOf="+ACTIVATE_AFTER_UNPACK +OUTPOST +IGNORE_FOR_VICTORY +CONSTRUCTION_YARD +FS_FACTORY +CRANE"
 		RadarPriority="STRUCTURE"
 		PlacementViewAngle="225d"
 		BuildPlacementTypeFlag="OTHER_STRUCTURE"
 		EditorName="AlliedOutpost"
 		Description="DESC:AlliedOutpost"
-		TypeDescription="Type:AlliedOutpost">
+		TypeDescription="Type:AlliedOutpost"
+		ProductionQueueType="OTHER_STRUCTURE">
 		<DisplayName
 			xai:joinAction="Replace" xmlns:xai="uri:ea.com:eala:asset:instance">Name:AlliedOutpost</DisplayName>
 		<GameDependency>
@@ -353,6 +354,15 @@
 			<ProductionUpdate
 				id="ModuleTag_UpgradeProductionUpdate"
 				Type="UPGRADE"
+				MaxQueueEntries="1" />
+			<!-- r14: crane builder logic (from SovietCrane) -->
+			<ProductionUpdate
+				id="ModuleTag_CraneMainProductionUpdate"
+				Type="MAIN_STRUCTURE"
+				MaxQueueEntries="1" />
+			<ProductionUpdate
+				id="ModuleTag_CraneOtherProductionUpdate"
+				Type="OTHER_STRUCTURE"
 				MaxQueueEntries="1" />
 			<CommandSetUpgrade
 				id="ModuleTag_CommandSetUpgrade"

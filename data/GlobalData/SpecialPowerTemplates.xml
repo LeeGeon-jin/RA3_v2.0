@@ -1217,7 +1217,7 @@
 
 	<SpecialPowerTemplate
 		id="SpecialPower_JapanAntiInfantryInfantryBonzai"
-		ReloadTime="30s"
+		ReloadTime="0s"
 		TargetType="NONE"
 		NameOfVoiceNameToUseAsInitiateIntendToDoVoice="VoiceBonzaiCharge"
 		WaypointModeTerminal="false"
@@ -1719,5 +1719,14 @@
 			<ExcludeThing>NanoSwarmHiveEffect</ExcludeThing>
 		</ForbiddenObjectFilter>
 	</SpecialPowerTemplate>
+
+
+	<!-- r16: Demolition Truck speed boost, 10s cooldown -->
+	<SpecialPowerTemplate
+		id="SpecialPower_SovietDemolitionTruckSprint"
+		ReloadTime="10s"
+		TargetType="NONE"
+		WaypointModeTerminal="false"
+	/>
 
 </AssetDeclaration>

@@ -2,6 +2,16 @@
 <AssetDeclaration xmlns="uri:ea.com:eala:asset" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xai="uri:ea.com:eala:asset:instance" xmlns:xi="http://www.w3.org/2001/XInclude">
 	<Tags></Tags>
 	<Includes>
+		<Include type="all" source="ART:NY_Liberty.W3X" />
+		<Include type="all" source="ART:NY_LibertyBase.W3X" />
+		<Include type="all" source="ART:NY_Liberty.xml" />
+		<Include type="all" source="ART:NY_Liberty_NRM.xml" />
+		<Include type="all" source="ART:NY_Liberty_SPM.xml" />
+		<Include type="all" source="ART:CBBuilding_Metal.xml" />
+		<Include type="all" source="ART:CBBuilding_Metal_NRM.xml" />
+		<Include type="all" source="ART:CBBuilding_Metal_SPM.xml" />
+		<Include type="all" source="ART:CBBuilding_Filler.xml" />
+		<Include type="all" source="ART:CBBuilding_Holes.xml" />
 		<Include type="instance" source="DATA:BaseObjects/BaseCivilianStructureNoGarrisonDestructible.xml" />
 		<Include type="instance" source="DATA:BaseObjects/BaseCivilianStructureNoGarrison.xml" />
 		<Include type="instance" source="DATA:Civilian/New_York_NY/Props/NY_Liberty_Collapse.xml" />
@@ -19,10 +29,9 @@
 		TypeDescription="Type:LibertyStatue"
 		SelectPortrait="Portrait_Special_StatueOfLiberty"
 		ButtonImage="Button_Special_StatueOfLiberty"
-		KindOf="-NOT_AUTOACQUIRABLE +AUTO_ACQUIRABLE_BY_AI"
+		KindOf="-NOT_AUTOACQUIRABLE +AUTO_ACQUIRABLE_BY_AI -AUTO_RALLYPOINT -CIVILIAN_BUILDING"
 		BuildTime="20"
 		EnergyProduction="0"
-		MaxSimultaneousOfType="1"
 		ProductionQueueType="OTHER_STRUCTURE"
 		BuildPlacementTypeFlag="OTHER_STRUCTURE">
 		<DisplayName
@@ -46,6 +55,9 @@
 
 			<Physics
 				id="ModuleTag_Physics"/>
+			<StructureUnpackUpdate
+				id="ModuleTag_StructureUnpackUpdate"
+				UnpackTime="0.0s" />
 
 
 			<BuildingDestructionBehavior
@@ -98,92 +110,44 @@
 				MaxHealth="=$CIV_HEALTH_MEDIUM"
 				/>
 		</Body>
-		<Geometry>
+			<Geometry>
 			<Shape 
      Type= "BOX"
-     MajorRadius = "100.059"
-     MinorRadius = "108.608"
-     Height = "37.6058"
+     MajorRadius = "40.0"
+     MinorRadius = "40.0"
+     Height = "114.788"
      ContactPointGeneration = "STRUCTURE" >
-				<Offset
-						x = "0.207092"
-						y = "-43.7746"
-						z = "0.0" />
-			</Shape>
-			<Shape 
-					 Type= "BOX"
-					 MajorRadius = "40.0"
-					 MinorRadius = "40.0"
-					 Height = "114.788"
-					 ContactPointGeneration = "STRUCTURE" >
 				<Offset
 						x = "0.331207"
 						y = "-48.1603"
 						z = "39.3818" />
 			</Shape>
-			<Shape 
-					 Type= "BOX"
-					 MajorRadius = "30.9963"
-					 MinorRadius = "23.2816"
-					 Height = "143.95"
-					 ContactPointGeneration = "STRUCTURE" >
-				<Offset
-						x = "-6.09594"
-						y = "-49.0419"
-						z = "153.144" />
-			</Shape>
-			<Shape 
-					 Type= "BOX"
-					 MajorRadius = "8.82009"
-					 MinorRadius = "10.5279"
-					 Height = "66.2172"
-					 ContactPointGeneration = "STRUCTURE" >
-				<Offset
-						x = "14.8479"
-						y = "-31.814"
-						z = "287.997" />
-			</Shape>
-			<Shape 
-					 Type= "BOX"
-					 MajorRadius = "40.8023"
-					 MinorRadius = "40.5395"
-					 Height = "14.8649"
-					 ContactPointGeneration = "STRUCTURE" >
-				<Offset
-						x = "-0.216499"
-						y = "-48.1603"
-						z = "58.0004" />
-			</Shape>
-			<Shape 
-					 Type= "BOX"
-					 MajorRadius = "135.08"
-					 MinorRadius = "54.3041"
-					 Height = "37.6058"
-					 ContactPointGeneration = "STRUCTURE" >
-				<Offset
-						x = "0.207092"
-						y = "-43.7746"
-						z = "0.0" />
-			</Shape>
-			<Shape 
-					 Type= "BOX"
-					 MajorRadius = "55.3829"
-					 MinorRadius = "138.999"
-					 Height = "37.6058"
-					 ContactPointGeneration = "STRUCTURE" >
-				<Offset
-						x = "0.207088"
-						y = "-55.4066"
-						z = "0.0" />
-			</Shape>
-
-
 		</Geometry>
+		<ProjectedBuildabilityInfo
+			Radius="0.0"
+			BuildPlacementTypes="MAIN_STRUCTURE OTHER_STRUCTURE" />
 		<AudioArraySound>
+			<AudioEntry Sound="BuildingUnderConstructionLoop" AudioType="soundUnderConstruction" />
 			<AudioEntry Sound="NoSound" AudioType="soundOnDamaged" />
 			<AudioEntry Sound="NoSound" AudioType="soundOnReallyDamaged" />
 		</AudioArraySound>
-	</GameObject>
+		<EvaEventArray xai:joinAction="Replace" xmlns:xai="uri:ea.com:eala:asset:instance">
+			<EvaEntry EvaEvent="BuildingConstructionStarted" EvaType="productionStarted" />
+			<EvaEntry EvaEvent="BuildingConstructionComplete" EvaType="productionComplete" />
+			<EvaEntry EvaEvent="StructureUnderAttack" EvaType="damagedOwner" />
+			<EvaEntry EvaEvent="AllyStructureUnderAttack" EvaType="damagedAlly" />
+			<EvaEntry EvaEvent="StructureSold" EvaType="soldOwner" />
+			<EvaEntry EvaEvent="StructureRepairing" EvaType="repairingOwner" />
+			<EvaEntry EvaEvent="EnemyCampSighted" EvaType="enemyObjectSighted" />
+			<EvaEntry EvaEvent="NewConstructionOptions" EvaType="availableForProduction" />
+			<EvaEntry EvaEvent="StructurePlacementFailed" EvaType="placementFailed" />
+			<EvaEntry EvaEvent="StructureCannotBuildDueToFullBuildQueue" EvaType="cannotBuildDueToFullBuildQueue" />
+			<EvaEntry EvaEvent="BuildOnHold" EvaType="buildOnHold" />
+			<EvaEntry EvaEvent="BuildCancelled" EvaType="buildCancelled" />
+			<EvaEntry EvaEvent="BuildingManuallyPoweredDown" EvaType="manuallyPoweredOff" />
+			<EvaEntry EvaEvent="BuildingManuallyPoweredUp" EvaType="manuallyPoweredOn" />
+		</EvaEventArray>
+</GameObject>
 
 	
 	<ObjectCreationList

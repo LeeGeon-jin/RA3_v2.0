@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="utf-8"?>
+<AssetDeclaration xmlns="uri:ea.com:eala:asset" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xi="http://www.w3.org/2001/XInclude">
+	<!-- r16: Soviet Demolition Truck. Model = vanilla Japan Sudden Transport (JULightTransportVehicle, also used by the campaign JapanOdessaSpecialTransportVehicle).
+	     Art is included as type="reference" (same as the vanilla campaign object), so nothing is compiled into the mod and no vanilla asset is shadowed. -->
+	<Tags></Tags>
+	<Includes>
+		<Include type="all" source="DATA:GlobalData/GlobalDefines.xml" />
+		<Include
+			type="reference"
+			source="ART:JULightTransportVehicle.w3x" />
+		<Include
+			type="reference"
+			source="ART:JULightTransportVehicle_02_D.xml" />
+		<Include
+			type="instance"
+			source="DATA:BaseObjects/BaseVehicle.xml" />
+	</Includes>
+	<GameObject
+		id="SovietDemolitionTruck"
+		inheritFrom="BaseVehicle"
+		SelectPortrait="Portrait_JapanLightTransportVehicle"
+		ButtonImage="Button_JapanLightTransportVehicle"
+		Side="Soviet"
+		SubGroupPriority="20"
+		EditorSorting="UNIT"
+		BuildTime="10"
+		CommandSet="SovietDemolitionTruckCommandSet"
+		KindOf="SELECTABLE CAN_ATTACK AMPHIBIOUS CAN_CAST_REFLECTIONS SCORE VEHICLE CAN_BE_FAVORITE_UNIT"
+		RadarPriority="UNIT"
+		ProductionQueueType="VEHICLE"
+		UnitCategory="VEHICLE"
+		WeaponCategory="CANNON"
+		VoicePriority="176"
+		EditorName="SovietDemolitionTruck"
+		Description="Desc:SovietDemolitionTruck"
+		TypeDescription="Type:SovietDemolitionTruck"
+		HealthBoxHeightOffset="35">
+		<DisplayName
+			xai:joinAction="Replace" xmlns:xai="uri:ea.com:eala:asset:instance">Name:SovietDemolitionTruck</DisplayName>
+		<GameDependency>
+			<RequiredObject>SovietPowerPlantAdvanced</RequiredObject>
+		</GameDependency>
+		<ObjectResourceInfo>
+			<BuildCost Account="=$ACCOUNT_ORE" Amount="1200"/>
+		</ObjectResourceInfo>
+		<ArmorSet
+			Armor="JapanLightTransportVehicleArmor"
+			DamageFX="VehicleDamageFX" />
+		<LocomotorSet
+			Locomotor="JapanLightTransportVehicleLocomotor"
+			Condition="NORMAL"
+			Speed="58.0" />
+		<LocomotorSet
+			Locomotor="JapanLightTransportVehicle_WaterLocomotor"
+			Condition="NORMAL"
+			Speed="58.0" />
+		<SkirmishAIInformation
+			UnitBuilderStandardCombatUnit="true" />
+		<Draws>
+			<TruckDraw
+				id="ModuleTag_Draw"
+				OkToChangeModelColor="true"
+				TrackMarksOnlyWhenCorneringQuickly="true"
+				TrackMarksLeftBone="Bone_TireLR"
+				TrackMarksRightBone="Bone_TireRR"
+				LeftFrontTireBone="Bone_TireLF"
+				RightFrontTireBone="Bone_TireRF"
+				MidLeftRearTireBone="Bone_TireLR"
+				MidRightRearTireBone="Bone_TireRR"
+				LeftRearTireBone="Bone_TireLR1"
+				RightRearTireBone="Bone_TireRR1"
+				TireRotationMultiplier="0.2"
+				PowerslideRotationAddition="1.25"
+				ExtraPublicBone="FXWeapon">
+				<TreadTerrainParticles>DefaultTankTerrainParticleMapping</TreadTerrainParticles>
+				<ModelConditionState
+					ParseCondStateType="PARSE_DEFAULT">
+					<Model
+						Name="JULightTransportVehicle" />
+					<WeaponFireFXBone
+						WeaponSlotID="1"
+						WeaponSlotType="PRIMARY_WEAPON"
+						BoneName="ROOTTRANSFORM" />
+					<WeaponLaunchBone
+						WeaponSlotID="1"
+						WeaponSlotType="PRIMARY_WEAPON"
+						BoneName="ROOTTRANSFORM" />
+				</ModelConditionState>
+				<ModelConditionState
+					ParseCondStateType="PARSE_NORMAL"
+					ConditionsYes="FORMATION_PREVIEW">
+					<Model
+						Name="JULightTransportVehicle" />
+				</ModelConditionState>
+				<ModelConditionState
+					ParseCondStateType="PARSE_NORMAL"
+					ConditionsYes="DAMAGED">
+					<Model
+						Name="JULightTransportVehicle" />
+					<ParticleSysBone
+						BoneName="JAPANLIGHTTRANSPORTVEHICLE02"
+						FXParticleSystemTemplate="JapanVehicleDamagedSmoke"
+						FollowBone="true" />
+				</ModelConditionState>
+				<ModelConditionState
+					ParseCondStateType="PARSE_NORMAL"
+					ConditionsYes="REALLYDAMAGED">
+					<Model
+						Name="JULightTransportVehicle" />
+					<Texture
+						Original="JULightTransportVehicle_02"
+						New="JULightTransportVehicle_02_D" />
+					<ParticleSysBone
+						BoneName="JAPANLIGHTTRANSPORTVEHICLE02"
+						FXParticleSystemTemplate="JapanVehicleDamagedSmoke"
+						FollowBone="true" />
+					<ParticleSysBone
+						BoneName="JAPANLIGHTTRANSPORTVEHICLE02"
+						FXParticleSystemTemplate="JapanVehicleDamagedFire"
+						FollowBone="true" />
+				</ModelConditionState>
+			</TruckDraw>
+		</Draws>
+		<Behaviors>
+			<WeaponSetUpdate
+				id="ModuleTag_WeaponSetUpdate">
+				<WeaponSlotHardpoint
+					ID="1">
+					<Weapon
+						Ordering="PRIMARY_WEAPON"
+						Template="SovietDemolitionTruckDetonateWeapon" />
+				</WeaponSlotHardpoint>
+			</WeaponSetUpdate>
+			<Physics
+				id="ModuleTag_Physics" />
+			<!-- speed boost: x1.5 for 5s (AttributeModifier_JapanYariSprint), 10s cooldown -->
+			<MovementSpecialPower
+				id="ModuleTag_DemolitionTruckSprint"
+				SpecialPowerTemplate="SpecialPower_SovietDemolitionTruckSprint"
+				AttributeModifier="AttributeModifier_JapanYariSprint"
+				AttributeModifierAffectsSelf="true"
+				MovementType="NONE"
+				Duration="5s" />
+			<!-- explodes on death (also after self-destructing on attack): medium time bomb blast -->
+			<FireWeaponWhenDead
+				id="ModuleTag_DemolitionTruckDeathWeapon"
+				DeathWeapon="SovietDemolitionTruckDeathWeapon"
+				InitiallyActive="true">
+				<DieMuxData
+					DeathTypes="ALL" />
+			</FireWeaponWhenDead>
+			<CreateObjectDie
+				id="ModuleTag_CreateObjectDie"
+				CreationList="JULightTransportVehicle_Die_OCL">
+				<DieMuxData
+					DeathTypes="ALL" />
+			</CreateObjectDie>
+			<DestroyDie
+				id="ModuleTag_Die">
+				<DieMuxData
+					DeathTypes="ALL" />
+			</DestroyDie>
+		</Behaviors>
+		<AI>
+			<AIUpdate
+				id="ModuleTag_AI"
+				AutoAcquireEnemiesWhenIdle="YES"
+				StateMachine="UnitAIStateMachine"/>
+		</AI>
+		<Body>
+			<ActiveBody
+				id="ModuleTag_Body"
+				MaxHealth="400" />
+		</Body>
+		<Geometry>
+			<Shape
+				Type="BOX"
+				MajorRadius="20.0"
+				MinorRadius="10.0"
+				Height="11.5"
+				ContactPointGeneration="VEHICLE" />
+		</Geometry>
+		<AudioArraySound>
+			<AudioEntry
+				Sound="AudioEvent:JAP_SuddenTransport_MoveStartLand"
+				AudioType="soundMoveStart" />
+		</AudioArraySound>
+		<VisionInfo
+			VisionRange="300"
+			ShroudClearingRange="300" />
+		<CrusherInfo
+			id="id_CrusherInfo"
+			CrusherLevel="0"
+			CrushEqualLevelProps="true"
+			CrushableLevel="50" />
+	</GameObject>
+</AssetDeclaration>

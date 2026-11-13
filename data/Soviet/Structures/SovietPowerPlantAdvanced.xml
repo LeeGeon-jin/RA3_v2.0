@@ -20,7 +20,7 @@
 		
 		BuildTime="0.0"
 		EnergyProduction="350"
-		EnergyBonus="10"
+		EnergyBonus="175"
 		CommandSet="SovietPowerPlantAdvancedCommandSet"
 		KindOf="+FS_POWER +FS_TECHNOLOGY"
 		RadarPriority="STRUCTURE"
@@ -526,7 +526,7 @@
 				GiveNoXP="true" />
 			<PowerUpgrade
 				id="ModuleTag_Turbines">
-				<TriggeredBy>Upgrade_PowerPlantTurbine</TriggeredBy>
+				<TriggeredBy>Upgrade_SovietPowerPlantAdvancedTurbine</TriggeredBy>
 			</PowerUpgrade>
 			
 			<!-- Soviet Advanced Power Plant Explosion -->

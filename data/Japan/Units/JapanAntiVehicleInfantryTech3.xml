@@ -256,6 +256,18 @@
 
 		</Draws>
 		<Behaviors>
+			<!-- r18: frozen while airborne -> dies (crash). Gate = AIRBORNE_TARGET here, UNDER_FROZEN in the weapon filter. -->
+			<FireWeaponUpdate
+				id="ModuleTag_AirborneFrozenCrash"
+				FireInterval="0.2s"
+				AliveOnly="true"
+				ActiveWhenDisabled="DEFAULT USER_PARALYZED EMP HELD PARALYZED">
+				<FireWeaponNugget
+					WeaponName="AirborneFrozenCrashWeapon"
+					OneShot="false" />
+				<ObjectStatusValidation
+					RequiredStatus="AIRBORNE_TARGET" />
+			</FireWeaponUpdate>
 			<WeaponSetUpdate
 				id="ModuleTag_WeaponSetUpdate">
 				<WeaponSlotHardpoint

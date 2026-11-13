@@ -5,24 +5,6 @@
 	<Includes>
 		<Include type="all" source="DATA:GlobalData/GlobalDefines.xml" /> 
 
-		<Include
-			type="all"
-			source="ART:SUAntiStructureVehicle_SKN.w3x" />
-		<Include
-			type="all"
-			source="ART:SUAntiStructureVehicle_IDLA.w3x" />
-		<Include
-			type="all"
-			source="ART:SUAntiStructureVehicle_ATKA.w3x" />
-		<Include
-			type="all"
-			source="ART:SUAntiStructureVehicle_PREA.w3x" />			
-		<Include
-			type="all"
-			source="ART:SUAntiStructureVehicle_MOVA.w3x" />	
-		<Include
-			type="all"
-			source="ART:SUAntiStructureVehicle_D.xml" />
     <Include
 			type="instance"
 			source="ART:EX_Headlights.w3x" />

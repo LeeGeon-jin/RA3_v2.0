@@ -9,6 +9,36 @@
 		<Include
 			type="instance"
 			source="DATA:BaseObjects/BaseVehicle.xml" />
+		<Include type="all" source="ART:jumechaking_abta.w3x" />
+		<Include type="all" source="ART:jumechaking_aida.w3x" />
+		<Include type="all" source="ART:jumechaking_atkb.w3x" />
+		<Include type="all" source="ART:jumechaking_bata.w3x" />
+		<Include type="all" source="ART:jumechaking_bida.w3x" />
+		<Include type="all" source="ART:jumechaking_dtha.w3x" />
+		<Include type="all" source="ART:jumechaking_skl.w3x" />
+		<Include type="all" source="ART:jumechaking_skn.w3x" />
+		<Include type="all" source="ART:jumechaking_spcb.w3x" />
+		<Include type="all" source="ART:jumechaking_torso_abta.w3x" />
+		<Include type="all" source="ART:jumechaking_torso_aida.w3x" />
+		<Include type="all" source="ART:jumechaking_torso_atka.w3x" />
+		<Include type="all" source="ART:jumechaking_torso_atkb.w3x" />
+		<Include type="all" source="ART:jumechaking_torso_bata.w3x" />
+		<Include type="all" source="ART:jumechaking_torso_bida.w3x" />
+		<Include type="all" source="ART:jumechaking_torso_fp0.w3x" />
+		<Include type="all" source="ART:jumechaking_torso_fp1.w3x" />
+		<Include type="all" source="ART:jumechaking_torso_fp2.w3x" />
+		<Include type="all" source="ART:jumechaking_torso_skl.w3x" />
+		<Include type="all" source="ART:jumechaking_torso_skn.w3x" />
+		<Include type="all" source="ART:jumechaking_torso_spcb.w3x" />
+		<Include type="all" source="ART:jumechaking_torso_trnl.w3x" />
+		<Include type="all" source="ART:jumechaking_torso_trnr.w3x" />
+		<Include type="all" source="ART:jumechaking_torso_wlka.w3x" />
+		<Include type="all" source="ART:jumechaking_trnl.w3x" />
+		<Include type="all" source="ART:jumechaking_trnr.w3x" />
+		<Include type="all" source="ART:jumechaking_wlka.w3x" />
+		<Include type="all" source="ART:jumechaking.xml" />
+		<Include type="all" source="ART:jumechaking_nrm.xml" />
+		<Include type="all" source="ART:jumechaking_spm.xml" />
 	</Includes>
     <Defines>
         <Define name="MECHAKING_IDLE_SCAN_DELAY" value="0.5s" />

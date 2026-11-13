@@ -2,6 +2,13 @@
 <AssetDeclaration xmlns="uri:ea.com:eala:asset" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xi="http://www.w3.org/2001/XInclude">
 	<Tags></Tags>
 	<Includes>
+		<Include type="all" source="ART:VeterancyGranterTechStructure.W3X" />
+		<Include type="all" source="ART:VeterancyGranterTechStructure.xml" />
+		<Include type="all" source="ART:VeterancyGranterTechStructure_NRM.xml" />
+		<Include type="all" source="ART:VeterancyGranterTechStructure_SPM.xml" />
+		<Include type="all" source="ART:VeterancyGTStructure_statue.xml" />
+		<Include type="all" source="ART:VeterancyGTStructure_statue_NRM.xml" />
+		<Include type="all" source="ART:VeterancyGTStructure_statue_SPM.xml" />
 		<Include
 			type="instance"
 			source="DATA:BaseObjects/BaseTechStructure.xml" />
@@ -12,6 +19,7 @@
 	</Includes>
 	<GameObject
 		id="AlliedVeterancyTechStructureBuildable"
+		MaxSimultaneousOfType="1"
 		inheritFrom="BaseTechStructure"
 		SelectPortrait="Portrait_Neutral_VeterancyBuilding"
 		ButtonImage="Button_Neutral_VeterancyBuilding"
@@ -22,7 +30,7 @@
 		EditorName="AlliedVeterancyTechStructureBuildable"
 		Description="DESC:VeterancyTechStructure"
 		TypeDescription="Type:TechStructure"
-		KindOf="+GRANTS_VETERANCY"
+		KindOf="+GRANTS_VETERANCY -NEUTRAL_TECH"
 		HealthBoxHeightOffset="45">
 		<DisplayName
 			xai:joinAction="Replace" xmlns:xai="uri:ea.com:eala:asset:instance">NAME:VeterancyTechStructure</DisplayName>
@@ -56,6 +64,19 @@
 				<UpgradeMap OwnershipAmount="2" ProvidedUpgrade="Upgrade_ProductionVeterancy_ELITE" />
 				<UpgradeMap OwnershipAmount="3" ProvidedUpgrade="Upgrade_ProductionVeterancy_HEROIC" />
 			</CaptureAndGiveUpgradeBehavior>
+			<!-- r18: CaptureAndGiveUpgradeBehavior only fires on capture, so a building the player builds never got the upgrade.
+			     Grant it when construction completes and remove it again when this building dies. -->
+			<GrantUpgradeCreate
+				id="ModuleTag_VetAcademyGrantOnBuild"
+				UpgradeToGrant="Upgrade_ProductionVeterancy_VETERAN"
+				GiveOnBuildComplete="true" />
+			<CreateObjectDie
+				id="ModuleTag_VetAcademyLostOCL"
+				CreationList="OCL_VeterancyAcademyBuildableLost">
+				<DieMuxData
+					DeathTypes="ALL"
+					ExemptStatus="UNDER_CONSTRUCTION" />
+			</CreateObjectDie>
 			<Physics
 				id="ModuleTag_Physics"/>
 			<BuildingDestructionBehavior
@@ -192,6 +213,7 @@
 			<AudioEntry Sound="TEC_VeteranAcademy_Select" AudioType="voiceSelect" />
 		</AudioArrayVoice>
 		<AudioArraySound>
+			<AudioEntry Sound="BuildingUnderConstructionLoop" AudioType="soundUnderConstruction" />
 			<AudioEntry Sound="HumanFaction_MediumBuilding_LightDamageMS" AudioType="soundOnDamaged" />
 			<AudioEntry Sound="HumanFaction_MediumBuilding_HeavyDamageMS" AudioType="soundOnReallyDamaged" />
 		</AudioArraySound>
@@ -201,10 +223,27 @@
 		<ProjectedBuildabilityInfo
 			Radius="0.0"
 			BuildPlacementTypes="MAIN_STRUCTURE OTHER_STRUCTURE" />
-	</GameObject>
+		<EvaEventArray xai:joinAction="Replace" xmlns:xai="uri:ea.com:eala:asset:instance">
+			<EvaEntry EvaEvent="BuildingConstructionStarted" EvaType="productionStarted" />
+			<EvaEntry EvaEvent="BuildingConstructionComplete" EvaType="productionComplete" />
+			<EvaEntry EvaEvent="StructureUnderAttack" EvaType="damagedOwner" />
+			<EvaEntry EvaEvent="AllyStructureUnderAttack" EvaType="damagedAlly" />
+			<EvaEntry EvaEvent="StructureSold" EvaType="soldOwner" />
+			<EvaEntry EvaEvent="StructureRepairing" EvaType="repairingOwner" />
+			<EvaEntry EvaEvent="EnemyCampSighted" EvaType="enemyObjectSighted" />
+			<EvaEntry EvaEvent="NewConstructionOptions" EvaType="availableForProduction" />
+			<EvaEntry EvaEvent="StructurePlacementFailed" EvaType="placementFailed" />
+			<EvaEntry EvaEvent="StructureCannotBuildDueToFullBuildQueue" EvaType="cannotBuildDueToFullBuildQueue" />
+			<EvaEntry EvaEvent="BuildOnHold" EvaType="buildOnHold" />
+			<EvaEntry EvaEvent="BuildCancelled" EvaType="buildCancelled" />
+			<EvaEntry EvaEvent="BuildingManuallyPoweredDown" EvaType="manuallyPoweredOff" />
+			<EvaEntry EvaEvent="BuildingManuallyPoweredUp" EvaType="manuallyPoweredOn" />
+		</EvaEventArray>
+</GameObject>
 
 	<GameObject
 		id="SovietVeterancyTechStructureBuildable"
+		MaxSimultaneousOfType="1"
 		inheritFrom="AlliedVeterancyTechStructureBuildable"
 		Side="Soviet"
 		BuildTime="0"
@@ -218,9 +257,11 @@
 
 	<GameObject
 		id="JapanVeterancyTechStructureBuildable"
+		MaxSimultaneousOfType="1"
 		inheritFrom="AlliedVeterancyTechStructureBuildable"
 		Side="Japan"
-		EditorName="JapanVeterancyTechStructureBuildable" />
+		EditorName="JapanVeterancyTechStructureBuildable"
+		BuildPlacementTypeFlag="OTHER_STRUCTURE" />
 
 	<ObjectCreationList
 		id="NUVeterancyTechStructureBuildable_Die_OCL">
@@ -233,6 +274,67 @@
 			MinForcePitch="90d"
 			MaxForcePitch="75d">
 			<CreateObject>NUVeterancyTechStructure_Collapse</CreateObject>
+		</CreateObject>
+	</ObjectCreationList>
+
+	<!-- r18: invisible helper spawned when the building dies; removes the player upgrade, then deletes itself -->
+	<GameObject
+		id="VeterancyAcademyBuildableLostHelper"
+		EditorSorting="SYSTEM"
+		TransportSlotCount="0"
+		IsTrainable="false"
+		KindOf="UNATTACKABLE NOT_AUTOACQUIRABLE NO_COLLIDE INERT"
+		EditorName="VeterancyAcademyBuildableLostHelper">
+		<DisplayName>VeterancyAcademyBuildableLostHelper</DisplayName>
+		<ArmorSet
+			Armor="NoArmor" />
+		<Draws>
+			<ScriptedModelDraw
+				id="ModuleTag_Draw">
+				<ModelConditionState
+					ParseCondStateType="PARSE_DEFAULT">
+					<Model Name="" />
+				</ModelConditionState>
+			</ScriptedModelDraw>
+		</Draws>
+		<Behaviors>
+			<GrantUpgradeCreate
+				id="ModuleTag_GrantTrigger"
+				UpgradeToGrant="Upgrade_VeterancyAcademyLost" />
+			<RemoveUpgradeUpgrade
+				id="ModuleTag_RemovePlayerUpgrade">
+				<TriggeredBy>Upgrade_VeterancyAcademyLost</TriggeredBy>
+				<UpgradeToRemove>Upgrade_ProductionVeterancy_VETERAN</UpgradeToRemove>
+			</RemoveUpgradeUpgrade>
+			<LifetimeUpdate
+				id="ModuleTag_Lifetime"
+				MinLifetime="1s"
+				MaxLifetime="1s" />
+			<DestroyDie
+				id="ModuleTag_DieDestroy">
+				<DieMuxData
+					DeathTypes="ALL" />
+			</DestroyDie>
+		</Behaviors>
+		<Body>
+			<PropBody
+				id="ModuleTag_Body" />
+		</Body>
+		<Geometry
+			IsSmall="true">
+			<Shape
+				Type="CYLINDER"
+				MajorRadius="1.0"
+				Height="1.0" />
+		</Geometry>
+	</GameObject>
+
+	<ObjectCreationList
+		id="OCL_VeterancyAcademyBuildableLost">
+		<CreateObject
+			Options="IGNORE_ALL_OBJECTS"
+			Disposition="LIKE_EXISTING">
+			<CreateObject>VeterancyAcademyBuildableLostHelper</CreateObject>
 		</CreateObject>
 	</ObjectCreationList>
 </AssetDeclaration>
