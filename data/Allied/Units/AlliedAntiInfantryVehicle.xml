@@ -649,6 +649,7 @@
 							IdleScanDelay="=$FAST_IDLE_SCAN_DELAY"/>
 					</TurretSettings>
 				</WeaponSlotTurret>
+				<!-- r20c: golden gun / commando pistol / Soviet commando sniper use the BF_* 150-range copies (see Weapon.xml) so every weapon on the fortress reaches 150 at most -->
 				<!-- r20 Battle Fortress: Multigunner IFV rider weapons (same AAAVT1_* weapons and Uprade_IFV_* upgrades, granted by the IFV SecondaryObjectListener below).
 				     Slots 1/2 (Riptide chaingun / torpedoes) are untouched and always active. One slot per weapon group so different passenger types fire together. -->
 				<WeaponSlotHardpoint
@@ -668,9 +669,9 @@
 				<WeaponSlotHardpoint
 					ID="5"
 					AutoChooseWeapon="false">
-					<Weapon Template="AAAVT1_PistolWeapon" Upgrade="Uprade_IFV_GoldenGun" Ordering="PRIMARY_WEAPON"/>
-					<Weapon Template="AAAVT1_CommandoPistolWeapon" Upgrade="Uprade_IFV_Pistol" Ordering="SECONDARY_WEAPON"/>
-					<Weapon Template="AAAVT1_SovietCommandoSniperRifle" Upgrade="Uprade_IFV_SovietCommando" Ordering="TERTIARY_WEAPON"/>
+					<Weapon Template="BF_PistolWeapon" Upgrade="Uprade_IFV_GoldenGun" Ordering="PRIMARY_WEAPON"/>
+					<Weapon Template="BF_CommandoPistolWeapon" Upgrade="Uprade_IFV_Pistol" Ordering="SECONDARY_WEAPON"/>
+					<Weapon Template="BF_SovietCommandoSniperRifle" Upgrade="Uprade_IFV_SovietCommando" Ordering="TERTIARY_WEAPON"/>
 					<Weapon Template="AAAVT1_JapanInfiltrationShiruken" Upgrade="Uprade_IFV_Shuriken" Ordering="QUATERNARY_WEAPON"/>
 				</WeaponSlotHardpoint>
 				<WeaponSlotHardpoint

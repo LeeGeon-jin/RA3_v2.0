@@ -9322,18 +9322,26 @@ Flags="NOT_ATTRACTED_BY_MAGNETS"
 	     the blast itself comes from the death weapon so it is identical on attack and on death. -->
 	<WeaponTemplate
 		id="SovietDemolitionTruckDetonateWeapon"
-		AttackRange="30.0"
+		AttackRange="75.0"
 		ClipSize="1"
 		AcceptableAimDelta="180d"
 		CanFireWhileMoving="true"
+		ChaseWeapon="true"
+		WeaponSpeed="999999.0"
 		RadiusDamageAffects="ENEMIES NEUTRALS SELF"
-		Flags="NOT_ATTRACTED_BY_MAGNETS"
-		RequiredAntiMask="ANTI_GROUND ANTI_STRUCTURE ANTI_WATER">
-		<!-- r20 fix: r16/r19 weapon did no damage to the target (first nugget Damage=0, second nugget filtered to SELF only), so the engine rated the weapon
-		     as useless against any target and never fired it -> truck drove up and did nothing. Now (vanilla kamikaze pattern, JapanNavalScoutShipKamikazeAttackWarhead /
-		     JapanCommandoTech1AirplaneCrashWeapon): nugget 1 = 1 point of real damage on the contacted target (makes the weapon valid / fireable),
-		     nugget 2 = Radius 0 OnlyKillOwnerWhenTriggered -> the truck's own health drops to zero on contact; its FireWeaponWhenDead then fires
-		     SovietDemolitionTruckDeathWeapon (medium time bomb 1000 / r200 + Desolator fallout). -->
+		Flags="NOT_ATTRACTED_BY_MAGNETS IGNORE_TARGET_AS_OBSTACLE"
+		RequiredAntiMask="ANTI_GROUND ANTI_STRUCTURE ANTI_WATER"
+		PreAttackType="PER_SHOT"
+		PreAttackWeapon="SovietDemolitionTruckSelfDestructWeapon">
+		<!-- r20c (2026-11-14): r20 still stopped "a few steps" in front of buildings. Most likely root cause: AttackRange 30 (r19: 25) is shorter than the gap the
+		     pathfinder leaves between a 40-long vehicle and a structure footprint, so the truck could never get into range, parked at the
+		     footprint edge and never fired (same for r19). Fix: AttackRange 75 (the death blast radius is 200, so firing 75 away still hits the
+		     target), IGNORE_TARGET_AS_OBSTACLE + ChaseWeapon (Tanya C4 / Terror Drone pattern: drive right up to the target and follow moving targets).
+		     Self-kill is now done twice: PreAttackWeapon below fires at the truck's own position (DamageDealtAtSelfPosition, King Oni melee pattern)
+		     and kills it outright; the OnlyKillOwnerWhenTriggered nugget stays as a backup. Truck death -> FireWeaponWhenDead -> medium time bomb. -->
+		<PreAttackDelay
+			MinSeconds="0.1s"
+			MaxSeconds="0.1s" />
 		<Nuggets>
 			<DamageNugget
 				Damage="1.0"
@@ -9345,6 +9353,25 @@ Flags="NOT_ATTRACTED_BY_MAGNETS"
 				OnlyKillOwnerWhenTriggered="true"
 				DamageType="UNRESISTABLE"
 				DamageFXType="JAPAN_CANNON"
+				DeathType="SUICIDED" />
+		</Nuggets>
+	</WeaponTemplate>
+
+	<!-- r20c: fired as the detonate weapon's PreAttackWeapon at the truck's own position; only hits the truck itself (RadiusDamageAffects SELF) -->
+	<WeaponTemplate
+		id="SovietDemolitionTruckSelfDestructWeapon"
+		AttackRange="75.0"
+		CanFireWhileMoving="true"
+		WeaponSpeed="999999.0"
+		DamageDealtAtSelfPosition="true"
+		AcceptableAimDelta="180d"
+		RadiusDamageAffects="SELF"
+		Flags="NOT_ATTRACTED_BY_MAGNETS">
+		<Nuggets>
+			<DamageNugget
+				Damage="100000.0"
+				Radius="5.0"
+				DamageType="UNRESISTABLE"
 				DeathType="SUICIDED" />
 		</Nuggets>
 	</WeaponTemplate>
@@ -9441,5 +9468,21 @@ Flags="NOT_ATTRACTED_BY_MAGNETS"
 		inheritFrom="AlliedAntiVehicleVehicleTech3PrismCannon_Veteran"
 		RequiredAntiMask="ANTI_GROUND ANTI_STRUCTURE ANTI_WATER ANTI_AIRBORNE_VEHICLE ANTI_AIRBORNE_INFANTRY" />
 
+
+	<!-- r20c Battle Fortress: copies of the IFV rider weapons whose range is above the Riptide chaingun (150). Most likely cause of "does not attack far targets":
+	     the attack approach used the longest weapon range on the fortress (golden gun 200 / commando pistol 210 / Soviet commando sniper 360, even while
+	     those rider weapons are locked), so it stopped out of chaingun range and nothing fired. Capped to 150 so every fortress weapon ends at 150. -->
+	<WeaponTemplate
+		id="BF_PistolWeapon"
+		inheritFrom="AAAVT1_PistolWeapon"
+		AttackRange="150.0" />
+	<WeaponTemplate
+		id="BF_CommandoPistolWeapon"
+		inheritFrom="AAAVT1_CommandoPistolWeapon"
+		AttackRange="150.0" />
+	<WeaponTemplate
+		id="BF_SovietCommandoSniperRifle"
+		inheritFrom="AAAVT1_SovietCommandoSniperRifle"
+		AttackRange="150.0" />
 </AssetDeclaration>
 

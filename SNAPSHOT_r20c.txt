@@ -1,0 +1,6 @@
+RA3_V2.0_Batch102FIX source snapshot r20c (2026-11-14 10:20 UTC+10).
+Content: mod data XML + mod.str only (same layout as repo data/): 202 XML + 1 mod.str. No EA art (w3x/dds/tga), no UI art, no built bigs/manifests.
+Matches E:\RA3ModBuild\RA3ModSDK\Mods\RA3_V2.0_Batch102FIX\data on the PC (MD5 list in ../pc_src_md5_r20c.txt; the 2 changed files were verified by MD5 after transfer).
+Status: compiled (BAB Critical 0 / Error 55 / Warning 359) and installed 2026-11-14 ~10:10 UTC+10; .big 93,442,971 bytes MD5 F827E46BBEB252DBA07A3C1009721EB8; str 6,010 bytes MD5 8501D2B9FD68A02D3AF6618A0C762B9A. Direct-launcher start OK. Compile/launch success does NOT prove gameplay; in-game checks pending.
+r20c vs r20 changed files (2): GlobalData/Weapon.xml (demolition truck detonate weapon range 75 + IGNORE_TARGET_AS_OBSTACLE + ChaseWeapon + self-position PreAttackWeapon; BF_* 150-range rider weapon copies), Allied/Units/AlliedAntiInfantryVehicle.xml (fortress uses BF_* copies).
+Art-side (PC only, not in this repo): r20b NUMarine1 mesh flags; r20c FX_SWORD AABTree + SortLevel, ROBOT_EYES TechniqueIndex, FX_LIGHTS SortLevel (all CastShadow restored to false).
