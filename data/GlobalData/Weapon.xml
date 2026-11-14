@@ -9318,45 +9318,58 @@ Flags="NOT_ATTRACTED_BY_MAGNETS"
 		RequiredAntiMask="ANTI_GROUND ANTI_WATER ANTI_STRUCTURE ANTI_SUBMERGED" />
 
 
-	<!-- r16: Demolition Truck. Attack = drive up and self-destruct (kills itself, SUICIDED);
-	     the blast itself comes from the death weapon so it is identical on attack and on death. -->
+	<!-- r20f (2026-11-14): Demolition Truck attack = Yari mini-sub kamikaze ram (ProjectileSelf + ContactWeapon), used as the normal attack weapon.
+	     The truck itself becomes the projectile (BezierProjectile module on the truck, Yari flags DETONATE_CALLS_KILL DONT_DETONATE_WITHOUT_COLLISION),
+	     dashes the last 100 into the target at speed 150, and on collision dies -> FireWeaponWhenDead (ALL) fires the medium time bomb death weapon.
+	     Differences from the Yari:
+	       - no SpecialPower / WeaponFireSpecialAbilityUpdate (that module is the Yari stop: UnpackTime 0.5s + BUSY_DURING_UNPACK, then BusyForDuration 3s),
+	         the ram is an ordinary hardpoint weapon like the Terror Drone leap (ProjectileSelf, ChaseWeapon, CanFireWhileMoving), so no unpack stop;
+	         no PreAttackDelay, AcceptableAimDelta 180d (no turn-to-face stop), no surfacing step (truck has no SUBMERGED state).
+	       - no ForbiddenAntiMask ANTI_GROUND: RequiredAntiMask ANTI_GROUND ANTI_STRUCTURE ANTI_WATER (ground units, buildings, ships).
+	     r20d radius-300 "kill Demolition Trucks" nugget removed (it also killed nearby enemy trucks); the truck now only kills itself
+	     (DETONATE_CALLS_KILL, backed up by a Radius 0 OnlyKillOwnerWhenTriggered nugget in the projectile warhead, the Final Squadron way).
+	     IGNORE_TARGET_AS_OBSTACLE removed (the dash, not the approach, now closes the gap). -->
 	<WeaponTemplate
 		id="SovietDemolitionTruckDetonateWeapon"
-		AttackRange="40.0"
+		AttackRange="100.0"
+		WeaponSpeed="150.0"
+		ProjectileSelf="true"
+		ContactWeapon="true"
+		ChaseWeapon="true"
 		ClipSize="1"
+		AutoReloadsClip="AUTO"
 		AcceptableAimDelta="180d"
 		CanFireWhileMoving="true"
-		ChaseWeapon="true"
-		WeaponSpeed="999999.0"
-		FireFX="FX_JAP_YariSubKamikazeExplosion"
-		RadiusDamageAffects="ENEMIES NEUTRALS SELF"
-		Flags="NOT_ATTRACTED_BY_MAGNETS IGNORE_TARGET_AS_OBSTACLE"
+		FinishAttackOnceStarted="true"
+		RadiusDamageAffects="ENEMIES NEUTRALS"
+		Flags="NOT_ATTRACTED_BY_MAGNETS"
 		RequiredAntiMask="ANTI_GROUND ANTI_STRUCTURE ANTI_WATER">
-		<!-- r20d (2026-11-14): r20 / r20c still parked next to the target and never exploded. The truck reaches attack range (it stops at range from the
-		     target's edge: r20 range 30 = "a few steps", r20c range 75 = further away), so the stop itself is normal approach behaviour; the failing part
-		     is the self-kill. Both r20 (OnlyKillOwnerWhenTriggered nugget) and r20c (+ self-position PreAttackWeapon) relied on mechanisms that vanilla only
-		     uses from projectile / attach / collide triggers, not from a normal AI weapon shot, so the truck never died and FireWeaponWhenDead never ran.
-		     Fix: plain radius damage that can only hit Demolition Trucks: 100000 UNRESISTABLE, radius 300 around the impact point (the target), filtered to
-		     SovietDemolitionTruck, RadiusDamageAffects includes SELF -> the firing truck always dies on the first shot (enemy demolition trucks inside the radius
-		     die too; own other trucks are ALLIES and are not hit). 1 point of real damage on the target keeps the weapon valid for targeting.
-		     FireFX = Yari kamikaze explosion, so in game it is visible whether the weapon fired at all.
-		     PreAttackWeapon removed. Range back to 40 so it drives close before going off (blast radius 200). -->
+		<ClipReloadTime
+			MinSeconds="1.0s"
+			MaxSeconds="1.0s" />
+		<Nuggets>
+			<ProjectileNugget
+				WarheadTemplate="SovietDemolitionTruckRamWarhead" />
+		</Nuggets>
+	</WeaponTemplate>
+
+	<!-- r20f: fired when the ramming truck collides (Yari JapanNavalScoutShipKamikazeCollisionWeapon / Final Squadron warhead pattern).
+	     1 point on the target keeps the weapon "able to hurt" it for targeting; the self-kill nugget only kills the owner (the truck), nothing else.
+	     FireFX = Yari kamikaze explosion, so it is visible in game that the ram connected. The real blast is the time bomb death weapon. -->
+	<WeaponTemplate
+		id="SovietDemolitionTruckRamWarhead"
+		FireFX="FX_JAP_YariSubKamikazeExplosion"
+		ProjectileCollidesWith="ENEMIES NEUTRAL STRUCTURES WALLS"
+		RadiusDamageAffects="ENEMIES NEUTRALS SELF"
+		Flags="NOT_ATTRACTED_BY_MAGNETS"
+		RequiredAntiMask="ANTI_GROUND ANTI_STRUCTURE ANTI_WATER"
+		HitStoredTarget="true">
 		<Nuggets>
 			<DamageNugget
 				Damage="1.0"
 				Radius="0.0"
 				DamageType="EXPLOSIVE"
 				DeathType="NORMAL" />
-			<DamageNugget
-				Damage="100000.0"
-				Radius="300.0"
-				DamageType="UNRESISTABLE"
-				DeathType="SUICIDED">
-				<SpecialObjectFilter
-					Rule="NONE">
-					<IncludeThing>SovietDemolitionTruck</IncludeThing>
-				</SpecialObjectFilter>
-			</DamageNugget>
 			<DamageNugget
 				Radius="0"
 				OnlyKillOwnerWhenTriggered="true"

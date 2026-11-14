@@ -1,0 +1,4 @@
+r20f snapshot 2026-11-14 22:55 UTC+10 (= r20e + Demolition Truck Yari-style ram: Weapon.xml, SovietDemolitionTruck.xml)
+Mod.xml md5 e814713dc8ea4a937ac411d12bfdec4a; Weapon.xml md5 2a1131372621211b694ce344aa9ca832; SovietDemolitionTruck.xml md5 3088a20dece8779262aa8812fc511ffc
+package RA3_V2.0_Batch102FIX_r20f.big 93371197 B MD5 74E8862DE15858AEF82BA3C7F8ACB007, installed
+No EA art in this snapshot.
