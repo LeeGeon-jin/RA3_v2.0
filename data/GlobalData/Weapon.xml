@@ -9329,12 +9329,12 @@ Flags="NOT_ATTRACTED_BY_MAGNETS"
 	     r20d radius-300 "kill Demolition Trucks" nugget removed (it also killed nearby enemy trucks); the truck now only kills itself
 	     (DETONATE_CALLS_KILL, backed up by a Radius 0 OnlyKillOwnerWhenTriggered nugget in the projectile warhead, the Final Squadron way).
 	     IGNORE_TARGET_AS_OBSTACLE removed (the dash, not the approach, now closes the gap). -->
+	<!-- r20g (2026-11-14 23:10): ContactWeapon removed. r20f stopped about one vehicle length short of the building: a ContactWeapon only fires once the firer reaches a contact point of the target's Geometry, which a pathing vehicle never reaches next to a structure footprint, so the weapon (and the ProjectileSelf dash) never started. Burst Drone pattern instead (JapanScoutInfantryAttachWeapon: ordinary hardpoint ProjectileSelf weapon, range 80, no ContactWeapon, fired straight from the normal attack): the truck now starts the dash as soon as it is within 100 of the target (range is measured to the target's edge) while still driving. -->
 	<WeaponTemplate
 		id="SovietDemolitionTruckDetonateWeapon"
 		AttackRange="100.0"
 		WeaponSpeed="150.0"
 		ProjectileSelf="true"
-		ContactWeapon="true"
 		ChaseWeapon="true"
 		ClipSize="1"
 		AutoReloadsClip="AUTO"

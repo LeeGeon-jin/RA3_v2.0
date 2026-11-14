@@ -1,0 +1,4 @@
+r20g snapshot 2026-11-14 23:09 UTC+10 (= r20f + Demolition Truck: ContactWeapon removed, DONT_DETONATE_WITHOUT_COLLISION removed)
+Mod.xml md5 e814713dc8ea4a937ac411d12bfdec4a; Weapon.xml md5 42b63e5d760e019d669d5880fd5ca7c1; SovietDemolitionTruck.xml md5 95b40a6dac77f6c049a6294a77966e69
+package RA3_V2.0_Batch102FIX_r20g.big 93371197 B MD5 CA18F2F918477F8777D59BAF2F6B9232, built; installed 2026-11-14 23:16 UTC+10
+No EA art in this snapshot.

@@ -220,9 +220,10 @@
 				Duration="5s" />
 			<!-- r20f: the truck is its own projectile during the ram (Yari ModuleTag_KamikazeProjectile flags; heights 0 = stays on the ground, no rise).
 			     DONT_DETONATE_WITHOUT_COLLISION: if the target moves out of the way the truck lands and survives; MaxDistanceToTravel caps the dash. -->
+			<!-- r20g: DONT_DETONATE_WITHOUT_COLLISION removed (Final Squadron flags): the dash always ends in a detonation, at the target or where the target was, so the truck can never land next to the target and park. -->
 			<BezierProjectile
 				id="ModuleTag_DemolitionTruckRamProjectile"
-				Flags="ORIENT_TO_FLIGHT_PATH DETONATE_CALLS_KILL DONT_DETONATE_WITHOUT_COLLISION"
+				Flags="ORIENT_TO_FLIGHT_PATH DETONATE_CALLS_KILL"
 				FirstHeightMin="0"
 				FirstHeightMax="0"
 				SecondHeightMin="0"
