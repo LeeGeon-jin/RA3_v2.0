@@ -1,0 +1,4 @@
+r20e snapshot 2026-11-14 10:45 UTC+10 (= r20d + Mod.xml without AIMicroManagerLibrary include)
+Mod.xml md5 e814713dc8ea4a937ac411d12bfdec4a; Weapon.xml md5 73d1bf9d4d518ab51fdd2a943ba08c4d
+package RA3_V2.0_Batch102FIX_r20e.big 93368912 B MD5 E35BEEF8AF70A41B88BD76E34E2028BB, installed
+No EA art in this snapshot.

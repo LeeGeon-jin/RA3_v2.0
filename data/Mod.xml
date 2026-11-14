@@ -54,7 +54,10 @@
 		<Include type="all" source="DATA:Allied/Units/AlliedAttackDrone.xml" />
 		<Include type="all" source="DATA:Allied/Units/AlliedCommandoTech1.xml" />
 		<Include type="all" source="DATA:SkirmishAI/Personalities/CoopBasePersonality.xml" />
-		<Include type="all" source="DATA:SkirmishAI/AIMicroManagerLibrary.xml" />
+		<!-- r20e (2026-11-14): AIMicroManagerLibrary.xml removed from the build. The SDK schema compiles AIMicroManagerData 4 bytes longer (308 vs 304 B, extra field at 0x88)
+		     than RA3 1.13 expects; every campaign team that gets a micro manager (BlankMicroManager / FearlessMicroManager / FearlessDefenseMicroManager_EASY ...)
+		     read a shifted pointer (0x41200000 = 10.0f) and crashed at RA3_1.13.game+0x171F6. Vanilla micro managers (global stream) are used again;
+		     the B88/88FIX "+2 s micro update interval" is therefore no longer active. File kept in the folder for reference only. -->
 		<Include type="all" source="DATA:Soviet/Structures/SovietRefinery.xml" />
 		<Include type="all" source="DATA:Allied/Units/AlliedEngineer.xml" />
 		<Include type="all" source="DATA:GlobalData/Armor.xml" />

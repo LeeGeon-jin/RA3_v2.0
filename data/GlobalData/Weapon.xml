@@ -9322,32 +9322,41 @@ Flags="NOT_ATTRACTED_BY_MAGNETS"
 	     the blast itself comes from the death weapon so it is identical on attack and on death. -->
 	<WeaponTemplate
 		id="SovietDemolitionTruckDetonateWeapon"
-		AttackRange="75.0"
+		AttackRange="40.0"
 		ClipSize="1"
 		AcceptableAimDelta="180d"
 		CanFireWhileMoving="true"
 		ChaseWeapon="true"
 		WeaponSpeed="999999.0"
+		FireFX="FX_JAP_YariSubKamikazeExplosion"
 		RadiusDamageAffects="ENEMIES NEUTRALS SELF"
 		Flags="NOT_ATTRACTED_BY_MAGNETS IGNORE_TARGET_AS_OBSTACLE"
-		RequiredAntiMask="ANTI_GROUND ANTI_STRUCTURE ANTI_WATER"
-		PreAttackType="PER_SHOT"
-		PreAttackWeapon="SovietDemolitionTruckSelfDestructWeapon">
-		<!-- r20c (2026-11-14): r20 still stopped "a few steps" in front of buildings. Most likely root cause: AttackRange 30 (r19: 25) is shorter than the gap the
-		     pathfinder leaves between a 40-long vehicle and a structure footprint, so the truck could never get into range, parked at the
-		     footprint edge and never fired (same for r19). Fix: AttackRange 75 (the death blast radius is 200, so firing 75 away still hits the
-		     target), IGNORE_TARGET_AS_OBSTACLE + ChaseWeapon (Tanya C4 / Terror Drone pattern: drive right up to the target and follow moving targets).
-		     Self-kill is now done twice: PreAttackWeapon below fires at the truck's own position (DamageDealtAtSelfPosition, King Oni melee pattern)
-		     and kills it outright; the OnlyKillOwnerWhenTriggered nugget stays as a backup. Truck death -> FireWeaponWhenDead -> medium time bomb. -->
-		<PreAttackDelay
-			MinSeconds="0.1s"
-			MaxSeconds="0.1s" />
+		RequiredAntiMask="ANTI_GROUND ANTI_STRUCTURE ANTI_WATER">
+		<!-- r20d (2026-11-14): r20 / r20c still parked next to the target and never exploded. The truck reaches attack range (it stops at range from the
+		     target's edge: r20 range 30 = "a few steps", r20c range 75 = further away), so the stop itself is normal approach behaviour; the failing part
+		     is the self-kill. Both r20 (OnlyKillOwnerWhenTriggered nugget) and r20c (+ self-position PreAttackWeapon) relied on mechanisms that vanilla only
+		     uses from projectile / attach / collide triggers, not from a normal AI weapon shot, so the truck never died and FireWeaponWhenDead never ran.
+		     Fix: plain radius damage that can only hit Demolition Trucks: 100000 UNRESISTABLE, radius 300 around the impact point (the target), filtered to
+		     SovietDemolitionTruck, RadiusDamageAffects includes SELF -> the firing truck always dies on the first shot (enemy demolition trucks inside the radius
+		     die too; own other trucks are ALLIES and are not hit). 1 point of real damage on the target keeps the weapon valid for targeting.
+		     FireFX = Yari kamikaze explosion, so in game it is visible whether the weapon fired at all.
+		     PreAttackWeapon removed. Range back to 40 so it drives close before going off (blast radius 200). -->
 		<Nuggets>
 			<DamageNugget
 				Damage="1.0"
 				Radius="0.0"
 				DamageType="EXPLOSIVE"
 				DeathType="NORMAL" />
+			<DamageNugget
+				Damage="100000.0"
+				Radius="300.0"
+				DamageType="UNRESISTABLE"
+				DeathType="SUICIDED">
+				<SpecialObjectFilter
+					Rule="NONE">
+					<IncludeThing>SovietDemolitionTruck</IncludeThing>
+				</SpecialObjectFilter>
+			</DamageNugget>
 			<DamageNugget
 				Radius="0"
 				OnlyKillOwnerWhenTriggered="true"
@@ -9357,24 +9366,6 @@ Flags="NOT_ATTRACTED_BY_MAGNETS"
 		</Nuggets>
 	</WeaponTemplate>
 
-	<!-- r20c: fired as the detonate weapon's PreAttackWeapon at the truck's own position; only hits the truck itself (RadiusDamageAffects SELF) -->
-	<WeaponTemplate
-		id="SovietDemolitionTruckSelfDestructWeapon"
-		AttackRange="75.0"
-		CanFireWhileMoving="true"
-		WeaponSpeed="999999.0"
-		DamageDealtAtSelfPosition="true"
-		AcceptableAimDelta="180d"
-		RadiusDamageAffects="SELF"
-		Flags="NOT_ATTRACTED_BY_MAGNETS">
-		<Nuggets>
-			<DamageNugget
-				Damage="100000.0"
-				Radius="5.0"
-				DamageType="UNRESISTABLE"
-				DeathType="SUICIDED" />
-		</Nuggets>
-	</WeaponTemplate>
 	<!-- = medium time bomb (AlliedTimeBomb_Level2): 1000 dmg, radius 200, taper 600, EXPLOSIVE, FX_TimeBombExplosionLvl2,
 	     + Desolator Airstrike Level 1 fallout: vanilla OCL_SovietDesolatorBombWarhead -> DesolatorField_DesolatorBomb
 	       (radius 150, 30s, Weapon_DesolatorBombFieldUpdate every 0.1s) -->
