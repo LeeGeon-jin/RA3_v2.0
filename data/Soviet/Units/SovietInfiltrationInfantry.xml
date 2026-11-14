@@ -31,9 +31,6 @@
 		UnitIntro="Allied_Spy_UnitIntro">
 		<DisplayName
 			xai:joinAction="Replace" xmlns:xai="uri:ea.com:eala:asset:instance">Name:SovietInfiltrationInfantry</DisplayName>
-		<GameDependency>
-			<RequiredObject>SovietWarFactory</RequiredObject>
-		</GameDependency>
 		<ObjectResourceInfo>
 			<BuildCost Account="=$ACCOUNT_ORE" Amount="1000"/>
 		</ObjectResourceInfo>

@@ -13,11 +13,14 @@
 		<Include type="all" source="DATA:GlobalData/LogicCommandSet.xml" />
 		<Include type="all" source="DATA:GlobalData/upgrade.xml" />
 		<Include type="all" source="DATA:GlobalData/UIConfigs.xml" />
+		<Include type="all" source="DATA:Neutral/InfiltratorContainFilters_V20.xml" />
 		<Include type="all" source="DATA:Allied/Structures/AlliedBarracks.xml" />
 		<Include type="all" source="DATA:Allied/Structures/AlliedPowerPlant.xml" />
+		<Include type="all" source="DATA:Allied/Structures/AlliedPowerPlantTurbine.xml" />
 		<Include type="all" source="DATA:Allied/Structures/AlliedRefinery.xml" />
 		<Include type="all" source="DATA:Allied/Structures/AlliedWarFactory.xml" />
 		<Include type="all" source="DATA:Allied/Structures/AlliedNavalYard.xml" />
+		<Include type="all" source="DATA:Allied/Structures/AlliedConstructionYard.xml" />
 		<Include type="all" source="DATA:Allied/Structures/AlliedBaseDefense.xml" />
 		<Include type="all" source="DATA:Allied/Structures/AlliedBaseDefenseAdvanced.xml" />
 		<Include type="all" source="DATA:Allied/Structures/AlliedSuperWeapon.xml" />
@@ -25,7 +28,11 @@
 		<Include type="all" source="DATA:Japan/Structures/JapanBaseDefense.xml" />
 		<Include type="all" source="DATA:Japan/Structures/JapanBaseDefenseAdvanced.xml" />
 		<Include type="all" source="DATA:Japan/Structures/JapanPowerPlant.xml" />
+		<Include type="all" source="DATA:Japan/Structures/JapanPowerPlantTurbine.xml" />
 		<Include type="all" source="DATA:Japan/Structures/JapanRefinery.xml" />
+		<Include type="all" source="DATA:Japan/Structures/JapanNavalYard.xml" />
+		<Include type="all" source="DATA:Japan/Structures/JapanWarFactory.xml" />
+		<Include type="all" source="DATA:Japan/Structures/JapanSuperWeapon.xml" />
 		<Include type="all" source="DATA:Japan/Structures/JapanSuperWeaponAdvanced.xml" />
 		<Include type="all" source="DATA:Japan/Structures/JapanQuickProductionCenter.xml" />
 		<Include type="all" source="DATA:Soviet/Structures/SovietBaseDefenseGround.xml" />
@@ -33,6 +40,10 @@
 		<Include type="all" source="DATA:Soviet/Structures/SovietBaseDefenseAdvanced.xml" />
 		<Include type="all" source="DATA:Soviet/Structures/SovietBunker.xml" />
 		<Include type="all" source="DATA:Soviet/Structures/SovietPowerPlantAdvanced.xml" />
+		<Include type="all" source="DATA:Soviet/Structures/SovietConstructionYard.xml" />
+		<Include type="all" source="DATA:Soviet/Structures/SovietOutPost.xml" />
+		<Include type="all" source="DATA:Soviet/Structures/SovietSuperWeapon.xml" />
+		<Include type="all" source="DATA:Soviet/Structures/SovietSuperWeaponAdvanced.xml" />
 		<Include type="all" source="DATA:Soviet/Structures/SovietTechStructure.xml" />
 		<Include type="all" source="DATA:Soviet/Structures/SovietQuickProductionCenter.xml" />
 		<Include type="all" source="DATA:Soviet/Props/IronCurtainEffect.xml" />

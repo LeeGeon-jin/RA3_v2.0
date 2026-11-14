@@ -1428,7 +1428,7 @@
 				EventListName="BuildingPowerFunctions"
 			/>	
 					<InfiltratorContain
-				id="ModuleTag_InfiltratorContain"
+				id="ModuleTag_InfiltratorContain" CanEnterFilter="InfiltrationCanEnterObjectFilterV20"
 				Effect="STEAL_MONEY"
 				Amount="5000"
 				BlockedDuration="0s">

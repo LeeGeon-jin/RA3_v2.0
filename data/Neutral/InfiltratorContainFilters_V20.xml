@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<AssetDeclaration xmlns="uri:ea.com:eala:asset" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<Tags></Tags>
+	<Includes>
+	</Includes>
+	<!-- r20j: Game-stream copy of the vanilla CanEnter whitelist, plus SovietInfiltrationInfantry.
+	     New id so it does not collide with the Static-stream InfiltrationCanEnterObjectFilter. -->
+	<ObjectFilterAsset
+		id="InfiltrationCanEnterObjectFilterV20">
+		<Filter
+			Relationship="ENEMIES"
+			Rule="NONE">
+			<IncludeThing>AlliedInfiltrationInfantry</IncludeThing>
+			<IncludeThing>JapanInfiltrationInfantry</IncludeThing>
+			<IncludeThing>SovietInfiltrationInfantry</IncludeThing>
+		</Filter>
+	</ObjectFilterAsset>
+</AssetDeclaration>
