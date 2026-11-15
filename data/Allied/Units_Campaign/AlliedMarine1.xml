@@ -48,6 +48,7 @@
 			Condition="TAXIING"
 			Speed="10" />
 		<LocomotorSet
+			id="Locomotor_Normal"
 			Locomotor="AlliedSupportAircraftLocomotor"
 			Condition="NORMAL"
 			Speed="100.0" />
@@ -253,10 +254,17 @@
 		EditorSorting="UNIT"
 		BuildTime="12"
 		Description="Desc:AlliedMarine1_Buildable"
-		KindOf="PRELOAD CAN_CAST_REFLECTIONS CAN_ATTACK SELECTABLE SCORE AIRCRAFT VEHICLE ASSAULT_AIRCRAFT LINE_OF_SIGHT_IGNORES_BUILDINGS CAN_BE_FAVORITE_UNIT LEAVE_PARKING_ON_BUILD_COMPLETE PRODUCED_AT_HELIPAD">
+		KindOf="PRELOAD CAN_CAST_REFLECTIONS CAN_ATTACK SELECTABLE SCORE AIRCRAFT VEHICLE ASSAULT_AIRCRAFT LINE_OF_SIGHT_IGNORES_BUILDINGS CAN_BE_FAVORITE_UNIT TRANSPORT LEAVE_PARKING_ON_BUILD_COMPLETE PRODUCED_AT_HELIPAD">
 		<GameDependency>
 			<RequiredObject>AlliedAirfield</RequiredObject>
 		</GameDependency>
+		<!-- r20m (2026-11-16): MaxHealth 650 / NORMAL speed 150, same as Cryocopter AlliedSupportAircraft. Campaign AlliedMarine1 stays 600 / 100. -->
+		<LocomotorSet
+			id="Locomotor_Normal"
+			xai:joinAction="Replace" xmlns:xai="uri:ea.com:eala:asset:instance"
+			Locomotor="AlliedSupportAircraftLocomotor"
+			Condition="NORMAL"
+			Speed="150.0" />
 		<Draws>
 			<LaserDraw
 				id="ModuleTag_PrismLaserDraw"
@@ -369,6 +377,58 @@
 				StatusToSet="WEAPON_UPGRADED_01">
 				<TriggeredBy>Upgrade_Veterancy_HEROIC</TriggeredBy>
 			</StatusBitsUpgrade>
+			<!-- r20m: make the buildable chopper carry and unload infantry like the Twinblade (SovietAntiGroundAircraft):
+			     drop BaseVehicle's ground DynamicsUpdate (every RA3 aircraft incl. Twinblade removes it) and limit passengers to infantry
+			     (no sling bone on NUMarine1, so vehicles are not allowed). Max 5, same as before. -->
+			<DynamicsUpdate
+				id="ModuleTag_DefaultDynamicsUpdate"
+				xai:joinAction="Remove" xmlns:xai="uri:ea.com:eala:asset:instance" />
+			<TransportContain
+				id="ModuleTag_Contain"
+				xai:joinAction="Replace" xmlns:xai="uri:ea.com:eala:asset:instance"
+				ObjectStatusOfContained="UNSELECTABLE NO_ATTACK"
+				ObjectStatusWhileContaining="CONTAINER_OCCUPIED CANNOT_LAND_AT_AIRFIELD"
+				ContainMax="5"
+				AllowEnemiesInside="false"
+				AllowAlliesInside="true"
+				AllowNeutralInside="false"
+				AllowOwnPlayerInsideOverride="true"
+				ShowPips="true"
+				EnterSound="VehicleEnter"
+				ExitSound="VehicleExit"
+				KillPassengersOnDeath="true"
+				ConditionForEntry="INVALID"
+				ExtendedExitContainerChecks="true">
+				<PassengerFilter
+					Rule="ANY"
+					Include="INFANTRY"
+					Exclude="AIRCRAFT SHIP SUBMARINE"
+					StatusBitFlagsExclude="AIRBORNE_TARGET" />
+				<DieMuxData
+					DeathTypes="ALL" />
+				<PassengerData
+					BonePrefix="NONE">
+					<Filter
+						Rule="NONE"
+						Include="INFANTRY" />
+				</PassengerData>
+			</TransportContain>
 		</Behaviors>
+		<AI>
+			<!-- r20m: Twinblade's TransportHelicopterAIStateMachine (lands to pick up / drop off passengers) instead of HelicopterAIStateMachine -->
+			<JetAIUpdate
+				id="ModuleTag_AIUpdate"
+				xai:joinAction="Replace" xmlns:xai="uri:ea.com:eala:asset:instance"
+				AutoAcquireEnemiesWhenIdle="YES"
+				StateMachine="TransportHelicopterAIStateMachine">
+				<UnitAITargetChooserData />
+			</JetAIUpdate>
+		</AI>
+		<Body>
+			<ActiveBody
+				id="ModuleTag_Body"
+				xai:joinAction="Replace" xmlns:xai="uri:ea.com:eala:asset:instance"
+				MaxHealth="650" />
+		</Body>
 	</GameObject>
 </AssetDeclaration>
