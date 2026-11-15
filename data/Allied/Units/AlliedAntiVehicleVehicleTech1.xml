@@ -34,9 +34,7 @@
 			<BuildCost Account="=$ACCOUNT_ORE" Amount="950"/>
 		</ObjectResourceInfo>
 		
-		<GameDependency>
-			<RequiredObject>AlliedAirfield</RequiredObject>
-		</GameDependency>
+		<!-- r20l (2026-11-15): GameDependency (RequiredObject AlliedAirfield) removed, user request: buildable with only the Allied War Factory (Cannes, Allied mission 2). Same way as the r20j spy prerequisite removal. -->
 		
 		<ArmorSet
 			Armor="AlliedAntiVehicleVehicleTech1Armor"

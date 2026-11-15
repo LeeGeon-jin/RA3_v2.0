@@ -9340,23 +9340,41 @@ Flags="NOT_ATTRACTED_BY_MAGNETS"
 	     Radius 0 OnlyKillOwnerWhenTriggered SUICIDED nugget (EnhancedKamikazeDeathPlayerPowerWeapon / Yari warhead order: kill nugget first);
 	     the blast itself (1000 EXPLOSIVE vs BaseVehicleArmor 100%, truck 400 HP) would also kill it.
 	     FireWeaponWhenDead on the truck forbids SUICIDED, so the death weapon only fires when the truck is destroyed by the enemy (no double blast). -->
+	<!-- r20l (2026-11-15): Grinder pattern (Uprising SovietGrinderVehicleGrindWeapon, user approved).
+	     r20g..r20k trucks stopped at the edge of AttackRange (r20k: 50) and never fired; r20f (ContactWeapon) stopped one vehicle length short
+	     because IGNORE_TARGET_AS_OBSTACLE had been removed, so pathing treated the target as an obstacle and the contact point was never reached
+	     (r20f failure = missing IGNORE_TARGET_AS_OBSTACLE, not ContactWeapon itself).
+	     Now: AttackRange 1, ContactWeapon + MeleeWeapon + ChaseWeapon, Flags IGNORE_TARGET_AS_OBSTACLE: the truck drives into the target and the
+	     hidden bomb fires on contact. DamageDealtAtSelfPosition removed (Grinder does not use it; at range 1 the blast is at the target anyway).
+	     Nuggets: 1 dmg radius 0 contact hit (Grinder first nugget), Radius 0 OnlyKillOwnerWhenTriggered SUICIDED, then the unchanged r20k bomb
+	     (1000 EXPLOSIVE, taper 600, radius 200, MetaImpact, Desolator fallout OCL). SELF in RadiusDamageAffects kept.
+	     SovietDemolitionTruck.xml unchanged (FireWeaponWhenDead forbids SUICIDED -> no double blast). -->
 	<WeaponTemplate
 		id="SovietDemolitionTruckDetonateWeapon"
-		AttackRange="50.0"
+		AttackRange="1.0"
+		WeaponSpeed="999999.0"
 		ClipSize="1"
 		AutoReloadsClip="AUTO"
+		InstantLoadClipOnActivate="true"
 		AcceptableAimDelta="180d"
 		CanFireWhileMoving="true"
 		FinishAttackOnceStarted="true"
-		DamageDealtAtSelfPosition="true"
+		ContactWeapon="true"
+		MeleeWeapon="true"
+		ChaseWeapon="true"
 		FireFX="FX_TimeBombExplosionLvl2"
 		RadiusDamageAffects="ENEMIES NEUTRALS ALLIES SELF"
-		Flags="NOT_ATTRACTED_BY_MAGNETS"
+		Flags="NOT_ATTRACTED_BY_MAGNETS IGNORE_TARGET_AS_OBSTACLE"
 		RequiredAntiMask="ANTI_GROUND ANTI_STRUCTURE ANTI_WATER">
 		<ClipReloadTime
 			MinSeconds="1.0s"
 			MaxSeconds="1.0s" />
 		<Nuggets>
+			<DamageNugget
+				Damage="1.0"
+				Radius="0.0"
+				DamageType="EXPLOSIVE"
+				DeathType="NORMAL" />
 			<DamageNugget
 				Radius="0"
 				OnlyKillOwnerWhenTriggered="true"

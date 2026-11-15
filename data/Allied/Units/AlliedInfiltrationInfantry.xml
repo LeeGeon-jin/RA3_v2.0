@@ -40,11 +40,11 @@
 		<LocomotorSet
 			Locomotor="TestReactiveLocomotorHUMAN"
 			Condition="NORMAL"
-			Speed="50" />
+			Speed="56" />
 		<LocomotorSet
 			Locomotor="HumanWaterLocomotor"
 			Condition="NORMAL"
-			Speed="50" />
+			Speed="56" />
 		
 		<!-- OverrideOuterDistanceToTarget: pretty much a random number -->
 		<SkirmishAIInformation

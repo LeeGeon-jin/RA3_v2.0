@@ -29,8 +29,10 @@
 		UnitIntro="Japan_TsunamiTank_UnitIntro">
 		<DisplayName
 			xai:joinAction="Replace" xmlns:xai="uri:ea.com:eala:asset:instance">Name:JapanAntiVehicleVehicleTech1</DisplayName>
+		<!-- r20l (2026-11-15): NeededUpgrade Upgrade_JapanWarFactoryTech2 replaced by RequiredObject JapanWarFactory, user request: buildable with only the Empire War Factory.
+		     The block is kept (not deleted) because JapanAntiVehicleVehicleTech1_Naval below replaces it with xai:joinAction="Replace" (Naval Yard Tech2, unchanged). -->
 		<GameDependency>
-			<NeededUpgrade>Upgrade_JapanWarFactoryTech2</NeededUpgrade>
+			<RequiredObject>JapanWarFactory</RequiredObject>
 		</GameDependency>
 		<ObjectResourceInfo>
 			<BuildCost Account="=$ACCOUNT_ORE" Amount="1000"/>

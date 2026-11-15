@@ -34,9 +34,7 @@
 		<ObjectResourceInfo>
 			<BuildCost Account="=$ACCOUNT_ORE" Amount="1000"/>
 		</ObjectResourceInfo>
-		<GameDependency>
-			<RequiredObject>SovietPowerPlantAdvanced</RequiredObject>
-		</GameDependency>
+		<!-- r20l (2026-11-15): GameDependency (RequiredObject SovietPowerPlantAdvanced / Super Reactor) removed, user request: buildable with only the Soviet War Factory. Same way as the r20j spy prerequisite removal. -->
 		<ArmorSet
 			Armor="SovietAntiVehicleVehicleTech1Armor"
 			DamageFX="VehicleDamageFX" />
