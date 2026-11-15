@@ -283,6 +283,7 @@
 			<xi:include href="DATA:Includes/GenericEngineerContain.xml" />
 		</Behaviors>
 		<ArmorSet
+			id="DefaultArmor"
 			Armor="BaseCivilianStructureArmor"/>
 		<AI>
 			<AIUpdate
@@ -352,6 +353,11 @@
 		<ObjectResourceInfo>
 			<BuildCost Account="=$ACCOUNT_ORE" Amount="2500"/>
 		</ObjectResourceInfo>
+		<ArmorSet
+			id="DefaultArmor"
+			xai:joinAction="Replace" xmlns:xai="uri:ea.com:eala:asset:instance"
+			Armor="JapanBaseDefenseAdvancedArmor"
+			DamageFX="FactionStructureDamageFX" />
 		<Behaviors>
 			<StructureUnpackUpdate
 				id="ModuleTag_StructureUnpack"

@@ -209,6 +209,12 @@
 				</WeaponSlotTurret>
 			</WeaponSetUpdate>
 		</Behaviors>
+		<Body>
+			<ActiveBody
+				id="ModuleTag_Body"
+				xai:joinAction="Replace" xmlns:xai="uri:ea.com:eala:asset:instance"
+				MaxHealth="5000" />
+		</Body>
 	</GameObject>
 
 	<ObjectCreationList
@@ -420,6 +426,22 @@
 		</Nuggets>
 	</WeaponTemplate>
 
+	<WeaponTemplate
+		id="AlliedCoastalGunWeaponWarhead"
+		ProjectileCollidesWith = "ALLIES ENEMIES NEUTRAL STRUCTURES WALLS"
+		RadiusDamageAffects="ALLIES ENEMIES NEUTRALS"
+		RequiredAntiMask="ANTI_STRUCTURE ANTI_WATER ANTI_GROUND"
+		Flags="">
+		<Nuggets>
+			<DamageNugget
+				Damage="150.0"
+				Radius="50.0"
+				DamageType="EXPLOSIVE"
+				DeathType="EXPLODED"
+			/>
+		</Nuggets>
+	</WeaponTemplate>
+
 
 	<!-- r16: Allied Coastal Gun only - attack interval halved (ClipReloadTime 5s -> 2.5s) -->
 	<!-- r19: halved again (2.5s -> 1.25s); 2-shell volley = ClipSize 2, one shell per barrel (FX_FireWeapon01/02 bones restored in r19), 0.15s between the two shells -->
@@ -434,5 +456,16 @@
 		<ClipReloadTime
 			MinSeconds="1.25s"
 			MaxSeconds="1.25s" />
+			<Nuggets xai:joinAction="Replace" xmlns:xai="uri:ea.com:eala:asset:instance">
+			<ProjectileNugget
+				ProjectileTemplate="FXCostalGunProjectileHoming"
+				WarheadTemplate="AlliedCoastalGunWeaponWarhead">
+			</ProjectileNugget>
+			<SuppressionNugget
+				Radius="100.0"
+				Suppression="100"
+				DurationSeconds="5s" />
+			<InformTargetNugget />
+		</Nuggets>
 	</WeaponTemplate>
 </AssetDeclaration>

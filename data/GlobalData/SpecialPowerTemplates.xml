@@ -758,7 +758,7 @@
 
 	<SpecialPowerTemplate
 		id="SpecialPower_SuperTorpedos"
-		ReloadTime="60s"
+		ReloadTime="30s"
 		TargetType="NONE"
 		NameOfVoiceNameToUseAsInitiateIntendToDoVoice="VoiceSuperTorpedos"
 		InitiateSound="SOV_AkulaSub_WeaponFire_UltraTorpedoMS"
@@ -767,7 +767,7 @@
 	
 	<SpecialPowerTemplate
 		id="SpecialPower_TeslaNova"
-		ReloadTime="60s"
+		ReloadTime="30s"
 		TargetType="NONE"
 		InitiateSound="SOV_Stingray_TeslaSurge"
 		WaypointModeTerminal="false"

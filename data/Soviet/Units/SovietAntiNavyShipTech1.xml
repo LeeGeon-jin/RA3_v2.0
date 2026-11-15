@@ -442,10 +442,10 @@
 				id="ModuleTag_ModuleTag_TeslaNovaUpdate"
 				SpecialPowerTemplate="SpecialPower_TeslaNova"
 				SpecialWeapon="SovietAntiNavyShipTech1TeslaNova"
-				UnpackTime="1s"
-				PackTime="2s"
+				UnpackTime="0.5s"
+				PackTime="0.5s"
 				FaceTarget="false"
-				FreezeAfterTriggerDuration="2s"
+				FreezeAfterTriggerDuration="0s"
 				StartAbilityRange="0.0"/>
 			<CircularDamageUpdate
 				id="ModuleTag_CircularDamage"

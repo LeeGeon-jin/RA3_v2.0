@@ -3566,14 +3566,14 @@ Flags="NOT_ATTRACTED_BY_MAGNETS"
 		ReAcquireDetailType="PER_CLIP"	
 		>
 		<PreAttackDelay
-			MinSeconds="0.1s"
-			MaxSeconds="0.1s" />
+			MinSeconds="0s"
+			MaxSeconds="0s" />
 		<FiringDuration
 			MinSeconds="0.1s"
 			MaxSeconds="0.3s" />
 		<ClipReloadTime
-			MinSeconds="0.3s"
-			MaxSeconds="0.5s" />
+			MinSeconds="0.15s"
+			MaxSeconds="0.25s" />
 		<Nuggets>
 			<DamageNugget
 				id="DefaultDamageNugget"
@@ -6149,8 +6149,8 @@ Flags="NOT_ATTRACTED_BY_MAGNETS"
 			MinSeconds="0.2s"
 			MaxSeconds="0.2s" />
 		<ClipReloadTime
-			MinSeconds="1.8s"
-			MaxSeconds="2.2s" />
+			MinSeconds="1.35s"
+			MaxSeconds="1.65s" />
 		<Nuggets>
 			<DamageNugget
 				Damage="8.0"
@@ -9330,52 +9330,53 @@ Flags="NOT_ATTRACTED_BY_MAGNETS"
 	     (DETONATE_CALLS_KILL, backed up by a Radius 0 OnlyKillOwnerWhenTriggered nugget in the projectile warhead, the Final Squadron way).
 	     IGNORE_TARGET_AS_OBSTACLE removed (the dash, not the approach, now closes the gap). -->
 	<!-- r20g (2026-11-14 23:10): ContactWeapon removed. r20f stopped about one vehicle length short of the building: a ContactWeapon only fires once the firer reaches a contact point of the target's Geometry, which a pathing vehicle never reaches next to a structure footprint, so the weapon (and the ProjectileSelf dash) never started. Burst Drone pattern instead (JapanScoutInfantryAttachWeapon: ordinary hardpoint ProjectileSelf weapon, range 80, no ContactWeapon, fired straight from the normal attack): the truck now starts the dash as soon as it is within 100 of the target (range is measured to the target's edge) while still driving. -->
+	<!-- r20k (2026-11-15): ProjectileSelf dash / ram warhead removed (user: no dash, no ContactWeapon, no health-to-zero tricks).
+	     The attack weapon IS the hidden time bomb: an ordinary instant hardpoint weapon with a short range; as soon as the truck is within
+	     AttackRange of the target it fires once and the blast is dealt at the truck's own position (DamageDealtAtSelfPosition, vanilla
+	     JapanMechaKingOmegaShockwave / King Oni melee JapanAntiVehicleVehicleTech3MeleeAttackWeapon).
+	     Blast = same numbers as the death weapon / AlliedTimeBomb_Level2: 1000 EXPLOSIVE, radius 200, taper 600, + Desolator fallout OCL.
+	     AttackRange 50 = King Oni melee range (vanilla vehicle melee); the target is always inside the 200 blast radius.
+	     The truck dies in the same shot: RadiusDamageAffects includes SELF and the first nugget is the vanilla
+	     Radius 0 OnlyKillOwnerWhenTriggered SUICIDED nugget (EnhancedKamikazeDeathPlayerPowerWeapon / Yari warhead order: kill nugget first);
+	     the blast itself (1000 EXPLOSIVE vs BaseVehicleArmor 100%, truck 400 HP) would also kill it.
+	     FireWeaponWhenDead on the truck forbids SUICIDED, so the death weapon only fires when the truck is destroyed by the enemy (no double blast). -->
 	<WeaponTemplate
 		id="SovietDemolitionTruckDetonateWeapon"
-		AttackRange="100.0"
-		WeaponSpeed="150.0"
-		ProjectileSelf="true"
-		ChaseWeapon="true"
+		AttackRange="50.0"
 		ClipSize="1"
 		AutoReloadsClip="AUTO"
 		AcceptableAimDelta="180d"
 		CanFireWhileMoving="true"
 		FinishAttackOnceStarted="true"
-		RadiusDamageAffects="ENEMIES NEUTRALS"
+		DamageDealtAtSelfPosition="true"
+		FireFX="FX_TimeBombExplosionLvl2"
+		RadiusDamageAffects="ENEMIES NEUTRALS ALLIES SELF"
 		Flags="NOT_ATTRACTED_BY_MAGNETS"
 		RequiredAntiMask="ANTI_GROUND ANTI_STRUCTURE ANTI_WATER">
 		<ClipReloadTime
 			MinSeconds="1.0s"
 			MaxSeconds="1.0s" />
 		<Nuggets>
-			<ProjectileNugget
-				WarheadTemplate="SovietDemolitionTruckRamWarhead" />
-		</Nuggets>
-	</WeaponTemplate>
-
-	<!-- r20f: fired when the ramming truck collides (Yari JapanNavalScoutShipKamikazeCollisionWeapon / Final Squadron warhead pattern).
-	     1 point on the target keeps the weapon "able to hurt" it for targeting; the self-kill nugget only kills the owner (the truck), nothing else.
-	     FireFX = Yari kamikaze explosion, so it is visible in game that the ram connected. The real blast is the time bomb death weapon. -->
-	<WeaponTemplate
-		id="SovietDemolitionTruckRamWarhead"
-		FireFX="FX_JAP_YariSubKamikazeExplosion"
-		ProjectileCollidesWith="ENEMIES NEUTRAL STRUCTURES WALLS"
-		RadiusDamageAffects="ENEMIES NEUTRALS SELF"
-		Flags="NOT_ATTRACTED_BY_MAGNETS"
-		RequiredAntiMask="ANTI_GROUND ANTI_STRUCTURE ANTI_WATER"
-		HitStoredTarget="true">
-		<Nuggets>
-			<DamageNugget
-				Damage="1.0"
-				Radius="0.0"
-				DamageType="EXPLOSIVE"
-				DeathType="NORMAL" />
 			<DamageNugget
 				Radius="0"
 				OnlyKillOwnerWhenTriggered="true"
 				DamageType="UNRESISTABLE"
-				DamageFXType="JAPAN_CANNON"
+				DamageFXType="ALLIED_BOMBLVL2"
 				DeathType="SUICIDED" />
+			<DamageNugget
+				Damage="1000.0"
+				DamageTaperOff="600"
+				Radius="200"
+				DamageType="EXPLOSIVE"
+				DamageFXType="ALLIED_BOMBLVL2"
+				DeathType="NORMAL"
+				RadiusAffectsBridges="true" />
+			<MetaImpactNugget
+				ShockWaveAmount="89.0"
+				ShockWaveRadius="175.0"
+				ShockWaveZMult="1.50" />
+			<WeaponOCLNugget
+				WeaponOCL="OCL_SovietDesolatorBombWarhead" />
 		</Nuggets>
 	</WeaponTemplate>
 
