@@ -221,7 +221,7 @@
 				DamageType="TESLA"
 				DamageFXType="SOVIET_TESLA"
 				DeathType="ELECTROCUTED"
-				DelayTimeSeconds="0.7s"/>
+				DelayTimeSeconds="0.45s"/><!-- r20n: 0.7s -> 0.45s, damage lands 0.9 + 0.45 = 1.35s after the attack starts, same as the Tesla Coil (1.25 + 0.1) -->
 		</Nuggets>
 	</WeaponTemplate>
 
@@ -241,6 +241,74 @@
 		<GameDependency>
 			<RequiredObject>SovietPowerPlantAdvanced</RequiredObject>
 		</GameDependency>
+		<!-- r20n (16:39): own copy of the neutral statue's draw, so only the buildable statue's open / close mouth (TRANS_StartAttack / TRANS_EndAttack) can be sped up. Same module id, joinAction Replace; everything else copied unchanged. -->
+		<Draws>
+			<ScriptedModelDraw
+				xai:joinAction="Replace" xmlns:xai="uri:ea.com:eala:asset:instance"
+				id="ModuleTag_Draw"
+				OkToChangeModelColor="true"
+				ExtraPublicBone="FX_Weapon_01 FX_WEAPON_02 FX_WEAPON_03">
+				<ModelConditionState
+					ParseCondStateType="PARSE_DEFAULT">
+					<Model
+						Name="EI_EasterIslandHeadDefense_SKN" />
+						<WeaponFireFXBone
+							WeaponSlotID="1"
+							WeaponSlotType="PRIMARY_WEAPON"
+							BoneName="FX_WEAPON_02" />
+						<Turret
+							TurretNameKey="BONE_Rotate_Control"							
+							TurretID="1" />
+				</ModelConditionState>
+				<AnimationState
+					ParseCondStateType="PARSE_DEFAULT"
+					StateName="State_Idle">
+					<Script>
+						Prev = CurDrawablePrevAnimationState();
+						if Prev == "State_Attacking" then
+						CurDrawableSetTransitionAnimState("TRANS_EndAttack")
+						end
+					</Script>
+				</AnimationState>
+				<AnimationState
+					ParseCondStateType="PARSE_NORMAL"
+					ConditionsYes="ENGAGED"
+					StateName="State_Attacking"
+					Flags="START_FRAME_LAST">
+					<Animation
+						AnimationName="EI_EasterIslandHeadDefense_GAG"						
+						AnimationBlendTime="0"
+						AnimationMode="MANUAL"/>
+					<Script>
+						Prev = CurDrawablePrevAnimationState();
+						if Prev == "State_Idle" then
+						CurDrawableSetTransitionAnimState("TRANS_StartAttack")
+						end
+					</Script>
+				</AnimationState>
+				<AnimationState
+					ParseCondStateType="PARSE_TRANSITION"
+					StateName="TRANS_StartAttack">
+					<Animation
+						AnimationName="EI_EasterIslandHeadDefense_GAG"
+						AnimationBlendTime="0"
+						AnimationMode="ONCE"
+						AnimationSpeedFactorMin="2.0"
+						AnimationSpeedFactorMax="2.0"/><!-- r20n (user 2026-11-17 18:47): x2.0 open mouth, ~1.8 s -> ~0.9 s (55 frames @ 30 fps), fully open when the 0.9 s pre-attack ends -->
+				</AnimationState>
+				<AnimationState
+					ParseCondStateType="PARSE_TRANSITION"
+					StateName="TRANS_EndAttack"
+					Flags="START_FRAME_LAST">
+					<Animation
+						AnimationName="EI_EasterIslandHeadDefense_GAG"
+						AnimationBlendTime="0"
+						AnimationMode="ONCE_BACKWARDS"
+						AnimationSpeedFactorMin="2.0"
+						AnimationSpeedFactorMax="2.0"/><!-- r20n (user 2026-11-17 18:47): x2.0. EI_EasterIslandHeadDefense_GAG = 55 frames @ 30 fps (~1.8 s) -> ~0.9 s close mouth -->
+				</AnimationState>        
+			</ScriptedModelDraw>
+		</Draws>
 		<Behaviors>
 			<StructureUnpackUpdate
 				id="ModuleTag_StructureUnpack"

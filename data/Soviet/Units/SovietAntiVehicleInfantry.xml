@@ -1297,11 +1297,11 @@
 
 			</ToggleStatusSpecialAbilityUpdate>
 
+			<!-- r20n: crushed in ANY mode (RequiredStatus GENERIC_TOGGLE_STATE removed) -> explosion of 3 magnetic mines (200 x 3 = 600) -->
 			<FireWeaponCollide
 				id="ModuleTag_CrushRevengeWeapon" 
-				CollideWeapon="SovietAntiVehicleInfantryMagneticBombExplosion"
+				CollideWeapon="SovietAntiVehicleInfantryCrushRevengeExplosion"
 				Flags="WHEN_BEING_CRUSHED"
-				RequiredStatus="GENERIC_TOGGLE_STATE"
 				FireOnce="true"/>
 			<Physics
 				id="ModuleTag_Physics" />

@@ -365,7 +365,8 @@
 	ModelConditionsSet="USER_6" 
 	EndFX="FX_SOV_OreCollector_ReactiveArmorOff">
 		<Modifier Type="ARMOR" Value="25%"/>
-		<Modifier Type="SPEED" Value="50%" />
+		<!-- r20n: SPEED 50% -> 66.67% so the Soviet Ore Collector moves at 75 x 0.6667 = 50 with armor up (was 37.5). Only SovietMiner uses this modifier. -->
+		<Modifier Type="SPEED" Value="66.67%" />
 	</AttributeModifier>
 
 
@@ -997,6 +998,16 @@
 		<Modifier Type="PRODUCTION" Value="200%"/>
 	</AttributeModifier>
 	
+	<!-- r20n_truck: "bomb bay empty" flag for SovietDemolitionTruck. Set on the truck itself (AttributeModifierOwnerName,
+	     vanilla Burst Drone / Tanya C4 owner-modifier pattern) the moment the truck releases its bomb by attacking.
+	     Duration 0 = permanent. EXPLOSIVES_DETONATING = vanilla Tanya C4 owner status (AttributeModifier_AlliedCommandoDetonationWeaponOwner);
+	     on the truck it is only read by its own death release (DieMux ExemptStatus) and its weapon slot (ForbiddenObjectStatus). -->
+	<AttributeModifier
+		id="AttributeModifier_SovietDemolitionTruckBayEmpty"
+		Category="NONE"
+		ObjectStatusToSet="EXPLOSIVES_DETONATING"
+		Duration="0s" />
+
 	<!-- please add new modifiers before these handicaps -->
 
 </AssetDeclaration>

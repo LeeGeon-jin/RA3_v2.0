@@ -430,8 +430,8 @@
           <Animation
 						AnimationName="JUHarvester_GTRANS"
 						AnimationMode="ONCE"
-						AnimationSpeedFactorMin="2.0"
-						AnimationSpeedFactorMax="2.0"/>
+						AnimationSpeedFactorMin="4.0"
+						AnimationSpeedFactorMax="4.0"/><!-- r20n: 2.0 -> 4.0 (switch animation time halved) -->
         </AnimationState>
         <AnimationState
 					ParseCondStateType="PARSE_TRANSITION"
@@ -441,8 +441,8 @@
 						AnimationName="JUHarvester_GTRANS"
 						AnimationMode="ONCE_BACKWARDS"
 						 
-						AnimationSpeedFactorMin="2.0"
-						AnimationSpeedFactorMax="2.0"/>
+						AnimationSpeedFactorMin="4.0"
+						AnimationSpeedFactorMax="4.0"/><!-- r20n: 2.0 -> 4.0 (switch animation time halved) -->
         </AnimationState>
 
         <AnimationState
@@ -451,8 +451,8 @@
           <Animation
 						AnimationName="JUHarvester_GWTRANS"
 						AnimationMode="ONCE"
-						AnimationSpeedFactorMin="2.0"
-						AnimationSpeedFactorMax="2.0"/>
+						AnimationSpeedFactorMin="4.0"
+						AnimationSpeedFactorMax="4.0"/><!-- r20n: 2.0 -> 4.0 (switch animation time halved) -->
         </AnimationState>
         <AnimationState
 					ParseCondStateType="PARSE_TRANSITION"
@@ -461,8 +461,8 @@
           <Animation
 						AnimationName="JUHarvester_GWTRANS"
 						AnimationMode="ONCE_BACKWARDS"
-						AnimationSpeedFactorMin="2.0"
-						AnimationSpeedFactorMax="2.0"/>
+						AnimationSpeedFactorMin="4.0"
+						AnimationSpeedFactorMax="4.0"/><!-- r20n: 2.0 -> 4.0 (switch animation time halved) -->
         </AnimationState>
 
       </TruckDraw>
@@ -689,8 +689,7 @@
 				ID="1">
 				<Weapon
 					Ordering="PRIMARY_WEAPON"
-					Template="JapanMinerGun" 
-					ObjectStatus="GENERIC_TOGGLE_STATE"/>
+					Template="JapanMinerGun"/><!-- r20n: removed ObjectStatus="GENERIC_TOGGLE_STATE" (same as r16 Defender VX), so the gun also fires in mining mode; F still switches to the full gun mode. Untested. -->
 				<TurretSettings
 					TurretTurnRate="720"
 					MinIdleScanTime="1.0s"

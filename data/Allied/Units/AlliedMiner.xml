@@ -413,10 +413,27 @@
 				<ReplacementTemplate>AlliedOutpost</ReplacementTemplate>
 			</ReplaceSelfSpecialAbility>
 			
-			<!-- No stances because there's no weapon -->
-			<StancesBehavior
-					  id="ModuleTag_Stance"
-					  xai:joinAction="Remove" />
+			<!-- r20n: has a machine gun now, so the inherited stance is kept (was: no weapons, so no stance / Remove). -->
+			<!-- r20n: Riptide ACV machine gun (turret pattern of SovietMiner / J05 armed MCV; no model bones, fires from the unit centre) -->
+			<WeaponSetUpdate
+				id="ModuleTag_WeaponSetUpdate">
+				<WeaponSlotTurret
+					ID="1">
+					<Weapon
+						Ordering="PRIMARY_WEAPON"
+						Template="AlliedMinerMachineGun" />
+					<TurretSettings
+						TurretTurnRate="360"
+						MinIdleScanTime="1.0s"
+						MaxIdleScanTime="5.0s"
+						MinIdleScanAngle="10.0"
+						MaxIdleScanAngle="90.0">
+						<TurretAITargetChooserData
+							CanAcquireDynamicIfAssignedOutOfRange="true"
+							IdleScanDelay="=$FAST_IDLE_SCAN_DELAY" />
+					</TurretSettings>
+				</WeaponSlotTurret>
+			</WeaponSetUpdate>
 		</Behaviors>
 		<!-- AI is implemented in BaseMiner class, so none are needed here
 			<AI>
@@ -425,6 +442,15 @@
 				  AutoAcquireEnemiesWhenIdle="NO"></AIUpdate>
 			</AI>
 		-->
+		<!-- r20n: the miner can shoot now, so it needs the offensive miner state machine (same as vanilla JapanMiner and r20n SovietMiner) -->
+		<AI	xai:joinAction="Replace">
+			<AIUpdate
+				id="ModuleTag_AI"
+				StateMachine="OreMinerOffensiveStateMachine"
+				AutoAcquireEnemiesWhenIdle="YES">
+				<UnitAITargetChooserData/>
+			</AIUpdate>
+		</AI>
 		
 		<Body>
 			<ActiveBody

@@ -540,6 +540,27 @@
 		<Behaviors>
 			<Physics
 				id="ModuleTag_Physics" />
+			<!-- r20n: machine gun on the vehicle only (the Construction Yard is a separate object).
+			     Vanilla precedent: J05 Deep Ocean override arms AlliedMCV with a WeaponSlotTurret and no model bones. -->
+			<WeaponSetUpdate
+				id="ModuleTag_WeaponSetUpdate">
+				<WeaponSlotTurret
+					ID="1">
+					<Weapon
+						Ordering="PRIMARY_WEAPON"
+						Template="AlliedMCVMachineGun" />
+					<TurretSettings
+						TurretTurnRate="360"
+						MinIdleScanTime="1.0s"
+						MaxIdleScanTime="5.0s"
+						MinIdleScanAngle="10.0"
+						MaxIdleScanAngle="90.0">
+						<TurretAITargetChooserData
+							CanAcquireDynamicIfAssignedOutOfRange="true"
+							IdleScanDelay="=$FAST_IDLE_SCAN_DELAY" />
+					</TurretSettings>
+				</WeaponSlotTurret>
+			</WeaponSetUpdate>
 			<ProductionUpdate
 				id="ModuleTag_ProductionUpdate" />
 			<ProductionUpdateInfo

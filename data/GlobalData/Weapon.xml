@@ -7018,7 +7018,7 @@ Flags="NOT_ATTRACTED_BY_MAGNETS"
 		ClipSize="8"
 		Flags="ATTACK_NEEDS_LINE_OF_SIGHT"
 		CanFireWhileMoving="true"
-		RequiredAntiMask="ANTI_GROUND ANTI_STRUCTURE ANTI_WATER">
+		RequiredAntiMask="ANTI_GROUND ANTI_STRUCTURE ANTI_WATER ANTI_AIRBORNE_VEHICLE ANTI_AIRBORNE_INFANTRY">
 		<FiringDuration
 				MinSeconds=".1s"
 				MaxSeconds=".1s" />
@@ -7046,7 +7046,7 @@ Flags="NOT_ATTRACTED_BY_MAGNETS"
 		RadiusDamageAffects="ALLIES ENEMIES NEUTRALS"
 		Flags="ATTACK_NEEDS_LINE_OF_SIGHT NOT_ATTRACTED_BY_MAGNETS"
 		ProjectileCollidesWith  = "ALLIES ENEMIES NEUTRAL STRUCTURES WALLS"
-		RequiredAntiMask="ANTI_GROUND ANTI_STRUCTURE ANTI_WATER" >
+		RequiredAntiMask="ANTI_GROUND ANTI_STRUCTURE ANTI_WATER ANTI_AIRBORNE_VEHICLE ANTI_AIRBORNE_INFANTRY" >
 		<Nuggets>
 			<DamageNugget
 				Damage="25.0"
@@ -7079,7 +7079,7 @@ Flags="NOT_ATTRACTED_BY_MAGNETS"
 		FireVeteranFX="FX_MuzzleSovietAir_Vet"
 		FireSoundPerClip="SOV_Twinblade_MachineGunFire"
 		AttackRange="150.0"
-		RequiredAntiMask="ANTI_GROUND ANTI_STRUCTURE ANTI_WATER"
+		RequiredAntiMask="ANTI_GROUND ANTI_STRUCTURE ANTI_WATER ANTI_AIRBORNE_VEHICLE ANTI_AIRBORNE_INFANTRY"
 		CanFireWhileMoving="true"
 		ClipSize="6"
 		Flags="ATTACK_NEEDS_LINE_OF_SIGHT"
@@ -7767,7 +7767,7 @@ Flags="NOT_ATTRACTED_BY_MAGNETS"
 		FireVeteranFX="FX_JapanAutoCannonMuzzleFlash_Vet"		
 		ClipSize="=$UNLIMITED_CLIP_SIZE"
 		Flags="ATTACK_NEEDS_LINE_OF_SIGHT"
-		RequiredAntiMask="ANTI_GROUND ANTI_WATER ANTI_STRUCTURE"
+		RequiredAntiMask="ANTI_GROUND ANTI_WATER ANTI_STRUCTURE ANTI_AIRBORNE_VEHICLE ANTI_AIRBORNE_INFANTRY"
 		CanFireWhileMoving="true"
 		ReAcquireDetailType="PER_SHOT"
 		UseCenterForRangeCheck="true"
@@ -9349,6 +9349,12 @@ Flags="NOT_ATTRACTED_BY_MAGNETS"
 	     Nuggets: 1 dmg radius 0 contact hit (Grinder first nugget), Radius 0 OnlyKillOwnerWhenTriggered SUICIDED, then the unchanged r20k bomb
 	     (1000 EXPLOSIVE, taper 600, radius 200, MetaImpact, Desolator fallout OCL). SELF in RadiusDamageAffects kept.
 	     SovietDemolitionTruck.xml unchanged (FireWeaponWhenDead forbids SUICIDED -> no double blast). -->
+	<!-- r20n_truck (2026-11-17, user design "bomb bay with exactly one bomb", replaces the r20k/r20l SUICIDED approach):
+	     targeting unchanged from r20l (AttackRange 1, Contact/Melee/Chase, IGNORE_TARGET_AS_OBSTACLE).
+	     Firing no longer deals the blast and no longer kills the truck by code. It (1) marks the bay empty (owner status EXPLOSIVES_DETONATING)
+	     and (2) releases SovietDemolitionTruckBomb at the truck (Soviet/Props/SovietDemolitionTruckBomb.xml), which explodes at once and kills the truck.
+	     Removed: SUICIDED nugget, blast / MetaImpact / fallout nuggets (moved into the bomb via SovietDemolitionTruckDeathWeapon), FireFX (the bomb shows it),
+	     SELF in RadiusDamageAffects. Damage, radius and range unchanged. -->
 	<WeaponTemplate
 		id="SovietDemolitionTruckDetonateWeapon"
 		AttackRange="1.0"
@@ -9362,8 +9368,7 @@ Flags="NOT_ATTRACTED_BY_MAGNETS"
 		ContactWeapon="true"
 		MeleeWeapon="true"
 		ChaseWeapon="true"
-		FireFX="FX_TimeBombExplosionLvl2"
-		RadiusDamageAffects="ENEMIES NEUTRALS ALLIES SELF"
+		RadiusDamageAffects="ENEMIES NEUTRALS ALLIES"
 		Flags="NOT_ATTRACTED_BY_MAGNETS IGNORE_TARGET_AS_OBSTACLE"
 		RequiredAntiMask="ANTI_GROUND ANTI_STRUCTURE ANTI_WATER">
 		<ClipReloadTime
@@ -9375,29 +9380,17 @@ Flags="NOT_ATTRACTED_BY_MAGNETS"
 				Radius="0.0"
 				DamageType="EXPLOSIVE"
 				DeathType="NORMAL" />
-			<DamageNugget
-				Radius="0"
-				OnlyKillOwnerWhenTriggered="true"
-				DamageType="UNRESISTABLE"
-				DamageFXType="ALLIED_BOMBLVL2"
-				DeathType="SUICIDED" />
-			<DamageNugget
-				Damage="1000.0"
-				DamageTaperOff="600"
-				Radius="200"
-				DamageType="EXPLOSIVE"
-				DamageFXType="ALLIED_BOMBLVL2"
-				DeathType="NORMAL"
-				RadiusAffectsBridges="true" />
-			<MetaImpactNugget
-				ShockWaveAmount="89.0"
-				ShockWaveRadius="175.0"
-				ShockWaveZMult="1.50" />
+			<!-- bay empty: permanent EXPLOSIVES_DETONATING on the truck itself (vanilla Burst Drone owner-modifier pattern, Radius 0) -->
+			<AttributeModifierNugget
+				AttributeModifierOwnerName="AttributeModifier_SovietDemolitionTruckBayEmpty"
+				Radius="0" />
+			<!-- release the one bomb at the truck (no CREATE_AT_TARGET); its blast kills the truck -->
 			<WeaponOCLNugget
-				WeaponOCL="OCL_SovietDesolatorBombWarhead" />
+				WeaponOCL="OCL_SovietDemolitionTruckBomb" />
 		</Nuggets>
 	</WeaponTemplate>
 
+	<!-- r20n_truck: now fired only by the hidden SovietDemolitionTruckBomb when it dies (not by the truck itself). Content unchanged. -->
 	<!-- = medium time bomb (AlliedTimeBomb_Level2): 1000 dmg, radius 200, taper 600, EXPLOSIVE, FX_TimeBombExplosionLvl2,
 	     + Desolator Airstrike Level 1 fallout: vanilla OCL_SovietDesolatorBombWarhead -> DesolatorField_DesolatorBomb
 	       (radius 150, 30s, Weapon_DesolatorBombFieldUpdate every 0.1s) -->
@@ -9507,5 +9500,67 @@ Flags="NOT_ATTRACTED_BY_MAGNETS"
 		id="BF_SovietCommandoSniperRifle"
 		inheritFrom="AAAVT1_SovietCommandoSniperRifle"
 		AttackRange="150.0" />
+
+	<!-- ===== r20n (2026-11-16) ===== -->
+	<!-- MCV / Soviet Ore Collector machine guns: copies, so the Riptide / Sickle / Japan Ore Collector guns stay untouched. Values inherited unchanged. -->
+	<WeaponTemplate
+		id="AlliedMCVMachineGun"
+		inheritFrom="AlliedAntiInfantryVehicleChaingun" />
+	<WeaponTemplate
+		id="SovietMCVMachineGun"
+		inheritFrom="SovietAntiInfantryVehicleChaingun" />
+	<WeaponTemplate
+		id="JapanMCVMachineGun"
+		inheritFrom="JapanMinerGun" />
+	<WeaponTemplate
+		id="SovietMinerMachineGun"
+		inheritFrom="SovietAntiInfantryVehicleChaingun" />
+	<!-- r20n (16:10): Allied Ore Collector machine gun = Riptide ACV gun, values unchanged (ground / structure / water only) -->
+	<WeaponTemplate
+		id="AlliedMinerMachineGun"
+		inheritFrom="AlliedAntiInfantryVehicleChaingun" />
+	<!-- Tank Buster: copy that also hits air (base weapon is inherited by the IFV / Multigunner tank-buster weapons and S01/S02 overrides, so a copy) -->
+	<WeaponTemplate
+		id="JapanAntiVehicleInfantryPlasmaBazooka_AA"
+		inheritFrom="JapanAntiVehicleInfantryPlasmaBazooka"
+		RequiredAntiMask="ANTI_GROUND ANTI_STRUCTURE ANTI_WATER ANTI_AIRBORNE_VEHICLE ANTI_AIRBORNE_INFANTRY" />
+	<!-- Flak Trooper crushed (any mode): copy of the magnetic mine explosion, damage 200 -> 600 (= 3 mines); radius / filters unchanged -->
+	<WeaponTemplate
+			id="SovietAntiVehicleInfantryCrushRevengeExplosion"
+			ProjectileCollidesWith="ENEMIES"
+      FireFX="FX_Soviet_MagneticMine"
+      FireVeteranFX="FX_Soviet_MagneticMine"
+			RadiusDamageAffects="ALLIES ENEMIES NEUTRALS"
+			Flags="ATTACK_NEEDS_LINE_OF_SIGHT NOT_ATTRACTED_BY_MAGNETS"
+			RequiredAntiMask="ANTI_WATER ANTI_GROUND ANTI_STRUCTURE ANTI_AIRBORNE_VEHICLE">
+		<Nuggets>
+			<DamageNugget
+				Damage="600.0"
+				DamageType="CANNON"
+				DamageTaperOff="10.0"
+				Radius="10"
+				DeathType="BURNED"
+				PartitionFilterTestType="CIRCLE">
+				<SpecialObjectFilter
+				   Rule="ANY"
+				   Include="VEHICLE STRUCTURE"
+				   Exclude="INFANTRY"
+				   StatusBitFlagsExclude="NOT_IN_WORLD AIRBORNE_TARGET SUBMERGED">
+				</SpecialObjectFilter>
+			<!--AttachNugget
+				AttachModuleId="ModuleTag_AttachUpdate">
+				<SpecialObjectFilter
+					Rule="ANY"
+					Include="VEHICLE"
+					Exclude="INFANTRY AIRCRAFT" />
+			</AttachNugget-->
+				<DamageScalarDetails Scalar= "75%">
+					<Filter
+						Rule="NONE"
+						Include="STRUCTURE" />
+				</DamageScalarDetails>
+			</DamageNugget>
+		</Nuggets>
+	</WeaponTemplate>
 </AssetDeclaration>
 

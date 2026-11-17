@@ -203,9 +203,11 @@
 				id="ModuleTag_WeaponSetUpdate">
 				<WeaponSlotHardpoint
 					ID="1">
+					<!-- r20n_truck: bay empty (EXPLOSIVES_DETONATING) -> cannot fire again (e.g. if it survives its own bomb under Iron Curtain) -->
 					<Weapon
 						Ordering="PRIMARY_WEAPON"
-						Template="SovietDemolitionTruckDetonateWeapon" />
+						Template="SovietDemolitionTruckDetonateWeapon"
+						ForbiddenObjectStatus="EXPLOSIVES_DETONATING" />
 				</WeaponSlotHardpoint>
 			</WeaponSetUpdate>
 			<Physics
@@ -218,17 +220,16 @@
 				AttributeModifierAffectsSelf="true"
 				MovementType="NONE"
 				Duration="5s" />
-			<!-- explodes on death: medium time bomb blast.
-			     r20k: BezierProjectile (ProjectileSelf dash) removed; the attack weapon is now the blast itself and kills the truck with SUICIDED,
-			     so SUICIDED is forbidden here (vanilla JapanEnhancedKamikazeUpgradeDeathWeapon) -> only fires when the truck is destroyed by the enemy. -->
-			<FireWeaponWhenDead
-				id="ModuleTag_DemolitionTruckDeathWeapon"
-				DeathWeapon="SovietDemolitionTruckDeathWeapon"
-				InitiallyActive="true">
+			<!-- r20n_truck: death by any cause releases the one bomb in the bay (same OCL as the attack weapon).
+			     Skipped when the bay is already empty (EXPLOSIVES_DETONATING, set when the truck fired) -> one blast only, no SUICIDED filter needed.
+			     Replaces r20k/r20l FireWeaponWhenDead SovietDemolitionTruckDeathWeapon with DeathTypesForbidden SUICIDED. -->
+			<CreateObjectDie
+				id="ModuleTag_DemolitionTruckBombRelease"
+				CreationList="OCL_SovietDemolitionTruckBomb">
 				<DieMuxData
 					DeathTypes="ALL"
-					DeathTypesForbidden="SUICIDED" />
-			</FireWeaponWhenDead>
+					ExemptStatus="EXPLOSIVES_DETONATING" />
+			</CreateObjectDie>
 			<CreateObjectDie
 				id="ModuleTag_CreateObjectDie"
 				CreationList="SBMiner_Die_OCL">

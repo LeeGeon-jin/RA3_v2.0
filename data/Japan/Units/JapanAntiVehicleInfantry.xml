@@ -925,7 +925,7 @@
 					WeaponChoiceCriteria="PREFER_MOST_DAMAGE">
 					<Weapon
 						Ordering="PRIMARY_WEAPON"
-						Template="JapanAntiVehicleInfantryPlasmaBazooka"/>
+						Template="JapanAntiVehicleInfantryPlasmaBazooka_AA"/><!-- r20n: copy that also hits air -->
 				</WeaponSlotHardpoint>
 			</WeaponSetUpdate>
 			
