@@ -86,7 +86,7 @@
 			<TruckDraw
 				id="ModuleTag_Draw"
 				OkToChangeModelColor="true"
-				ExtraPublicBone="Bone_Treads_Rear_Right Bone_Treads_Rear_Left Bone_Treads_Front_Right Bone_Treads_Front_Left FXTracksLR FXTracksRR"
+				ExtraPublicBone="Bone_Treads_Rear_Right Bone_Treads_Rear_Left Bone_Treads_Front_Right Bone_Treads_Front_Left FXTracksLR FXTracksRR FXHeadlight"
 
 				TrackMarks="EXTnkTrack"
 				TrackMarksLeftBone="FXTracksLR"
@@ -115,12 +115,28 @@
 					ParseCondStateType="PARSE_DEFAULT">
 					<Model
 						Name="AUMCV_SKN" />
+					<WeaponFireFXBone
+						WeaponSlotID="1"
+						WeaponSlotType="PRIMARY_WEAPON"
+						BoneName="FXHeadlight" />
+					<WeaponLaunchBone
+						WeaponSlotID="1"
+						WeaponSlotType="PRIMARY_WEAPON"
+						BoneName="FXHeadlight" />
 				</ModelConditionState>
 				<ModelConditionState
 					ParseCondStateType="PARSE_NORMAL"
 					ConditionsYes="FORMATION_PREVIEW">
 					<Model
 						Name="AUMCV_SKN" />
+					<WeaponFireFXBone
+						WeaponSlotID="1"
+						WeaponSlotType="PRIMARY_WEAPON"
+						BoneName="FXHeadlight" />
+					<WeaponLaunchBone
+						WeaponSlotID="1"
+						WeaponSlotType="PRIMARY_WEAPON"
+						BoneName="FXHeadlight" />
 				</ModelConditionState>
 
 				<ModelConditionState
@@ -144,6 +160,14 @@
 					ConditionsYes="DAMAGED">
 					<Model
 						Name="AUMCV_SKN" />
+					<WeaponFireFXBone
+						WeaponSlotID="1"
+						WeaponSlotType="PRIMARY_WEAPON"
+						BoneName="FXHeadlight" />
+					<WeaponLaunchBone
+						WeaponSlotID="1"
+						WeaponSlotType="PRIMARY_WEAPON"
+						BoneName="FXHeadlight" />
 				</ModelConditionState>
 
 				<ModelConditionState
@@ -154,6 +178,14 @@
 					<Texture
 						Original="AUMCV"
 						New="AUMCV_D" />
+					<WeaponFireFXBone
+						WeaponSlotID="1"
+						WeaponSlotType="PRIMARY_WEAPON"
+						BoneName="FXHeadlight" />
+					<WeaponLaunchBone
+						WeaponSlotID="1"
+						WeaponSlotType="PRIMARY_WEAPON"
+						BoneName="FXHeadlight" />
 				</ModelConditionState>
 			
 				<AnimationState
@@ -300,6 +332,34 @@
 				</AnimationState>	
 		
 			</TruckDraw>
+			<!-- r20o: visible tracers for the r20n machine gun, slot 1 (copy of vanilla Riptide ACV (AlliedAntiInfantryVehicle) ModuleTag_TracerModelDraw) -->
+			<TracerModelDraw
+				id="ModuleTag_R20oMGTracer1"
+				MinLength="30.0"
+				MaxLength="30.0"
+				Width="10.0"
+				MinSpeed="20"
+				MaxSpeed="20"
+				SweepSpeed="3.0"
+				SpreadAngle="4.0"
+				MinTracersPerFrame=".2"
+				MaxTracersPerFrame=".35"
+				FrameLifeTime="30"
+				Texture="FXTracer"
+				WeaponSlotType="PRIMARY_WEAPON"
+				WeaponSlotID="1"
+				UseAdditiveBlending="true">
+				<HeadColor
+					r="1.0"
+					g="1.0"
+					b="0.5"
+					a="1.0" />
+				<TailColor
+					r="1.0"
+					g="1.0"
+					b="0.5"
+					a="0.0" />
+			</TracerModelDraw>
 
 <!-- Draw Hover -->
 
@@ -610,7 +670,7 @@
 		<AI>
 			<AIUpdate
 				id="ModuleTag_AI"
-				AutoAcquireEnemiesWhenIdle="NO"
+				AutoAcquireEnemiesWhenIdle="YES"
 				StateMachine="UnitAIStateMachine"/>
 		</AI>
 		<Body>

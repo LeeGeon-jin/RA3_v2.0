@@ -359,4 +359,26 @@
 		<Cmd>Command_AttackMove</Cmd>
 	</LogicCommandSet>
 
+	<!-- r20o: MCVs now carry a machine gun (r20n); add the vanilla Attack Move button. Rest = vanilla SDK command set. -->
+	<LogicCommandSet
+		id="AlliedMCVCommandSet">
+		<Cmd>Command_UnPackAlliedMCV</Cmd>
+		<Cmd>Command_AttackMove</Cmd>
+		<Cmd>Command_MoveToPositionAndCollect</Cmd>
+	</LogicCommandSet>
+
+	<LogicCommandSet
+		id="SovietMCVCommandSet">
+		<Cmd>Command_UnPackSovietMCV</Cmd>
+		<Cmd>Command_AttackMove</Cmd>
+		<Cmd>Command_MoveToPositionAndCollect</Cmd>
+	</LogicCommandSet>
+
+	<LogicCommandSet
+		id="JapanMCVCommandSet">
+		<Cmd>Command_UnPackJapanMCV</Cmd>
+		<Cmd>Command_AttackMove</Cmd>
+		<Cmd>Command_MoveToPositionAndCollect</Cmd>
+	</LogicCommandSet>
+
 </AssetDeclaration>

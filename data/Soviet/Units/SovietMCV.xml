@@ -75,7 +75,7 @@
 				TireRotationMultiplier="0.0"
 				TireRotationMultiplierFront="0.0"
 				OkToChangeModelColor="true"
-				ExtraPublicBone="Bone_Treads_Right_Rear Bone_Treads_Left_Rear FXTracksL01 FXTracksR01 Bone_Treads_Right_Middle Bone_Treads_Left_Middle Bone_Treads_Right_Front Bone_Treads_Left_Front FXTracksL01 FXTracksL02 FXTracksR01 FXTracksR02">
+				ExtraPublicBone="Bone_Treads_Right_Rear Bone_Treads_Left_Rear FXTracksL01 FXTracksR01 Bone_Treads_Right_Middle Bone_Treads_Left_Middle Bone_Treads_Right_Front Bone_Treads_Left_Front FXTracksL01 FXTracksL02 FXTracksR01 FXTracksR02 FXHeadlight_L FXHeadlight_R">
 				
 				<TreadTerrainParticles>MCVTerrainParticleMapping</TreadTerrainParticles>
 
@@ -101,6 +101,22 @@
 					ParseCondStateType="PARSE_DEFAULT">
 					<Model
 						Name="SUMCV_SKN" />
+					<WeaponFireFXBone
+						WeaponSlotID="1"
+						WeaponSlotType="PRIMARY_WEAPON"
+						BoneName="FXHeadlight_L" />
+					<WeaponLaunchBone
+						WeaponSlotID="1"
+						WeaponSlotType="PRIMARY_WEAPON"
+						BoneName="FXHeadlight_L" />
+					<WeaponFireFXBone
+						WeaponSlotID="2"
+						WeaponSlotType="PRIMARY_WEAPON"
+						BoneName="FXHeadlight_R" />
+					<WeaponLaunchBone
+						WeaponSlotID="2"
+						WeaponSlotType="PRIMARY_WEAPON"
+						BoneName="FXHeadlight_R" />
 				</ModelConditionState>
 
 				<ModelConditionState
@@ -126,12 +142,44 @@
 					<Texture
 						Original="SBConstructionYard"
 						New="SBConstructionYard_D" />
+					<WeaponFireFXBone
+						WeaponSlotID="1"
+						WeaponSlotType="PRIMARY_WEAPON"
+						BoneName="FXHeadlight_L" />
+					<WeaponLaunchBone
+						WeaponSlotID="1"
+						WeaponSlotType="PRIMARY_WEAPON"
+						BoneName="FXHeadlight_L" />
+					<WeaponFireFXBone
+						WeaponSlotID="2"
+						WeaponSlotType="PRIMARY_WEAPON"
+						BoneName="FXHeadlight_R" />
+					<WeaponLaunchBone
+						WeaponSlotID="2"
+						WeaponSlotType="PRIMARY_WEAPON"
+						BoneName="FXHeadlight_R" />
 				</ModelConditionState>
 				<ModelConditionState
 					ParseCondStateType="PARSE_NORMAL"
 					ConditionsYes="FORMATION_PREVIEW">
 					<Model
 						Name="SUMCV_SKN" />
+					<WeaponFireFXBone
+						WeaponSlotID="1"
+						WeaponSlotType="PRIMARY_WEAPON"
+						BoneName="FXHeadlight_L" />
+					<WeaponLaunchBone
+						WeaponSlotID="1"
+						WeaponSlotType="PRIMARY_WEAPON"
+						BoneName="FXHeadlight_L" />
+					<WeaponFireFXBone
+						WeaponSlotID="2"
+						WeaponSlotType="PRIMARY_WEAPON"
+						BoneName="FXHeadlight_R" />
+					<WeaponLaunchBone
+						WeaponSlotID="2"
+						WeaponSlotType="PRIMARY_WEAPON"
+						BoneName="FXHeadlight_R" />
 				</ModelConditionState>		
 
 				<AnimationState
@@ -323,6 +371,63 @@
 						AnimationMode="ONCE"></Animation>
 				</AnimationState>		-->				
 			</TruckDraw>
+			<!-- r20o: visible tracers for the r20n machine gun, slot 1 (copy of vanilla Sickle (SovietAntiInfantryVehicle) ModuleTag_TracerModelDrawRight) -->
+			<TracerModelDraw
+				id="ModuleTag_R20oMGTracer1"
+				MinLength="15.0"
+				MaxLength="30.0"
+				Width="8.0"
+				MinSpeed="20"
+				MaxSpeed="25"
+				SweepSpeed="3.0"
+				SpreadAngle="4.0"
+				MinTracersPerFrame=".5"
+				MaxTracersPerFrame=".8"
+				FrameLifeTime="35"
+				Texture="FXTracer"
+				WeaponSlotType="PRIMARY_WEAPON"
+				WeaponSlotID="1"
+				UseAdditiveBlending="true">
+				<HeadColor
+					r="1.0"
+					g="1.0"
+					b="1.0"
+					a="1.0" />
+				<TailColor
+					r="1.0"
+					g="1.0"
+					b="1.0"
+					a="1.0" />
+			</TracerModelDraw>
+			<!-- r20o: visible tracers for the r20n machine gun, slot 2 (copy of vanilla Sickle (SovietAntiInfantryVehicle) ModuleTag_TracerModelDrawLeft) -->
+			<TracerModelDraw
+				id="ModuleTag_R20oMGTracer2"
+				MinLength="10.0"
+				MaxLength="30.0"
+				Width="15.0"
+				MinSpeed="15"
+				MaxSpeed="30"
+				SweepSpeed="3.0"
+				SpreadAngle="4.0"
+				MinTracersPerFrame=".5"
+				MaxTracersPerFrame=".8"
+				FrameLifeTime="35"
+				Texture="FXTracer"
+				WeaponSlotType="PRIMARY_WEAPON"
+				WeaponSlotID="2"
+				UseAdditiveBlending="true"
+				TracerHitFx="FX_BulletHitSoviet">
+				<HeadColor
+					r="1.0"
+					g="1.0"
+					b="1.0"
+					a="1.0" />
+				<TailColor
+					r="1.0"
+					g="1.0"
+					b="1.0"
+					a="1.0" />
+			</TracerModelDraw>
 
 <!-- DRAW PLATFORM -->
 			
@@ -529,7 +634,7 @@
 		<AI>
 			<AIUpdate
 				id="ModuleTag_AI"
-				AutoAcquireEnemiesWhenIdle="NO"
+				AutoAcquireEnemiesWhenIdle="YES"
 				StateMachine="UnitAIStateMachine"/>
 		</AI>
 		<Body>
