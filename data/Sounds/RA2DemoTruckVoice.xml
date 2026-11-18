@@ -72,6 +72,6 @@
 		Type = "WORLD PLAYER VOICE"
 		SubmixSlider = "VOICE" >
 		<PitchShift Low="-1" High="1" />
-		<Sound>RA2DemoTruck_vdemmoc</Sound>
+		<Sound>RA2DemoTruck_vdemsea</Sound>
 	</AudioEvent>
 </AssetDeclaration>
