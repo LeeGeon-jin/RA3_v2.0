@@ -229,6 +229,10 @@
 				ConditionForEntry="INVALID"
 				EjectPassengersOnDeath="true"
 				KillPassengersOnDeath="false">
+				<PassengerFilter
+					Rule="NONE">
+					<IncludeThing>SovietDemolitionTruckBomb</IncludeThing>
+				</PassengerFilter>
 				<InitialPayload
 					Name="SovietDemolitionTruckBomb"
 					Count="1" />
