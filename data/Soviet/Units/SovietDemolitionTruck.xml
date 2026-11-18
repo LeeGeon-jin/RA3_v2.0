@@ -279,6 +279,16 @@
 				Height="15.0"
 				ContactPointGeneration="VEHICLE" />
 		</Geometry>
+		<AudioArrayVoice>
+			<AudioEntry Sound="RA2DemoTruck_VoiceAttack" AudioType="voiceAttack" />
+			<AudioEntry Sound="RA2DemoTruck_VoiceAttack" AudioType="voiceAttackAfterMoving" />
+			<AudioEntry Sound="RA2DemoTruck_VoiceAttack" AudioType="voiceAttackStructure" />
+			<AudioEntry Sound="RA2DemoTruck_VoiceAttack" AudioType="voiceAttackGarrisonedStructure" />
+			<AudioEntry Sound="RA2DemoTruck_VoiceAttack" AudioType="voiceAttackMachine" />
+			<AudioEntry Sound="RA2DemoTruck_VoiceCreate" AudioType="voiceCreated" />
+			<AudioEntry Sound="RA2DemoTruck_VoiceMove" AudioType="voiceMove" />
+			<AudioEntry Sound="RA2DemoTruck_VoiceSelect" AudioType="voiceSelect" />
+		</AudioArrayVoice>
 		<AudioArraySound>
 			<AudioEntry
 				Sound="SOV_OreCollector_MoveStart"

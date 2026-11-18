@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<AssetDeclaration xmlns="uri:ea.com:eala:asset" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<!-- r20q10: RA2 Libyan Demolition Truck voice lines for SovietDemolitionTruck.
+	     WAV files are decoded from the user's own RA2 install (langmd.mix > audiomd.mix > audio.bag)
+	     and live only on the build PC under RA3ModSDK\Audio\RA2DemoTruck\ (not in the repository).
+	     Event settings copy vanilla Voice.xml unit responses (e.g. SOV_MCV_Voice*). -->
+	<Tags />
+	<Includes>
+		<Include type="instance" source="DATA:Sounds/BaseSoundEffect.xml" />
+	</Includes>
+
+	<AudioFile id="RA2DemoTruck_vdemsea" File="AUDIO:RA2DemoTruck\vdemsea.wav" PCSampleRate="22050" PCCompression="XAS" />
+	<AudioFile id="RA2DemoTruck_vdemseb" File="AUDIO:RA2DemoTruck\vdemseb.wav" PCSampleRate="22050" PCCompression="XAS" />
+	<AudioFile id="RA2DemoTruck_vdemsec" File="AUDIO:RA2DemoTruck\vdemsec.wav" PCSampleRate="22050" PCCompression="XAS" />
+	<AudioFile id="RA2DemoTruck_vdemsed" File="AUDIO:RA2DemoTruck\vdemsed.wav" PCSampleRate="22050" PCCompression="XAS" />
+	<AudioFile id="RA2DemoTruck_vdemmoa" File="AUDIO:RA2DemoTruck\vdemmoa.wav" PCSampleRate="22050" PCCompression="XAS" />
+	<AudioFile id="RA2DemoTruck_vdemmob" File="AUDIO:RA2DemoTruck\vdemmob.wav" PCSampleRate="22050" PCCompression="XAS" />
+	<AudioFile id="RA2DemoTruck_vdemmoc" File="AUDIO:RA2DemoTruck\vdemmoc.wav" PCSampleRate="22050" PCCompression="XAS" />
+	<AudioFile id="RA2DemoTruck_vdemata" File="AUDIO:RA2DemoTruck\vdemata.wav" PCSampleRate="22050" PCCompression="XAS" />
+	<AudioFile id="RA2DemoTruck_vdematb" File="AUDIO:RA2DemoTruck\vdematb.wav" PCSampleRate="22050" PCCompression="XAS" />
+	<AudioFile id="RA2DemoTruck_vdematc" File="AUDIO:RA2DemoTruck\vdematc.wav" PCSampleRate="22050" PCCompression="XAS" />
+	<AudioFile id="RA2DemoTruck_vdematd" File="AUDIO:RA2DemoTruck\vdematd.wav" PCSampleRate="22050" PCCompression="XAS" />
+	<AudioFile id="RA2DemoTruck_vdemate" File="AUDIO:RA2DemoTruck\vdemate.wav" PCSampleRate="22050" PCCompression="XAS" />
+
+	<!-- RA2 DemoTruckSelect: vdemsea vdemseb vdemsec vdemsed -->
+	<AudioEvent id="RA2DemoTruck_VoiceSelect" inheritFrom="AudioEvent:BaseUnitResponse"
+		Volume = "100"
+		MinVolume = "95"
+		Priority = "HIGH"
+		Type = "WORLD PLAYER VOICE"
+		SubmixSlider = "VOICE" >
+		<PitchShift Low="-1" High="1" />
+		<Sound>RA2DemoTruck_vdemsea</Sound>
+		<Sound>RA2DemoTruck_vdemseb</Sound>
+		<Sound>RA2DemoTruck_vdemsec</Sound>
+		<Sound>RA2DemoTruck_vdemsed</Sound>
+	</AudioEvent>
+
+	<!-- RA2 DemoTruckMove: vdemmoa vdemmob vdemmoc -->
+	<AudioEvent id="RA2DemoTruck_VoiceMove" inheritFrom="AudioEvent:BaseUnitResponse"
+		Volume = "100"
+		MinVolume = "95"
+		Priority = "HIGH"
+		Type = "WORLD PLAYER VOICE"
+		SubmixSlider = "VOICE" >
+		<PitchShift Low="-1" High="1" />
+		<Sound>RA2DemoTruck_vdemmoa</Sound>
+		<Sound>RA2DemoTruck_vdemmob</Sound>
+		<Sound>RA2DemoTruck_vdemmoc</Sound>
+	</AudioEvent>
+
+	<!-- RA2 DemoTruckAttackCommand: vdemata .. vdemate -->
+	<AudioEvent id="RA2DemoTruck_VoiceAttack" inheritFrom="AudioEvent:BaseUnitResponse"
+		Volume = "100"
+		MinVolume = "95"
+		Priority = "HIGH"
+		Type = "WORLD PLAYER VOICE"
+		SubmixSlider = "VOICE" >
+		<PitchShift Low="-1" High="1" />
+		<Sound>RA2DemoTruck_vdemata</Sound>
+		<Sound>RA2DemoTruck_vdematb</Sound>
+		<Sound>RA2DemoTruck_vdematc</Sound>
+		<Sound>RA2DemoTruck_vdematd</Sound>
+		<Sound>RA2DemoTruck_vdemate</Sound>
+	</AudioEvent>
+
+	<!-- Unit ready line. User asked for the line remembered as 'Watch out for the bumps'; vdemmoc by elimination (RA2's own CreateSound is vdemsea 'My truck is loaded!'). Needs user confirmation. -->
+	<AudioEvent id="RA2DemoTruck_VoiceCreate" inheritFrom="AudioEvent:BaseUnitResponse"
+		Volume = "100"
+		MinVolume = "95"
+		Priority = "HIGH"
+		Type = "WORLD PLAYER VOICE"
+		SubmixSlider = "VOICE" >
+		<PitchShift Low="-1" High="1" />
+		<Sound>RA2DemoTruck_vdemmoc</Sound>
+	</AudioEvent>
+</AssetDeclaration>

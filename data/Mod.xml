@@ -88,6 +88,7 @@
 	<Include type="all" source="DATA:Japan/Units/JapanAntiVehicleVehicleTech1.xml" />
 	<Include type="all" source="DATA:Soviet/Units/SovietAntiVehicleVehicleTech1.xml" />
 	<Include type="all" source="DATA:Soviet/Units/SovietAntiVehicleVehicleTech2.xml" />
+	<Include type="all" source="DATA:Sounds/RA2DemoTruckVoice.xml" />
 	<Include type="all" source="DATA:Soviet/Units/SovietDemolitionTruck.xml" />
 	<Include type="all" source="DATA:Soviet/Props/SovietDemolitionTruckBomb.xml" />
 	<Include type="all" source="DATA:Soviet/Units/SovietAntiAirShip.xml" />
