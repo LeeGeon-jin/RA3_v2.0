@@ -9318,109 +9318,28 @@ Flags="NOT_ATTRACTED_BY_MAGNETS"
 		RequiredAntiMask="ANTI_GROUND ANTI_WATER ANTI_STRUCTURE ANTI_SUBMERGED" />
 
 
-	<!-- r20f (2026-11-14): Demolition Truck attack = Yari mini-sub kamikaze ram (ProjectileSelf + ContactWeapon), used as the normal attack weapon.
-	     The truck itself becomes the projectile (BezierProjectile module on the truck, Yari flags DETONATE_CALLS_KILL DONT_DETONATE_WITHOUT_COLLISION),
-	     dashes the last 100 into the target at speed 150, and on collision dies -> FireWeaponWhenDead (ALL) fires the medium time bomb death weapon.
-	     Differences from the Yari:
-	       - no SpecialPower / WeaponFireSpecialAbilityUpdate (that module is the Yari stop: UnpackTime 0.5s + BUSY_DURING_UNPACK, then BusyForDuration 3s),
-	         the ram is an ordinary hardpoint weapon like the Terror Drone leap (ProjectileSelf, ChaseWeapon, CanFireWhileMoving), so no unpack stop;
-	         no PreAttackDelay, AcceptableAimDelta 180d (no turn-to-face stop), no surfacing step (truck has no SUBMERGED state).
-	       - no ForbiddenAntiMask ANTI_GROUND: RequiredAntiMask ANTI_GROUND ANTI_STRUCTURE ANTI_WATER (ground units, buildings, ships).
-	     r20d radius-300 "kill Demolition Trucks" nugget removed (it also killed nearby enemy trucks); the truck now only kills itself
-	     (DETONATE_CALLS_KILL, backed up by a Radius 0 OnlyKillOwnerWhenTriggered nugget in the projectile warhead, the Final Squadron way).
-	     IGNORE_TARGET_AS_OBSTACLE removed (the dash, not the approach, now closes the gap). -->
-	<!-- r20g (2026-11-14 23:10): ContactWeapon removed. r20f stopped about one vehicle length short of the building: a ContactWeapon only fires once the firer reaches a contact point of the target's Geometry, which a pathing vehicle never reaches next to a structure footprint, so the weapon (and the ProjectileSelf dash) never started. Burst Drone pattern instead (JapanScoutInfantryAttachWeapon: ordinary hardpoint ProjectileSelf weapon, range 80, no ContactWeapon, fired straight from the normal attack): the truck now starts the dash as soon as it is within 100 of the target (range is measured to the target's edge) while still driving. -->
-	<!-- r20k (2026-11-15): ProjectileSelf dash / ram warhead removed (user: no dash, no ContactWeapon, no health-to-zero tricks).
-	     The attack weapon IS the hidden time bomb: an ordinary instant hardpoint weapon with a short range; as soon as the truck is within
-	     AttackRange of the target it fires once and the blast is dealt at the truck's own position (DamageDealtAtSelfPosition, vanilla
-	     JapanMechaKingOmegaShockwave / King Oni melee JapanAntiVehicleVehicleTech3MeleeAttackWeapon).
-	     Blast = same numbers as the death weapon / AlliedTimeBomb_Level2: 1000 EXPLOSIVE, radius 200, taper 600, + Desolator fallout OCL.
-	     AttackRange 50 = King Oni melee range (vanilla vehicle melee); the target is always inside the 200 blast radius.
-	     The truck dies in the same shot: RadiusDamageAffects includes SELF and the first nugget is the vanilla
-	     Radius 0 OnlyKillOwnerWhenTriggered SUICIDED nugget (EnhancedKamikazeDeathPlayerPowerWeapon / Yari warhead order: kill nugget first);
-	     the blast itself (1000 EXPLOSIVE vs BaseVehicleArmor 100%, truck 400 HP) would also kill it.
-	     FireWeaponWhenDead on the truck forbids SUICIDED, so the death weapon only fires when the truck is destroyed by the enemy (no double blast). -->
-	<!-- r20l (2026-11-15): Grinder pattern (Uprising SovietGrinderVehicleGrindWeapon, user approved).
-	     r20g..r20k trucks stopped at the edge of AttackRange (r20k: 50) and never fired; r20f (ContactWeapon) stopped one vehicle length short
-	     because IGNORE_TARGET_AS_OBSTACLE had been removed, so pathing treated the target as an obstacle and the contact point was never reached
-	     (r20f failure = missing IGNORE_TARGET_AS_OBSTACLE, not ContactWeapon itself).
-	     Now: AttackRange 1, ContactWeapon + MeleeWeapon + ChaseWeapon, Flags IGNORE_TARGET_AS_OBSTACLE: the truck drives into the target and the
-	     hidden bomb fires on contact. DamageDealtAtSelfPosition removed (Grinder does not use it; at range 1 the blast is at the target anyway).
-	     Nuggets: 1 dmg radius 0 contact hit (Grinder first nugget), Radius 0 OnlyKillOwnerWhenTriggered SUICIDED, then the unchanged r20k bomb
-	     (1000 EXPLOSIVE, taper 600, radius 200, MetaImpact, Desolator fallout OCL). SELF in RadiusDamageAffects kept.
-	     SovietDemolitionTruck.xml unchanged (FireWeaponWhenDead forbids SUICIDED -> no double blast). -->
-	<!-- r20n_truck (2026-11-17, user design "bomb bay with exactly one bomb", replaces the r20k/r20l SUICIDED approach):
-	     targeting unchanged from r20l (AttackRange 1, Contact/Melee/Chase, IGNORE_TARGET_AS_OBSTACLE).
-	     Firing no longer deals the blast and no longer kills the truck by code. It (1) marks the bay empty (owner status EXPLOSIVES_DETONATING)
-	     and (2) releases SovietDemolitionTruckBomb at the truck (Soviet/Props/SovietDemolitionTruckBomb.xml), which explodes at once and kills the truck.
-	     Removed: SUICIDED nugget, blast / MetaImpact / fallout nuggets (moved into the bomb via SovietDemolitionTruckDeathWeapon), FireFX (the bomb shows it),
-	     SELF in RadiusDamageAffects. Damage, radius and range unchanged. -->
+	<!-- r20r_truck (2026-11-18, user design): Demolition Truck attack. Range 1; the attack releases the one carried bomb in place
+	     (SpecialPowerNugget -> truck SpecialPower + EjectPassengersSpecialAbilityUpdate, like the vanilla Sudden Transport disguise weapon). -->
 	<WeaponTemplate
 		id="SovietDemolitionTruckDetonateWeapon"
-		AttackRange="1.0"
-		WeaponSpeed="999999.0"
-		ClipSize="1"
-		AutoReloadsClip="AUTO"
-		InstantLoadClipOnActivate="true"
-		AcceptableAimDelta="180d"
-		CanFireWhileMoving="true"
-		FinishAttackOnceStarted="true"
-		ContactWeapon="true"
-		MeleeWeapon="true"
-		ChaseWeapon="true"
-		RadiusDamageAffects="ENEMIES NEUTRALS ALLIES"
-		Flags="NOT_ATTRACTED_BY_MAGNETS IGNORE_TARGET_AS_OBSTACLE"
-		RequiredAntiMask="ANTI_GROUND ANTI_STRUCTURE ANTI_WATER">
-		<ClipReloadTime
-			MinSeconds="1.0s"
-			MaxSeconds="1.0s" />
+		AttackRange="1.0">
 		<Nuggets>
-			<DamageNugget
-				Damage="1.0"
-				Radius="0.0"
-				DamageType="EXPLOSIVE"
-				DeathType="NORMAL" />
-			<!-- bay empty: permanent EXPLOSIVES_DETONATING on the truck itself (vanilla Burst Drone owner-modifier pattern, Radius 0) -->
-			<AttributeModifierNugget
-				AttributeModifierOwnerName="AttributeModifier_SovietDemolitionTruckBayEmpty"
-				Radius="0" />
-			<!-- release the one bomb at the truck (no CREATE_AT_TARGET); its blast kills the truck -->
-			<WeaponOCLNugget
-				WeaponOCL="OCL_SovietDemolitionTruckBomb" />
+			<SpecialPowerNugget
+				SpecialPowerTemplate="SpecialPower_SovietDemolitionTruckBombRelease" />
 		</Nuggets>
 	</WeaponTemplate>
 
-	<!-- r20n_truck: now fired only by the hidden SovietDemolitionTruckBomb when it dies (not by the truck itself). Content unchanged. -->
-	<!-- = medium time bomb (AlliedTimeBomb_Level2): 1000 dmg, radius 200, taper 600, EXPLOSIVE, FX_TimeBombExplosionLvl2,
-	     + Desolator Airstrike Level 1 fallout: vanilla OCL_SovietDesolatorBombWarhead -> DesolatorField_DesolatorBomb
-	       (radius 150, 30s, Weapon_DesolatorBombFieldUpdate every 0.1s) -->
+	<!-- r20r_truck: 0 s countdown of the released bomb. Fired once by the bomb itself as soon as it is no longer inside the truck;
+	     ends the bomb object (Radius 0 OnlyKillOwnerWhenTriggered = vanilla JapanScoutInfantryBombWeapon), whose death fires the medium time bomb blast. -->
 	<WeaponTemplate
-		id="SovietDemolitionTruckDeathWeapon"
-		ClipSize="1"
-		WeaponSpeed="500"
-		FireFX="FX_TimeBombExplosionLvl2"
-		Flags="NOT_ATTRACTED_BY_MAGNETS"
-		RadiusDamageAffects="ENEMIES NEUTRALS ALLIES"
-		AcceptableAimDelta="180d"
-		CanFireWhileMoving="true"
-		RequiredAntiMask="ANTI_GROUND ANTI_STRUCTURE ANTI_WATER ANTI_SUBMERGED">
+		id="SovietDemolitionTruckBombFuse"
+		RadiusDamageAffects="SELF">
 		<Nuggets>
 			<DamageNugget
-				id="ModuleTag_DamageNugget"
-				Damage="1000.0"
-				DamageTaperOff="600"
-				Radius="200"
-				DamageType="EXPLOSIVE"
-				DamageFXType="ALLIED_BOMBLVL2"
-				DeathType="NORMAL"
-				RadiusAffectsBridges="true">
-			</DamageNugget>
-			<MetaImpactNugget
-				ShockWaveAmount="89.0"
-				ShockWaveRadius="175.0"
-				ShockWaveZMult="1.50" />
-			<WeaponOCLNugget
-				WeaponOCL="OCL_SovietDesolatorBombWarhead" />
+				Radius="0"
+				OnlyKillOwnerWhenTriggered="true"
+				DamageType="UNRESISTABLE"
+				DeathType="NORMAL" />
 		</Nuggets>
 	</WeaponTemplate>
 

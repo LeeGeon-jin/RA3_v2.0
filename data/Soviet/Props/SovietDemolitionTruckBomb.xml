@@ -1,14 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <AssetDeclaration xmlns="uri:ea.com:eala:asset" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-	<!-- r20n_truck: the one bomb in the Soviet Demolition Truck "bomb bay".
-	     Hidden, 0 s medium time bomb: no model, no FX, no sound; it dies the frame after it is created and its death fires
-	     SovietDemolitionTruckDeathWeapon (= AlliedTimeBomb_Level2 blast 1000 / taper 600 / radius 200 EXPLOSIVE + the already approved Desolator fallout).
-	     RadiusDamageAffects ENEMIES NEUTRALS ALLIES -> the truck (same player = ally, 400 HP, BaseVehicleArmor EXPLOSIVE 100%) dies in the blast.
-	     Released by (a) the truck attack weapon (WeaponOCLNugget) and (b) the truck CreateObjectDie, which is skipped once the bay is empty
-	     (truck status EXPLOSIVES_DETONATING, set by AttributeModifier_SovietDemolitionTruckBayEmpty when it fires).
-	     Template = vanilla BaseTimeBombSeed (invisible time bomb seed) without FX_TimeBombChrono / ambient loop;
-	     0 s lifetime = vanilla bridge *_Dying props ("Since the death triggers the weapon, we kill this object immediately").
-	     Owner = the truck's player (an OCL cannot create a neutral object here), so kills/XP count for the truck owner. -->
+	<!-- r20r_truck (2026-11-18, user design): the one time bomb carried inside the Soviet Demolition Truck (truck TransportContain InitialPayload 1).
+	     Invisible medium time bomb = vanilla AlliedTimeBombLvl2 (death weapon AlliedTimeBomb_Level2) without model / sounds.
+	     Dormant while carried (truck gives it ENCLOSED). Countdown 0 s: once released (attack or truck death) it fires its fuse at once,
+	     dies, and its death fires the medium time bomb blast, which also hits the truck (ALLIES) like a time bomb placed next to it. -->
 	<Tags></Tags>
 	<Includes>
 		<Include type="all" source="DATA:GlobalData/GlobalDefines.xml" />
@@ -17,29 +12,17 @@
 			source="DATA:BaseObjects/BaseObject.xml" />
 	</Includes>
 
-	<!-- created at the truck itself (no CREATE_AT_TARGET): against a building the blast centre stays on the truck, not on the building centre -->
-	<ObjectCreationList
-		id="OCL_SovietDemolitionTruckBomb">
-		<CreateObject
-			Options="IGNORE_ALL_OBJECTS"
-			Disposition="ON_GROUND_ALIGNED USE_WATER_SURFACE"
-			Count="1">
-			<CreateObject>SovietDemolitionTruckBomb</CreateObject>
-		</CreateObject>
-	</ObjectCreationList>
-
 	<GameObject
 		id="SovietDemolitionTruckBomb"
 		inheritFrom="BaseObject"
 		Side="Soviet"
 		EditorSorting="SYSTEM"
 		IsTrainable="false"
-		KindOf="IMMOBILE NO_COLLIDE NOT_AUTOACQUIRABLE IGNORE_FOR_VICTORY CANNOT_BE_DETECTED UNATTACKABLE"
+		KindOf="IMMOBILE NO_COLLIDE NOT_AUTOACQUIRABLE IGNORE_FOR_VICTORY CANNOT_BE_DETECTED"
 		EditorName="SovietDemolitionTruckBomb">
 		<DisplayName>SovietDemolitionTruckBomb</DisplayName>
 		<ArmorSet
-			Armor="BaseVehicleArmor" />
-		<!-- vanilla BaseTimeBombSeed: locomotor only validates terrain (land / water), no speed -->
+			Armor="AlliedTimeBombArmor" />
 		<LocomotorSet
 			Locomotor="SpecialPowerAllTerrainValidLocomotor"
 			Condition="NORMAL"
@@ -57,22 +40,25 @@
 		<Behaviors>
 			<Physics
 				id="ModuleTag_Physics" />
-			<!-- 0 s: dies right away (vanilla AS_Bridge_Dying etc. use MinLifetime/MaxLifetime 0s for "die and fire the death weapon") -->
-			<LifetimeUpdate
-				id="ModuleTag_LifetimeUpdate"
-				MinLifetime="0s"
-				MaxLifetime="0s"
-				DeathType="NORMAL"
-				IgnoreProjectileState="true" />
+			<!-- countdown 0 s, only outside the truck (ENCLOSED = carried). OneShot FireWeaponUpdate = vanilla NanoSwarmHiveEffect. -->
+			<FireWeaponUpdate
+				id="ModuleTag_Fuse">
+				<FireWeaponNugget
+					WeaponName="SovietDemolitionTruckBombFuse"
+					OneShot="true" />
+				<ObjectStatusValidation
+					ForbiddenStatus="ENCLOSED" />
+			</FireWeaponUpdate>
+			<!-- = vanilla AlliedTimeBombLvl2 ModuleTag_FinalWeapon: medium time bomb blast -->
 			<FireWeaponWhenDead
-				id="ModuleTag_BombBlast"
-				DeathWeapon="SovietDemolitionTruckDeathWeapon"
-				InitiallyActive="true">
+				id="ModuleTag_FinalWeapon"
+				InitiallyActive="true"
+				DeathWeapon="AlliedTimeBomb_Level2">
 				<DieMuxData
 					DeathTypes="ALL" />
 			</FireWeaponWhenDead>
 			<DestroyDie
-				id="ModuleTag_DestroyDie">
+				id="ModuleTag_Die">
 				<DieMuxData
 					DeathTypes="ALL" />
 			</DestroyDie>
@@ -83,8 +69,9 @@
 				AutoAcquireEnemiesWhenIdle="NO" />
 		</AI>
 		<Body>
-			<PropBody
-				id="ModuleTag_PropBody" />
+			<ActiveBody
+				id="ModuleTag_Body"
+				MaxHealth="1000.0" />
 		</Body>
 		<Geometry
 			IsSmall="true">

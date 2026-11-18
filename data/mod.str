@@ -155,7 +155,7 @@ Type:SovietDemolitionTruck
 END
 
 Desc:SovietDemolitionTruck
-"Suicide truck built on an Ore Collector chassis (cannot harvest ore). Drives into its target and detonates on contact, and also explodes when destroyed, with the force of a medium time bomb, leaving a radioactive fallout zone (Desolator Airstrike level 1). Same speed as the Ore Collector. Ability: 1.5x speed boost for 5s (10s cooldown). Requires a Super Reactor."
+"Suicide truck built on an Ore Collector chassis (cannot harvest ore). Carries one invisible medium time bomb with a 0-second countdown: it drops the bomb in place when it reaches its target, and also when it is destroyed. Same speed as the Ore Collector. Ability: 1.5x speed boost for 5s (10s cooldown). Requires a Super Reactor."
 END
 
 Name:SpySatellite

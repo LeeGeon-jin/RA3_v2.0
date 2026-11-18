@@ -203,11 +203,10 @@
 				id="ModuleTag_WeaponSetUpdate">
 				<WeaponSlotHardpoint
 					ID="1">
-					<!-- r20n_truck: bay empty (EXPLOSIVES_DETONATING) -> cannot fire again (e.g. if it survives its own bomb under Iron Curtain) -->
+					<!-- r20r_truck: range 1; the attack releases the carried bomb in place -->
 					<Weapon
 						Ordering="PRIMARY_WEAPON"
-						Template="SovietDemolitionTruckDetonateWeapon"
-						ForbiddenObjectStatus="EXPLOSIVES_DETONATING" />
+						Template="SovietDemolitionTruckDetonateWeapon" />
 				</WeaponSlotHardpoint>
 			</WeaponSetUpdate>
 			<Physics
@@ -220,16 +219,35 @@
 				AttributeModifierAffectsSelf="true"
 				MovementType="NONE"
 				Duration="5s" />
-			<!-- r20n_truck: death by any cause releases the one bomb in the bay (same OCL as the attack weapon).
-			     Skipped when the bay is already empty (EXPLOSIVES_DETONATING, set when the truck fired) -> one blast only, no SUICIDED filter needed.
-			     Replaces r20k/r20l FireWeaponWhenDead SovietDemolitionTruckDeathWeapon with DeathTypesForbidden SUICIDED. -->
-			<CreateObjectDie
-				id="ModuleTag_DemolitionTruckBombRelease"
-				CreationList="OCL_SovietDemolitionTruckBomb">
+			<!-- r20r_truck: carries exactly one bomb (InitialPayload 1, vanilla CAMP_AlliedBomberAircraft_Infantry_1 / Century Bomber container).
+			     ConditionForEntry INVALID = nothing can be loaded by hand (vanilla Century Bomber / Bullfrog). ENCLOSED keeps the bomb dormant while carried.
+			     Death: the carried bomb is ejected (EjectPassengersOnDeath); once outside its 0 s countdown runs. Released bomb = container empty = nothing left. -->
+			<TransportContain
+				id="ModuleTag_DemolitionTruckBombBay"
+				ContainMax="1"
+				ObjectStatusOfContained="UNSELECTABLE ENCLOSED"
+				ConditionForEntry="INVALID"
+				EjectPassengersOnDeath="true"
+				KillPassengersOnDeath="false">
+				<InitialPayload
+					Name="SovietDemolitionTruckBomb"
+					Count="1" />
 				<DieMuxData
-					DeathTypes="ALL"
-					ExemptStatus="EXPLOSIVES_DETONATING" />
-			</CreateObjectDie>
+					DeathTypes="ALL" />
+			</TransportContain>
+			<!-- r20r_truck: attack release = eject the carried bomb at the truck (vanilla Bullfrog / Century Bomber SpecialPower + EjectPassengersSpecialAbilityUpdate;
+			     IgnoreTargetLocation + Radius 0 = drop where the truck is, as in CAMP_AlliedBomberAircraft_Infantry_1) -->
+			<SpecialPower
+				id="ModuleTag_DemolitionTruckBombRelease"
+				SpecialPowerTemplate="SpecialPower_SovietDemolitionTruckBombRelease"
+				UpdateModuleStartsAttack="true" />
+			<EjectPassengersSpecialAbilityUpdate
+				id="ModuleTag_DemolitionTruckBombReleaseUpdate"
+				SpecialPowerTemplate="SpecialPower_SovietDemolitionTruckBombRelease"
+				StartAbilityRange="0.0"
+				Radius="0"
+				IgnoreTargetLocation="true"
+				Options="DO_NOT_DO_AI_SPECIAL_POWER" />
 			<CreateObjectDie
 				id="ModuleTag_CreateObjectDie"
 				CreationList="SBMiner_Die_OCL">

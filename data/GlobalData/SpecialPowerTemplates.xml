@@ -1729,4 +1729,10 @@
 		WaypointModeTerminal="false"
 	/>
 
+	<!-- r20r_truck: release the one carried bomb (fired by the truck's range-1 attack weapon via SpecialPowerNugget). Like vanilla SpecialPower_EjectPassengersUntargeted. -->
+	<SpecialPowerTemplate
+		id="SpecialPower_SovietDemolitionTruckBombRelease"
+		ReloadTime="0s"
+		TargetType="NONE" />
+
 </AssetDeclaration>
