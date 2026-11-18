@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="us-ascii"?>
+<AssetDeclaration xmlns="uri:ea.com:eala:asset" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xai="uri:ea.com:eala:asset:instance">
+	<Tags></Tags>
+	<Includes>
+		<Include
+			type="instance"
+			source="DATA:Soviet/Units/SovietRepairDrone.xml" />
+		<Include
+			type="all"
+			source="DATA:GlobalData/GlobalDefines.xml" />
+	</Includes>
+	<!-- r20q9c: Soviet Airfield repair drone, made to match AlliedAirfieldRepairDrone (range 200, InitialAttachDelay 2.0s). Art/heal 20 HP/s inherited from SovietRepairDrone. -->
+	<GameObject
+		id="SovietAirfieldRepairDrone"
+		inheritFrom="SovietRepairDrone"
+		EditorName="SovietAirfieldRepairDrone"
+		Description="Desc:SovietRepairDrone">
+		<Behaviors>
+			<SlavedUpdate
+				id="ModuleTag_SlavedUpdate"
+				xai:joinAction="Replace"
+				LeashRange="=$REPAIR_DRONE_LEASH_DISTANCE"
+				GuardMaxRange="=$REPAIR_DRONE_LEASH_DISTANCE"
+				GuardWanderRange="50"
+				AttackRange="0"
+				UseSlaverAsControlForEvaObjectSightedEvents="false" />
+			<AttachUpdate
+				id="ModuleTag_Attach"
+				xai:joinAction="Replace"
+				Range="=$REPAIR_DRONE_LEASH_DISTANCE"
+				CloseEnoughRange="20.0"
+				InitialAttachDelay="2.0s"
+				ParentStatus="TARGETED_FOR_REPAIR" 
+				ParentStatusAttached="UNDERGOING_REPAIR"
+				Flags="STICK_TO_PARENT DETACH_WHEN_PARENT_OUT_OF_SLAVE_RANGE PARENT_MUST_BE_FULL_HEALTH_TO_DETACH SCAN_FOR_NEW_PARENT_WHEN_DETACHED FIND_BEST_PARENT UNCONTAINED_ONLY ONE_ATTACH_PER_PARENT USE_GEOMETRY DETACH_WHEN_PARENT_HEALED"
+				>
+				<ObjectFilter
+					Rule="ANY"
+					Include="VEHICLE AIRCRAFT HUGE_VEHICLE"
+					Relationship="ALLIES" />
+			</AttachUpdate>
+		</Behaviors>
+	</GameObject>
+</AssetDeclaration>

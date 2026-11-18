@@ -1039,6 +1039,31 @@
 				</ModelConditionState>
 			</ScriptedModelDraw>						
 
+			<!-- r20q9c: repair drone range circle when selected, same as AlliedAirfield.xml ModuleTag_RepairDecal (REPAIR_DRONE_HOME_DECAL_SIZE, range 200) -->
+			<ScriptedModelDraw
+				id="ModuleTag_RepairDecal"
+				OkToChangeModelColor="true">
+				<ModelConditionState
+					ParseCondStateType="PARSE_DEFAULT">
+					<Model Name="" />
+				</ModelConditionState>
+				<ModelConditionState
+					ParseCondStateType="PARSE_NORMAL"
+					ConditionsYes="SELECTED">
+					<Model Name="FXInvisBone" />
+					<ShadowInfo
+						Type="ADDITIVE_DECAL"
+						SizeX="=$REPAIR_DRONE_HOME_DECAL_SIZE"
+						SizeY="=$REPAIR_DRONE_HOME_DECAL_SIZE"
+						OverrideLODVisibility="true"
+						MaxHeight="200"
+						UseHouseColor="true"
+						Texture="Decal_Rig_CO"
+						LocalPlayerOnly="true"
+					/>
+				</ModelConditionState>
+			</ScriptedModelDraw>
+
 		</Draws>
 		<Behaviors>
 			<BuildingBehavior
@@ -1078,6 +1103,21 @@
 					DeathTypes="ALL" />
 				<SpawnTemplate>GDIRepairAircraftDrone</SpawnTemplate>
 			</SpawnBehavior> -->
+			<!-- r20q9c: repair drones, same values as AlliedAirfield.xml ModuleTag_SpawnRepairDrones, plus SpawnOnUnpack (StructureUnpackUpdate) like SovietWarFactory -->
+			<SpawnBehavior
+				id="ModuleTag_SpawnRepairDrones"
+				SpawnNumberData="3"
+				InitialBurst="3"
+				SpawnReplaceDelayData="10s"
+				SpawnedRequireSpawner="true"
+				KillSpawnsOnCaptured="true"
+				SpawnInsideBuilding="true"
+				KillSpawnsOnDisabled="true"
+				SpawnOnUnpack="true">
+				<Die
+					DeathTypes="ALL" />
+				<SpawnTemplate>SovietAirfieldRepairDrone</SpawnTemplate>
+			</SpawnBehavior>
 			<ParkingPlaceBehavior
 				id="ModuleTag_ParkingPlaceBehavior"
 				NumRows="2"
