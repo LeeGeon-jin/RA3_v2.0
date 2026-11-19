@@ -998,6 +998,12 @@
 		<Modifier Type="PRODUCTION" Value="200%"/>
 	</AttributeModifier>
 	
+	<!-- r20q11: Demolition Truck hasBomb = false. Permanent (no Duration = default 0s, like vanilla AttributeModifer_SpiderHole / ShortCircut toggles). -->
+	<AttributeModifier
+		id="AttributeModifier_SovietDemolitionTruckBombSpent"
+		Category="NONE"
+		ObjectStatusToSet="GENERIC_TOGGLE_STATE" />
+
 	<!-- please add new modifiers before these handicaps -->
 
 </AssetDeclaration>

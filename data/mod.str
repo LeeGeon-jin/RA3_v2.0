@@ -265,3 +265,15 @@ END
 Desc:SovietKremlinHeartBuildable
 "The Heart of the Kremlin from the Moscow battle, rebuilt for the Soviet Union. Monument with no weapons. Requires a Battle Lab. Uses no power."
 END
+
+Name:SovietTerrorist
+"Terrorist"
+END
+
+Type:SovietTerrorist
+"Suicide Infantry"
+END
+
+Desc:SovietTerrorist
+"Cuban fanatic. Runs up to the target and blows himself up. Releases an invisible small time bomb with a 0-second countdown whenever he dies. Ability: 1.5x speed sprint for 5s (15s cooldown)."
+END

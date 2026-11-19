@@ -671,4 +671,11 @@
 	<UpgradeTemplate id="Upgrade_CloningCenterLost"
 		Type="OBJECT"
 	/>
+
+	<!-- r20q11 (2026-11-19 user t857): object-level trigger upgrade granted to SovietTerrorist on create
+	     so USER_5 (Conscript molotov look) is on for every owner, not just the Soviet player.
+	     Same Type=OBJECT trigger-only pattern as the r18 Upgrade_VeterancyAcademyLost / Upgrade_CloningCenterLost templates. -->
+	<UpgradeTemplate id="Upgrade_SovietTerroristMolotovLook"
+		Type="OBJECT"
+	/>
 </AssetDeclaration>

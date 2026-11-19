@@ -376,6 +376,17 @@
 			UseInMicroManagerState="RETREAT COMBAT CLEANUP"
 			UseNearTacticalTarget="true"/>
 	</LogicCommand>
+	<!-- r20q11: Soviet Terrorist (Soviet Barracks). Sprint has no AISpecialPowerInfo, so the AI never uses it. -->
+	<LogicCommand
+		Type="UNIT_BUILD"
+		id="Command_ConstructSovietTerrorist">
+		<Object>SovietTerrorist</Object>
+	</LogicCommand>
+	<LogicCommand
+		id="Command_SovietTerroristSprint"
+		Type="SPECIAL_POWER">
+		<SpecialPower>SpecialPower_SovietTerroristSprint</SpecialPower>
+	</LogicCommand>
 
 	<!-- r18: Spy Satellite -->
 	<LogicCommand

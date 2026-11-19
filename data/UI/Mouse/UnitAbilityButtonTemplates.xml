@@ -97,4 +97,13 @@
 		</Data>
 	</UnitAbilityButtonTemplate>
 
+	<UnitAbilityButtonTemplate
+		id="ButtonSovietTerroristSprint"
+		LogicCommand="Command_SovietTerroristSprint">
+		<Data>
+			<SpecialPower
+				StateData="ButtonStateAbilityJapanEngineerSprint"/>
+		</Data>
+	</UnitAbilityButtonTemplate>
+
 </AssetDeclaration>

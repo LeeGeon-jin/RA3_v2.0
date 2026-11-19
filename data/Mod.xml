@@ -91,6 +91,9 @@
 	<Include type="all" source="DATA:Sounds/RA2DemoTruckVoice.xml" />
 	<Include type="all" source="DATA:Soviet/Units/SovietDemolitionTruck.xml" />
 	<Include type="all" source="DATA:Soviet/Props/SovietDemolitionTruckBomb.xml" />
+	<Include type="all" source="DATA:Sounds/RA2TerroristVoice.xml" />
+	<Include type="all" source="DATA:Soviet/Units/SovietTerrorist.xml" />
+	<Include type="all" source="DATA:Soviet/Props/SovietTerroristBomb.xml" />
 	<Include type="all" source="DATA:Soviet/Units/SovietAntiAirShip.xml" />
 		<Include type="all" source="DATA:Soviet/Units/SovietAntiNavyShipTech1.xml" />
 		<Include type="all" source="DATA:Soviet/Units/SovietAntiNavyShipTech2.xml" />

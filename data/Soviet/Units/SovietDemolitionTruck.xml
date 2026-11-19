@@ -203,7 +203,7 @@
 				id="ModuleTag_WeaponSetUpdate">
 				<WeaponSlotHardpoint
 					ID="1">
-					<!-- r20r_truck: range 1; the attack releases the carried bomb in place -->
+					<!-- r20q11: range 1; the attack sets the hasBomb=false marker on the truck and spawns the invisible 0 s medium time bomb in place -->
 					<Weapon
 						Ordering="PRIMARY_WEAPON"
 						Template="SovietDemolitionTruckDetonateWeapon" />
@@ -219,39 +219,15 @@
 				AttributeModifierAffectsSelf="true"
 				MovementType="NONE"
 				Duration="5s" />
-			<!-- r20r_truck: carries exactly one bomb (InitialPayload 1, vanilla CAMP_AlliedBomberAircraft_Infantry_1 / Century Bomber container).
-			     ConditionForEntry INVALID = nothing can be loaded by hand (vanilla Century Bomber / Bullfrog). ENCLOSED keeps the bomb dormant while carried.
-			     Death: the carried bomb is ejected (EjectPassengersOnDeath); once outside its 0 s countdown runs. Released bomb = container empty = nothing left. -->
-			<TransportContain
-				id="ModuleTag_DemolitionTruckBombBay"
-				ContainMax="1"
-				ObjectStatusOfContained="UNSELECTABLE ENCLOSED"
-				ConditionForEntry="INVALID"
-				EjectPassengersOnDeath="true"
-				KillPassengersOnDeath="false">
-				<PassengerFilter
-					Rule="NONE">
-					<IncludeThing>SovietDemolitionTruckBomb</IncludeThing>
-				</PassengerFilter>
-				<InitialPayload
-					Name="SovietDemolitionTruckBomb"
-					Count="1" />
+			<!-- r20q11 (hasBomb): no GENERIC_TOGGLE_STATE = still has the bomb -> spawn the invisible 0 s medium time bomb where the truck dies.
+			     After the attack the truck has GENERIC_TOGGLE_STATE (= hasBomb false) -> nothing extra (vanilla AlliedBomberAircraft CreateObjectDie ExemptStatus). -->
+			<CreateObjectDie
+				id="ModuleTag_DemolitionTruckDeathBomb"
+				CreationList="OCL_SovietDemolitionTruckBomb">
 				<DieMuxData
-					DeathTypes="ALL" />
-			</TransportContain>
-			<!-- r20r_truck: attack release = eject the carried bomb at the truck (vanilla Bullfrog / Century Bomber SpecialPower + EjectPassengersSpecialAbilityUpdate;
-			     IgnoreTargetLocation + Radius 0 = drop where the truck is, as in CAMP_AlliedBomberAircraft_Infantry_1) -->
-			<SpecialPower
-				id="ModuleTag_DemolitionTruckBombRelease"
-				SpecialPowerTemplate="SpecialPower_SovietDemolitionTruckBombRelease"
-				UpdateModuleStartsAttack="true" />
-			<EjectPassengersSpecialAbilityUpdate
-				id="ModuleTag_DemolitionTruckBombReleaseUpdate"
-				SpecialPowerTemplate="SpecialPower_SovietDemolitionTruckBombRelease"
-				StartAbilityRange="0.0"
-				Radius="0"
-				IgnoreTargetLocation="true"
-				Options="DO_NOT_DO_AI_SPECIAL_POWER" />
+					DeathTypes="ALL"
+					ExemptStatus="GENERIC_TOGGLE_STATE" />
+			</CreateObjectDie>
 			<CreateObjectDie
 				id="ModuleTag_CreateObjectDie"
 				CreationList="SBMiner_Die_OCL">

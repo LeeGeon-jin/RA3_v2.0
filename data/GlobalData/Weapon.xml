@@ -9318,18 +9318,27 @@ Flags="NOT_ATTRACTED_BY_MAGNETS"
 		RequiredAntiMask="ANTI_GROUND ANTI_WATER ANTI_STRUCTURE ANTI_SUBMERGED" />
 
 
-	<!-- r20r_truck (2026-11-18, user design): Demolition Truck attack. Range 1; the attack releases the one carried bomb in place
-	     (SpecialPowerNugget -> truck SpecialPower + EjectPassengersSpecialAbilityUpdate, like the vanilla Sudden Transport disguise weapon). -->
+	<!-- r20q11 (2026-11-19, user design hasBomb): Demolition Truck attack. Range 1 literally, one shot only (ClipSize 1, no auto reload), 60 s interval.
+	     On fire: first set GENERIC_TOGGLE_STATE on the truck itself (= hasBomb false, permanent; owner-only modifier like vanilla JapanScoutInfantryBombWeapon AttributeModifierOwnerName),
+	     then spawn the invisible 0 s medium time bomb in place (WeaponOCLNugget; OCL without CREATE_AT_TARGET = at the truck). No damage from the truck itself. -->
 	<WeaponTemplate
 		id="SovietDemolitionTruckDetonateWeapon"
-		AttackRange="1.0">
+		AttackRange="1.0"
+		ClipSize="1"
+		AutoReloadsClip="NONE">
+		<ClipReloadTime
+			MinSeconds="60s"
+			MaxSeconds="60s" />
 		<Nuggets>
-			<SpecialPowerNugget
-				SpecialPowerTemplate="SpecialPower_SovietDemolitionTruckBombRelease" />
+			<AttributeModifierNugget
+				AttributeModifierOwnerName="AttributeModifier_SovietDemolitionTruckBombSpent"
+				Radius="0" />
+			<WeaponOCLNugget
+				WeaponOCL="OCL_SovietDemolitionTruckBomb" />
 		</Nuggets>
 	</WeaponTemplate>
 
-	<!-- r20r_truck: 0 s countdown of the released bomb. Fired once by the bomb itself as soon as it is no longer inside the truck;
+	<!-- r20r_truck: 0 s countdown of the released bomb. Fired once by the bomb itself as soon as it is spawned;
 	     ends the bomb object (Radius 0 OnlyKillOwnerWhenTriggered = vanilla JapanScoutInfantryBombWeapon), whose death fires the medium time bomb blast. -->
 	<WeaponTemplate
 		id="SovietDemolitionTruckBombFuse"
@@ -9340,6 +9349,23 @@ Flags="NOT_ATTRACTED_BY_MAGNETS"
 				OnlyKillOwnerWhenTriggered="true"
 				DamageType="UNRESISTABLE"
 				DeathType="NORMAL" />
+		</Nuggets>
+	</WeaponTemplate>
+
+	<!-- r20q11 (2026-11-19, user spec): Soviet Terrorist attack. Range 1. Kills only the terrorist himself, no delay
+	     (= the self-kill DamageNugget of vanilla JapanScoutInfantryBombWeapon without DelayTimeSeconds). The blast comes from his death (OCL_SovietTerroristBomb).
+	     RequiredAntiMask = Conscript's (infantry, vehicles, structures, ships). No ChaseWeapon / VirtualDamage (not requested). -->
+	<WeaponTemplate
+		id="SovietTerroristSuicideWeapon"
+		AttackRange="1.0"
+		RadiusDamageAffects="ENEMIES NEUTRALS ALLIES SELF"
+		RequiredAntiMask="ANTI_WATER ANTI_GROUND ANTI_STRUCTURE">
+		<Nuggets>
+			<DamageNugget
+				Radius="0"
+				OnlyKillOwnerWhenTriggered="true"
+				DamageType="UNRESISTABLE"
+				DeathType="SUICIDED" />
 		</Nuggets>
 	</WeaponTemplate>
 

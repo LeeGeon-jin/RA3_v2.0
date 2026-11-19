@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <AssetDeclaration xmlns="uri:ea.com:eala:asset" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-	<!-- r20r_truck (2026-11-18, user design): the one time bomb carried inside the Soviet Demolition Truck (truck TransportContain InitialPayload 1).
+	<!-- r20q11 (2026-11-19, user design hasBomb): the invisible 0 s medium time bomb spawned by the Soviet Demolition Truck
+	     (attack: WeaponOCLNugget in SovietDemolitionTruckDetonateWeapon; death without GENERIC_TOGGLE_STATE: truck CreateObjectDie).
 	     Invisible medium time bomb = vanilla AlliedTimeBombLvl2 (death weapon AlliedTimeBomb_Level2) without model / sounds.
-	     Dormant while carried (truck gives it ENCLOSED). Countdown 0 s: once released (attack or truck death) it fires its fuse at once,
-	     dies, and its death fires the medium time bomb blast, which also hits the truck (ALLIES) like a time bomb placed next to it. -->
+	     Countdown 0 s: fires its fuse at once, dies, and its death fires the medium time bomb blast, which also hits the truck (ALLIES). -->
 	<Tags></Tags>
 	<Includes>
 		<Include type="all" source="DATA:GlobalData/GlobalDefines.xml" />
@@ -40,14 +40,12 @@
 		<Behaviors>
 			<Physics
 				id="ModuleTag_Physics" />
-			<!-- countdown 0 s, only outside the truck (ENCLOSED = carried). OneShot FireWeaponUpdate = vanilla NanoSwarmHiveEffect. -->
+			<!-- countdown 0 s. OneShot FireWeaponUpdate = vanilla NanoSwarmHiveEffect. -->
 			<FireWeaponUpdate
 				id="ModuleTag_Fuse">
 				<FireWeaponNugget
 					WeaponName="SovietDemolitionTruckBombFuse"
 					OneShot="true" />
-				<ObjectStatusValidation
-					ForbiddenStatus="ENCLOSED" />
 			</FireWeaponUpdate>
 			<!-- = vanilla AlliedTimeBombLvl2 ModuleTag_FinalWeapon: medium time bomb blast -->
 			<FireWeaponWhenDead
@@ -81,4 +79,11 @@
 				Height="1.0" />
 		</Geometry>
 	</GameObject>
+	<!-- r20q11: spawns the bomb at the source object (the truck); no CREATE_AT_TARGET -->
+	<ObjectCreationList
+		id="OCL_SovietDemolitionTruckBomb">
+		<CreateObject>
+			<CreateObject>SovietDemolitionTruckBomb</CreateObject>
+		</CreateObject>
+	</ObjectCreationList>
 </AssetDeclaration>

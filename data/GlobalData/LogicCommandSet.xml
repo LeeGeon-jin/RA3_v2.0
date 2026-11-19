@@ -206,6 +206,7 @@
 		<Cmd>Command_ConstructSovietHeavyAntiVehicleInfantry</Cmd>
 		<Cmd>Command_ConstructSovietCommandoTech1</Cmd>
 		<Cmd>Command_ConstructSovietInfiltrationInfantry</Cmd>
+		<Cmd>Command_ConstructSovietTerrorist</Cmd>
 	</LogicCommandSet>
 
 	<LogicCommandSet
@@ -356,6 +357,13 @@
 	<LogicCommandSet
 		id="SovietDemolitionTruckCommandSet">
 		<Cmd>Command_SovietDemolitionTruckSprint</Cmd>
+		<Cmd>Command_AttackMove</Cmd>
+	</LogicCommandSet>
+
+	<!-- r20q11: Soviet Terrorist: sprint + Attack Move -->
+	<LogicCommandSet
+		id="SovietTerroristCommandSet">
+		<Cmd>Command_SovietTerroristSprint</Cmd>
 		<Cmd>Command_AttackMove</Cmd>
 	</LogicCommandSet>
 

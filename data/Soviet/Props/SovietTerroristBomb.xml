@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<AssetDeclaration xmlns="uri:ea.com:eala:asset" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<!-- r20q11 (2026-11-19, user t856/t857): the invisible 0 s small time bomb the Soviet Terrorist leaves wherever he dies
+	     (any of the 7 Conscript molotov-mode death types; terrorist CreateObjectDie DeathTypes=ALL).
+	     Invisible small time bomb = vanilla AlliedTimeBombLvl1 (death weapon AlliedTimeBomb_Level1) without model / sounds.
+	     Same 0 s fuse as SovietDemolitionTruckBomb (shared weapon SovietDemolitionTruckBombFuse). -->
+	<Tags></Tags>
+	<Includes>
+		<Include type="all" source="DATA:GlobalData/GlobalDefines.xml" />
+		<Include
+			type="instance"
+			source="DATA:BaseObjects/BaseObject.xml" />
+	</Includes>
+
+	<GameObject
+		id="SovietTerroristBomb"
+		inheritFrom="BaseObject"
+		Side="Soviet"
+		EditorSorting="SYSTEM"
+		IsTrainable="false"
+		KindOf="IMMOBILE NO_COLLIDE NOT_AUTOACQUIRABLE IGNORE_FOR_VICTORY CANNOT_BE_DETECTED"
+		EditorName="SovietTerroristBomb">
+		<DisplayName>SovietTerroristBomb</DisplayName>
+		<ArmorSet
+			Armor="AlliedTimeBombArmor" />
+		<LocomotorSet
+			Locomotor="SpecialPowerAllTerrainValidLocomotor"
+			Condition="NORMAL"
+			Speed="0.0" />
+		<Draws>
+			<ScriptedModelDraw
+				id="ModuleTag_Draw">
+				<ModelConditionState
+					ParseCondStateType="PARSE_DEFAULT">
+					<Model
+						Name="" />
+				</ModelConditionState>
+			</ScriptedModelDraw>
+		</Draws>
+		<Behaviors>
+			<Physics
+				id="ModuleTag_Physics" />
+			<!-- countdown 0 s. OneShot FireWeaponUpdate = vanilla NanoSwarmHiveEffect. -->
+			<FireWeaponUpdate
+				id="ModuleTag_Fuse">
+				<FireWeaponNugget
+					WeaponName="SovietDemolitionTruckBombFuse"
+					OneShot="true" />
+			</FireWeaponUpdate>
+			<!-- = vanilla AlliedTimeBombLvl1 ModuleTag_FinalWeapon: small time bomb blast -->
+			<FireWeaponWhenDead
+				id="ModuleTag_FinalWeapon"
+				InitiallyActive="true"
+				DeathWeapon="AlliedTimeBomb_Level1">
+				<DieMuxData
+					DeathTypes="ALL" />
+			</FireWeaponWhenDead>
+			<DestroyDie
+				id="ModuleTag_Die">
+				<DieMuxData
+					DeathTypes="ALL" />
+			</DestroyDie>
+		</Behaviors>
+		<AI>
+			<AIUpdate
+				id="ModuleTag_AI"
+				AutoAcquireEnemiesWhenIdle="NO" />
+		</AI>
+		<Body>
+			<ActiveBody
+				id="ModuleTag_Body"
+				MaxHealth="1000.0" />
+		</Body>
+		<Geometry
+			IsSmall="true">
+			<Shape
+				Type="CYLINDER"
+				MajorRadius="1.0"
+				Height="1.0" />
+		</Geometry>
+	</GameObject>
+	<!-- r20q11: spawns the bomb at the dying terrorist; no CREATE_AT_TARGET -->
+	<ObjectCreationList
+		id="OCL_SovietTerroristBomb">
+		<CreateObject>
+			<CreateObject>SovietTerroristBomb</CreateObject>
+		</CreateObject>
+	</ObjectCreationList>
+</AssetDeclaration>

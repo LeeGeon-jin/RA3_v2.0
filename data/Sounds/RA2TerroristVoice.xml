@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<AssetDeclaration xmlns="uri:ea.com:eala:asset" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<!-- r20q11 (2026-11-19 user t857): RA2 Cuban Terrorist voice lines for SovietTerrorist (same method as r20q10 RA2DemoTruckVoice.xml).
+	     WAV files are decoded from the user's own RA2 install (langmd.mix > audiomd.mix > audio.bag)
+	     and live only on the build PC under RA3ModSDK\Audio\RA2Terrorist\ (not in the repository).
+	     Event settings copy RA2DemoTruckVoice.xml (vanilla Voice.xml unit responses). No creation line: RA2 [TERROR] has none.
+	     Under-attack event = RA2 TerroristFear ([TERROR] VoiceFeedback= fear/under-attack lines), used as voiceFear (and voiceSelectUnderFire).
+	     AudioFile names verified on the build PC against RA2 soundmd.ini / audio_idx.csv (2026-11-19). -->
+	<Tags />
+	<Includes>
+		<Include type="instance" source="DATA:Sounds/BaseSoundEffect.xml" />
+	</Includes>
+
+	<AudioFile id="RA2Terrorist_itersea" File="AUDIO:RA2Terrorist\itersea.wav" PCSampleRate="22050" PCCompression="XAS" />
+	<AudioFile id="RA2Terrorist_iterseb" File="AUDIO:RA2Terrorist\iterseb.wav" PCSampleRate="22050" PCCompression="XAS" />
+	<AudioFile id="RA2Terrorist_itersec" File="AUDIO:RA2Terrorist\itersec.wav" PCSampleRate="22050" PCCompression="XAS" />
+	<AudioFile id="RA2Terrorist_itermoa" File="AUDIO:RA2Terrorist\itermoa.wav" PCSampleRate="22050" PCCompression="XAS" />
+	<AudioFile id="RA2Terrorist_itermob" File="AUDIO:RA2Terrorist\itermob.wav" PCSampleRate="22050" PCCompression="XAS" />
+	<AudioFile id="RA2Terrorist_itermoc" File="AUDIO:RA2Terrorist\itermoc.wav" PCSampleRate="22050" PCCompression="XAS" />
+	<AudioFile id="RA2Terrorist_iterata" File="AUDIO:RA2Terrorist\iterata.wav" PCSampleRate="22050" PCCompression="XAS" />
+	<AudioFile id="RA2Terrorist_iteratb" File="AUDIO:RA2Terrorist\iteratb.wav" PCSampleRate="22050" PCCompression="XAS" />
+	<AudioFile id="RA2Terrorist_iteratc" File="AUDIO:RA2Terrorist\iteratc.wav" PCSampleRate="22050" PCCompression="XAS" />
+	<AudioFile id="RA2Terrorist_iteratd" File="AUDIO:RA2Terrorist\iteratd.wav" PCSampleRate="22050" PCCompression="XAS" />
+	<AudioFile id="RA2Terrorist_iterfea" File="AUDIO:RA2Terrorist\iterfea.wav" PCSampleRate="22050" PCCompression="XAS" />
+	<AudioFile id="RA2Terrorist_iterfeb" File="AUDIO:RA2Terrorist\iterfeb.wav" PCSampleRate="22050" PCCompression="XAS" />
+	<AudioFile id="RA2Terrorist_iterfec" File="AUDIO:RA2Terrorist\iterfec.wav" PCSampleRate="22050" PCCompression="XAS" />
+	<AudioFile id="RA2Terrorist_iterdia" File="AUDIO:RA2Terrorist\iterdia.wav" PCSampleRate="22050" PCCompression="XAS" />
+	<AudioFile id="RA2Terrorist_iterdib" File="AUDIO:RA2Terrorist\iterdib.wav" PCSampleRate="22050" PCCompression="XAS" />
+	<AudioFile id="RA2Terrorist_iterdic" File="AUDIO:RA2Terrorist\iterdic.wav" PCSampleRate="22050" PCCompression="XAS" />
+
+	<!-- RA2 TerroristSelect (verified): itersea iterseb itersec -->
+	<AudioEvent id="RA2Terrorist_VoiceSelect" inheritFrom="AudioEvent:BaseUnitResponse"
+		Volume = "100"
+		MinVolume = "95"
+		Priority = "HIGH"
+		Type = "WORLD PLAYER VOICE"
+		SubmixSlider = "VOICE" >
+		<PitchShift Low="-1" High="1" />
+		<Sound>RA2Terrorist_itersea</Sound>
+		<Sound>RA2Terrorist_iterseb</Sound>
+		<Sound>RA2Terrorist_itersec</Sound>
+	</AudioEvent>
+
+	<!-- RA2 TerroristMove (verified): itermoa itermob itermoc -->
+	<AudioEvent id="RA2Terrorist_VoiceMove" inheritFrom="AudioEvent:BaseUnitResponse"
+		Volume = "100"
+		MinVolume = "95"
+		Priority = "HIGH"
+		Type = "WORLD PLAYER VOICE"
+		SubmixSlider = "VOICE" >
+		<PitchShift Low="-1" High="1" />
+		<Sound>RA2Terrorist_itermoa</Sound>
+		<Sound>RA2Terrorist_itermob</Sound>
+		<Sound>RA2Terrorist_itermoc</Sound>
+	</AudioEvent>
+
+	<!-- RA2 TerroristAttackCommand (verified): iterata iteratb iteratc iteratd -->
+	<AudioEvent id="RA2Terrorist_VoiceAttack" inheritFrom="AudioEvent:BaseUnitResponse"
+		Volume = "100"
+		MinVolume = "95"
+		Priority = "HIGH"
+		Type = "WORLD PLAYER VOICE"
+		SubmixSlider = "VOICE" >
+		<PitchShift Low="-1" High="1" />
+		<Sound>RA2Terrorist_iterata</Sound>
+		<Sound>RA2Terrorist_iteratb</Sound>
+		<Sound>RA2Terrorist_iteratc</Sound>
+		<Sound>RA2Terrorist_iteratd</Sound>
+	</AudioEvent>
+
+	<!-- RA2 TerroristFear (verified): iterfea iterfeb iterfec -->
+	<AudioEvent id="RA2Terrorist_VoiceUnderFire" inheritFrom="AudioEvent:BaseUnitResponse"
+		Volume = "100"
+		MinVolume = "95"
+		Priority = "HIGH"
+		Type = "WORLD PLAYER VOICE"
+		SubmixSlider = "VOICE" >
+		<PitchShift Low="-1" High="1" />
+		<Sound>RA2Terrorist_iterfea</Sound>
+		<Sound>RA2Terrorist_iterfeb</Sound>
+		<Sound>RA2Terrorist_iterfec</Sound>
+	</AudioEvent>
+
+	<!-- RA2 TerroristDie (verified): iterdia iterdib iterdic -->
+	<AudioEvent id="RA2Terrorist_VoiceDie" inheritFrom="AudioEvent:BaseUnitResponse"
+		Volume = "100"
+		MinVolume = "95"
+		Priority = "HIGH"
+		Type = "WORLD PLAYER VOICE"
+		SubmixSlider = "VOICE" >
+		<PitchShift Low="-1" High="1" />
+		<Sound>RA2Terrorist_iterdia</Sound>
+		<Sound>RA2Terrorist_iterdib</Sound>
+		<Sound>RA2Terrorist_iterdic</Sound>
+	</AudioEvent>
+</AssetDeclaration>
