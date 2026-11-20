@@ -595,6 +595,13 @@
 						Template="AAAVT1_MachineGun"
 						Upgrade="Uprade_IFV_MachineGun"
 						Ordering="PRIMARY_WEAPON"/>
+          <!-- r20q13 (user t868): SovietTerrorist rider. Same slot as the Conscript (no unit uses a weapon slot ID above 7,
+               so no 8th slot). Reuses the r20q11 SovietTerroristSuicideWeapon (AttackRange 1, kills only the firer = this IFV,
+               DeathType SUICIDED). Only one passenger fits, so only one of the two upgrades is ever present. -->
+          <Weapon
+            Template="SovietTerroristSuicideWeapon"
+            Upgrade="Uprade_IFV_Terrorist"
+            Ordering="SECONDARY_WEAPON"/>
         </WeaponSlotHardpoint>
 
         <WeaponSlotHardpoint
@@ -657,6 +664,27 @@
 				<TriggeredBy>Uprade_IFV_Pistol</TriggeredBy>
 			</StatusBitsUpgrade>
 
+      <!-- r20q13 (user t868): Terrorist inside -> WEAPON_UPGRADED_03 marks "reactor blast armed" (read by
+           ModuleTag_TerroristReactorDeath DieMux). Same on/off-with-passenger pattern as REPAIR_ALLIES_WHEN_IDLE below.
+           NO_AUTO_ACQUIRE = same as the Terrorist on foot (does not charge by itself). Q3 in the plan. -->
+      <StatusBitsUpgrade
+				id="ModuleTag_TerroristStatus"
+				StatusToSet="WEAPON_UPGRADED_03 NO_AUTO_ACQUIRE">
+        <TriggeredBy>Uprade_IFV_Terrorist</TriggeredBy>
+      </StatusBitsUpgrade>
+      <!-- r20q13: Conscript look = same subobjects as the Uprade_IFV_MachineGun nugget of the vanilla IF_SubObjectsUpgrade include
+           (show Upgrade_MachineGun, hide Upgrade_Default_Missile; checked on the PC 2026-11-21). -->
+      <SubObjectsUpgrade
+				id="ModuleTag_TerroristSubObjects">
+        <TriggeredBy>Uprade_IFV_Terrorist</TriggeredBy>
+        <Nugget
+					Upgrade="Uprade_IFV_Terrorist"
+					ShowSubObjects="Upgrade_MachineGun"
+					HideSubObjects="Upgrade_Default_Missile"
+					HideSubObjectsOnRemove="true"
+					UnHideSubObjectsOnRemove="true" />
+      </SubObjectsUpgrade>
+
       <!-- For the Allied IFV Auto Repair Allies -->
       <StatusBitsUpgrade
 				id="ModuleTag_UpgradeWeapon"
@@ -676,6 +704,20 @@
 			<Physics
 				id="ModuleTag_Physics" />
 			
+			<!-- r20q13 (user t868): Super Reactor death blast while a Terrorist is inside (any death type, incl. the
+			     suicide SUICIDED). Same weapon as SovietPowerPlantAdvanced ModuleTag_ExplosionDeathWeapon
+			     (SovietPowerPlantAdvancedDeathWeapon: FireFX FX_SovPPXP, 1500 dmg, radius 250, hits SELF ALLIES ENEMIES NEUTRALS).
+			     Placed BEFORE TransportContain so it is evaluated before the passenger is ejected (order must be verified in game). -->
+			<FireWeaponWhenDead
+				id="ModuleTag_TerroristReactorDeath"
+				InitiallyActive="true"
+				DeathWeapon="SovietPowerPlantAdvancedDeathWeapon"
+				ContinueToBezierDestination="false">
+				<DieMuxData
+					DeathTypes="ALL"
+					RequiredStatus="WEAPON_UPGRADED_03" />
+			</FireWeaponWhenDead>
+
 			<TransportContain
 				id="ModuleTag_Contain"
 				ObjectStatusOfContained="UNSELECTABLE ENCLOSED NO_ATTACK"

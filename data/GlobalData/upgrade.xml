@@ -678,4 +678,10 @@
 	<UpgradeTemplate id="Upgrade_SovietTerroristMolotovLook"
 		Type="OBJECT"
 	/>
+
+	<!-- r20q13 (user t868): granted to the Multigunner IFV by IF_SecondaryObjectListener while a SovietTerrorist rides inside -->
+	<UpgradeTemplate id="Uprade_IFV_Terrorist"
+		Type="OBJECT"
+		BuildCost="0"
+	/>
 </AssetDeclaration>

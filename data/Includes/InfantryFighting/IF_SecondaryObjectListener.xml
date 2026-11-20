@@ -29,6 +29,16 @@
 		</ObjectFilter>
 		<UpgradeSelf>Uprade_IFV_MachineGun</UpgradeSelf>
 	</ObjectEffectTuple>
+
+	<!-- r20q13 (user t868): SovietTerrorist. Own trigger upgrade so the IFV gets the Conscript look
+	     (SubObjectsUpgrade in AlliedAntiAirVehicleTech1.xml) + suicide weapon + reactor death blast,
+	     but NOT the Conscript machine gun / tracer. On the Battle Fortress and Multigunner Turret this upgrade has no consumer (inert). -->
+	<ObjectEffectTuple>
+		<ObjectFilter Rule="NONE">
+			<IncludeThing>SovietTerrorist</IncludeThing>
+		</ObjectFilter>
+		<UpgradeSelf>Uprade_IFV_Terrorist</UpgradeSelf>
+	</ObjectEffectTuple>
 	
 
 	<!--  JapanAntiInfantryInfantry -->
