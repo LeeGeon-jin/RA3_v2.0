@@ -75,12 +75,12 @@
 						WeaponSlotType="PRIMARY_WEAPON"
 						BoneName="FX_WEAPON_" />
 					<WeaponFireFXBone
-						WeaponSlotID="1"
-						WeaponSlotType="SECONDARY_WEAPON"
+						WeaponSlotID="2"
+						WeaponSlotType="PRIMARY_WEAPON"
 						BoneName="FX_WEAPON_" />
 					<WeaponLaunchBone
-						WeaponSlotID="1"
-						WeaponSlotType="SECONDARY_WEAPON"
+						WeaponSlotID="2"
+						WeaponSlotType="PRIMARY_WEAPON"
 						BoneName="FX_WEAPON_" />
 				</ModelConditionState>
 
@@ -262,8 +262,11 @@
 					<Weapon
 						Ordering="PRIMARY_WEAPON"
 						Template="SovietFighterAircraftFlakMissile" />
+				</WeaponSlotHardpoint>
+				<WeaponSlotHardpoint
+					ID="2">
 					<Weapon
-						Ordering="SECONDARY_WEAPON"
+						Ordering="PRIMARY_WEAPON"
 						Template="SovietFighterAircraftFlakMissileGround" />
 				</WeaponSlotHardpoint>
 			</WeaponSetUpdate>
