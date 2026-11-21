@@ -91,6 +91,14 @@
 						WeaponSlotID="1"
 						WeaponSlotType="PRIMARY_WEAPON"
 						BoneName="BONE_MUZZLE_" />
+          <WeaponFireFXBone
+						WeaponSlotID="1"
+						WeaponSlotType="SECONDARY_WEAPON"
+						BoneName="BONE_MUZZLE_" />
+					<WeaponLaunchBone
+						WeaponSlotID="1"
+						WeaponSlotType="SECONDARY_WEAPON"
+						BoneName="BONE_MUZZLE_" />
 				</ModelConditionState>
 <!-- UPGRADED MODEL -->
 
@@ -241,6 +249,32 @@
 					b="1.0"
 					a="1.0" />
 			</TracerModelDraw>
+			<TracerModelDraw
+				id="ModuleTag_TracerModelDrawGround"
+				MinLength="20.0"
+				MaxLength="20.0"
+				Width="10.0"
+				MinSpeed="10"
+				MaxSpeed="20"
+				SweepSpeed="1.0"
+				SpreadAngle="7.0"
+				MinTracersPerFrame="0.2"
+				MaxTracersPerFrame="0.3"
+				FrameLifeTime="25"
+				WeaponSlotType="SECONDARY_WEAPON"
+				Texture="FXTracer"
+				UseAdditiveBlending="true">
+				<HeadColor
+					r="1.0"
+					g="1.0"
+					b="1.0"
+					a="1.0" />
+				<TailColor
+					r="1.0"
+					g="1.0"
+					b="1.0"
+					a="1.0" />
+			</TracerModelDraw>
 
 		</Draws>
 		<Behaviors>
@@ -254,6 +288,13 @@
 					<Weapon
 						Ordering="PRIMARY_WEAPON"
 						Template="AlliedFighterAircraftCannon_Veteran"
+						ObjectStatus="WEAPON_UPGRADED_01" />
+					<Weapon
+						Ordering="SECONDARY_WEAPON"
+						Template="AlliedFighterAircraftCannonGround" />
+					<Weapon
+						Ordering="SECONDARY_WEAPON"
+						Template="AlliedFighterAircraftCannonGround_Veteran"
 						ObjectStatus="WEAPON_UPGRADED_01" />
 				</WeaponSlotHardpoint>
 			</WeaponSetUpdate>

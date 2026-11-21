@@ -74,6 +74,14 @@
 						WeaponSlotID="1"
 						WeaponSlotType="PRIMARY_WEAPON"
 						BoneName="FX_WEAPON_" />
+					<WeaponFireFXBone
+						WeaponSlotID="1"
+						WeaponSlotType="SECONDARY_WEAPON"
+						BoneName="FX_WEAPON_" />
+					<WeaponLaunchBone
+						WeaponSlotID="1"
+						WeaponSlotType="SECONDARY_WEAPON"
+						BoneName="FX_WEAPON_" />
 				</ModelConditionState>
 
 				<ModelConditionState
@@ -254,6 +262,9 @@
 					<Weapon
 						Ordering="PRIMARY_WEAPON"
 						Template="SovietFighterAircraftFlakMissile" />
+					<Weapon
+						Ordering="SECONDARY_WEAPON"
+						Template="SovietFighterAircraftFlakMissileGround" />
 				</WeaponSlotHardpoint>
 			</WeaponSetUpdate>
 			<!-- gravity mult of 30 is temporary -->
