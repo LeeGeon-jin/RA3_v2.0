@@ -1737,7 +1737,7 @@
 		AttackRange="200.0"
 		MinimumAttackRange="10"
 		WeaponSpeed="500"
-		AcceptableAimDelta="20d"
+		AcceptableAimDelta="180d"
 		PreAttackType="PER_SHOT"
 		ClipSize="16"
 		AutoReloadsClip="RETURN_TO_BASE"
@@ -1745,7 +1745,7 @@
 		FireSound="SOV_MigFighter_MissileFire"
 		FireFX="FX_SovietMigMissilesFire"
 		FireVeteranFX="FX_SovietMigMissilesFire_Vet"
-		RequiredAntiMask="ANTI_AIRBORNE_VEHICLE ANTI_AIRBORNE_INFANTRY"
+		RequiredAntiMask="ANTI_AIRBORNE_VEHICLE ANTI_AIRBORNE_INFANTRY ANTI_GROUND ANTI_STRUCTURE ANTI_WATER"
 		CanFireWhileMoving="true"
 		InstantLoadClipOnActivate="true"
 		VirtualDamage="SHARE"
@@ -1762,7 +1762,7 @@
 			MaxSeconds="10s" />
 		<Nuggets>
 			<ProjectileNugget
-				WarheadTemplate="SovietFighterAircraftFlakMissileWarhead"
+				WarheadTemplate="SovietFighterAircraftFlakMissileGroundWarhead"
 				ProjectileTemplate="SovietFighterAircraftFlakMissileProjectile">
 				<VeterancyProjectiles
 					VeterancyLevel="HEROIC"
@@ -1803,29 +1803,11 @@
 		</Nuggets>
 	</WeaponTemplate>
 
-	<!-- r20q14: MiG ground-only secondary. Same missile / ROF / range; 180d aim cone; own warhead so buildings collide. -->
-	<WeaponTemplate
-		id="SovietFighterAircraftFlakMissileGround"
-		inheritFrom="SovietFighterAircraftFlakMissile"
-		AcceptableAimDelta="180d"
-		RequiredAntiMask="ANTI_GROUND ANTI_STRUCTURE ANTI_WATER">
-		<Nuggets>
-			<ProjectileNugget
-				WarheadTemplate="SovietFighterAircraftFlakMissileGroundWarhead"
-				ProjectileTemplate="SovietFighterAircraftFlakMissileProjectile">
-				<VeterancyProjectiles
-					VeterancyLevel="HEROIC"
-					ProjectileTemplate="SovietFighterAircraftFlakMissileProjectile_Veteran"/>
-			</ProjectileNugget>
-			<InformTargetNugget />
-		</Nuggets>
-	</WeaponTemplate>
-
+	<!-- r20q16: MiG uses this warhead for both air and ground so projectiles can collide with structures. RequiredAntiMask inherited from parent (includes air + ground). Original FlakMissileWarhead (ProjectileCollidesWith=ENEMIES) is kept for Leech_FlakMissile. -->
 	<WeaponTemplate
 		id="SovietFighterAircraftFlakMissileGroundWarhead"
 		inheritFrom="SovietFighterAircraftFlakMissileWarhead"
-		ProjectileCollidesWith="ENEMIES NEUTRAL STRUCTURES WALLS"
-		RequiredAntiMask="ANTI_GROUND ANTI_STRUCTURE ANTI_WATER"/>
+		ProjectileCollidesWith="ENEMIES NEUTRAL STRUCTURES WALLS"/>
 	
 	<WeaponTemplate
 		id="AlliedAntiNavalScoutSonar"
@@ -2870,8 +2852,8 @@
 		FireVeteranFX="FX_Allied_FighterFire_Vet"
 		AttackRange="200.0"
 		MinimumAttackRange="10"
-		AcceptableAimDelta="10d"
-		RequiredAntiMask="ANTI_AIRBORNE_VEHICLE ANTI_AIRBORNE_INFANTRY ANTI_PARACHUTE"
+		AcceptableAimDelta="180d"
+		RequiredAntiMask="ANTI_AIRBORNE_VEHICLE ANTI_AIRBORNE_INFANTRY ANTI_PARACHUTE ANTI_GROUND ANTI_STRUCTURE ANTI_WATER"
 		CanFireWhileMoving="true"
 		ClipSize="90"
 		Flags="ATTACK_NEEDS_LINE_OF_SIGHT NOT_ATTRACTED_BY_MAGNETS"
@@ -2907,16 +2889,6 @@
 		id="AlliedFighterAircraftCannon_Veteran"
 		inheritFrom="AlliedFighterAircraftCannon"/>
 
-	<!-- r20q14: Apollo ground-only secondary. Inherits damage / ROF / range / FX; 180d aim cone. -->
-	<WeaponTemplate
-		id="AlliedFighterAircraftCannonGround"
-		inheritFrom="AlliedFighterAircraftCannon"
-		AcceptableAimDelta="180d"
-		RequiredAntiMask="ANTI_GROUND ANTI_STRUCTURE ANTI_WATER"/>
-
-	<WeaponTemplate
-		id="AlliedFighterAircraftCannonGround_Veteran"
-		inheritFrom="AlliedFighterAircraftCannonGround"/>
 	
 	<!-- ========================================= -->
 	
@@ -7182,7 +7154,19 @@ Flags="NOT_ATTRACTED_BY_MAGNETS"
 		id="Leech_FlakMissile"
 		inheritFrom="SovietFighterAircraftFlakMissile"
 		RequiredAntiMask="ANTI_AIRBORNE_VEHICLE ANTI_AIRBORNE_INFANTRY ANTI_GROUND ANTI_STRUCTURE ANTI_WATER"
-		ForbiddenFiringObjectStatus=""/>
+		AcceptableAimDelta="20d"
+		ForbiddenFiringObjectStatus="">
+		<Nuggets>
+			<ProjectileNugget
+				WarheadTemplate="SovietFighterAircraftFlakMissileWarhead"
+				ProjectileTemplate="SovietFighterAircraftFlakMissileProjectile">
+				<VeterancyProjectiles
+					VeterancyLevel="HEROIC"
+					ProjectileTemplate="SovietFighterAircraftFlakMissileProjectile_Veteran"/>
+			</ProjectileNugget>
+			<InformTargetNugget />
+		</Nuggets>
+	</WeaponTemplate>
 
 	<WeaponTemplate
 		id="Leech_StrikerMissile"

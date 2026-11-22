@@ -91,14 +91,6 @@
 						WeaponSlotID="1"
 						WeaponSlotType="PRIMARY_WEAPON"
 						BoneName="BONE_MUZZLE_" />
-          <WeaponFireFXBone
-						WeaponSlotID="2"
-						WeaponSlotType="PRIMARY_WEAPON"
-						BoneName="BONE_MUZZLE_" />
-					<WeaponLaunchBone
-						WeaponSlotID="2"
-						WeaponSlotType="PRIMARY_WEAPON"
-						BoneName="BONE_MUZZLE_" />
 				</ModelConditionState>
 <!-- UPGRADED MODEL -->
 
@@ -262,16 +254,6 @@
 					<Weapon
 						Ordering="PRIMARY_WEAPON"
 						Template="AlliedFighterAircraftCannon_Veteran"
-						ObjectStatus="WEAPON_UPGRADED_01" />
-				</WeaponSlotHardpoint>
-				<WeaponSlotHardpoint
-					ID="2">
-					<Weapon
-						Ordering="PRIMARY_WEAPON"
-						Template="AlliedFighterAircraftCannonGround" />
-					<Weapon
-						Ordering="PRIMARY_WEAPON"
-						Template="AlliedFighterAircraftCannonGround_Veteran"
 						ObjectStatus="WEAPON_UPGRADED_01" />
 				</WeaponSlotHardpoint>
 			</WeaponSetUpdate>
