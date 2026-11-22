@@ -9,7 +9,6 @@
 		<Include type="instance" source="DATA:BaseObjects/BaseCivilianStructureNoGarrisonDestructible.xml" />
 		<Include type="instance" source="DATA:Civilian/Yucatan_YU/Props/YU_HotelDebris.xml" />
 		<Include type="all" source="DATA:GlobalData/GlobalDefines.xml" />
-		<Include type="all" source="ART:MJ_MtFujiViewingTower_COL.w3x" />
 	</Includes>
 	<GameObject
 		id="JapanMtFujiViewingTowerBuildable"

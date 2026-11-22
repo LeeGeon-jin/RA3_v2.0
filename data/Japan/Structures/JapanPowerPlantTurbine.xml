@@ -151,8 +151,14 @@
 				href="DATA:Includes/GenericBuildingRepair.xml" />
 			<xi:include
 				href="DATA:Includes/GenericEngineerContain.xml" />
-			<xi:include
-				href="DATA:Includes/InfiltratorContainEnergy.xml" />
+			<!-- r20q17: spy power blackout = EnergyProduction x Amount (vanilla 0.2 -> <30s); raised to 30s -->
+			<InfiltratorContain
+				id="ModuleTag_InfiltratorContain" CanEnterFilter="InfiltrationCanEnterObjectFilterV20"
+				Effect="ENERGY"
+				Amount="0.6"
+				ObjectRef="EnergyDisabler"
+				StructureFilter="InfiltrationEnergyStructuresFilter">
+			</InfiltratorContain>
 			<SubStructureBehavior
 				 id="ModuleTag_SubStructureBehavior" />
 		</Behaviors>
