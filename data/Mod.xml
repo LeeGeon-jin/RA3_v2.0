@@ -66,6 +66,59 @@
 		<Include type="all" source="DATA:Allied/Units/AlliedCommandoTech1.xml" />
 		<Include type="all" source="DATA:SkirmishAI/Personalities/CoopBasePersonality.xml" />
 		<Include type="all" source="DATA:maps/official/CAMP_A07_TokyoHarbor_Davis/AIP_A07_Coop.xml" />
+		<Include type="all" source="DATA:maps/official/CAMP_A02_Cannes_Smith/AIP_A02_Coop.xml" />
+		<Include type="all" source="DATA:maps/official/CAMP_A02_Cannes_Smith/AIP_A02_SovietTankMarshall.xml" />
+		<Include type="all" source="DATA:maps/official/CAMP_A03_Heidelberg_Smith/AIP_A03_SovietBaseMarshall.xml" />
+		<Include type="all" source="DATA:maps/official/CAMP_A03_Heidelberg_Smith/AIP_A03_SovietInnerBaseMarshall.xml" />
+		<Include type="all" source="DATA:maps/official/CAMP_A04_Gibraltar_Hayes/AIP_A04_Coop.xml" />
+		<Include type="all" source="DATA:maps/official/CAMP_A04_Gibraltar_Hayes/AIP_A04_JapanMechaWarfare.xml" />
+		<Include type="all" source="DATA:maps/official/CAMP_A05_NorthSea_White/AIP_A05_JapanFleetCommand.xml" />
+		<Include type="all" source="DATA:maps/official/CAMP_A06_MountRushmore_White/AIP_A06_AlliedPresident.xml" />
+		<Include type="all" source="DATA:maps/official/CAMP_A06_MountRushmore_White/AIP_A06_Coop.xml" />
+		<Include type="all" source="DATA:maps/official/CAMP_A07_TokyoHarbor_Davis/AIP_A07_JapanCommander_1.xml" />
+		<Include type="all" source="DATA:maps/official/CAMP_A07_TokyoHarbor_Davis/AIP_A07_JapanCommander_2.xml" />
+		<Include type="all" source="DATA:maps/official/CAMP_A07_TokyoHarbor_Davis/AIP_A07_JapanCommander_3.xml" />
+		<Include type="all" source="DATA:maps/official/CAMP_A08_Havana_Rao/AIP_A08_SovietAirMarshall.xml" />
+		<Include type="all" source="DATA:maps/official/CAMP_A09_Leningrad_Rao/AIP_A09_Coop.xml" />
+		<Include type="all" source="DATA:maps/official/CAMP_A09_Leningrad_Rao/AIP_A09_SovietCommander.xml" />
+		<Include type="all" source="DATA:maps/official/CAMP_J02_Stalingrad_Stewart/AIP_J02_SovietAirMarshall.xml" />
+		<Include type="all" source="DATA:maps/official/CAMP_J03_Odessa_Stewart/AIP_J03_Coop.xml" />
+		<Include type="all" source="DATA:maps/official/CAMP_J03_Odessa_Stewart/AIP_J03_SovietHeavyArmor.xml" />
+		<Include type="all" source="DATA:maps/official/CAMP_J04_PearlHarbor_Davis/AIP_J04_AlliedFirstAssault.xml" />
+		<Include type="all" source="DATA:maps/official/CAMP_J05_DeepOcean_Davis/AIP_J05_AlliedCommander_2.xml" />
+		<Include type="all" source="DATA:maps/official/CAMP_J06_LosAngeles_White/AIP_J06_Coop.xml" />
+		<Include type="all" source="DATA:maps/official/CAMP_J06_LosAngeles_White/AIP_J06_Tanya.xml" />
+		<Include type="all" source="DATA:maps/official/CAMP_J07_Yokohama_Stewart/AIP_J07_AlliedSpecialForces.xml" />
+		<Include type="all" source="DATA:maps/official/CAMP_J07_Yokohama_Stewart/AIP_J07_Coop.xml" />
+		<Include type="all" source="DATA:maps/official/CAMP_J07_Yokohama_Stewart/AIP_J07_SovietKrukov.xml" />
+		<Include type="all" source="DATA:maps/official/CAMP_J08_Kremlin_Stewart/AIP_J08_Coop.xml" />
+		<Include type="all" source="DATA:maps/official/CAMP_J08_Kremlin_Stewart/AIP_J08_SovietPremiere.xml" />
+		<Include type="all" source="DATA:maps/official/CAMP_J09_Amsterdam_Bass/AIP_J09_AlliedMainBase.xml" />
+		<Include type="all" source="DATA:maps/official/CAMP_J09_Amsterdam_Bass/AIP_J09_AlliedSubBase.xml" />
+		<Include type="all" source="DATA:maps/official/CAMP_J09_Amsterdam_Bass/AIP_J09_Coop.xml" />
+		<Include type="all" source="DATA:maps/official/CAMP_J09_Amsterdam_Bass/AIP_J09_SovietScientist.xml" />
+		<Include type="all" source="DATA:maps/official/CAMP_S03_Vladivostok_Davis/AIP_S03_JapanCommander_2.xml" />
+		<Include type="all" source="DATA:maps/official/CAMP_S03_Vladivostok_Davis/AIP_S03_JapanCommander_3.xml" />
+		<Include type="all" source="DATA:maps/official/CAMP_S04_Geneva_Bass/AIP_S04_AlliedGroundBase.xml" />
+		<Include type="all" source="DATA:maps/official/CAMP_S04_Geneva_Bass/AIP_S04_AlliedMainBase.xml" />
+		<Include type="all" source="DATA:maps/official/CAMP_S04_Geneva_Bass/AIP_S04_Coop.xml" />
+		<Include type="all" source="DATA:maps/official/CAMP_S04_Geneva_Bass/AIP_S04_SovietKrukov.xml" />
+		<Include type="all" source="DATA:maps/official/CAMP_S05_Mykonos_Smith/AIP_S05_AlliedSquadronLeader.xml" />
+		<Include type="all" source="DATA:maps/official/CAMP_S06_Iceland_Bass/AIP_S06_AlliedMainBase.xml" />
+		<Include type="all" source="DATA:maps/official/CAMP_S06_Iceland_Bass/AIP_S06_AlliedSubBaseE.xml" />
+		<Include type="all" source="DATA:maps/official/CAMP_S06_Iceland_Bass/AIP_S06_AlliedSubBaseW.xml" />
+		<Include type="all" source="DATA:maps/official/CAMP_S06_Iceland_Bass/AIP_S06_Coop.xml" />
+		<Include type="all" source="DATA:maps/official/CAMP_S06_Iceland_Bass/AIP_S06_SovietKrukov.xml" />
+		<Include type="all" source="DATA:maps/official/CAMP_S07_MountFuji_White/AIP_S07_Coop.xml" />
+		<Include type="all" source="DATA:maps/official/CAMP_S07_MountFuji_White/AIP_S07_JapanAmbushDivision.xml" />
+		<Include type="all" source="DATA:maps/official/CAMP_S07_MountFuji_White/AIP_S07_JapanEmperor.xml" />
+		<Include type="all" source="DATA:maps/official/CAMP_S07_MountFuji_White/AIP_S07_JapanFleetCommand.xml" />
+		<Include type="all" source="DATA:maps/official/CAMP_S07_MountFuji_White/AIP_S07_JapanMechaWarfare.xml" />
+		<Include type="all" source="DATA:maps/official/CAMP_S08_EasterIsland_Stewart/AIP_S08_AlliedBingham.xml" />
+		<Include type="all" source="DATA:maps/official/CAMP_S08_EasterIsland_Stewart/AIP_S08_Coop.xml" />
+		<Include type="all" source="DATA:maps/official/CAMP_S08_EasterIsland_Stewart/AIP_S08_SovietPremiere.xml" />
+		<Include type="all" source="DATA:maps/official/CAMP_S09_NewYork_Rao/AIP_S09_AlliedStatueOfLibertyBase.xml" />
+		<Include type="all" source="DATA:maps/official/CAMP_S09_NewYork_Rao/AIP_S09_Coop.xml" />
 		<!-- r20e (2026-11-14): AIMicroManagerLibrary.xml removed from the build. The SDK schema compiles AIMicroManagerData 4 bytes longer (308 vs 304 B, extra field at 0x88)
 		     than RA3 1.13 expects; every campaign team that gets a micro manager (BlankMicroManager / FearlessMicroManager / FearlessDefenseMicroManager_EASY ...)
 		     read a shifted pointer (0x41200000 = 10.0f) and crashed at RA3_1.13.game+0x171F6. Vanilla micro managers (global stream) are used again;

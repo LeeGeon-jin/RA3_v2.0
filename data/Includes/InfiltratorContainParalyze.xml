@@ -3,6 +3,6 @@
 	<InfiltratorContain xmlns="uri:ea.com:eala:asset"
 		id="ModuleTag_InfiltratorContain" CanEnterFilter="InfiltrationCanEnterObjectFilterV20"
 		Effect="PARALYZE"
-		Duration="30s"
+		Duration="300s"
 		UnitFilter="InfiltrationParalyzeObjectFilter">	
 	</InfiltratorContain>
